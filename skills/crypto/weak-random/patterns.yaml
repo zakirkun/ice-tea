@@ -1,0 +1,85 @@
+rules:
+  - id: RAND-GO-01
+    name: go-math-rand
+    description: "Use of math/rand"
+    severity: medium
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'math/rand'
+
+  - id: RAND-PY-01
+    name: py-random
+    description: "Use of random module"
+    severity: medium
+    confidence: medium
+    languages: [python]
+    patterns:
+      - ast_node_type: call
+        function: random.random
+      - regex: 'random\.(randint|choice|random|randrange)'
+
+  - id: RAND-JS-01
+    name: js-math-random
+    description: "Use of Math.random"
+    severity: medium
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'Math\.random\(\)'
+
+  - id: RAND-JAVA-01
+    name: java-util-random
+    description: "Use of java.util.Random"
+    severity: medium
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'new\s+java\.util\.Random\(\)'
+      - regex: 'new\s+Random\(\)'
+
+  - id: RAND-PHP-01
+    name: php-rand-mt-rand
+    description: "Use of rand or mt_rand"
+    severity: medium
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '\b(rand|mt_rand|uniqid)\s*\('
+
+  - id: RAND-RUBY-01
+    name: ruby-rand
+    description: "Use of Kernel.rand"
+    severity: medium
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: '\brand\('
+
+  - id: RAND-C-01
+    name: c-rand
+    description: "Use of rand()"
+    severity: medium
+    confidence: medium
+    languages: [c]
+    patterns:
+      - regex: '\brand\(\)'
+
+  - id: RAND-CPP-01
+    name: cpp-rand
+    description: "Use of rand()"
+    severity: medium
+    confidence: medium
+    languages: [cpp]
+    patterns:
+      - regex: '\brand\(\)'
+
+  - id: RAND-RUST-01
+    name: rust-rand-thread_rng
+    description: "Use of thread_rng without crypto feature explicitly (heuristic)"
+    severity: medium
+    confidence: medium
+    languages: [rust]
+    patterns:
+      - regex: 'rand::thread_rng()'
+

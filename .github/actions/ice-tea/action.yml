@@ -1,0 +1,58 @@
+name: "Ice Tea SAST Scan"
+description: "Run Ice Tea AI-Powered DevOps Security Scanner on your codebase"
+branding:
+  icon: "shield"
+  color: "green"
+
+inputs:
+  target:
+    description: "Directory or file to scan (default: .)"
+    required: false
+    default: "."
+  severity:
+    description: "Minimum severity finding to report (critical, high, medium, low, info)"
+    required: false
+    default: "medium"
+  format:
+    description: "Output format (console, json, sarif, gitlab)"
+    required: false
+    default: "sarif"
+  output_file:
+    description: "File to write results to"
+    required: false
+    default: "ice-tea-results.sarif"
+  enable_llm:
+    description: "Enable LLM deep reasoning false-positive filtering"
+    required: false
+    default: "false"
+  openai_api_key:
+    description: "OpenAI API Key (Required if enable_llm is true)"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download Ice Tea Scanner
+      shell: bash
+      # Typically this grabs the latest release from GitHub releases
+      run: |
+        echo "Downloading latest Ice Tea release..."
+        curl -sL https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea_Linux_x86_64.tar.gz | tar xz
+        chmod +x ice-tea
+        sudo mv ice-tea /usr/local/bin/ice-tea
+
+    - name: Run Ice Tea Scanner
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+      run: |
+        LLM_FLAG=""
+        if [ "${{ inputs.enable_llm }}" == "true" ]; then
+          LLM_FLAG="--enable-llm"
+        fi
+        
+        ice-tea scan ${{ inputs.target }} \
+          --severity ${{ inputs.severity }} \
+          --format ${{ inputs.format }} \
+          --output ${{ inputs.output_file }} \
+          $LLM_FLAG

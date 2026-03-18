@@ -1,0 +1,94 @@
+rules:
+  - id: CMD-GO-01
+    name: go-cmdi
+    description: "exec.Command with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: exec.Command
+
+  - id: CMD-PY-01
+    name: python-cmdi-os-system
+    description: "os.system with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [python]
+    patterns:
+      - ast_node_type: call
+        function: os.system
+      - ast_node_type: call
+        function: subprocess.Popen
+      - regex: 'subprocess\.run\(.*shell\s*=\s*True.*\)'
+
+  - id: CMD-JS-01
+    name: js-cmdi-exec
+    description: "child_process.exec with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - ast_node_type: call_expression
+        function: exec
+      - regex: 'child_process\.exec\(.*\+.*\)'
+
+  - id: CMD-JAVA-01
+    name: java-cmdi-runtime
+    description: "Runtime.exec with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'Runtime\.getRuntime\(\)\.exec\(.*\+.*\)'
+
+  - id: CMD-PHP-01
+    name: php-cmdi-system
+    description: "system/exec/passthru with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '(?i)(system|exec|passthru|shell_exec)\s*\(.*\$.*\)'
+
+  - id: CMD-RUBY-01
+    name: ruby-cmdi-system
+    description: "system or backticks with untrusted input"
+    severity: critical
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: 'system\s*\(.*\#\{.*\}\)'
+      - regex: '`.*\#\{.*\}.*`'
+
+  - id: CMD-C-01
+    name: c-cmdi-system
+    description: "system() in C"
+    severity: critical
+    confidence: medium
+    languages: [c]
+    patterns:
+      - ast_node_type: call_expression
+        function: system
+      - regex: '\bsystem\s*\(.*\)'
+
+  - id: CMD-CPP-01
+    name: cpp-cmdi-system
+    description: "system() in C++"
+    severity: critical
+    confidence: medium
+    languages: [cpp]
+    patterns:
+      - ast_node_type: call_expression
+        function: system
+      - regex: '\bsystem\s*\(.*\)'
+
+  - id: CMD-RUST-01
+    name: rust-cmdi-command
+    description: "Command::new in Rust"
+    severity: critical
+    confidence: medium
+    languages: [rust]
+    patterns:
+      - regex: 'Command::new\s*\(.*\)'
+

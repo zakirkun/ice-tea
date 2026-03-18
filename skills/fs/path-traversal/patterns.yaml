@@ -1,0 +1,27 @@
+rules:
+  - id: FS101
+    name: path-traversal-go
+    description: "Unsafe file read using potentially un-sanitized string concatenation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: "os.ReadFile"
+        context: "string_concatenation_in_args"
+      - regex: "os\\.(ReadFile|Open|OpenFile)\\([^,]*\\+.*\\)"
+
+  - id: FS102
+    name: path-traversal-python
+    description: "Unsafe file read in Python using string concatenation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      # Simple regex match for typical open() calls with string concat or format
+      - regex: "\\bopen\\(\\s*f['\"].*\\{[^}]+\\}.*['\"]\\s*[,\\)]"
+      - regex: "\\bopen\\(.*\\+.*[,\\)]"

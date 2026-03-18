@@ -1,0 +1,15 @@
+rules:
+  - id: G204
+    name: command-injection
+    description: "User input passed to OS command execution — potential command injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-78]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: "exec.Command"
+      - ast_node_type: call_expression
+        function: "exec.CommandContext"
+      - import_path: "os/exec"

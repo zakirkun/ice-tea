@@ -1,0 +1,55 @@
+rules:
+  - id: DESER-PY-01
+    name: py-pickle
+    description: "Pickle loads"
+    severity: critical
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'pickle\.loads\('
+
+  - id: DESER-PY-02
+    name: py-yaml-load
+    description: "Unsafe yaml.load"
+    severity: critical
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'yaml\.load\([^,]*\)'
+
+  - id: DESER-JAVA-01
+    name: java-object-input-stream
+    description: "ObjectInputStream"
+    severity: critical
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'new\s+ObjectInputStream\('
+
+  - id: DESER-PHP-01
+    name: php-unserialize
+    description: "unserialize()"
+    severity: critical
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: 'unserialize\('
+
+  - id: DESER-RUBY-01
+    name: ruby-marshal-load
+    description: "Marshal.load"
+    severity: critical
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: 'Marshal\.load\('
+
+  - id: DESER-JS-01
+    name: js-node-serialize
+    description: "node-serialize"
+    severity: critical
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'unserialize\('
+

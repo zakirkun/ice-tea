@@ -1,0 +1,22 @@
+# GitLab CI SAST Configuration for Ice Tea
+# Include this in your .gitlab-ci.yml
+
+sast:
+  stage: test
+  image: alpine:latest
+  allow_failure: true
+  before_script:
+    - apk add --no-cache curl
+    # Replace with actual release URL when published
+    - curl -L -o ice-tea https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea-linux-amd64
+    - chmod +x ice-tea
+  script:
+    - ./ice-tea scan . --format gitlab --output gl-sast-report.json
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - gl-sast-report.json
+  # Optional: Enable LLM analysis
+  # variables:
+  #   OPENAI_API_KEY: $OPENAI_API_KEY

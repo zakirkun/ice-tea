@@ -1,0 +1,42 @@
+name: Ice Tea SAST Scan
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  ice-tea-scan:
+    name: Run Ice Tea Security Scanner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Ice Tea
+        run: |
+          # Replace with actual release URL when published
+          curl -L -o ice-tea https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea-linux-amd64
+          chmod +x ice-tea
+          sudo mv ice-tea /usr/local/bin/
+
+      - name: Run Ice Tea Scan
+        env:
+          # Optional: Add OPENAI_API_KEY for LLM analysis
+          # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ice-tea scan . \
+            --format sarif \
+            --output results.sarif \
+            --severity medium \
+            --confidence medium \
+            --concurrency 4
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() # Upload even if scan found vulnerabilities (exit code 1)
+        with:
+          sarif_file: results.sarif
+          category: ice-tea

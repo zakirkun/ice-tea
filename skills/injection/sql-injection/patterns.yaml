@@ -1,0 +1,33 @@
+rules:
+  - id: G201
+    name: sql-injection-concat
+    description: "SQL query built with string concatenation — potential SQL injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: "db.Query"
+        context: string_concatenation_in_args
+      - ast_node_type: call_expression
+        function: "db.QueryRow"
+        context: string_concatenation_in_args
+      - ast_node_type: call_expression
+        function: "db.Exec"
+        context: string_concatenation_in_args
+      - regex: "(?i)(SELECT|INSERT|UPDATE|DELETE).*\\+.*\\b(user|input|param|req|query|id)\\b"
+
+  - id: G202
+    name: sql-injection-sprintf
+    description: "SQL query built with fmt.Sprintf — potential SQL injection"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-89]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: "fmt.Sprintf"
+        context: sql_query_argument

@@ -1,0 +1,70 @@
+rules:
+  - id: SQLI-GO-01
+    name: go-sqli-concat
+    description: "SQL query using string concatenation"
+    severity: critical
+    confidence: medium
+    languages: [go]
+    patterns:
+      - ast_node_type: call_expression
+        function: db.Query
+        context: string_concatenation_in_args
+      - regex: '(?i)(SELECT|UPDATE|INSERT|DELETE).*?\+.*?'
+
+  - id: SQLI-PY-01
+    name: python-sqli-format
+    description: "SQL query using f-strings or format"
+    severity: critical
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: '(?i)execute\s*\(\s*f?["\'].*(SELECT|UPDATE|INSERT|DELETE).*?\{.*\}.*["\']\s*\)'
+      - regex: '(?i)execute\s*\(\s*["\'].*(SELECT|UPDATE|INSERT|DELETE).*?["\']\s*%.*\)'
+
+  - id: SQLI-JS-01
+    name: js-sqli-template
+    description: "SQL query using template literals"
+    severity: critical
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: '(?i)query\s*\(\s*`.*(SELECT|UPDATE|INSERT|DELETE).*?\$\{.*\}.*`\s*\)'
+
+  - id: SQLI-TS-01
+    name: ts-sqli-template
+    description: "SQL query using template literals in TS"
+    severity: critical
+    confidence: medium
+    languages: [typescript]
+    patterns:
+      - regex: '(?i)query\s*\(\s*`.*(SELECT|UPDATE|INSERT|DELETE).*?\$\{.*\}.*`\s*\)'
+
+  - id: SQLI-JAVA-01
+    name: java-sqli-concat
+    description: "SQL query string concatenation"
+    severity: critical
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: '(?i)executeQuery\s*\(.*(SELECT|UPDATE|INSERT|DELETE).*?\+.*\)'
+      - regex: '(?i)createStatement\s*\(\s*\)\.execute\s*\(.*(SELECT|UPDATE|INSERT|DELETE).*?\+.*\)'
+
+  - id: SQLI-PHP-01
+    name: php-sqli-concat
+    description: "SQL query using string concatenation"
+    severity: critical
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '(?i)mysql_query\s*\(.*(SELECT|UPDATE|INSERT|DELETE).*?\..*\)'
+      - regex: '(?i)->query\s*\(.*(SELECT|UPDATE|INSERT|DELETE).*?\..*\)'
+
+  - id: SQLI-RUBY-01
+    name: ruby-sqli-interp
+    description: "SQL query using string interpolation"
+    severity: critical
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: '(?i)(?:execute|query)\s*["\'].*(SELECT|UPDATE|INSERT|DELETE).*?\#\{.*\}.*["\']'
+

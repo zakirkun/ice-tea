@@ -1,0 +1,37 @@
+rules:
+  - id: G401
+    name: weak-crypto-md5
+    description: "Use of weak cryptographic hash MD5 — consider SHA-256 or stronger"
+    severity: high
+    confidence: high
+    cwe: [CWE-327]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - import_path: "crypto/md5"
+      - function: "md5.New"
+      - function: "md5.Sum"
+
+  - id: G402
+    name: weak-crypto-sha1
+    description: "Use of weak cryptographic hash SHA1 — consider SHA-256 or stronger"
+    severity: medium
+    confidence: high
+    cwe: [CWE-328]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - import_path: "crypto/sha1"
+      - function: "sha1.New"
+      - function: "sha1.Sum"
+
+  - id: G403
+    name: weak-crypto-des
+    description: "Use of weak DES encryption — use AES instead"
+    severity: high
+    confidence: high
+    cwe: [CWE-327]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - import_path: "crypto/des"

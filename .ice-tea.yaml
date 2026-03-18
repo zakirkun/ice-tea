@@ -1,0 +1,57 @@
+# Ice Tea configuration
+# Ref: docs/07-golang-project-structure.md
+
+scan:
+  target: "."
+  severity: medium # critical, high, medium, low, info
+  confidence: medium # high, medium, low
+  concurrency: 4
+  timeout: 5m
+
+exclude:
+  dirs:
+    - vendor
+    - node_modules
+    - .git
+    - build
+    - dist
+    - testdata
+    - __pycache__
+    - .venv
+    - venv
+  files:
+    - "*.min.js"
+    - "*.min.css"
+    - "*.generated.go"
+    - "*.pb.go"
+  extensions:
+    - .md
+    - .txt
+    - .png
+    - .jpg
+    - .svg
+    - .ico
+    - .pdf
+    - .zip
+    - .exe
+
+skills:
+  dir: "./skills"
+  external_dirs: []
+  trust_external: false
+
+llm:
+  enabled: true
+  provider: "openai" # openai, anthropic, ollama
+  model: "gpt-4o"
+  api_key_env: "OPENAI_KEY"
+  max_tokens: 4096
+  rate_limit: 10 # requests per minute
+  timeout: 30s
+  cache: true
+
+output:
+  format: "console" # console, sarif, gitlab, json
+  file: "" # empty = stdout
+  verbose: false
+  color: true

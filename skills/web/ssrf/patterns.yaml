@@ -1,0 +1,70 @@
+rules:
+  - id: SSRF-GO-01
+    name: go-http-get
+    description: "http.Get with variable"
+    severity: high
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'http\.(Get|Post|Do)\([a-zA-Z_]'
+      - ast_node_type: call_expression
+        function: http.Get
+
+  - id: SSRF-PY-01
+    name: py-requests-get
+    description: "requests.get with variable"
+    severity: high
+    confidence: medium
+    languages: [python]
+    patterns:
+      - ast_node_type: call
+        function: requests.get
+      - regex: 'requests\.(get|post|request)\([a-zA-Z_]'
+
+  - id: SSRF-JS-01
+    name: js-fetch
+    description: "fetch with variable"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - ast_node_type: call_expression
+        function: fetch
+      - regex: 'axios\.(get|post)\([a-zA-Z_]'
+
+  - id: SSRF-JAVA-01
+    name: java-url-conn
+    description: "URL openConnection with variable"
+    severity: high
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'new\s+URL\([a-zA-Z_][a-zA-Z0-9_]*\)\.openConnection'
+
+  - id: SSRF-PHP-01
+    name: php-curl-file-get
+    description: "file_get_contents or curl with variable"
+    severity: high
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '(file_get_contents|curl_init)\(\s*\$'
+
+  - id: SSRF-RUBY-01
+    name: ruby-net-http
+    description: "Net::HTTP.get with variable"
+    severity: high
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: 'Net::HTTP\.(get|post_form)\([a-zA-Z_]'
+
+  - id: SSRF-C-01
+    name: c-libcurl
+    description: "curl_easy_setopt with URL"
+    severity: high
+    confidence: medium
+    languages: [c]
+    patterns:
+      - regex: 'curl_easy_setopt\(.*CURLOPT_URL.*\)'
+

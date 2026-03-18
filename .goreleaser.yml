@@ -1,0 +1,54 @@
+version: 2
+
+project_name: ice-tea
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ice-tea
+    binary: ice-tea
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      # Cross-compiling CGO is hard without a matrix, but goreleaser will attempt it if CC cross-compilers are accessible.
+      # Exclude arm64 for windows as it often requires specialized CGO toolchains not present by default.
+      - goos: windows
+        goarch: arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+
+archives:
+  - format: tar.gz
+    # Use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+release:
+  github:
+    owner: zakirkun
+    name: ice-tea

@@ -1,0 +1,46 @@
+rules:
+  - id: LFI-PHP-01
+    name: php-include-require
+    description: "Dynamic include/require"
+    severity: critical
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '(?i)(include|require|include_once|require_once)\s*\(\s*\$.*\)'
+
+  - id: LFI-JAVA-01
+    name: java-file-read
+    description: "Unsafe file read"
+    severity: high
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'new\s+File\(.*\+.*\)'
+
+  - id: LFI-C-01
+    name: c-fopen
+    description: "Unsafe fopen"
+    severity: high
+    confidence: medium
+    languages: [c]
+    patterns:
+      - regex: 'fopen\([a-zA-Z_]'
+
+  - id: LFI-JS-01
+    name: js-fs-readfile
+    description: "fs.readFile with variable"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'fs\.(readFile|readFileSync)\([a-zA-Z_]'
+
+  - id: LFI-PY-01
+    name: py-open
+    description: "open with variable"
+    severity: high
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'open\([a-zA-Z_]'
+

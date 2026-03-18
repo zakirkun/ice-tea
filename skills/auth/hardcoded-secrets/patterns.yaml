@@ -1,0 +1,91 @@
+rules:
+  - id: SEC-GEN-01
+    name: generic-aws-key
+    description: "AWS Access Key"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'
+
+  - id: SEC-GEN-02
+    name: generic-google-key
+    description: "Google API Key"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: 'AIza[0-9A-Za-z\-_]{35}'
+
+  - id: SEC-GEN-03
+    name: generic-stripe-key
+    description: "Stripe Key"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)sk_live_[0-9a-zA-Z]{24}'
+
+  - id: SEC-GEN-04
+    name: generic-slack-token
+    description: "Slack Token"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: 'xox[baprs]-[0-9a-zA-Z]{10,48}'
+
+  - id: SEC-GEN-05
+    name: generic-github-token
+    description: "GitHub Token"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)gh[pousr]_[0-9a-zA-Z]{36}'
+
+  - id: SEC-GEN-06
+    name: generic-password
+    description: "Variables named password with hardcoded string"
+    severity: high
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)(password|passwd|pwd)\s*[:=]\s*["\'][^"\']+["\']'
+
+  - id: SEC-GEN-07
+    name: generic-secret
+    description: "Variables named secret with hardcoded string"
+    severity: high
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)(secret|client_secret|api_secret)\s*[:=]\s*["\'][^"\']+["\']'
+
+  - id: SEC-GEN-08
+    name: generic-bearer
+    description: "Hardcoded Bearer Token"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '(?i)bearer\s+[a-zA-Z0-9_\-\.]{30,}'
+
+  - id: SEC-GEN-09
+    name: generic-rsa-private
+    description: "RSA Private Key"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '-----BEGIN RSA PRIVATE KEY-----'
+
+  - id: SEC-GEN-10
+    name: generic-pgp-private
+    description: "PGP Private Key"
+    severity: critical
+    confidence: medium
+    languages: [generic]
+    patterns:
+      - regex: '-----BEGIN PGP PRIVATE KEY BLOCK-----'
+

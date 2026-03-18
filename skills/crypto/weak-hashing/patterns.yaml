@@ -1,0 +1,93 @@
+rules:
+  - id: HASH-GO-01
+    name: go-md5-sha1
+    description: "MD5 or SHA1 in Go"
+    severity: high
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'crypto/(md5|sha1)'
+
+  - id: HASH-PY-01
+    name: py-md5-sha1
+    description: "MD5 or SHA1 in Python"
+    severity: high
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'hashlib\.(md5|sha1)'
+
+  - id: HASH-JS-01
+    name: js-md5-sha1
+    description: "MD5 or SHA1 in JS"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'createHash\([\"\'](md5|sha1)[\"\']\)'
+      - regex: 'crypto-js/(md5|sha1)'
+
+  - id: HASH-TS-01
+    name: ts-md5-sha1
+    description: "MD5 or SHA1 in TS"
+    severity: high
+    confidence: medium
+    languages: [typescript]
+    patterns:
+      - regex: 'createHash\([\"\'](md5|sha1)[\"\']\)'
+
+  - id: HASH-JAVA-01
+    name: java-md5-sha1
+    description: "MD5 or SHA1 in Java"
+    severity: high
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'MessageDigest\.getInstance\([\"\'](MD5|SHA-1)[\"\']\)'
+
+  - id: HASH-PHP-01
+    name: php-md5-sha1
+    description: "MD5 or SHA1 in PHP"
+    severity: high
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '\b(md5|sha1)\s*\('
+
+  - id: HASH-RUBY-01
+    name: ruby-md5-sha1
+    description: "MD5 or SHA1 in Ruby"
+    severity: high
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: 'Digest::(MD5|SHA1)'
+
+  - id: HASH-C-01
+    name: c-md5-sha1
+    description: "MD5 or SHA1 in C (OpenSSL)"
+    severity: high
+    confidence: medium
+    languages: [c]
+    patterns:
+      - regex: '\b(MD5|SHA1)\s*\('
+
+  - id: HASH-CPP-01
+    name: cpp-md5-sha1
+    description: "MD5 or SHA1 in C++"
+    severity: high
+    confidence: medium
+    languages: [cpp]
+    patterns:
+      - regex: '\b(MD5|SHA1)\s*\('
+
+  - id: HASH-RUST-01
+    name: rust-md5-sha1
+    description: "MD5 or SHA1 in Rust"
+    severity: high
+    confidence: medium
+    languages: [rust]
+    patterns:
+      - regex: 'md5::compute'
+      - regex: 'sha1::Sha1'
+

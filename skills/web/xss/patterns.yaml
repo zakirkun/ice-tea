@@ -1,0 +1,26 @@
+rules:
+  - id: JS101
+    name: xss-innerhtml
+    description: "Dangerous assignment to innerHTML — potential DOM XSS"
+    severity: high
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      # Tree-sitter matches property assignments differently depending on grammar
+      # A regex offers a solid baseline while AST matching is refined
+      - regex: "(?i)\\.innerHTML\\s*=\\s*[^'\"]"
+
+  - id: JS102
+    name: xss-eval
+    description: "Use of eval() — potential code injection / XSS"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94, CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - ast_node_type: "call_expression"
+        function: "eval"
+      - regex: "\\beval\\([^)]+\\)"
