@@ -8,6 +8,7 @@ before:
 
 builds:
   - id: ice-tea
+    dir: cmd/ice-tea
     binary: ice-tea
     env:
       - CGO_ENABLED=1
