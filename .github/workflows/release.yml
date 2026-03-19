@@ -1,46 +1,143 @@
-name: Release
+name: Build and Release
 
 on:
   push:
     tags:
-      - '*' # Trigger on any tag push
+      - '*'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  goreleaser:
-    runs-on: ubuntu-latest
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            runner: ubuntu-latest
+            ext: ""
+          - os: linux
+            arch: arm64
+            runner: ubuntu-latest
+            ext: ""
+          - os: windows
+            arch: amd64
+            runner: ubuntu-latest
+            ext: .exe
+          - os: darwin
+            arch: amd64
+            runner: macos-latest
+            ext: ""
+          - os: darwin
+            arch: arm64
+            runner: macos-latest
+            ext: ""
+
+    runs-on: ${{ matrix.runner }}
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-          
-      # Since go-tree-sitter requires CGO, we need cross-compilers for multi-os support using goreleaser natively.
-      # For a simpler matrix release we could do it in GitHub natively, but we will use zig as a C/C++ drop-in cross compiler for goreleaser.
-      # Extract to RUNNER_TEMP to avoid polluting workspace (GoReleaser requires clean git state)
-      - name: Install Zig for CGO Cross Compilation
-        run: |
-          cd $RUNNER_TEMP
-          wget -q https://ziglang.org/download/0.11.0/zig-linux-x86_64-0.11.0.tar.xz
-          tar xf zig-linux-x86_64-0.11.0.tar.xz
-          echo "$RUNNER_TEMP/zig-linux-x86_64-0.11.0" >> $GITHUB_PATH
+          cache: true
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+      - name: Install CGO dependencies (Linux)
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc
+          if [ "${{ matrix.arch }}" = "arm64" ]; then
+            sudo apt-get install -y gcc-aarch64-linux-gnu
+          fi
+
+      - name: Install CGO dependencies (Windows cross-compile from Ubuntu)
+        if: matrix.os == 'windows'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc mingw-w64
+
+      - name: Build binary (Linux)
+        if: matrix.os == 'linux'
+        env:
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 1
+        run: |
+          if [ "${{ matrix.arch }}" = "arm64" ]; then export CC=aarch64-linux-gnu-gcc; fi
+          go build -ldflags="-s -w -X main.version=${{ github.ref_name }} -X main.commit=${{ github.sha }} -X main.date=$(date -u +%Y-%m-%d)" \
+            -o ice-tea-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }} ./cmd/ice-tea
+
+      - name: Build binary (Windows from Ubuntu)
+        if: matrix.os == 'windows'
+        env:
+          GOOS: windows
+          GOARCH: amd64
+          CGO_ENABLED: 1
+          CC: x86_64-w64-mingw32-gcc
+        run: |
+          go build -ldflags="-s -w -X main.version=${{ github.ref_name }} -X main.commit=${{ github.sha }} -X main.date=$(date -u +%Y-%m-%d)" \
+            -o ice-tea-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }} ./cmd/ice-tea
+
+      - name: Build binary (macOS)
+        if: matrix.os == 'darwin'
+        env:
+          GOOS: darwin
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 1
+        run: |
+          go build -ldflags="-s -w -X main.version=${{ github.ref_name }} -X main.commit=${{ github.sha }} -X main.date=$(date -u +%Y-%m-%d)" \
+            -o ice-tea-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }} ./cmd/ice-tea
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          distribution: goreleaser
-          version: "~> v2"
-          args: release --clean
+          name: ice-tea-${{ matrix.os }}-${{ matrix.arch }}
+          path: ice-tea-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create release notes
+        run: |
+          cat > release_notes.md << EOF
+          ## Ice Tea Security Scanner ${{ github.ref_name }}
+
+          ### Cross-Platform Binaries
+          - **Linux**: \`ice-tea-linux-amd64\`, \`ice-tea-linux-arm64\`
+          - **Windows**: \`ice-tea-windows-amd64.exe\`
+          - **macOS**: \`ice-tea-darwin-amd64\`, \`ice-tea-darwin-arm64\`
+
+          ### Installation
+          Download the appropriate binary for your platform and add it to your PATH.
+          EOF
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          body_path: release_notes.md
+          files: |
+            ice-tea-linux-amd64/ice-tea-linux-amd64
+            ice-tea-linux-arm64/ice-tea-linux-arm64
+            ice-tea-windows-amd64/ice-tea-windows-amd64.exe
+            ice-tea-darwin-amd64/ice-tea-darwin-amd64
+            ice-tea-darwin-arm64/ice-tea-darwin-arm64
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Configure GoReleaser to use zig for cross compiling CGO
-          CGO_ENABLED: 1
-          CC: "zig cc"
-          CXX: "zig c++"
