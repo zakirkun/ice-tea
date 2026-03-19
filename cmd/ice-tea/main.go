@@ -8,9 +8,9 @@ import (
 
 // Build info set via ldflags
 var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
+	version = "1.0.0"
+	commit  = "14cff13"
+	date    = "2025-03-19"
 )
 
 func main() {
