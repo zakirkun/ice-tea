@@ -1,0 +1,34 @@
+rules:
+  - id: AUTH-CONC-001
+    name: session-create-no-old-invalidation
+    description: "New session created on login without invalidating existing sessions"
+    severity: medium
+    confidence: low
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:jwt\\.sign|createSession|generateToken)\\s*\\([^)]+\\)(?![^;\\n]*(?:revoke|invalidate|delete|destroy).*(?:existing|old|prev))"
+
+  - id: AUTH-CONC-002
+    name: no-session-count-limit
+    description: "User session created without checking session count limit"
+    severity: low
+    confidence: low
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "Session\\.create\\s*\\([^)]+\\)(?![^;]*(?:count|limit|max))"
+
+  - id: AUTH-CONC-003
+    name: logout-single-session-only
+    description: "Logout only destroys current session, not all user sessions"
+    severity: medium
+    confidence: low
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "req\\.session\\.destroy\\s*\\(\\s*\\)(?![^;\\n]*(?:all|other|everywhere))"
+      - regex: "session\\.flush\\s*\\(\\s*\\)(?![^;\\n]*other)"

@@ -1,0 +1,60 @@
+rules:
+  - id: AUTH-RESET-001
+    name: reset-token-math-random
+    description: "Password reset token generated with Math.random() — predictable"
+    severity: critical
+    confidence: high
+    cwe: [CWE-338]
+    owasp: [A07:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:reset|token).*Math\\.random\\s*\\(\\s*\\)"
+      - regex: "Math\\.random\\s*\\(\\s*\\).*(?:reset|token)"
+
+  - id: AUTH-RESET-002
+    name: reset-token-no-expiry
+    description: "Password reset token stored without expiration time"
+    severity: high
+    confidence: medium
+    cwe: [CWE-640]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "resetToken.*=.*(?:uuid|crypto\\.randomBytes|secrets\\.token)(?![^;]*expir|[^;]*ttl|[^;]*expiresAt)"
+      - regex: "User\\.(?:update|save).*resetToken(?![^;]*resetTokenExpiry|[^;]*expiresAt)"
+
+  - id: AUTH-RESET-003
+    name: reset-url-from-host-header
+    description: "Password reset URL generated from HTTP Host header — phishing via host injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-640]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php, go]
+    patterns:
+      - regex: "(?:https?://).*req\\.headers?\\.host.*(?:reset|token|password)"
+      - regex: "reset.*link.*\\$_SERVER\\[.HTTP_HOST.\\]"
+
+  - id: AUTH-RESET-004
+    name: reset-token-after-use-valid
+    description: "Reset token not invalidated after successful use — allows reuse"
+    severity: high
+    confidence: medium
+    cwe: [CWE-640]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "password.*updated(?![^;]*(?:resetToken|reset_token).*null|[^;]*delete.*token)"
+      - regex: "user\\.password\\s*=.*newPassword(?![^;]*user\\.resetToken)"
+
+  - id: AUTH-RESET-005
+    name: user-enumeration-reset
+    description: "Password reset returns different responses for valid vs invalid email"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-204]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "Email not found|User not found|No account.*email"
+      - regex: "res\\.json.*(?:email.*not.*found|invalid.*email|user.*does.*not.*exist)"

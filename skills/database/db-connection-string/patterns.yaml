@@ -1,0 +1,60 @@
+rules:
+  - id: DB-CONN-001
+    name: postgres-connection-string-creds
+    description: "PostgreSQL connection string with hardcoded username and password"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby, generic]
+    patterns:
+      - regex: "['\"]postgresql?://[^:]+:[^@]+@[^'\"]+['\"]"
+      - regex: "['\"]postgres://[^:]+:[^@]+@[^'\"]+['\"]"
+
+  - id: DB-CONN-002
+    name: mysql-connection-string-creds
+    description: "MySQL connection string with hardcoded credentials"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby, generic]
+    patterns:
+      - regex: "['\"]mysql://[^:]+:[^@]+@[^'\"]+['\"]"
+      - regex: "mysql://[a-zA-Z0-9]+:[a-zA-Z0-9@#$%!]{4,}@"
+
+  - id: DB-CONN-003
+    name: mssql-connection-string-password
+    description: "MSSQL/SQL Server connection string with hardcoded password"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, java, generic]
+    patterns:
+      - regex: "(?i)Password\\s*=\\s*[^;\"']{4,}(?:;|[\"'])"
+      - regex: "(?i)Server=.*Password=[^;\"']{4,}"
+
+  - id: DB-CONN-004
+    name: connection-string-in-config
+    description: "Database connection string with password in config/settings file"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-312]
+    owasp: [A07:2025]
+    languages: [python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)(?:DB_URL|DATABASE_URL|CONNECTION_STRING)\\s*=\\s*['\"][^'\"]+:[^'\"]+@[^'\"]+['\"]"
+      - regex: "(?i)dsn\\s*[=:]\\s*['\"][^:]+:[^@]+@[^'\"]+['\"]"
+
+  - id: DB-CONN-005
+    name: sqlite-file-world-accessible
+    description: "SQLite database file stored in web-accessible directory"
+    severity: high
+    confidence: medium
+    cwe: [CWE-312]
+    owasp: [A07:2025]
+    languages: [python, php, javascript, go, ruby]
+    patterns:
+      - regex: "sqlite:///(?:public|static|www|htdocs|webroot)/[^'\"]+"
+      - regex: "sqlite3\\.connect\\s*\\(['\"](?:public|static|www)/[^'\"]+\\.db['\"]"

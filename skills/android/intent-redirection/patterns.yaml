@@ -1,0 +1,50 @@
+rules:
+  - id: AND-INT-001
+    name: android-intent-redirect-parcelable
+    description: "Android Intent forwarded from Parcelable extra — intent redirection"
+    severity: high
+    confidence: high
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "getParcelableExtra\\s*\\([^)]+\\)\\s*;[^;]*startActivity"
+      - regex: "\\(Intent\\)\\s*(?:intent|getIntent\\(\\))\\.getParcelableExtra\\s*\\([^)]+\\)\\s*;[^;]*startActivity"
+      - regex: "Intent\\s+\\w+\\s*=\\s*\\(Intent\\).*getParcelableExtra"
+
+  - id: AND-INT-002
+    name: android-implicit-intent-sensitive
+    description: "Android implicit Intent starting Activity with action from user data"
+    severity: high
+    confidence: medium
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+Intent\\s*\\(\\s*(?:intent\\.getStringExtra|getIntent\\(\\)\\.getStringExtra)"
+      - regex: "Intent\\.parseUri\\s*\\(\\s*(?:intent\\.getStringExtra|uri|url)"
+
+  - id: AND-INT-003
+    name: android-startactivity-for-result-unsafe
+    description: "Android startActivityForResult with external intent — SSRF-like escalation"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "startActivityForResult\\s*\\(\\s*(?:intent\\.getParcelableExtra|\\(Intent\\))"
+      - regex: "startActivity\\s*\\(\\s*\\(Intent\\).*getExtra"
+
+  - id: AND-INT-004
+    name: android-pending-intent-mutable
+    description: "Mutable PendingIntent can be hijacked by malicious apps"
+    severity: high
+    confidence: high
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "PendingIntent\\.getActivity\\s*\\([^)]*,\\s*0\\s*,\\s*new\\s+Intent\\s*\\(\\s*\\)"
+      - regex: "PendingIntent\\.FLAG_MUTABLE"
+      - regex: "PendingIntent\\.[^(]+\\([^)]*\\b0\\b[^)]*\\)(?![^;]*IMMUTABLE)"

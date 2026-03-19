@@ -1,0 +1,49 @@
+rules:
+  - id: API-SWAG-001
+    name: swagger-ui-no-auth
+    description: "Swagger UI endpoint registered without authentication middleware"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, java, go]
+    patterns:
+      - regex: "(?:app|router)\\.use\\s*\\(['\"][^'\"]*(?:api-docs|swagger|openapi)[^'\"]*['\"]\\s*,\\s*swaggerUi"
+      - regex: "swagger_ui_view\\s*\\([^)]*\\)(?![^;]*login_required|[^;]*auth)"
+
+  - id: API-SWAG-002
+    name: spring-swagger-all-paths
+    description: "Spring Boot Swagger enabled without restricting access"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [java]
+    patterns:
+      - regex: "@EnableSwagger2"
+      - regex: "@OpenAPIDefinition"
+
+  - id: API-SWAG-003
+    name: swagger-production-env
+    description: "Swagger explicitly enabled in production environment"
+    severity: high
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "swagger.*production|production.*swagger"
+      - regex: "(?:if|unless).*production.*swagger|swagger.*(?:if|unless).*production"
+
+  - id: API-SWAG-004
+    name: graphiql-production
+    description: "GraphiQL or Apollo Sandbox enabled in production"
+    severity: medium
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "graphiql\\s*:\\s*true"
+      - regex: "introspection\\s*:\\s*true"
+      - regex: "playground\\s*:\\s*true"

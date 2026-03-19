@@ -1,0 +1,86 @@
+rules:
+  - id: CLOUD-SEC-001
+    name: env-file-real-secret
+    description: "Environment variable file containing what appears to be a real secret value"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-526]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)(?:SECRET|PASSWORD|PASSWD|API_KEY|PRIVATE_KEY|TOKEN|AUTH)\\s*=\\s*[a-zA-Z0-9/+\\-_]{16,}"
+      - regex: "(?i)(?:SECRET|PASSWORD)\\s*=\\s*(?!\\$\\{|\\$\\()\\S+"
+
+  - id: CLOUD-SEC-002
+    name: stripe-secret-key
+    description: "Stripe secret API key hardcoded"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, javascript, typescript, python, go, php]
+    patterns:
+      - regex: "sk_live_[a-zA-Z0-9]{24,}"
+      - regex: "(?i)STRIPE_SECRET_KEY\\s*[=:]\\s*sk_live_"
+
+  - id: CLOUD-SEC-003
+    name: github-token
+    description: "GitHub personal access token or OAuth token exposed"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, yaml]
+    patterns:
+      - regex: "ghp_[a-zA-Z0-9]{36}"
+      - regex: "gho_[a-zA-Z0-9]{36}"
+      - regex: "github_pat_[a-zA-Z0-9_]{82}"
+
+  - id: CLOUD-SEC-004
+    name: google-api-key
+    description: "Google API key or service account key exposed"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, javascript, typescript, python]
+    patterns:
+      - regex: "AIza[0-9A-Za-z\\-_]{35}"
+      - regex: "(?i)GOOGLE_API_KEY\\s*[=:]\\s*AIza"
+      - regex: "\"type\":\\s*\"service_account\""
+
+  - id: CLOUD-SEC-005
+    name: sendgrid-api-key
+    description: "SendGrid API key hardcoded"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, javascript, python, go]
+    patterns:
+      - regex: "SG\\.[a-zA-Z0-9\\-_]{22}\\.[a-zA-Z0-9\\-_]{43}"
+
+  - id: CLOUD-SEC-006
+    name: slack-webhook-token
+    description: "Slack webhook URL or Bot token hardcoded"
+    severity: high
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, javascript, typescript, python, go]
+    patterns:
+      - regex: "https://hooks\\.slack\\.com/services/[A-Z0-9/]+"
+      - regex: "xoxb-[0-9]{11}-[0-9]{11}-[a-zA-Z0-9]{24}"
+      - regex: "xoxp-[0-9]{11}-[0-9]{11}-[0-9]{11}-[a-zA-Z0-9]{32}"
+
+  - id: CLOUD-SEC-007
+    name: twilio-credentials
+    description: "Twilio Account SID or Auth Token hardcoded"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic, javascript, python, go, php]
+    patterns:
+      - regex: "AC[a-z0-9]{32}"
+      - regex: "(?i)TWILIO_AUTH_TOKEN\\s*[=:]\\s*[a-z0-9]{32}"

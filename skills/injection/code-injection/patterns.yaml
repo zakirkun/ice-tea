@@ -1,0 +1,63 @@
+rules:
+  - id: INJ-CODE-001
+    name: python-eval-user-input
+    description: "Python eval() with user-controlled input — code injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "eval\\s*\\(\\s*(?:request\\.(?:args|form|json|data)|user_input|input\\()"
+      - regex: "exec\\s*\\(\\s*(?:request\\.(?:args|form|json)|user_input)"
+      - regex: "compile\\s*\\(\\s*(?:request\\.(?:args|form|json)|user_input)"
+
+  - id: INJ-CODE-002
+    name: php-eval-user-input
+    description: "PHP eval() with user-controlled input — remote code execution"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "eval\\s*\\(\\s*\\$_(?:GET|POST|REQUEST|COOKIE)"
+      - regex: "eval\\s*\\([^)]*\\$(?:input|data|code|payload)"
+      - regex: "assert\\s*\\(\\s*\\$_(?:GET|POST|REQUEST)"
+
+  - id: INJ-CODE-003
+    name: php-preg-replace-eval
+    description: "PHP preg_replace() with /e modifier — code execution via regex replacement"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "preg_replace\\s*\\([^,]*\\/e[^,]*,"
+      - regex: "preg_replace\\s*\\(\\s*['\"][^'\"]*\\/e['\"]"
+
+  - id: INJ-CODE-004
+    name: js-new-function-user-input
+    description: "JavaScript new Function() with user-controlled body"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "new\\s+Function\\s*\\([^)]*(?:req\\.body|req\\.query|userInput)"
+      - regex: "Function\\s*\\(['\"][^'\"]*['\"]\\s*,\\s*(?:req\\.body|userInput)"
+
+  - id: INJ-CODE-005
+    name: ruby-eval-user-input
+    description: "Ruby eval() with user-controlled string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "eval\\s*\\(\\s*params(?:\\[|\\.)\\w+"
+      - regex: "instance_eval\\s*\\(\\s*params(?:\\[|\\.)\\w+"
+      - regex: "binding\\.eval\\s*\\(\\s*params"

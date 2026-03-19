@@ -1,0 +1,35 @@
+rules:
+  - id: AUTH-REM-001
+    name: remember-me-token-predictable
+    description: "Remember-me token constructed from predictable data (username, ID, timestamp)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-338]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "rememberToken.*=.*(?:md5|sha1|base64).*(?:userId|username|email|Date\\.now)"
+      - regex: "remember_token.*=.*btoa|remember.*token.*Buffer\\.from.*username"
+
+  - id: AUTH-REM-002
+    name: persistent-cookie-long-expiry
+    description: "Remember-me cookie set with very long expiry (> 30 days)"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "maxAge\\s*:\\s*(?:[3-9][0-9]{7,}|[0-9]{9,})"
+      - regex: "expires\\s*=.*\\+\\s*(?:365|730|1000)\\s*\\*\\s*24\\s*\\*\\s*60\\s*\\*\\s*60"
+
+  - id: AUTH-REM-003
+    name: remember-me-not-invalidated-on-pw-change
+    description: "Password change without invalidating remember-me tokens"
+    severity: high
+    confidence: low
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "password.*update|user\\.save.*password(?![^;]*(?:rememberToken|remember_token).*null)"

@@ -1,0 +1,47 @@
+rules:
+  - id: SC-POST-001
+    name: postinstall-remote-execution
+    description: "postinstall script downloads and executes remote code"
+    severity: critical
+    confidence: high
+    cwe: [CWE-506]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"postinstall\"\\s*:\\s*\"[^\"]*(?:curl|wget).*\\|\\s*(?:sh|bash|node|python)"
+      - regex: "\"postinstall\"\\s*:\\s*\"node\\s+install\\.js\""
+
+  - id: SC-POST-002
+    name: preinstall-remote-fetch
+    description: "preinstall script fetches from remote URL"
+    severity: critical
+    confidence: high
+    cwe: [CWE-506]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"preinstall\"\\s*:\\s*\"[^\"]*(?:curl|wget|fetch)\\s+https?://"
+
+  - id: SC-POST-003
+    name: install-script-env-exfiltration
+    description: "Install script reading environment variables and sending to remote"
+    severity: critical
+    confidence: high
+    cwe: [CWE-506]
+    owasp: [A06:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "process\\.env.*(?:fetch|http\\.get|axios\\.post)\\s*\\(['\"]https?://"
+      - regex: "require\\s*\\(['\"]https?://[^'\"]+['\"]\\)"
+
+  - id: SC-POST-004
+    name: install-script-encode-env
+    description: "Package script encodes environment and sends base64 to remote server"
+    severity: critical
+    confidence: high
+    cwe: [CWE-506]
+    owasp: [A06:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "Buffer\\.from\\s*\\(\\s*JSON\\.stringify\\s*\\(\\s*process\\.env"
+      - regex: "btoa\\s*\\(\\s*JSON\\.stringify\\s*\\(\\s*process\\.env"

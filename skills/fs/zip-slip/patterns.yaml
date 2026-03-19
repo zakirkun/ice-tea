@@ -1,0 +1,65 @@
+rules:
+  - id: FS-ZIP-001
+    name: python-zipfile-extractall-no-check
+    description: "Python ZipFile.extractall() without path traversal validation"
+    severity: high
+    confidence: high
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "\\.extractall\\s*\\("
+      - regex: "zipfile\\.ZipFile.*\\.extractall\\s*\\("
+      - regex: "ZipFile.*\\.extractall\\s*\\((?![^)]*(?:members|filter|path_check))"
+
+  - id: FS-ZIP-002
+    name: python-tarfile-extractall-no-check
+    description: "Python tarfile.extractall() — vulnerable to absolute paths and .."
+    severity: high
+    confidence: high
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "tar\\.extractall\\s*\\("
+      - regex: "tarfile\\.open.*\\.extractall\\s*\\("
+      - regex: "\\.extract\\s*\\(\\s*member(?![^)]*safe)"
+
+  - id: FS-ZIP-003
+    name: java-zip-entry-no-path-check
+    description: "Java ZipEntry extracted without canonical path validation"
+    severity: high
+    confidence: high
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+File\\s*\\(\\s*\\w+\\s*,\\s*entry\\.getName\\s*\\(\\s*\\)\\s*\\)"
+      - regex: "ZipEntry.*getName\\s*\\(\\s*\\)(?![^;]*getCanonicalFile|[^;]*startsWith)"
+      - regex: "ZipInputStream.*getNextEntry\\s*\\(\\s*\\)(?![^}]*getCanonicalPath)"
+
+  - id: FS-ZIP-004
+    name: go-archive-zip-no-check
+    description: "Go archive/zip extraction without path traversal check"
+    severity: high
+    confidence: high
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [go]
+    patterns:
+      - regex: "zip\\.OpenReader\\s*\\([^)]+\\)(?![^}]*filepath\\.Clean|[^}]*strings\\.HasPrefix)"
+      - regex: "f\\.Name\\b(?![^;\\n]*filepath\\.Clean|[^;\\n]*strings\\.HasPrefix)"
+      - regex: "rc\\s*,\\s*err\\s*:?=\\s*f\\.Open\\s*\\(\\s*\\)(?![^}]*filepath\\.Clean)"
+
+  - id: FS-ZIP-005
+    name: node-extract-zip-no-check
+    description: "Node.js ZIP extraction without validating entry paths"
+    severity: high
+    confidence: medium
+    cwe: [CWE-22]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "extract\\s*\\([^)]*,\\s*\\{[^}]*dir[^}]*\\}(?![^)]*(?:validate|check|filter))"
+      - regex: "unzipper\\.Extract\\s*\\(\\s*\\{[^}]*path[^}]*\\}\\s*\\)"
+      - regex: "yauzl.*entry\\.fileName(?![^;]*path\\.resolve|[^;]*normalize)"

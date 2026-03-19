@@ -1,0 +1,50 @@
+rules:
+  - id: DESER-JSON-001
+    name: jackson-default-typing
+    description: "Jackson ObjectMapper enableDefaultTyping() — polymorphic deserialization RCE"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "enableDefaultTyping\\s*\\("
+      - regex: "activateDefaultTyping\\s*\\("
+      - regex: "ObjectMapper.*enableDefaultTyping"
+
+  - id: DESER-JSON-002
+    name: jackson-jsonsubtypes-user-class
+    description: "Jackson @JsonTypeInfo with user-controlled class name"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "@JsonTypeInfo\\s*\\([^)]*use\\s*=\\s*JsonTypeInfo\\.Id\\.CLASS"
+      - regex "@JsonTypeInfo\\s*\\([^)]*property\\s*=\\s*['\"]@class['\"]"
+
+  - id: DESER-JSON-003
+    name: gson-deserialize-unsafe-class
+    description: "Gson deserializes into Object.class — type unknown, potential injection"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "gson\\.fromJson\\s*\\([^,]+,\\s*Object\\.class\\s*\\)"
+      - regex: "fromJson\\s*\\([^,]+,\\s*new\\s+TypeToken\\s*<\\s*Object\\s*>"
+
+  - id: DESER-JSON-004
+    name: fastjson-autotype
+    description: "FastJSON with autotype enabled — known critical deserialization vulnerabilities"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "ParserConfig\\.getGlobalInstance\\(\\)\\.setAutoTypeSupport\\(true\\)"
+      - regex: "JSON\\.parseObject.*Feature\\.SupportAutoType"
+      - regex: "import\\s+com\\.alibaba\\.fastjson"

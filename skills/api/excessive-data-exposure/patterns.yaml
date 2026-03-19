@@ -1,0 +1,48 @@
+rules:
+  - id: API-EDE-001
+    name: express-res-json-whole-document
+    description: "Express API returns entire Mongoose/ORM document including sensitive fields"
+    severity: high
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "res\\.json\\s*\\(\\s*(?:user|account|order|customer)\\s*\\)(?![^;]*select|[^;]*omit|[^;]*pick)"
+      - regex: "res\\.json\\s*\\(\\s*await\\s+\\w+\\.find(?:One|All)?\\s*\\([^)]*\\)\\s*\\)"
+
+  - id: API-EDE-002
+    name: password-in-api-response
+    description: "User password hash included in API response"
+    severity: critical
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?:res\\.json|jsonify).*password"
+      - regex: "json\\.Marshal.*Password"
+      - regex: "json_encode.*['\"]password['\"]"
+
+  - id: API-EDE-003
+    name: internal-fields-in-response
+    description: "Internal/system fields returned in API response"
+    severity: medium
+    confidence: low
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "res\\.json\\s*\\(\\s*\\{[^}]*(?:__v|__id|_id|createdAt|updatedAt)\\s*:"
+
+  - id: API-EDE-004
+    name: python-model-to-dict-all
+    description: "Python serializes entire model instance without excluding sensitive fields"
+    severity: high
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "jsonify\\s*\\(\\s*user\\.to_dict\\s*\\(\\s*\\)\\s*\\)"
+      - regex: "jsonify\\s*\\(\\s*\\w+\\.as_dict\\s*\\(\\s*\\)\\s*\\)"

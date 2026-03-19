@@ -1,0 +1,63 @@
+rules:
+  - id: CLOUD-AZ-001
+    name: azure-storage-connection-string
+    description: "Azure Storage connection string with account key hardcoded"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A05:2025]
+    languages: [generic, python, javascript, go, java]
+    patterns:
+      - regex: "DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[a-zA-Z0-9+/=]+"
+      - regex: "(?i)AZURE_STORAGE_CONNECTION_STRING\\s*[=:]\\s*['\"]DefaultEndpoints"
+      - regex: "AccountKey=[a-zA-Z0-9+/]{86}=="
+
+  - id: CLOUD-AZ-002
+    name: azure-blob-public-access
+    description: "Azure Blob container configured with public anonymous access"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic, python, javascript]
+    patterns:
+      - regex: "(?i)publicAccess:\\s*(?:blob|container)"
+      - regex: "(?i)allow_blob_public_access:\\s*true"
+      - regex: "(?i)public_access:\\s*(?:Blob|Container)"
+
+  - id: CLOUD-AZ-003
+    name: azure-nsg-all-inbound
+    description: "Azure NSG rule allowing all inbound traffic from internet"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "(?i)source_address_prefix:\\s*['\"]?\\*['\"]?"
+      - regex: "(?i)sourceAddressPrefix:\\s*['\"]?(?:\\*|Internet)['\"]?"
+      - regex: "(?i)access:\\s*Allow.*direction:\\s*Inbound.*source:\\s*\\*"
+
+  - id: CLOUD-AZ-004
+    name: azure-key-vault-secret-in-code
+    description: "Azure Key Vault secret accessed by hardcoded name or value in code"
+    severity: high
+    confidence: medium
+    cwe: [CWE-312]
+    owasp: [A05:2025]
+    languages: [python, javascript, go, java]
+    patterns:
+      - regex: "(?i)secret_client\\.get_secret\\s*\\(['\"][^'\"]+['\"]\\)"
+      - regex: "(?i)keyVaultClient\\.getSecret.*['\"][^'\"]+['\"]"
+
+  - id: CLOUD-AZ-005
+    name: arm-template-hardcoded-password
+    description: "Azure ARM template with hardcoded password parameter"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A05:2025]
+    languages: [generic, yaml]
+    patterns:
+      - regex: "\"adminPassword\":\\s*['\"][^'\"]{6,}['\"]"
+      - regex: "(?i)password.*defaultValue.*[a-zA-Z0-9@#$%]{8,}"

@@ -1,0 +1,35 @@
+rules:
+  - id: SC-TYPO-001
+    name: known-typosquatting-npm
+    description: "Import of known npm typosquatting package name"
+    severity: critical
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "require\\s*\\(['\"](?:lodahs|lod4sh|lo-dash|requets|expres|expresjs|mongoosejs|mongos|node-uuid2|colourama|crossenv|babelcli|d3-scale-chromatic2|eslint-config-airbnb2)['\"]"
+      - regex: "from\\s+['\"](?:lodahs|lod4sh|requets|expres|expresjs|crossenv|babelcli|colourama)['\"]"
+
+  - id: SC-TYPO-002
+    name: known-typosquatting-pypi
+    description: "Import of known Python typosquatting package"
+    severity: critical
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [python]
+    patterns:
+      - regex: "import\\s+(?:requets|reqeusts|requestss|urllib4|urlib3|pyhton|flak|djang0|beauitfulsoup)"
+      - regex: "from\\s+(?:requets|reqeusts|urllib4|urlib3)\\s+import"
+
+  - id: SC-TYPO-003
+    name: package-with-unusual-zero-version
+    description: "Package dependency pinned to version 0.0.1 — potential placeholder or malicious package"
+    severity: medium
+    confidence: low
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"[a-z][a-z0-9-]+\"\\s*:\\s*\"0\\.0\\.1\""

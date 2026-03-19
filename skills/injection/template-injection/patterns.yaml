@@ -1,0 +1,100 @@
+rules:
+  - id: INJ-SSTI-001
+    name: flask-jinja2-render-string-user-input
+    description: "Flask render_template_string() called with user-controlled input — SSTI"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "render_template_string\\s*\\(\\s*f['\"]"
+      - regex: "render_template_string\\s*\\(\\s*['\"][^'\"]*\\{[^}]+\\}"
+      - regex: "render_template_string\\s*\\([^)]*request\\."
+      - regex: "render_template_string\\s*\\([^)]*\\+[^)]*\\)"
+
+  - id: INJ-SSTI-002
+    name: jinja2-environment-from-string
+    description: "Jinja2 Environment.from_string() with user input — SSTI"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "Environment\\(\\)\\.from_string\\s*\\([^)]*(?:request|user|input|param)"
+      - regex: "jinja2\\.Template\\s*\\([^)]*(?:request|user|input|param)"
+
+  - id: INJ-SSTI-003
+    name: twig-render-user-input
+    description: "PHP Twig template rendered with user-controlled template string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$twig->createTemplate\\s*\\(\\s*\\$(?:_GET|_POST|_REQUEST|input|template)"
+      - regex: "Twig.*Environment.*render.*\\$_(?:GET|POST|REQUEST)"
+      - regex: "twig\\.render\\s*\\([^)]*\\$(?:_GET|_POST|_REQUEST)"
+
+  - id: INJ-SSTI-004
+    name: freemarker-template-injection
+    description: "Java Freemarker template rendered with user-supplied template string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+Template\\s*\\([^)]*request\\.getParameter"
+      - regex: "cfg\\.getTemplate\\s*\\([^)]*request\\.getParameter"
+      - regex: "template\\.process\\s*\\([^)]*request\\.getParameter"
+
+  - id: INJ-SSTI-005
+    name: pebble-template-injection
+    description: "Java Pebble template engine rendering user-controlled string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "PebbleTemplate.*request\\.getParameter"
+      - regex: "engine\\.getLiteralTemplate\\s*\\([^)]*(?:request|param|input)"
+
+  - id: INJ-SSTI-006
+    name: go-template-user-input
+    description: "Go text/template parsed with user-controlled template string (html/template is safer)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [go]
+    patterns:
+      - regex: "template\\.New\\(.*\\)\\.Parse\\s*\\([^)]*(?:r\\.URL|r\\.Form|r\\.Body|userInput)"
+      - regex: "text/template.*Parse\\s*\\([^)]*(?:query|param|input|user)"
+
+  - id: INJ-SSTI-007
+    name: mustache-handlebars-injection
+    description: "Handlebars/Mustache template compiled from user-controlled string"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "Handlebars\\.compile\\s*\\([^)]*(?:req\\.body|req\\.query|req\\.params|userInput)"
+      - regex: "Mustache\\.render\\s*\\([^)]*(?:req\\.body|req\\.query|req\\.params)"
+
+  - id: INJ-SSTI-008
+    name: lodash-template-injection
+    description: "Lodash _.template() called with user input — allows arbitrary JS execution"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "_\\.template\\s*\\([^)]*(?:req\\.body|req\\.query|req\\.params|userInput)"
+      - regex: "lodash\\.template\\s*\\([^)]*(?:req\\.body|req\\.query)"

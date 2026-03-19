@@ -1,0 +1,75 @@
+rules:
+  - id: WEB-CORS-001
+    name: cors-wildcard-origin
+    description: "CORS Access-Control-Allow-Origin set to wildcard '*'"
+    severity: high
+    confidence: high
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]\\*['\"]"
+      - regex: "origin\\s*:\\s*['\"]\\*['\"]"
+      - regex: "allowedOrigins?\\s*[=:]\\s*['\"]\\*['\"]"
+
+  - id: WEB-CORS-002
+    name: cors-reflect-origin
+    description: "CORS origin reflected directly from request header without validation"
+    severity: critical
+    confidence: high
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?i)Access-Control-Allow-Origin.*req(?:uest)?\\.(?:headers?|get)\\(['\"]origin['\"]\\)"
+      - regex: "(?i)res\\.(?:set|header)\\(['\"]Access-Control-Allow-Origin['\"],\\s*req\\.headers?.origin\\)"
+      - regex: "(?i)w\\.Header\\(\\)\\.Set\\(['\"]Access-Control-Allow-Origin['\"],\\s*r\\.Header\\.Get\\(['\"]Origin['\"]\\)\\)"
+
+  - id: WEB-CORS-003
+    name: cors-null-origin-allowed
+    description: "CORS configuration allows 'null' origin (sandbox iframe exploit)"
+    severity: high
+    confidence: high
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?i)Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]null['\"]"
+      - regex: "(?i)allowedOrigins?.*['\"]null['\"]"
+      - regex: "(?i)origin\\s*===?\\s*['\"]null['\"]"
+
+  - id: WEB-CORS-004
+    name: cors-credentials-with-wildcard
+    description: "CORS sets Allow-Credentials true alongside permissive origin (auth bypass)"
+    severity: critical
+    confidence: high
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "Access-Control-Allow-Credentials['\"]?\\s*[=:]\\s*['\"]?true['\"]?"
+      - regex: "credentials\\s*:\\s*true"
+
+  - id: WEB-CORS-005
+    name: express-cors-no-origin-check
+    description: "Express cors() middleware without explicit origin configuration"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "app\\.use\\s*\\(\\s*cors\\s*\\(\\s*\\)\\s*\\)"
+      - regex: "cors\\(\\s*\\{[^}]*origin\\s*:\\s*true[^}]*\\}\\s*\\)"
+
+  - id: WEB-CORS-006
+    name: python-flask-cors-all
+    description: "Flask-CORS configured with resources='/*' and no origin restriction"
+    severity: high
+    confidence: high
+    cwe: [CWE-942]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "CORS\\s*\\(\\s*app\\s*\\)(?!.*origins)"
+      - regex: "CORS\\s*\\(\\s*app\\s*,\\s*(?:resources\\s*=\\s*r?['\"]\\*['\"]|origins\\s*=\\s*['\"]\\*['\"])"

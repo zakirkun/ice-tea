@@ -1,0 +1,44 @@
+rules:
+  - id: BL-VAL-001
+    name: age-not-validated
+    description: "User age/birthdate accepted from input without range validation"
+    severity: medium
+    confidence: low
+    cwe: [CWE-20]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:age|birthdate|dob|date_of_birth)\\s*=\\s*(?:req\\.body|request\\.form|\\$_POST)(?![^;]*(?:>|<|min|max|year))"
+
+  - id: BL-VAL-002
+    name: email-no-domain-validation
+    description: "Email accepted without domain validation for B2B/corporate contexts"
+    severity: medium
+    confidence: low
+    cwe: [CWE-20]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "email.*regex.*@[^[]*\\[^@\\]"
+
+  - id: BL-VAL-003
+    name: quantity-no-max-limit
+    description: "Quantity accepted without maximum limit — potential abuse"
+    severity: medium
+    confidence: low
+    cwe: [CWE-20]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "quantity\\s*=\\s*parseInt\\s*\\([^)]*\\)(?![^;]*&&[^;]*<\\s*[0-9]|[^;]*Math\\.min)"
+
+  - id: BL-VAL-004
+    name: string-no-length-limit
+    description: "Free text field stored without length limit — DoS or storage exhaustion"
+    severity: low
+    confidence: low
+    cwe: [CWE-400]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:comment|description|notes|bio|message)\\s*=\\s*(?:req\\.body|request\\.form|\\$_POST)(?![^;]*(?:substring|slice|maxlength|max_length))"

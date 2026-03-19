@@ -1,0 +1,48 @@
+rules:
+  - id: API-DOC-001
+    name: spring-actuator-health-only
+    description: "Spring Boot actuator exposure includes sensitive endpoints"
+    severity: high
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "management\\.endpoints\\.web\\.exposure\\.include\\s*=\\s*(?:\\*|.*(?:env|heapdump|threaddump|beans))"
+      - regex: "management\\.endpoint\\.(?:heapdump|threaddump|env)\\.enabled\\s*=\\s*true"
+
+  - id: API-DOC-002
+    name: phpinfo-accessible
+    description: "phpinfo() accessible via route — exposes server configuration"
+    severity: critical
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [php]
+    patterns:
+      - regex: "phpinfo\\s*\\(\\s*\\)"
+      - regex: "phpinfo\\s*\\([0-9-]*\\)"
+
+  - id: API-DOC-003
+    name: debug-toolbar-production
+    description: "Django/Flask debug toolbar enabled in production"
+    severity: high
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "DEBUG_TOOLBAR_CONFIG.*SHOW_TOOLBAR_CALLBACK.*True"
+      - regex: "django_toolbar.*SHOW.*True"
+
+  - id: API-DOC-004
+    name: dev-route-debug
+    description: "Debug or development route registered in application"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:app|router)\\.(?:get|use)\\s*\\(['\"][^'\"]*(?:__debug__|/debug|/healthz|/internal)[^'\"]*['\"]"
+      - regex "(?:app|router)\\.(?:get|use)\\s*\\(['\"][^'\"]*(?:phpinfo|config\\.php|debug\\.php)[^'\"]*['\"]"

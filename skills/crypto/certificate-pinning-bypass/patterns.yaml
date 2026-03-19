@@ -1,0 +1,47 @@
+rules:
+  - id: CRYPTO-PIN-001
+    name: okhttp-empty-certificate-pinner
+    description: "OkHttp CertificatePinner with no pinned certificates"
+    severity: high
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "CertificatePinner\\.Builder\\s*\\(\\s*\\)\\.build\\s*\\(\\s*\\)"
+      - regex: "new\\s+CertificatePinner\\.Builder\\s*\\(\\s*\\)"
+
+  - id: CRYPTO-PIN-002
+    name: network-security-config-no-pinning
+    description: "Android Network Security Config without certificate pinning"
+    severity: medium
+    confidence: low
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<network-security-config>(?![\\s\\S]*<pin-set)"
+      - regex: "cleartextTrafficPermitted\\s*=\\s*['\"]true['\"]"
+
+  - id: CRYPTO-PIN-003
+    name: axios-ssl-bypass
+    description: "Axios request with httpsAgent ignoring SSL certificates"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "httpsAgent.*rejectUnauthorized.*false"
+      - regex: "new\\s+https\\.Agent\\s*\\(\\s*\\{[^}]*rejectUnauthorized\\s*:\\s*false"
+
+  - id: CRYPTO-PIN-004
+    name: go-tls-insecure-skip
+    description: "Go TLS config with InsecureSkipVerify disabling cert pinning"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "InsecureSkipVerify\\s*:\\s*true"

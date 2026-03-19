@@ -1,100 +1,388 @@
 # How to Create Custom SKILLs for Ice Tea
 
-Ice Tea uses a declarative **SKILL** system to define security vulnerabilities, search patterns, and remediation instructions. This system allows you to add detection capabilities without writing any Go code!
+Ice Tea uses a declarative **SKILL** system to define security vulnerabilities, search patterns, and remediation guidance. You can add new detection capabilities without writing any Go code.
 
-A "SKILL" is simply a directory containing two files:
-1. `SKILL.md`: The documentation and metadata.
-2. `patterns.yaml`: The actual AST or Regex detection rules.
+A SKILL is a directory containing exactly two files:
+
+1. **`SKILL.md`** — Metadata frontmatter + human-readable vulnerability documentation
+2. **`patterns.yaml`** — Detection rules (regex and/or AST node matchers)
+
+---
 
 ## Directory Structure
 
-You can create a new SKILL anywhere inside the `skills/` folder. For example, to detect insecure cookie configurations:
+Skills live inside the `skills/` directory, organized by category. Ice Tea automatically discovers all `patterns.yaml` files recursively.
 
 ```
 skills/
-└── web/
-    └── insecure-cookies/
+├── auth/
+│   ├── hardcoded-secrets/
+│   │   ├── SKILL.md
+│   │   └── patterns.yaml
+│   └── session-fixation/
+│       ├── SKILL.md
+│       └── patterns.yaml
+├── injection/
+│   └── sql-injection/
+│       ├── SKILL.md
+│       └── patterns.yaml
+└── myteam/                  ← You can create new top-level categories
+    └── custom-vuln/
         ├── SKILL.md
         └── patterns.yaml
 ```
 
-## 1. Writing `SKILL.md`
+You can also point Ice Tea at a completely separate directory using:
+```bash
+./bin/ice-tea scan ./src --skills-dir ./my-company-skills
+```
 
-This file uses **Markdown** with **YAML Frontmatter**. 
+---
 
-- The **YAML Frontmatter** defines the metadata Ice Tea parses (severity, CWEs, tags)
-- The **Markdown Body** defines the explanation and remediation advice that will be displayed to users, and serves as the context for the **LLM Engine**.
+## Available Skill Categories
+
+| Category | Focus Area |
+|----------|-----------|
+| `auth/` | Authentication & authorization flaws |
+| `injection/` | All injection vulnerability classes |
+| `web/` | Browser/HTTP-layer vulnerabilities |
+| `crypto/` | Cryptographic algorithm misuse |
+| `fs/` | Filesystem and file handling issues |
+| `api/` | REST/GraphQL API security |
+| `infra/` | Infrastructure & configuration |
+| `logging/` | Security logging failures |
+| `memory/` | Memory safety (C/C++) |
+| `cloud/` | Cloud platform misconfigurations |
+| `android/` | Android mobile security |
+| `network/` | Network-level vulnerabilities |
+
+---
+
+## Step 1: Writing `SKILL.md`
+
+This file uses **Markdown** with a **YAML Frontmatter** block. The frontmatter is parsed by Ice Tea's loader; the markdown body is passed to the LLM Engine as context for false-positive verification.
+
+### Full Example
 
 ```markdown
 ---
 name: Insecure Cookie Configuration
 version: 1.0.0
-description: Detects cookies created without the 'Secure' and 'HttpOnly' flags.
+description: Detects cookies set without Secure, HttpOnly, or SameSite attributes.
 tags: [web, cookie, session, owasp-a05]
-languages: [go, javascript]
-severity: high
-confidence: medium
+languages: [go, javascript, typescript, python, php, java, ruby]
+severity: medium
+confidence: high
 cwe: [CWE-614, CWE-1004]
 owasp: [A05:2025]
 ---
 
-# Insecure Cookie
+# Insecure Cookie Configuration
 
 ## Overview
-Cookies used for sensitive configuration or session management must be marked with the `Secure` flag (so they are only sent over HTTPS) and the `HttpOnly` flag (so they cannot be accessed by client-side Javascript).
+Cookies that store session tokens must be configured with:
+- **Secure**: Cookie only transmitted over HTTPS
+- **HttpOnly**: Inaccessible to JavaScript — prevents XSS token theft
+- **SameSite=Strict**: Prevents cross-site request forgery
+
+## Detection Strategy
+Look for `http.SetCookie` calls (Go) or `res.cookie()` calls (Express) that do not
+include all three security attributes.
 
 ## Remediation
-Always set `Secure: true` and `HttpOnly: true` when defining cookies.
+Always set all three security attributes on session cookies.
+
+**Vulnerable (Go):**
+```go
+http.SetCookie(w, &http.Cookie{
+    Name:  "session",
+    Value: token,
+    // Missing Secure, HttpOnly, SameSite
+})
 ```
 
-## 2. Writing `patterns.yaml`
+**Safe (Go):**
+```go
+http.SetCookie(w, &http.Cookie{
+    Name:     "session",
+    Value:    token,
+    Secure:   true,
+    HttpOnly: true,
+    SameSite: http.SameSiteStrictMode,
+})
+```
+```
 
-This file contains the rules Ice Tea's **Pattern Matching Engine** (Engine 1) will execute against the source code syntax tree.
+### Frontmatter Field Reference
 
-You define a list of `rules`, each containing one or more `patterns`.
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `name` | ✅ | string | Human-readable SKILL name |
+| `version` | ✅ | semver | Start at `1.0.0` |
+| `description` | ✅ | string | One sentence starting with "Detects" |
+| `tags` | ✅ | array | Lowercase kebab-case labels |
+| `languages` | ✅ | array | Language identifiers (see list below), or `[generic]` |
+| `severity` | ✅ | enum | `critical` / `high` / `medium` / `low` / `info` |
+| `confidence` | ✅ | enum | `high` / `medium` / `low` |
+| `cwe` | ✅ | array | `["CWE-XXX"]` — use official CWE identifiers |
+| `owasp` | ✅ | array | `["AXX:2025"]` — OWASP Top 10 2025 reference |
+
+### Supported Language Identifiers
+
+```
+go, javascript, typescript, python, java, php, ruby, rust, c, cpp, yaml, generic
+```
+
+Use `generic` for patterns (regex-only) that apply to any file type.
+
+---
+
+## Step 2: Writing `patterns.yaml`
+
+This file contains the actual detection logic. Each file defines a list of `rules`, and each rule contains one or more `patterns`.
+
+### Full Schema
 
 ```yaml
 rules:
-  - id: COOKIE-GO-01
-    name: go-insecure-cookie
-    description: "Go http.Cookie missing Secure or HttpOnly flags"
-    severity: high
-    confidence: high
-    languages: [go]
+  - id: CATEGORY-ABBREV-NNN      # Unique ID — see naming convention below
+    name: kebab-case-rule-name   # Short slug for the rule
+    description: "One sentence describing what this rule detects"
+    severity: high               # critical | high | medium | low | info
+    confidence: medium           # high | medium | low
+    cwe: [CWE-XXX]               # Array of CWE identifiers
+    owasp: [AXX:2025]            # Array of OWASP Top 10 identifiers
+    languages: [go, python]      # Languages this rule applies to
     patterns:
-      # Use ast_node_type to match structural syntax
-      - ast_node_type: composite_literal
-        # For Go AST, we can look for specific structs
-        function: "http.Cookie"
-      
-      # Or you can use a regular expression!
-      # This regex looks for cookies being constructed.
-      - regex: '(?i)http\.Cookie\s*\{[^\}]*(?:Secure:\s*false|HttpOnly:\s*false)[^\}]*\}'
+      # ── Pattern Type 1: Regex ──────────────────────────────────────────
+      # Matched against the raw source code text of each file
+      - regex: "(?i)dangerous_call\\s*\\("
 
-  - id: COOKIE-JS-01
-    name: js-insecure-cookie-express
-    description: "Express res.cookie missing secure options"
-    severity: medium
-    languages: [javascript, typescript]
-    patterns:
-      - ast_node_type: call_expression
-        function: "res.cookie"
-      - regex: 'res\.cookie\s*\(\s*[^,]+,\s*[^,]+,\s*\{[^\}]*secure\s*:\s*false'
+      # ── Pattern Type 2: AST Node ───────────────────────────────────────
+      # Matched against the Abstract Syntax Tree
+      - ast_node_type: "call_expression"
+        function: "dangerous_call"      # Optional: match specific function name
+      
+      # ── Pattern Type 3: Import Path (Go only) ─────────────────────────
+      - import_path: "crypto/md5"
 ```
 
-### Supported Pattern Matchers
+### Pattern Types In Depth
 
-Ice Tea supports two primary types of matchers:
+#### `regex` — Raw Source Matching
 
-1. **`regex`**: A standard PCRE regular expression string. It will match against the raw source code text. Use `(?i)` to make the regex case-insensitive.
-2. **`ast_node_type`**: Matches a specific node in the Abstract Syntax Tree (AST). 
-   - *Example Types*: `call_expression`, `binary_expression`, `composite_literal`.
-   - You can pair this with `function` to specifically match function calls (e.g. `function: "eval"`).
+The regex is matched against the raw text of every file whose language is in the rule's `languages` list.
 
-### How It Works Together
-When Ice Tea runs `ice-tea scan`:
-1. It walks the directory and parses files into ASTs.
-2. It loads `SKILL.md` metadata into the rule index.
-3. It evaluates the `patterns.yaml` AST matchers against the codebase.
-4. If a match is found, the metadata and markdown description are bundled up and sent to the **LLM Engine** (Engine 3) to ask: *"Is this a true positive based on this code context?"*
-5. The LLM responds, and the final filtered finding is printed in the SARIF or Console output!
+```yaml
+patterns:
+  # Case-insensitive match for MD5 in any context
+  - regex: "(?i)\\bmd5\\s*\\("
+
+  # Match SELECT with string concatenation (SQL injection indicator)
+  - regex: "(?i)(SELECT|UPDATE|DELETE).*['\"]\\s*\\+\\s*\\w"
+
+  # Match hardcoded AWS access key
+  - regex: "AKIA[0-9A-Z]{16}"
+```
+
+**Tips:**
+- Use `(?i)` prefix for case-insensitive matching
+- Double-escape backslashes in YAML strings: `\\.` = one literal dot
+- Test your regex on [regex101.com](https://regex101.com/) with PCRE flavor selected
+- Anchor patterns (`^`, `$`) when you want line-level precision
+- Use `\\b` word boundaries to avoid partial-word matches
+
+#### `ast_node_type` — Syntax Tree Matching
+
+Matches a specific type of AST node. Optionally restrict to a specific function name.
+
+```yaml
+patterns:
+  # Match any call to eval()
+  - ast_node_type: "call_expression"
+    function: "eval"
+
+  # Match Go composite literal for http.Cookie struct
+  - ast_node_type: "composite_literal"
+    function: "http.Cookie"
+
+  # Match any binary expression (useful with taint tracking)
+  - ast_node_type: "binary_expression"
+```
+
+**Common AST node types:**
+
+| Node Type | Description |
+|-----------|-------------|
+| `call_expression` | Function/method call |
+| `binary_expression` | `a + b`, `a && b`, etc. |
+| `composite_literal` | Go struct/slice/map literal `T{...}` |
+| `assignment_statement` | `x = y` |
+| `import_declaration` | Import statement |
+| `return_statement` | Return statement |
+
+#### `import_path` — Go Import Matching (Go only)
+
+Detects when a specific Go package is imported. Useful for flagging dangerous library usage.
+
+```yaml
+patterns:
+  - import_path: "crypto/md5"
+  - import_path: "math/rand"     # Non-cryptographic random
+  - import_path: "net/http"      # Pair with function match for context
+```
+
+### Rule ID Naming Convention
+
+```
+<CATEGORY>-<ABBREV>-<NNN>
+```
+
+| Segment | Format | Examples |
+|---------|--------|---------|
+| CATEGORY | 2-6 uppercase chars | `AUTH`, `INJ`, `WEB`, `CRYPTO`, `FS`, `API`, `INFRA`, `LOG`, `MEM`, `CLOUD`, `AND`, `NET` |
+| ABBREV | 2-5 uppercase chars | `SQL`, `XSS`, `TLS`, `BOF`, `SSRF`, `JWT`, `SSTI` |
+| NNN | 3-digit number | `001`, `002`, `003` |
+
+IDs must be **globally unique** across all skills. Check for duplicates:
+```bash
+grep -rh "^\s*- id:" skills/ | awk '{print $3}' | sort | uniq -d
+```
+
+### Complete Example: XSS SKILL
+
+`skills/web/xss/patterns.yaml`:
+
+```yaml
+rules:
+  - id: WEB-XSS-001
+    name: xss-innerhtml
+    description: "Assignment to innerHTML with non-literal value — potential DOM XSS"
+    severity: high
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "\\.innerHTML\\s*=\\s*(?!\\s*['\"])"
+
+  - id: WEB-XSS-002
+    name: xss-eval
+    description: "Call to eval() with non-literal argument — code injection risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-94, CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - ast_node_type: "call_expression"
+        function: "eval"
+      - regex: "\\beval\\s*\\([^)]+\\)"
+
+  - id: WEB-XSS-003
+    name: xss-document-write
+    description: "document.write() with user-controlled content"
+    severity: high
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - ast_node_type: "call_expression"
+        function: "document.write"
+      - regex: "document\\.write\\s*\\([^)]*(?:location|hash|search|query|input|param)"
+```
+
+---
+
+## Step 3: Test Your SKILL
+
+### Verify Detection (True Positive)
+
+```bash
+# Build with your new skill
+make build
+
+# Scan your vulnerable test file
+./bin/ice-tea scan testdata/vulnerable/<lang>/<file> \
+  --severity low \
+  --verbose
+
+# Expected: at least one finding from your new rule ID
+```
+
+### Verify No False Positives
+
+Create a safe version of the code and confirm it's not flagged:
+
+```bash
+./bin/ice-tea scan testdata/safe/<lang>/<file> --severity low
+# Expected: zero findings from your rule
+```
+
+### Run Unit Tests
+
+```bash
+go test ./...
+```
+
+---
+
+## Step 4: Add to `testdata/`
+
+Add a minimal code snippet demonstrating the vulnerability to `testdata/vulnerable/<language>/`:
+
+```bash
+# Example file name: testdata/vulnerable/python/ssti.py
+cat > testdata/vulnerable/python/ssti.py << 'EOF'
+from flask import Flask, render_template_string, request
+app = Flask(__name__)
+
+@app.route("/greet")
+def greet():
+    name = request.args.get("name")
+    return render_template_string(f"Hello {name}!")  # VULN: SSTI
+EOF
+```
+
+---
+
+## How the Engines Use Your SKILL
+
+When `ice-tea scan` runs:
+
+```
+File parsed by Go/Tree-sitter parser
+          ↓
+Engine 1: Pattern Matcher
+  └─ Reads patterns.yaml
+  └─ Runs regex against raw source
+  └─ Matches AST nodes in parsed tree
+  └─ Finding generated if pattern matches
+          ↓
+Engine 2: Taint Tracker (optional)
+  └─ Traces if matched source has data flow from user input to dangerous sink
+          ↓
+Engine 3: LLM Reasoning (if --enable-llm)
+  └─ Sends code snippet + SKILL.md body as context
+  └─ Asks: "Is this a real vulnerability or false positive?"
+  └─ Filters out false positives before reporting
+          ↓
+Reporter: Output to console / JSON / SARIF / GitLab
+```
+
+---
+
+## Checklist Before Submitting
+
+- [ ] `SKILL.md` frontmatter is complete with all required fields
+- [ ] `description` field starts with "Detects" or "Identifies"
+- [ ] At least one vulnerable code example in `SKILL.md`
+- [ ] At least one safe code example in `SKILL.md`
+- [ ] All rule IDs in `patterns.yaml` follow the `CATEGORY-ABBREV-NNN` format
+- [ ] Rule IDs are unique (no duplicates in the whole `skills/` tree)
+- [ ] `languages` field is set to the correct language(s)
+- [ ] Regex tested on [regex101.com](https://regex101.com/) with PCRE
+- [ ] Vulnerable test file added to `testdata/vulnerable/<lang>/`
+- [ ] `./bin/ice-tea scan testdata/vulnerable/` detects your new rule
+- [ ] `go test ./...` passes

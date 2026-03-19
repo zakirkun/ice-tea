@@ -1,0 +1,35 @@
+rules:
+  - id: MEM-WILD-001
+    name: c-pointer-used-before-init
+    description: "Pointer declared and used without initialization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-457]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:int|char|float|double|struct\\s+\\w+)\\s*\\*\\s*(\\w+)\\s*;[^;]*\\*\\1\\s*="
+      - regex: "(?:int|char)\\s*\\*\\s*(\\w+);(?:[^;]*;){0,3}[^;]*\\*\\1\\s+="
+
+  - id: MEM-WILD-002
+    name: c-conditional-init-pointer
+    description: "Pointer only initialized in one branch — potential wild pointer"
+    severity: high
+    confidence: medium
+    cwe: [CWE-457]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:int|char|void)\\s*\\*\\s*(\\w+)\\s*;\\s*if\\s*\\([^)]+\\)\\s*\\{[^}]*\\1\\s*="
+
+  - id: MEM-WILD-003
+    name: cpp-raw-pointer-no-init
+    description: "C++ class member raw pointer not initialized in constructor"
+    severity: medium
+    confidence: low
+    cwe: [CWE-457]
+    owasp: [A06:2025]
+    languages: [cpp]
+    patterns:
+      - regex: "\\w+\\*\\s+m_\\w+\\s*;(?![^{]*=\\s*nullptr|[^{]*=\\s*NULL)"
+      - regex: "\\w+\\*\\s+\\w+_\\s*;(?![^{]*=\\s*nullptr)"

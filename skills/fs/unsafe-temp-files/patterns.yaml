@@ -1,0 +1,73 @@
+rules:
+  - id: FS-TMP-001
+    name: python-predictable-tmpfile
+    description: "Python creates temp file with predictable name in /tmp"
+    severity: medium
+    confidence: high
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "open\\s*\\(\\s*['\"](?:/tmp|/var/tmp)/[^'\"]*['\"]\\s*,\\s*['\"]w"
+      - regex: "os\\.path\\.join\\s*\\(\\s*['\"](?:/tmp|tempfile\\.gettempdir\\(\\))['\"]\\s*,\\s*['\"][^'\"]+['\"]"
+      - regex: "tempfile\\.mktemp\\s*\\("
+
+  - id: FS-TMP-002
+    name: go-predictable-tmpfile
+    description: "Go creates temp file using os.Create in /tmp with predictable name"
+    severity: medium
+    confidence: high
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [go]
+    patterns:
+      - regex: "os\\.Create\\s*\\(\\s*['\"](?:/tmp|os\\.TempDir\\(\\))[^'\"]*['\"]"
+      - regex: "fmt\\.Sprintf\\s*\\(['\"](?:/tmp|%s)/[^'\"]*['\"]\\s*,\\s*os\\.TempDir"
+
+  - id: FS-TMP-003
+    name: java-predictable-tmpfile
+    description: "Java creates File in temp directory with guessable name"
+    severity: medium
+    confidence: high
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+File\\s*\\(\\s*System\\.getProperty\\s*\\(\\s*['\"]java\\.io\\.tmpdir['\"]\\s*\\)"
+      - regex: "new\\s+File\\s*\\(\\s*['\"](?:/tmp|/var/tmp)/[^'\"]*['\"]\\s*\\)"
+
+  - id: FS-TMP-004
+    name: c-tmpnam-unsafe
+    description: "C tmpnam() creates predictable temp file name — insecure"
+    severity: high
+    confidence: high
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\btmpnam\\s*\\("
+      - regex: "\\btempnam\\s*\\("
+
+  - id: FS-TMP-005
+    name: php-predictable-tmpfile
+    description: "PHP creates temp file with concatenated predictable path"
+    severity: medium
+    confidence: high
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$tmp(?:file|path)\\s*=\\s*['\"](?:/tmp|sys_get_temp_dir\\(\\))[^'\"]*['\"]\\s*\\."
+      - regex: "sys_get_temp_dir\\(\\)\\s*\\.\\s*['\"][^'\"]+['\"]"
+
+  - id: FS-TMP-006
+    name: node-tmp-predictable
+    description: "Node.js writes to /tmp with predictable path derived from pid or timestamp"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-377]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:os\\.tmpdir\\(\\)|['\"](?:/tmp|/var/tmp)['\"]).*process\\.pid"
+      - regex: "path\\.join\\s*\\(\\s*os\\.tmpdir\\(\\)\\s*,\\s*['\"][^'\"]+['\"]\\s*\\)"

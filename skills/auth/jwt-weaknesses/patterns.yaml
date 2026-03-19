@@ -1,0 +1,46 @@
+rules:
+  - id: JWT-JS-01
+    name: js-jwt-none-algo
+    description: "JWT configured with 'none' algorithm"
+    severity: critical
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'algorithms\s*:\s*\[\s*["\']none["\']\s*\]'
+
+  - id: JWT-JS-02
+    name: js-jwt-hardcoded-secret
+    description: "Hardcoded secret passed to jwt.verify or sign"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'jwt\.(verify|sign)\([^,]+,\s*["\'][^"\']+["\']'
+
+  - id: JWT-GO-01
+    name: go-jwt-none-algo
+    description: "JWT None signing method in Go"
+    severity: critical
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'jwt\.SigningMethodNone'
+
+  - id: JWT-PY-01
+    name: py-jwt-verify-false
+    description: "PyJWT decoding without verification"
+    severity: critical
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'jwt\.decode\(.*verify_signature\s*=\s*False.*\)'
+
+  - id: JWT-JAVA-01
+    name: java-jwt-none
+    description: "Java JWT allowing none algorithm"
+    severity: critical
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'Jwts\.parser\(\)\.setSigningKey\(\)'
+

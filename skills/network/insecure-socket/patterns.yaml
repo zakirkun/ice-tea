@@ -1,0 +1,60 @@
+rules:
+  - id: NET-SOCK-001
+    name: python-plain-socket
+    description: "Python plain TCP socket without TLS wrapping"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "socket\\.socket\\s*\\(\\s*socket\\.AF_INET(?![\\s\\S]*?ssl\\.wrap_socket|[\\s\\S]*?context\\.wrap_socket)"
+      - regex: "s\\.connect\\s*\\([^)]+\\)(?![^;\\n]*ssl|[^;\\n]*tls)"
+
+  - id: NET-SOCK-002
+    name: node-net-socket-no-tls
+    description: "Node.js net.Socket or net.connect used instead of tls.connect"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "net\\.connect\\s*\\(\\s*\\{[^}]*port"
+      - regex: "new\\s+net\\.Socket\\s*\\(\\s*\\)"
+
+  - id: NET-SOCK-003
+    name: go-tcp-dial-no-tls
+    description: "Go net.Dial with tcp protocol instead of tls.Dial"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "net\\.Dial\\s*\\(\\s*['\"]tcp['\"]"
+      - regex: "net\\.DialTCP\\s*\\("
+
+  - id: NET-SOCK-004
+    name: java-plain-socket
+    description: "Java Socket created without SSL wrapping"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+Socket\\s*\\(\\s*(?:host|address|ip|\"[^\"]+\")"
+      - regex: "new\\s+Socket\\s*\\([^)]+,\\s*[0-9]+\\s*\\)(?![^;]*SSL)"
+
+  - id: NET-SOCK-005
+    name: c-socket-no-tls
+    description: "C TCP socket created without TLS (OpenSSL) wrapping"
+    severity: medium
+    confidence: low
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "socket\\s*\\(\\s*AF_INET\\s*,\\s*SOCK_STREAM"
+      - regex: "connect\\s*\\(\\s*sockfd\\s*,\\s*\\(struct sockaddr"

@@ -1,0 +1,76 @@
+rules:
+  - id: INJ-NOSQL-001
+    name: mongodb-where-user-input
+    description: "MongoDB $where operator with user-controlled input enables JS injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "\\$where\\s*:\\s*(?:req\\.|request\\.|user\\.|input)"
+      - regex: "\\.find\\(\\s*\\{[^}]*\\$where\\s*:"
+      - regex: "\\$where.*function\\s*\\(\\).*req"
+
+  - id: INJ-NOSQL-002
+    name: mongoose-direct-query-object
+    description: "Mongoose query using direct request body object (operator injection risk)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "\\.findOne\\s*\\(\\s*req\\.body"
+      - regex: "\\.find\\s*\\(\\s*req\\.body"
+      - regex: "\\.findOne\\s*\\(\\s*\\{\\s*(?:username|email|user):\\s*req\\.body\\.(?:username|email|user)\\s*,\\s*password:\\s*req\\.body\\.password"
+
+  - id: INJ-NOSQL-003
+    name: mongodb-python-where
+    description: "Python PyMongo $where with user-controlled string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "db\\.\\w+\\.find\\s*\\(\\s*\\{[^}]*\"\\$where\"\\s*:"
+      - regex: "collection\\.find\\s*\\(\\s*\\{[^}]*'\\$where'\\s*:"
+      - regex: "find_one\\s*\\(\\s*\\{[^}]*'\\$where'"
+
+  - id: INJ-NOSQL-004
+    name: redis-command-injection
+    description: "Redis command constructed from user input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "redis.*(?:GET|SET|DEL|KEYS).*(?:req\\.body|req\\.query|req\\.params|user_input)"
+      - regex: "client\\.keys\\s*\\([^)]*(?:req\\.|request\\.)"
+
+  - id: INJ-NOSQL-005
+    name: mongodb-regex-injection
+    description: "MongoDB regex query with unsanitized user input enables data enumeration"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "\\$regex\\s*:\\s*(?:req\\.|request\\.|user\\.|input)"
+      - regex: "new\\s+RegExp\\s*\\([^)]*(?:req\\.body|req\\.query|req\\.params)"
+
+  - id: INJ-NOSQL-006
+    name: go-mongodb-unvalidated-filter
+    description: "Go MongoDB driver using bson.M{} built from user request parameters"
+    severity: high
+    confidence: medium
+    cwe: [CWE-943]
+    owasp: [A03:2025]
+    languages: [go]
+    patterns:
+      - regex: "bson\\.M\\{[^}]*r\\.URL\\.Query\\(\\)"
+      - regex: "bson\\.M\\{[^}]*r\\.FormValue"
+      - regex: "collection\\.FindOne\\s*\\([^)]*bson\\.M\\{[^}]*r\\."

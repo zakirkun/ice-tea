@@ -1,0 +1,19 @@
+rules:
+  - id: STORE-JS-01
+    name: js-localstorage-token
+    description: "localStorage.setItem storing JWT or token"
+    severity: medium
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'localStorage\.setItem\(\s*["\'].*(token|jwt|password|secret).*["\']'
+
+  - id: STORE-JS-02
+    name: js-sessionstorage-token
+    description: "sessionStorage.setItem storing JWT or token"
+    severity: medium
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'sessionStorage\.setItem\(\s*["\'].*(token|jwt|password|secret).*["\']'
+

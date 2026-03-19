@@ -1,0 +1,46 @@
+rules:
+  - id: DEVOPS-ART-001
+    name: source-map-production
+    description: "Source map files served in production expose original source code"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, generic]
+    patterns:
+      - regex: "sourceMappingURL\\s*=\\s*[^\\n]+"
+      - regex: "\"sourceRoot\"\\s*:\\s*['\"](?:/|src/|source/)"
+
+  - id: DEVOPS-ART-002
+    name: node-modules-in-repo
+    description: "node_modules directory potentially committed to repository"
+    severity: medium
+    confidence: low
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "node_modules/[a-zA-Z0-9@][a-zA-Z0-9@_\\-]*/package\\.json"
+
+  - id: DEVOPS-ART-003
+    name: debug-symbols-production
+    description: "Debug symbol or PDB file referenced or generated in production config"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\\.pdb['\"]"
+      - regex: "DebugType.*full|DebugSymbols.*true"
+
+  - id: DEVOPS-ART-004
+    name: ds-store-gitignore-missing
+    description: ".DS_Store files not excluded in .gitignore"
+    severity: low
+    confidence: low
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\\.DS_Store"

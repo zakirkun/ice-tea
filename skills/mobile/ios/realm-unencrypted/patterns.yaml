@@ -1,0 +1,24 @@
+rules:
+  - id: IOS-REALM-001
+    name: realm-configuration-no-encryption
+    description: "Realm database configuration without encryptionKey"
+    severity: high
+    confidence: high
+    cwe: [CWE-311]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "Realm\\.Configuration\\s*\\([^)]*\\)(?![^;]*encryptionKey)"
+      - regex: "Realm\\.Configuration\\s*\\(\\s*\\)(?![^;]*encryptionKey)"
+
+  - id: IOS-REALM-002
+    name: realm-open-no-config
+    description: "Realm opened without explicit configuration — uses default unencrypted config"
+    severity: high
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "try!\\s+Realm\\s*\\(\\s*\\)"
+      - regex: "Realm\\(\\)(?![^;]*configuration|[^;]*encryptionKey)"

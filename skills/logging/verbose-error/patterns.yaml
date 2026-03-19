@@ -1,0 +1,77 @@
+rules:
+  - id: LOG-VERB-001
+    name: express-stack-trace-response
+    description: "Express.js error handler sends stack trace in HTTP response body"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "res\\.(?:json|send)\\s*\\(\\s*\\{[^}]*(?:stack|err\\.stack|error\\.stack)[^}]*\\}\\s*\\)"
+      - regex: "res\\.status\\s*\\(\\s*500\\s*\\)\\.json\\s*\\(\\s*\\{[^}]*err\\.(?:message|stack)"
+      - regex: "res\\.json\\s*\\(\\s*\\{[^}]*stack:\\s*(?:err|error)\\.stack"
+
+  - id: LOG-VERB-002
+    name: python-exception-in-response
+    description: "Python Flask/Django returns exception string in HTTP response"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "return\\s+jsonify\\s*\\(\\s*\\{[^}]*['\"]error['\"]\\s*:\\s*str\\s*\\(\\s*(?:e|exc|error)\\s*\\)"
+      - regex: "return\\s+make_response\\s*\\(\\s*traceback\\.format_exc"
+      - regex: "HttpResponse\\s*\\(\\s*traceback\\.format_exc"
+
+  - id: LOG-VERB-003
+    name: go-error-in-http-response
+    description: "Go HTTP handler writes error details (including internal paths) to response"
+    severity: medium
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - regex: "fmt\\.Fprintf\\s*\\(\\s*w\\s*,\\s*['\"][^'\"]*%(?:s|v)[^'\"]*['\"]\\s*,\\s*err\\s*\\)"
+      - regex: "http\\.Error\\s*\\(\\s*w\\s*,\\s*err\\.Error\\s*\\(\\s*\\)"
+      - regex: "json\\.NewEncoder\\s*\\(\\s*w\\s*\\)\\.Encode.*err\\.Error\\(\\)"
+
+  - id: LOG-VERB-004
+    name: java-exception-in-response
+    description: "Java Servlet/Spring writes exception message or stack trace to response"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [java]
+    patterns:
+      - regex: "response\\.getWriter\\s*\\(\\s*\\)\\.println\\s*\\(\\s*e\\.getMessage"
+      - regex: "response\\.getWriter\\s*\\(\\s*\\)\\.println\\s*\\(\\s*e\\.getStackTrace"
+      - regex: "e\\.printStackTrace\\s*\\(\\s*response\\.getWriter"
+
+  - id: LOG-VERB-005
+    name: php-die-with-error
+    description: "PHP die() or exit() called with internal error message"
+    severity: medium
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [php]
+    patterns:
+      - regex: "die\\s*\\(\\s*(?:mysql_error|mysqli_error|pg_last_error|\\$e->getMessage)"
+      - regex: "die\\s*\\(\\s*['\"][^'\"]*Error[^'\"]*['\"]\\s*\\.\\s*\\$(?:e|err|error)"
+      - regex: "echo\\s+\\$(?:e|err|error)->getMessage\\s*\\("
+
+  - id: LOG-VERB-006
+    name: sql-error-in-response
+    description: "SQL error message exposed in HTTP response (reveals table/column names)"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [php, python, javascript, java, go]
+    patterns:
+      - regex: "(?i)(?:mysql_error|mysqli_error|pg_last_error|sqlite_error_string)\\s*\\("
+      - regex: "(?i)(?:ORA-|MySQL.*error|PostgreSQL.*error|SQLITE_ERROR).*(?:echo|print|response|json)"

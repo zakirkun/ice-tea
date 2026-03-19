@@ -1,0 +1,48 @@
+rules:
+  - id: CRYPTO-SALT-001
+    name: python-static-salt
+    description: "Python hashing with static string salt"
+    severity: high
+    confidence: high
+    cwe: [CWE-760]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "hashlib\\.pbkdf2_hmac\\s*\\([^,]+,\\s*[^,]+,\\s*['\"][^'\"]+['\"]"
+      - regex: "salt\\s*=\\s*b?['\"][^'\"]{4,}['\"].*hashlib"
+
+  - id: CRYPTO-SALT-002
+    name: js-static-salt
+    description: "JavaScript crypto uses static string as salt"
+    severity: high
+    confidence: high
+    cwe: [CWE-760]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "pbkdf2Sync\\s*\\([^,]+,\\s*['\"][^'\"]{4,}['\"]"
+      - regex: "bcrypt\\.hash\\s*\\([^,]+,\\s*['\"][^'\"]{4,}['\"]"
+
+  - id: CRYPTO-SALT-003
+    name: java-static-salt
+    description: "Java PBEKeySpec or MessageDigest with hardcoded salt"
+    severity: high
+    confidence: high
+    cwe: [CWE-760]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+PBEKeySpec\\s*\\([^,]+,\\s*['\"][^'\"]+['\"]\\s*\\.getBytes"
+      - regex: "PBEKeySpec\\s*\\([^,]+,\\s*new\\s+byte\\[\\]\\s*\\{"
+
+  - id: CRYPTO-SALT-004
+    name: go-static-salt
+    description: "Go hashing with hardcoded salt string"
+    severity: high
+    confidence: high
+    cwe: [CWE-760]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "pbkdf2\\.Key\\s*\\([^,]+,\\s*\\[\\]byte\\(['\"][^'\"]+['\"]\\)"
+      - regex: "salt\\s*:?=\\s*\\[\\]byte\\(['\"][^'\"]+['\"]\\)"

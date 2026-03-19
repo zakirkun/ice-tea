@@ -1,0 +1,72 @@
+rules:
+  - id: AUTH-SF-001
+    name: php-session-no-regenerate
+    description: "PHP login handler sets session data without calling session_regenerate_id()"
+    severity: high
+    confidence: medium
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$_SESSION\\s*\\[\\s*['\"](?:user|username|uid|user_id|logged_in|auth)['\"]\\s*\\]\\s*="
+      - regex: "session_start\\(\\)(?!(?:[^}]|\\{[^}]*\\})*session_regenerate_id)"
+
+  - id: AUTH-SF-002
+    name: express-session-no-regenerate
+    description: "Express.js login sets session user without calling req.session.regenerate()"
+    severity: high
+    confidence: medium
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "req\\.session\\.(?:user|userId|username|authenticated)\\s*="
+      - regex: "req\\.session\\.(?:user|userId|username)\\s*=(?!(?:[^;]|;[^r])*session\\.regenerate)"
+
+  - id: AUTH-SF-003
+    name: django-session-no-cycle
+    description: "Django login does not call session cycle_key() or flush() before setting user"
+    severity: high
+    confidence: low
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [python]
+    patterns:
+      - regex: "request\\.session\\[\\s*['\"](?:user|user_id|_auth_user_id)['\"]\\s*\\]\\s*="
+      - regex: "login\\(request,\\s*user\\)(?!(?:[^\\n]*\\n){0,5}[^\\n]*cycle_key)"
+
+  - id: AUTH-SF-004
+    name: java-session-no-invalidate
+    description: "Java Servlet login does not invalidate old session before creating new one"
+    severity: high
+    confidence: medium
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [java]
+    patterns:
+      - regex: "request\\.getSession\\((?:true|\\))"
+      - regex: "session\\.setAttribute\\(\\s*['\"](?:user|userId|username|principal)['\"]"
+
+  - id: AUTH-SF-005
+    name: go-session-fixation
+    description: "Go session handler does not regenerate session ID after authentication"
+    severity: high
+    confidence: low
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [go]
+    patterns:
+      - regex: "session\\.Set\\(\\s*['\"](?:user|user_id|username|authenticated)['\"]"
+      - regex: "session\\.Values\\[\\s*['\"](?:user|userId|authenticated)['\"]\\s*\\]\\s*="
+
+  - id: AUTH-SF-006
+    name: ruby-rails-session-fixation
+    description: "Rails controller resets session data but may not call reset_session"
+    severity: medium
+    confidence: low
+    cwe: [CWE-384]
+    owasp: [A07:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "session\\[:(?:user|user_id|current_user)\\]\\s*="
+      - regex: "session\\[\"(?:user|user_id|current_user)\"\\]\\s*="

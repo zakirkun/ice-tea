@@ -1,0 +1,74 @@
+rules:
+  - id: NET-CLR-001
+    name: http-api-endpoint-hardcoded
+    description: "HTTP (not HTTPS) URL hardcoded for API or authentication endpoint"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "http://[^'\"/\\s]+(?:api|auth|login|token|payment|checkout)"
+      - regex: "['\"]http://(?!localhost|127\\.0\\.0\\.1)[^'\"]+['\"]"
+
+  - id: NET-CLR-002
+    name: python-requests-http-sensitive
+    description: "Python requests HTTP call to non-local URL with auth headers"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "requests\\.(?:get|post|put)\\s*\\(\\s*['\"]http://(?!localhost|127)"
+      - regex: "session\\.(?:get|post)\\s*\\(\\s*['\"]http://(?!localhost|127)"
+
+  - id: NET-CLR-003
+    name: go-http-client-not-tls
+    description: "Go HTTP client making request to http:// URL"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "http\\.Get\\s*\\(\\s*['\"]http://(?!localhost|127)"
+      - regex: "http\\.Post\\s*\\(\\s*['\"]http://(?!localhost|127)"
+      - regex: "client\\.Get\\s*\\(\\s*['\"]http://(?!localhost|127)"
+
+  - id: NET-CLR-004
+    name: java-http-url-connection
+    description: "Java HttpURLConnection to HTTP URL (not HTTPS)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+URL\\s*\\(\\s*['\"]http://(?!localhost|127)"
+      - regex: "HttpURLConnection.*openConnection\\s*\\(\\s*\\)(?![^;]*HTTPS)"
+
+  - id: NET-CLR-005
+    name: express-http-not-https
+    description: "Node.js HTTP server created instead of HTTPS for production"
+    severity: medium
+    confidence: low
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "http\\.createServer\\s*\\(\\s*app\\s*\\)\\.listen"
+      - regex: "require\\s*\\(\\s*['\"]http['\"]\\s*\\).*createServer"
+
+  - id: NET-CLR-006
+    name: php-curl-http
+    description: "PHP cURL request to HTTP URL without SSL"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [php]
+    patterns:
+      - regex: "curl_setopt\\s*\\([^,]+,\\s*CURLOPT_SSL_VERIFYPEER\\s*,\\s*false"
+      - regex: "curl_setopt\\s*\\([^,]+,\\s*CURLOPT_SSL_VERIFYHOST\\s*,\\s*0"
+      - regex: "curl_setopt\\s*\\([^,]+,\\s*CURLOPT_URL\\s*,\\s*['\"]http://(?!localhost)"

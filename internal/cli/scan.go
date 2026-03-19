@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 
 	"github.com/zakirkun/ice-tea/internal/analyzer/llm/providers"
+	"github.com/zakirkun/ice-tea/internal/finding"
+	"github.com/zakirkun/ice-tea/internal/notifier/telegram"
 	"github.com/zakirkun/ice-tea/internal/parser/goparser"
 	"github.com/zakirkun/ice-tea/internal/parser/treesitter"
 	"github.com/zakirkun/ice-tea/internal/reporter"
@@ -46,11 +49,13 @@ func init() {
 	scanCmd.Flags().IntP("concurrency", "c", 4, "number of concurrent workers")
 	scanCmd.Flags().Bool("enable-llm", false, "enable LLM deep reasoning engine")
 	scanCmd.Flags().String("skills-dir", "", "custom skills directory")
+	scanCmd.Flags().Bool("notify-telegram", false, "send Telegram notification after scan (requires notify.telegram config)")
 }
 
 func runScan(cmd *cobra.Command, args []string) error {
 	log := getLogger()
 	conf := getConfig()
+	scanStart := time.Now()
 
 	// Determine target
 	target := "."
@@ -141,6 +146,7 @@ func runScan(cmd *cobra.Command, args []string) error {
 	engine.RegisterReporter(reporter.NewJSONReporter())
 	engine.RegisterReporter(reporter.NewSarifReporter())
 	engine.RegisterReporter(reporter.NewGitLabReporter())
+	engine.RegisterReporter(reporter.NewPDFReporter())
 
 	// Initialize LLM provider if enabled
 	if conf.LLM.Enabled {
@@ -161,6 +167,34 @@ func runScan(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		log.Errorw("Scan failed with error", "error", err)
 		return err
+	}
+
+	scanDuration := time.Since(scanStart)
+
+	// Send Telegram notification if enabled
+	notifyTelegram, _ := cmd.Flags().GetBool("notify-telegram")
+	if conf.Notify.Telegram.Enabled || notifyTelegram {
+		// Override config if flag was set
+		telegramCfg := conf.Notify.Telegram
+		if notifyTelegram && !telegramCfg.Enabled {
+			telegramCfg.Enabled = true
+		}
+		if telegramCfg.BotToken == "" {
+			// Try environment variable
+			if envToken := os.Getenv("ICE_TEA_TELEGRAM_BOT_TOKEN"); envToken != "" {
+				telegramCfg.BotToken = envToken
+			}
+		}
+		if telegramCfg.BotToken != "" && telegramCfg.ChatID != "" {
+			n := telegram.New(telegramCfg)
+			if err := n.Notify(cmd.Context(), target, finding.Summarize(findings), findings, scanDuration); err != nil {
+				log.Warnw("Telegram notification failed", "error", err)
+			} else {
+				log.Info("Telegram notification sent")
+			}
+		} else {
+			log.Warnw("Telegram notification enabled but bot_token or chat_id is missing")
+		}
 	}
 
 	// Exit with code 1 if findings exist (typical CI behavior)

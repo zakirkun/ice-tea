@@ -1,0 +1,48 @@
+rules:
+  - id: PRIV-GDPR-001
+    name: google-analytics-no-consent
+    description: "Google Analytics script loaded without consent check"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, generic]
+    patterns:
+      - regex: "googletagmanager\\.com/gtag/js"
+      - regex: "google-analytics\\.com/analytics\\.js"
+      - regex: "gtag\\s*\\(\\s*['\"]config['\"]"
+
+  - id: PRIV-GDPR-002
+    name: facebook-pixel-no-consent
+    description: "Facebook Pixel loaded without consent check"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, generic]
+    patterns:
+      - regex: "connect\\.facebook\\.net.*/fbevents\\.js"
+      - regex: "fbq\\s*\\(\\s*['\"]init['\"]"
+
+  - id: PRIV-GDPR-003
+    name: fingerprinting-script
+    description: "Browser fingerprinting library loaded — may require consent"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "fingerprintjs|FingerprintJS|@fingerprintjs/fingerprintjs"
+      - regex: "canvas\\.toDataURL.*fingerprint|fingerprint.*canvas\\.toDataURL"
+
+  - id: PRIV-GDPR-004
+    name: localstorage-tracking-id
+    description: "Tracking or advertising ID stored in localStorage without consent"
+    severity: medium
+    confidence: low
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "localStorage\\.setItem\\s*\\(['\"](?:_ga|_gid|fbp|_fbp|mixpanel|amplitude)['\"]"

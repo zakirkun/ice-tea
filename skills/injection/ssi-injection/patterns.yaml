@@ -1,0 +1,36 @@
+rules:
+  - id: INJ-SSI-001
+    name: ssi-exec-directive
+    description: "SSI exec directive in user-controlled content — command injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-97]
+    owasp: [A03:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<!--#exec\\s+cmd\\s*="
+      - regex: "<!--#exec\\s+cgi\\s*="
+
+  - id: INJ-SSI-002
+    name: ssi-include-directive
+    description: "SSI include directive — file disclosure risk"
+    severity: high
+    confidence: high
+    cwe: [CWE-97]
+    owasp: [A03:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<!--#include\\s+(?:file|virtual)\\s*="
+      - regex: "<!--#printenv\\s*-->"
+
+  - id: INJ-SSI-003
+    name: user-input-in-ssi-page
+    description: "User input reflected in HTML page with .shtml or SSI-processed extension"
+    severity: high
+    confidence: low
+    cwe: [CWE-97]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "echo\\s+\\$_(?:GET|POST|REQUEST).*\\.shtml"
+      - regex: "file_put_contents.*\\.shtml.*\\$_(?:GET|POST)"

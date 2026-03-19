@@ -1,0 +1,61 @@
+rules:
+  - id: DESER-DOTNET-001
+    name: binaryformatter-deserialize
+    description: "BinaryFormatter.Deserialize() — insecure, deprecated in .NET 5+"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "BinaryFormatter\\s*\\(\\s*\\)\\.Deserialize"
+      - regex: "new\\s+BinaryFormatter\\s*\\(\\s*\\)"
+      - regex: "\\bBinaryFormatter\\b"
+
+  - id: DESER-DOTNET-002
+    name: soapformatter-deserialize
+    description: "SoapFormatter.Deserialize() — insecure .NET deserialization"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "SoapFormatter\\s*\\(\\s*\\)\\.Deserialize"
+      - regex: "new\\s+SoapFormatter\\s*\\(\\s*\\)"
+
+  - id: DESER-DOTNET-003
+    name: netdatacontractserializer-deserialize
+    description: "NetDataContractSerializer.Deserialize() — allows arbitrary type instantiation"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "NetDataContractSerializer"
+      - regex: "LosFormatter\\.Deserialize"
+
+  - id: DESER-DOTNET-004
+    name: objectstateformatter-deserialize
+    description: "ObjectStateFormatter used for ViewState deserialization"
+    severity: high
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "ObjectStateFormatter\\.Deserialize"
+      - regex: "new\\s+ObjectStateFormatter\\s*\\(\\s*\\)"
+
+  - id: DESER-DOTNET-005
+    name: jsonconvert-typeinfo
+    description: "Newtonsoft.Json with TypeNameHandling.All — allows type injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "TypeNameHandling\\.(?:All|Objects|Arrays|Auto)"
+      - regex: "JsonConvert\\.DeserializeObject.*TypeNameHandling\\.All"

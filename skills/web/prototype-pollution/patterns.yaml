@@ -1,0 +1,73 @@
+rules:
+  - id: WEB-PP-001
+    name: proto-direct-assignment
+    description: "Direct assignment to __proto__ property enables prototype pollution"
+    severity: critical
+    confidence: high
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "\\.__proto__\\s*="
+      - regex: "\\[\\s*['\"]__proto__['\"]\\s*\\]\\s*="
+      - regex: "Object\\.assign\\s*\\([^,]+,\\s*\\{\\s*__proto__"
+
+  - id: WEB-PP-002
+    name: recursive-merge-no-proto-check
+    description: "Recursive object merge without filtering __proto__/constructor keys"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "function\\s+(?:merge|deepMerge|extend|assign)\\s*\\([^)]+\\)\\s*\\{[^}]*for\\s*\\(.*of.*Object\\.keys"
+      - regex: "for\\s*\\(.*in\\s+src\\)\\s*\\{[^}]*target\\[.*\\]\\s*=\\s*src\\["
+
+  - id: WEB-PP-003
+    name: object-bracket-user-key-assignment
+    description: "Object property assigned using user-controlled key — prototype pollution risk"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "obj(?:ect)?\\s*\\[\\s*(?:req\\.(?:body|query|params)|userKey|key)\\s*\\]\\s*="
+      - regex: "target\\[\\s*key\\s*\\]\\s*=\\s*(?:value|src\\[key\\])"
+
+  - id: WEB-PP-004
+    name: json-parse-no-schema-validation
+    description: "JSON.parse of user input assigned to object without key validation"
+    severity: medium
+    confidence: low
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "JSON\\.parse\\s*\\(\\s*req\\.(?:body|query|params)"
+      - regex: "Object\\.assign\\s*\\(\\s*\\{\\}\\s*,\\s*JSON\\.parse\\s*\\("
+
+  - id: WEB-PP-005
+    name: constructor-property-access
+    description: "Accessing .constructor property from user-controlled object — pollution vector"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "req\\.(?:body|query)(?:\\[\\w+\\])*\\.constructor"
+      - regex: "userInput\\.constructor\\s*\\."
+
+  - id: WEB-PP-006
+    name: vulnerable-lodash-merge
+    description: "lodash _.merge() called with user-controlled object (vulnerable in old versions)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1321]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "_\\.merge\\s*\\([^)]*req\\.(?:body|query|params)"
+      - regex: "lodash\\.merge\\s*\\([^)]*req\\."

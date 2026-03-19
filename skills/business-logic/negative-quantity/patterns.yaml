@@ -1,0 +1,34 @@
+rules:
+  - id: BL-NEG-001
+    name: quantity-not-validated-positive
+    description: "Quantity from request not validated to be greater than zero"
+    severity: high
+    confidence: medium
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php, java, go]
+    patterns:
+      - regex: "quantity\\s*=\\s*(?:parseInt|parseFloat|int|float)\\s*\\([^)]*(?:req\\.body|request\\.form|\\$_POST)(?![^;]*>\\s*0|[^;]*>= 1|[^;]*positive)"
+      - regex: "qty\\s*=\\s*(?:req\\.body|request\\.form\\.get)(?![^;]*>\\s*0)"
+
+  - id: BL-NEG-002
+    name: amount-no-positive-check
+    description: "Transaction amount used without positive value validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "amount\\s*=\\s*(?:parseFloat|float)\\s*\\([^)]*(?:req\\.body|\\$_POST|request\\.form)(?![^;]*>\\s*0)"
+
+  - id: BL-NEG-003
+    name: refund-amount-no-max-check
+    description: "Refund amount not capped to original payment amount"
+    severity: high
+    confidence: low
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php, java]
+    patterns:
+      - regex: "(?:refund|credit).*(?:req\\.body|request\\.form|\\$_POST).*amount(?![^;]*original|[^;]*order\\.amount|[^;]*payment\\.amount)"

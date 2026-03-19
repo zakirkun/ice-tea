@@ -1,0 +1,35 @@
+rules:
+  - id: AUTH-FORM-001
+    name: login-form-http-action
+    description: "Login form submits to HTTP (not HTTPS) URL — credentials in cleartext"
+    severity: critical
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A07:2025]
+    languages: [generic, php, python, javascript]
+    patterns:
+      - regex: "<form[^>]*action\\s*=\\s*['\"]http://[^'\"]+['\"][^>]*>(?:[^<]*<[^>]*>)*[^<]*(?:password|passwd)"
+      - regex: "action\\s*=\\s*['\"]http://[^'\"]*(?:login|auth|signin)['\"]"
+
+  - id: AUTH-FORM-002
+    name: password-autocomplete-on
+    description: "Password field with autocomplete='on' — credentials cached in browser"
+    severity: medium
+    confidence: high
+    cwe: [CWE-522]
+    owasp: [A07:2025]
+    languages: [generic, javascript, typescript, php, python]
+    patterns:
+      - regex: "<input[^>]*type\\s*=\\s*['\"]password['\"][^>]*autocomplete\\s*=\\s*['\"]on['\"]"
+      - regex: "<input[^>]*autocomplete\\s*=\\s*['\"]on['\"][^>]*type\\s*=\\s*['\"]password['\"]"
+
+  - id: AUTH-FORM-003
+    name: login-form-no-csrf
+    description: "HTML login form without CSRF token hidden input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-352]
+    owasp: [A07:2025]
+    languages: [generic, php, python, javascript]
+    patterns:
+      - regex: "<form[^>]*(?:login|signin|auth)[^>]*>(?!(?:[\\s\\S]*?)<input[^>]*(?:csrf|_token|authenticity_token))"

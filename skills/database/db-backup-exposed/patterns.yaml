@@ -1,0 +1,48 @@
+rules:
+  - id: DB-BACK-001
+    name: sql-backup-in-webroot
+    description: "SQL backup file path references web-accessible directory"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic, php, python]
+    patterns:
+      - regex: "(?i)/(?:public|static|www|htdocs|web|upload)[^'\"]*/[^'\"]*\\.(?:sql|dump|bak|backup)"
+      - regex: "(?i)(?:public|static|www|htdocs)/[^'\"]*\\.(?:sql|dump)"
+
+  - id: DB-BACK-002
+    name: sqlite-db-in-webroot
+    description: "SQLite database file stored in web-accessible location"
+    severity: critical
+    confidence: high
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic, php, python, go]
+    patterns:
+      - regex: "(?i)/(?:public|static|www|htdocs)/[^'\"]*\\.(?:db|sqlite|sqlite3)"
+      - regex: "(?i)sqlite:///(?:public|static|www)/[^'\"]+"
+
+  - id: DB-BACK-003
+    name: backup-predictable-name
+    description: "Database backup with predictable filename pattern"
+    severity: high
+    confidence: medium
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)(?:backup|dump|export)_?(?:db|database|\\d{4})\\.sql"
+      - regex: "(?i)(?:db|database)\\.(?:bak|backup|dump|sql)"
+
+  - id: DB-BACK-004
+    name: backup-path-in-code
+    description: "Backup file written to path accessible via HTTP"
+    severity: high
+    confidence: medium
+    cwe: [CWE-530]
+    owasp: [A05:2025]
+    languages: [php, python, javascript, go]
+    patterns:
+      - regex: "(?i)pg_dump.*(?:public|www|htdocs|static)"
+      - regex: "(?i)mysqldump.*(?:public|www|htdocs|static)"

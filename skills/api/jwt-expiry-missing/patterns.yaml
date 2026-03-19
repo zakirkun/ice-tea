@@ -1,0 +1,48 @@
+rules:
+  - id: API-JWT-001
+    name: jwt-sign-no-expiry
+    description: "JWT signed without expiresIn option — no expiration"
+    severity: high
+    confidence: high
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "jwt\\.sign\\s*\\(\\s*\\{[^}]*\\}\\s*,\\s*[^,)]+\\s*\\)(?![^;]*expiresIn|[^;]*exp\\b)"
+      - regex: "jwt\\.sign\\s*\\([^,]+,\\s*[^,]+,\\s*\\{[^}]*\\}\\s*\\)(?![^;]*expiresIn)"
+
+  - id: API-JWT-002
+    name: jwt-very-long-expiry
+    description: "JWT with expiry longer than 7 days — effectively permanent"
+    severity: medium
+    confidence: high
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "expiresIn:\\s*['\"](?:[1-9][0-9]+[dDyY]|[3-9][0-9][0-9]d|[0-9]+y)['\"]"
+      - regex: "expiresIn:\\s*(?:[0-9]{6,}|[1-9][0-9]*\\s*\\*\\s*60\\s*\\*\\s*60\\s*\\*\\s*(?:24|[2-9][0-9]))"
+
+  - id: API-JWT-003
+    name: python-jwt-no-exp
+    description: "Python PyJWT token issued without exp claim"
+    severity: high
+    confidence: high
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [python]
+    patterns:
+      - regex: "jwt\\.encode\\s*\\(\\s*\\{[^}]*\\}(?![^}]*exp\\b)"
+      - regex: "jwt\\.encode\\s*\\(\\s*payload\\s*,(?![^;\\n]*exp\\b)"
+
+  - id: API-JWT-004
+    name: go-jwt-no-expiry
+    description: "Go JWT claims without ExpiresAt field"
+    severity: high
+    confidence: medium
+    cwe: [CWE-613]
+    owasp: [A07:2025]
+    languages: [go]
+    patterns:
+      - regex: "jwt\\.MapClaims\\s*\\{[^}]*\\}(?![^;]*ExpiresAt|[^;]*exp)"
+      - regex: "StandardClaims\\s*\\{[^}]*\\}(?![^}]*ExpiresAt)"

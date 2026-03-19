@@ -1,0 +1,34 @@
+rules:
+  - id: API-KEYROT-001
+    name: api-key-created-no-expiry
+    description: "API key generated without expiration date"
+    severity: medium
+    confidence: low
+    cwe: [CWE-522]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "ApiKey\\.create\\s*\\(\\s*\\{[^}]*\\}\\s*\\)(?![^;]*expir|[^;]*expiresAt|[^;]*validUntil)"
+      - regex: "generateApiKey\\s*\\([^)]+\\)(?![^;]*expiry|[^;]*expires)"
+
+  - id: API-KEYROT-002
+    name: static-api-key-in-env
+    description: "API key stored as environment variable without rotation notice"
+    severity: low
+    confidence: low
+    cwe: [CWE-522]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)API_KEY\\s*=\\s*[a-zA-Z0-9_\\-]{20,}"
+
+  - id: API-KEYROT-003
+    name: api-key-no-scope-limit
+    description: "API key issued without scope or permission restrictions"
+    severity: medium
+    confidence: low
+    cwe: [CWE-522]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "ApiKey\\.create\\s*\\(\\s*\\{[^}]*\\}\\s*\\)(?![^;]*scope|[^;]*permission|[^;]*role)"

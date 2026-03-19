@@ -1,0 +1,49 @@
+rules:
+  - id: CRYPTO-RIV-001
+    name: js-math-random-iv
+    description: "JavaScript IV generated with Math.random() — not cryptographically secure"
+    severity: high
+    confidence: high
+    cwe: [CWE-330]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "iv\\s*=.*Math\\.random"
+      - regex: "nonce\\s*=.*Math\\.random"
+      - regex: "Array\\.from.*Math\\.random.*iv|iv.*Array\\.from.*Math\\.random"
+
+  - id: CRYPTO-RIV-002
+    name: python-random-iv
+    description: "Python IV generated with random module instead of os.urandom"
+    severity: high
+    confidence: high
+    cwe: [CWE-330]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "iv\\s*=.*random\\.(?:randint|randbytes|random)"
+      - regex: "nonce\\s*=.*random\\.(?:randint|randbytes|random)"
+
+  - id: CRYPTO-RIV-003
+    name: php-rand-iv
+    description: "PHP IV generated with rand() or mt_rand() — not cryptographically secure"
+    severity: high
+    confidence: high
+    cwe: [CWE-330]
+    owasp: [A02:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$iv\\s*=.*(?:rand|mt_rand)\\s*\\("
+      - regex: "openssl_random_pseudo_bytes.*(?:rand|mt_rand)"
+
+  - id: CRYPTO-RIV-004
+    name: java-random-iv
+    description: "Java IV populated with java.util.Random instead of SecureRandom"
+    severity: high
+    confidence: high
+    cwe: [CWE-330]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+Random\\s*\\(\\s*\\)\\.nextBytes\\s*\\(\\s*iv\\s*\\)"
+      - regex: "Random\\s+\\w+\\s*=\\s*new\\s+Random.*nextBytes.*iv"

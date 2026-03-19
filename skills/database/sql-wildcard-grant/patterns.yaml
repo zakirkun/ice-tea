@@ -1,0 +1,58 @@
+rules:
+  - id: DB-GRANT-001
+    name: grant-all-privileges-wildcard
+    description: "GRANT ALL PRIVILEGES on all databases — over-privilege"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)GRANT\\s+ALL\\s+PRIVILEGES\\s+ON\\s+\\*\\.\\*"
+      - regex: "(?i)GRANT\\s+ALL\\s+ON\\s+\\*\\.\\*"
+
+  - id: DB-GRANT-002
+    name: grant-all-on-database
+    description: "GRANT ALL on entire database — over-privilege for application user"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)GRANT\\s+ALL\\s+(?:PRIVILEGES\\s+)?ON\\s+\\w+\\.\\*"
+
+  - id: DB-GRANT-003
+    name: grant-with-grant-option
+    description: "GRANT WITH GRANT OPTION allows user to grant their privileges to others"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)WITH\\s+GRANT\\s+OPTION"
+
+  - id: DB-GRANT-004
+    name: grant-superuser
+    description: "Database SUPERUSER or CREATEDB role granted to application user"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)(?:SUPERUSER|CREATEDB|CREATEROLE|REPLICATION)"
+      - regex: "(?i)WITH\\s+SUPERUSER"
+
+  - id: DB-GRANT-005
+    name: grant-to-anonymous
+    description: "GRANT privileges to anonymous or public user"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)GRANT\\s+.+\\s+TO\\s+(?:PUBLIC|''@'%'|anonymous)"
+      - regex: "(?i)GRANT\\s+.+\\s+TO\\s+'[^']*'@'%'"

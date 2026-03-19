@@ -1,0 +1,36 @@
+rules:
+  - id: WEB-JSONP-001
+    name: jsonp-callback-no-validation
+    description: "JSONP callback parameter reflected without allowlist validation"
+    severity: high
+    confidence: high
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php, go, java]
+    patterns:
+      - regex: "callback\\s*=\\s*req\\.query\\.callback(?![^;]*replace|[^;]*match|[^;]*test)"
+      - regex: "\\$callback\\s*=\\s*\\$_GET\\s*\\[\\s*['\"]callback['\"]\\s*\\](?![^;]*preg_match|[^;]*filter)"
+      - regex: "request\\.args\\.get\\(['\"]callback['\"]\\)(?![^;]*re\\.|[^;]*match)"
+
+  - id: WEB-JSONP-002
+    name: jsonp-endpoint-reflection
+    description: "JSONP response directly wraps callback with user-supplied value"
+    severity: high
+    confidence: high
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "res\\.(?:send|end)\\s*\\(`\\$\\{(?:req\\.query|params)(?:\\.callback)?\\}\\s*\\(.*\\)`\\)"
+      - regex: "echo\\s+\\$(?:_GET\\[.callback.\\]|callback)\\s*\\.\\s*['\"]\\(\\$"
+
+  - id: WEB-JSONP-003
+    name: jsonp-cors-alternative-missing
+    description: "JSONP endpoint without CORS alternative — legacy pattern"
+    severity: medium
+    confidence: low
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:req\\.query|query\\.callback).*\\(.*json"

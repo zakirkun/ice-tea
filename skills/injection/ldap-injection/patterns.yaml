@@ -1,0 +1,62 @@
+rules:
+  - id: INJ-LDAP-001
+    name: java-ldap-string-concat
+    description: "Java LDAP search filter built via string concatenation with user input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-90]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "search\\s*\\([^,]+,\\s*['\"].*\\+\\s*\\w+"
+      - regex: "NamingEnumeration.*search.*\\+.*request\\.getParameter"
+      - regex: "(?:uid|cn|mail|sAMAccountName)=\\s*\"\\s*\\+"
+
+  - id: INJ-LDAP-002
+    name: python-ldap-filter-injection
+    description: "Python ldap3/python-ldap filter built with user input via format string"
+    severity: high
+    confidence: medium
+    cwe: [CWE-90]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "conn\\.search\\s*\\([^)]*f['\"].*\\{[^}]+\\}"
+      - regex: "ldap\\.search_s\\s*\\([^,]+,\\s*(?:ldap\\.SCOPE|2)\\s*,\\s*['\"].*%s"
+      - regex: "search_filter\\s*=\\s*f['\"].*\\{.*(?:username|user|input|request)"
+
+  - id: INJ-LDAP-003
+    name: php-ldap-search-injection
+    description: "PHP ldap_search() with user input in filter string"
+    severity: high
+    confidence: medium
+    cwe: [CWE-90]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "ldap_search\\s*\\([^)]*\\$_(?:GET|POST|REQUEST)"
+      - regex: "ldap_search\\s*\\([^,]+,\\s*[^,]+,\\s*['\"].*\\.\\s*\\$"
+
+  - id: INJ-LDAP-004
+    name: node-ldap-injection
+    description: "Node.js LDAP client search with user-controlled filter"
+    severity: high
+    confidence: medium
+    cwe: [CWE-90]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "client\\.search\\s*\\([^)]*(?:req\\.body|req\\.query|req\\.params)"
+      - regex: "ldapClient\\.search\\s*\\([^)]*\\+[^)]*(?:req|user|input)"
+
+  - id: INJ-LDAP-005
+    name: ldap-authentication-bypass-pattern
+    description: "LDAP authentication filter with string concatenation (auth bypass risk)"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-90]
+    owasp: [A03:2025]
+    languages: [java, python, php, javascript]
+    patterns:
+      - regex: "(?:uid|sAMAccountName|mail)=\\s*['\"]\\s*\\+\\s*(?:username|user|login|email)"
+      - regex: "userPassword=\\s*['\"]?\\s*\\+\\s*(?:password|pass|pwd)"

@@ -1,0 +1,84 @@
+rules:
+  - id: INFRA-DOCK-001
+    name: docker-privileged-mode
+    description: "Docker container running in privileged mode — container escape possible"
+    severity: critical
+    confidence: high
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "privileged:\\s*true"
+      - regex: "--privileged"
+
+  - id: INFRA-DOCK-002
+    name: docker-root-user
+    description: "Dockerfile missing USER instruction — container runs as root"
+    severity: high
+    confidence: medium
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "USER\\s+(?:root|0)(?:\\s|$)"
+      - regex: "^FROM\\s+\\w+(?![\\s\\S]*USER\\s+(?!root|0))"
+
+  - id: INFRA-DOCK-003
+    name: docker-socket-mount
+    description: "Docker socket mounted inside container — allows host takeover"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "/var/run/docker\\.sock"
+      - regex: "docker\\.sock:/var/run/docker\\.sock"
+
+  - id: INFRA-DOCK-004
+    name: docker-secrets-in-env
+    description: "Sensitive values passed as Docker ENV variables (visible in inspect)"
+    severity: high
+    confidence: high
+    cwe: [CWE-312]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "(?i)ENV\\s+(?:PASSWORD|SECRET|KEY|TOKEN|API_KEY)\\s+\\S+"
+      - regex: "(?i)environment:\\s*[\\s\\S]*(?:PASSWORD|SECRET|TOKEN|API_KEY)\\s*:\\s*\\S+"
+
+  - id: INFRA-DOCK-005
+    name: docker-no-readonly-filesystem
+    description: "Docker container without read-only root filesystem (writable FS increases attack surface)"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "read_only:\\s*false"
+      - regex: "securityContext:(?![^:]*readOnlyRootFilesystem:\\s*true)"
+
+  - id: INFRA-DOCK-006
+    name: docker-host-network
+    description: "Docker container using host network mode — bypasses network isolation"
+    severity: high
+    confidence: high
+    cwe: [CWE-668]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "network_mode:\\s*['\"]?host['\"]?"
+      - regex: "--network\\s+host(?:\\s|$)"
+
+  - id: INFRA-DOCK-007
+    name: docker-cap-sys-admin
+    description: "Docker container with CAP_SYS_ADMIN capability — near-privileged access"
+    severity: critical
+    confidence: high
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "(?i)cap_add:\\s*[\\s\\S]*SYS_ADMIN"
+      - regex: "(?i)--cap-add\\s+SYS_ADMIN"

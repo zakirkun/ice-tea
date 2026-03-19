@@ -1,0 +1,36 @@
+rules:
+  - id: DESER-MSG-001
+    name: msgpack-unpack-user-input
+    description: "MessagePack unpack on user-controlled data without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "msgpack\\.unpackb?\\s*\\(\\s*request\\.(?:data|body|get_data)"
+      - regex: "msgpack\\.unpack\\s*\\([^)]*(?:request|user_input|payload)"
+
+  - id: DESER-MSG-002
+    name: msgpack-unpack-object-pairs-hook
+    description: "MessagePack with object_pairs_hook that may construct dangerous objects"
+    severity: medium
+    confidence: low
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "msgpack\\.unpackb\\s*\\([^)]*object_pairs_hook\\s*="
+      - regex: "msgpack\\.unpackb\\s*\\([^)]*object_hook\\s*="
+
+  - id: DESER-MSG-003
+    name: node-msgpack-decode-user-input
+    description: "Node.js msgpack decode on request body or user-controlled data"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "msgpack\\.decode\\s*\\(\\s*(?:req\\.body|req\\.rawBody|data)"
+      - regex: "unpack\\s*\\(\\s*(?:req\\.body|Buffer\\.from\\(req)"

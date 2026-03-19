@@ -1,0 +1,47 @@
+rules:
+  - id: DEVOPS-REG-001
+    name: docker-insecure-registry
+    description: "Docker daemon configured with --insecure-registry flag"
+    severity: high
+    confidence: high
+    cwe: [CWE-327]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "--insecure-registry\\s+(?!localhost|127\\.0\\.0\\.1)"
+      - regex: "\"insecure-registries\":\\s*\\[\\s*\"(?!localhost|127\\.0\\.0\\.1)[^\"]+\""
+
+  - id: DEVOPS-REG-002
+    name: http-registry-in-dockerfile
+    description: "Dockerfile pulls from HTTP (non-HTTPS) registry"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "FROM\\s+http://[^/\\s]+"
+
+  - id: DEVOPS-REG-003
+    name: registry-no-content-trust
+    description: "Docker image pulled without content trust verification"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic, yaml]
+    patterns:
+      - regex: "DOCKER_CONTENT_TRUST\\s*=\\s*0"
+      - regex: "docker\\s+pull\\s+.*(?!.*DOCKER_CONTENT_TRUST=1)"
+
+  - id: DEVOPS-REG-004
+    name: image-no-digest-pin
+    description: "Docker image referenced by tag instead of immutable digest"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic, yaml]
+    patterns:
+      - regex: "FROM\\s+[a-z][a-z0-9/\\-]+(?::[a-zA-Z0-9\\-\\.]+)?(?!@sha256:)"
+      - regex: "image:\\s+[a-z][a-z0-9/\\-]+(?::[a-zA-Z0-9\\-\\.]+)?(?!@sha256:)"

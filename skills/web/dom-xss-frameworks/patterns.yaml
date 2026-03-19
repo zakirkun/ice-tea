@@ -1,0 +1,37 @@
+rules:
+  - id: FRMWK-REACT-01
+    name: react-dangerouslysetinnerhtml
+    description: "Use of dangerouslySetInnerHTML in React"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'dangerouslySetInnerHTML\s*=\s*\{\s*\{\s*__html\s*:'
+
+  - id: FRMWK-REACT-02
+    name: react-dangerouslysetinnerhtml-ts
+    description: "Use of dangerouslySetInnerHTML in React TS"
+    severity: high
+    confidence: medium
+    languages: [typescript]
+    patterns:
+      - regex: 'dangerouslySetInnerHTML\s*=\s*\{\s*\{\s*__html\s*:'
+
+  - id: FRMWK-VUE-01
+    name: vue-v-html
+    description: "Use of v-html directive in Vue templates"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'v-html\s*=\s*["\'][^"\']*["\']'
+
+  - id: FRMWK-ANGULAR-01
+    name: angular-bypasssecurity
+    description: "Use of DomSanitizer bypassSecurityTrustHtml"
+    severity: high
+    confidence: medium
+    languages: [typescript]
+    patterns:
+      - regex: 'bypassSecurityTrustHtml\('
+

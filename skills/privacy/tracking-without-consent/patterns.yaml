@@ -1,0 +1,48 @@
+rules:
+  - id: PRIV-TRACK-001
+    name: hotjar-no-consent
+    description: "Hotjar session recording loaded without consent verification"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "hotjar\\.com/c/[0-9]+/hotjar\\.js"
+      - regex: "hj\\s*\\(\\s*['\"](?:identify|trigger|event)['\"]"
+
+  - id: PRIV-TRACK-002
+    name: fullstory-no-consent
+    description: "FullStory session recording loaded without consent"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "fullstory\\.com/s/fs\\.js"
+      - regex: "FS\\.(?:identify|restart|setUserVars)"
+
+  - id: PRIV-TRACK-003
+    name: logrocket-no-consent
+    description: "LogRocket session recording without consent check"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "LogRocket\\.init\\s*\\("
+      - regex: "import\\s+LogRocket\\s+from\\s+['\"]logrocket['\"]"
+
+  - id: PRIV-TRACK-004
+    name: mixpanel-no-consent
+    description: "Mixpanel analytics initialized without consent verification"
+    severity: medium
+    confidence: low
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "mixpanel\\.init\\s*\\("
+      - regex: "mixpanel\\.track\\s*\\("

@@ -1,0 +1,37 @@
+rules:
+  - id: DEVOPS-PIPE-001
+    name: gitlab-ci-variable-injection
+    description: "GitLab CI uses unquoted CI_COMMIT_TITLE or branch name in script"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-77]
+    owasp: [A03:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "script:\\s*\\n.*\\$CI_COMMIT_TITLE(?![^\\n]*\")"
+      - regex: "script:\\s*\\n.*\\$CI_COMMIT_MESSAGE(?![^\\n]*\")"
+      - regex: "echo\\s+\\$CI_(?:COMMIT_TITLE|COMMIT_MESSAGE|MERGE_REQUEST_TITLE)(?![^\\n]*\")"
+
+  - id: DEVOPS-PIPE-002
+    name: makefile-shell-injection
+    description: "Makefile target interpolates shell variables from external sources"
+    severity: high
+    confidence: low
+    cwe: [CWE-77]
+    owasp: [A03:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\\$\\(shell\\s+.*\\$\\{?(?:1|arg|ARG|input|INPUT)\\}?"
+      - regex: "@\\$\\(.*\\$@.*\\)"
+
+  - id: DEVOPS-PIPE-003
+    name: jenkins-pipeline-inject
+    description: "Jenkins pipeline interpolates user-controlled values into sh step"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-77]
+    owasp: [A03:2025]
+    languages: [generic]
+    patterns:
+      - regex: "sh\\s+['\"].*\\$\\{params\\.\\w+\\}.*['\"]"
+      - regex: "sh\\s+\".*\\${env\\.GIT_BRANCH}.*\""

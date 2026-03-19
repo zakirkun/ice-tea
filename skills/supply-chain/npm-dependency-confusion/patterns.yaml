@@ -1,0 +1,47 @@
+rules:
+  - id: SC-NPM-001
+    name: unscoped-internal-package
+    description: "Unscoped package name in dependencies — potential dependency confusion risk"
+    severity: medium
+    confidence: low
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"dependencies\":\\s*\\{[^}]*\"(?!@)[a-z][a-z0-9-]*-(?:internal|private|lib|core|shared|common)\"\\s*:"
+      - regex: "\"devDependencies\":\\s*\\{[^}]*\"(?!@)[a-z][a-z0-9-]*-(?:internal|private|lib)\"\\s*:"
+
+  - id: SC-NPM-002
+    name: npm-registry-no-private-scope
+    description: ".npmrc without always-auth or private registry for internal packages"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "registry=https://registry\\.npmjs\\.org"
+
+  - id: SC-NPM-003
+    name: postinstall-script-curl
+    description: "package.json postinstall script downloads and executes code — supply chain risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-506]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"postinstall\"\\s*:\\s*\"[^\"]*(?:curl|wget|fetch)\\s+https?://"
+      - regex: "\"install\"\\s*:\\s*\"[^\"]*(?:curl|wget).*\\|\\s*(?:sh|bash|node)"
+
+  - id: SC-NPM-004
+    name: dependencies-version-wildcard
+    description: "npm dependency with wildcard (*) version — unpinned installs"
+    severity: medium
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"[a-z][a-z0-9-]+\"\\s*:\\s*\"\\*\""
+      - regex: "\"[a-z][a-z0-9-]+\"\\s*:\\s*\"latest\""

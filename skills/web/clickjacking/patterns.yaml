@@ -1,0 +1,57 @@
+rules:
+  - id: WEB-CJ-001
+    name: express-no-xframe-options
+    description: "Express.js app without X-Frame-Options header (helmet not used or misconfigured)"
+    severity: medium
+    confidence: low
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:app|router)\\.use\\((?!(?:[^)]*helmet|[^)]*frameguard|[^)]*X-Frame))"
+      - regex: "helmet\\(\\s*\\{[^}]*frameguard\\s*:\\s*false"
+
+  - id: WEB-CJ-002
+    name: xframe-options-allowall
+    description: "X-Frame-Options set to ALLOWALL which disables clickjacking protection"
+    severity: high
+    confidence: high
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)X-Frame-Options['\"]?\\s*[=:]\\s*['\"]?ALLOWALL['\"]?"
+      - regex: "(?i)X-Frame-Options.*ALLOWALL"
+
+  - id: WEB-CJ-003
+    name: csp-no-frame-ancestors
+    description: "Content-Security-Policy header missing frame-ancestors directive"
+    severity: medium
+    confidence: low
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "Content-Security-Policy['\"]?\\s*[=:]\\s*['\"][^'\"]*(?!frame-ancestors)"
+
+  - id: WEB-CJ-004
+    name: php-no-xframe-header
+    description: "PHP response without X-Frame-Options header"
+    severity: medium
+    confidence: low
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [php]
+    patterns:
+      - regex: "header\\s*\\(\\s*['\"](?!X-Frame-Options|Content-Security-Policy)"
+
+  - id: WEB-CJ-005
+    name: go-no-frame-protection-header
+    description: "Go HTTP handler missing X-Frame-Options header in response"
+    severity: medium
+    confidence: low
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - regex: "w\\.Header\\(\\)\\.Set\\s*\\([^)]*(?!X-Frame-Options|Content-Security-Policy)"

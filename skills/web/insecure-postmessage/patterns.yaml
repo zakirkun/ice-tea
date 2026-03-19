@@ -1,0 +1,19 @@
+rules:
+  - id: CORS-JS-01
+    name: js-postmessage-wildcard
+    description: "postMessage targeting generic origin '*'"
+    severity: medium
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: '\.postMessage\([^,]+,\s*["\']\*["\']\)'
+
+  - id: CORS-TS-01
+    name: ts-postmessage-wildcard
+    description: "postMessage targeting generic origin '*'"
+    severity: medium
+    confidence: medium
+    languages: [typescript]
+    patterns:
+      - regex: '\.postMessage\([^,]+,\s*["\']\*["\']\)'
+

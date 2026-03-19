@@ -1,0 +1,36 @@
+rules:
+  - id: IOS-URL-001
+    name: oauth-token-in-url-scheme
+    description: "OAuth token or code passed via custom URL scheme (hijackable)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "CFBundleURLSchemes.*[^>]*\\n[^>]*<string>[a-zA-Z][a-zA-Z0-9]+</string>"
+      - regex: "\\\\?(?:code|token|access_token)=[a-zA-Z0-9\\-._]+"
+
+  - id: IOS-URL-002
+    name: openurl-no-source-validation
+    description: "openURL handler without validating sourceApplication"
+    severity: high
+    confidence: medium
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "application.*openURL.*options(?![^{]*sourceApplication)"
+      - regex: "handleOpenURL.*(?!.*sourceApplication)"
+
+  - id: IOS-URL-003
+    name: sensitive-data-in-url-scheme
+    description: "Sensitive data passed as URL scheme query parameter"
+    severity: high
+    confidence: medium
+    cwe: [CWE-940]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\\\\?(?:password|secret|pin|auth_token)=[^&\"']+"
+      - regex: "myapp://[^?]*\\?[^\"']*(?:token|password|secret)="

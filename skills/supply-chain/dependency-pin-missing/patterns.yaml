@@ -1,0 +1,47 @@
+rules:
+  - id: SC-PIN-001
+    name: npm-caret-version
+    description: "npm dependency with caret (^) version — allows minor/patch upgrades"
+    severity: low
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"(?:dependencies|devDependencies)\":\\s*\\{[^}]*\"[a-z][a-z0-9-]+\"\\s*:\\s*\"\\^[0-9]"
+
+  - id: SC-PIN-002
+    name: npm-latest-version
+    description: "npm dependency pinned to 'latest' — unpredictable version"
+    severity: medium
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "\"[a-z][a-z0-9-]+\"\\s*:\\s*\"latest\""
+      - regex: "\"[a-z][a-z0-9-]+\"\\s*:\\s*\"\\*\""
+
+  - id: SC-PIN-003
+    name: github-action-no-hash-pin
+    description: "GitHub Actions uses action with branch/tag reference instead of commit SHA"
+    severity: medium
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "uses:\\s+[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+@(?:main|master|v[0-9]+)(?![a-f0-9]{40})"
+      - regex: "uses:\\s+actions/[a-zA-Z0-9_-]+@(?:main|master)(?![a-f0-9]{40})"
+
+  - id: SC-PIN-004
+    name: requirements-loose-version
+    description: "Python requirements.txt with >= or no version pin"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic]
+    patterns:
+      - regex: "^[a-zA-Z][a-zA-Z0-9-_]+\\s*>=\\s*[0-9]"
+      - regex: "^[a-zA-Z][a-zA-Z0-9-_]+\\s*$"

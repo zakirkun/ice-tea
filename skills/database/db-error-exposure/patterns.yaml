@@ -1,0 +1,65 @@
+rules:
+  - id: DB-ERR-001
+    name: sql-error-in-response-node
+    description: "Node.js database error sent directly in HTTP response"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "res\\.(?:json|send)\\s*\\(\\s*\\{[^}]*(?:err\\.message|error\\.message|err\\.stack)[^}]*\\}\\s*\\)"
+      - regex: "res\\.status\\s*\\(\\s*500\\s*\\).*err\\.message"
+      - regex: "catch\\s*\\([^)]+\\)\\s*\\{[^}]*res\\.json\\s*\\([^)]*err"
+
+  - id: DB-ERR-002
+    name: python-db-error-in-response
+    description: "Python database exception sent in Flask/Django HTTP response"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "except\\s+(?:Exception|psycopg2|MySQLError|sqlite3\\.Error)[^:]*:[^\\n]*\\n[^\\n]*(?:return|jsonify).*str\\(\\s*e\\s*\\)"
+      - regex: "jsonify\\s*\\(\\s*\\{[^}]*['\"]error['\"]\\s*:\\s*str\\s*\\(\\s*(?:e|err|error)\\s*\\)"
+
+  - id: DB-ERR-003
+    name: java-db-error-in-response
+    description: "Java SQL exception message sent to HTTP response"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [java]
+    patterns:
+      - regex: "catch\\s*\\(\\s*SQLException"
+      - regex: "response\\.getWriter\\(\\)\\.print.*e\\.getMessage\\(\\)"
+      - regex: "e\\.getMessage\\(\\).*response\\.sendError"
+
+  - id: DB-ERR-004
+    name: php-mysql-error-echo
+    description: "PHP MySQL/PDO error echoed or printed to output"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [php]
+    patterns:
+      - regex: "echo\\s+mysql_error\\s*\\("
+      - regex: "echo\\s+mysqli_error\\s*\\("
+      - regex: "die\\s*\\(\\s*\\$(?:e|err|error)->getMessage"
+      - regex: "echo\\s+pg_last_error\\s*\\("
+
+  - id: DB-ERR-005
+    name: go-db-error-in-http-response
+    description: "Go database error written directly to HTTP response writer"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - regex: "http\\.Error\\s*\\(\\s*w\\s*,\\s*err\\.Error\\s*\\(\\s*\\)"
+      - regex: "fmt\\.Fprintf\\s*\\(\\s*w\\s*,.*err\\.Error\\s*\\(\\s*\\)"
+      - regex: "json\\.NewEncoder\\s*\\(w\\)\\.Encode.*err\\.Error"

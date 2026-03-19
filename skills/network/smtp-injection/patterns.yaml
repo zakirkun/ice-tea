@@ -1,0 +1,37 @@
+rules:
+  - id: NET-SMTP-001
+    name: python-smtplib-raw-send
+    description: "Python smtplib direct SMTP command with user input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "smtp\\.sendmail\\s*\\([^,]*request\\.(?:args|form|json)"
+      - regex: "server\\.sendmail\\s*\\([^,]*user_input"
+      - regex: "smtp\\.rcpt\\s*\\(\\s*(?:request\\.(?:args|form)|user_input)"
+
+  - id: NET-SMTP-002
+    name: java-smtp-injection
+    description: "Java JavaMail session with user input in addresses without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+InternetAddress\\s*\\(\\s*request\\.getParameter"
+      - regex: "message\\.setRecipients\\s*\\([^,]+,\\s*request\\.getParameter"
+
+  - id: NET-SMTP-003
+    name: php-mail-header-injection
+    description: "PHP mail() with user-supplied recipient/header without CRLF check"
+    severity: high
+    confidence: high
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "mail\\s*\\(\\s*\\$_(?:GET|POST|REQUEST)\\[.to.\\]"
+      - regex: "mail\\s*\\(\\s*[^,]+,\\s*[^,]+,\\s*[^,]+,\\s*[^)]*\\$_(?:GET|POST)"

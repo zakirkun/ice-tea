@@ -1,0 +1,85 @@
+rules:
+  - id: NET-SSRF-001
+    name: aws-metadata-ssrf-access
+    description: "AWS EC2 metadata endpoint accessed via user-controlled URL"
+    severity: critical
+    confidence: high
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "169\\.254\\.169\\.254"
+      - regex: "169\\.254\\.170\\.2"
+
+  - id: NET-SSRF-002
+    name: gcp-metadata-ssrf
+    description: "GCP metadata endpoint accessed"
+    severity: critical
+    confidence: high
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "metadata\\.google\\.internal"
+      - regex: "metadata\\.google\\.internal/computeMetadata"
+
+  - id: NET-SSRF-003
+    name: ssrf-file-protocol
+    description: "HTTP request to file:// URL — reads local filesystem"
+    severity: critical
+    confidence: high
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "file://(?:[^\"'\\s]+)"
+      - regex: "['\"]file://[^'\"]*['\"]"
+
+  - id: NET-SSRF-004
+    name: ssrf-gopher-protocol
+    description: "HTTP client making request with gopher:// protocol (internal service exploit)"
+    severity: critical
+    confidence: high
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "gopher://[^'\"\\s]+"
+      - regex: "['\"]gopher://[^'\"]*['\"]"
+
+  - id: NET-SSRF-005
+    name: ssrf-user-controlled-url-fetch
+    description: "HTTP client fetches user-controlled URL without allowlist or SSRF protection"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?:fetch|axios\\.get|requests\\.get|http\\.Get|curl_exec)\\s*\\([^)]*(?:req\\.body\\.url|req\\.query\\.url|\\$_GET\\[.url|request\\.args\\.get\\(['\"]url['\"]\\))"
+      - regex: "http\\.Get\\s*\\(\\s*r\\.(?:URL\\.Query\\(\\)\\.Get|FormValue)\\s*\\(['\"]url['\"]\\)\\s*\\)"
+
+  - id: NET-SSRF-006
+    name: ssrf-redirect-follow-user-url
+    description: "HTTP client configured to follow redirects with user-supplied URL"
+    severity: high
+    confidence: medium
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "maxRedirects\\s*:\\s*(?:[5-9]|[1-9][0-9]+)(?![^}]*allowlist)"
+      - regex: "allow_redirects\\s*=\\s*True.*(?:req\\.|request\\.)(?:args|form)"
+
+  - id: NET-SSRF-007
+    name: ssrf-dns-lookup-user-hostname
+    description: "DNS resolution or connection to user-controlled hostname"
+    severity: high
+    confidence: medium
+    cwe: [CWE-918]
+    owasp: [A10:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "dns\\.lookup\\s*\\(\\s*(?:req\\.body|req\\.query|user_input)"
+      - regex: "socket\\.gethostbyname\\s*\\(\\s*(?:request\\.args|user_input)"
+      - regex: "net\\.LookupHost\\s*\\(\\s*(?:r\\.FormValue|hostname)"

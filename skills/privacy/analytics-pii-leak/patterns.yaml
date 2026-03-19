@@ -1,0 +1,48 @@
+rules:
+  - id: PRIV-ANA-001
+    name: gtag-user-id-email
+    description: "Google Analytics gtag with email address as user_id"
+    severity: high
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "gtag\\s*\\(['\"]set['\"],\\s*['\"]user_id['\"],\\s*[^)]*email"
+      - regex: "gtag\\s*\\(['\"]config['\"],\\s*[^,]+,\\s*\\{[^}]*user_id\\s*:\\s*[^}]*email"
+
+  - id: PRIV-ANA-002
+    name: mixpanel-identify-email
+    description: "Mixpanel identify() called with email address as user identifier"
+    severity: high
+    confidence: high
+    cwe: [CWE-359]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "mixpanel\\.identify\\s*\\([^)]*email"
+      - regex: "mixpanel\\.people\\.set\\s*\\(\\s*\\{[^}]*\\$email"
+
+  - id: PRIV-ANA-003
+    name: amplitude-user-id-email
+    description: "Amplitude analytics user ID set to email address"
+    severity: high
+    confidence: high
+    cwe: [CWE-359]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "amplitude\\.setUserId\\s*\\([^)]*email"
+      - regex: "amplitude\\.getInstance\\(\\)\\.setUserId\\s*\\([^)]*\\.email"
+
+  - id: PRIV-ANA-004
+    name: segment-track-pii
+    description: "Segment analytics track event with PII in properties"
+    severity: high
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "analytics\\.identify\\s*\\([^)]*email"
+      - regex: "analytics\\.track\\s*\\([^)]*(?:email|phone|ssn|name)"

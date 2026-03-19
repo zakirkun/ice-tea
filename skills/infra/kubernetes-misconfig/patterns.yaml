@@ -1,0 +1,82 @@
+rules:
+  - id: INFRA-K8S-001
+    name: k8s-privileged-container
+    description: "Kubernetes container with privileged: true — full host access"
+    severity: critical
+    confidence: high
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "privileged:\\s*true"
+
+  - id: INFRA-K8S-002
+    name: k8s-host-pid-network
+    description: "Kubernetes pod with hostPID or hostNetwork true — host namespace access"
+    severity: critical
+    confidence: high
+    cwe: [CWE-668]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "hostPID:\\s*true"
+      - regex: "hostNetwork:\\s*true"
+      - regex: "hostIPC:\\s*true"
+
+  - id: INFRA-K8S-003
+    name: k8s-allow-privilege-escalation
+    description: "Kubernetes container with allowPrivilegeEscalation: true"
+    severity: high
+    confidence: high
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "allowPrivilegeEscalation:\\s*true"
+
+  - id: INFRA-K8S-004
+    name: k8s-run-as-root
+    description: "Kubernetes container runAsUser: 0 (running as root)"
+    severity: high
+    confidence: high
+    cwe: [CWE-250]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "runAsUser:\\s*0"
+      - regex: "runAsNonRoot:\\s*false"
+
+  - id: INFRA-K8S-005
+    name: k8s-rbac-wildcard
+    description: "Kubernetes RBAC role with wildcard resources and verbs — overprivileged"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "resources:\\s*\\[?['\"]?\\*['\"]?\\]?"
+      - regex: "verbs:\\s*\\[?['\"]?\\*['\"]?\\]?"
+
+  - id: INFRA-K8S-006
+    name: k8s-no-resource-limits
+    description: "Kubernetes container without CPU/memory resource limits (DoS risk)"
+    severity: medium
+    confidence: low
+    cwe: [CWE-400]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "containers:(?![\\s\\S]*?resources:)[\\s\\S]*?image:"
+
+  - id: INFRA-K8S-007
+    name: k8s-default-service-account
+    description: "Kubernetes pod using default service account (may have broad RBAC)"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "serviceAccountName:\\s*default"
+      - regex: "automountServiceAccountToken:\\s*true"

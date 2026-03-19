@@ -1,0 +1,46 @@
+rules:
+  - id: REDIR-GO-01
+    name: go-http-redirect
+    description: "http.Redirect using request variable"
+    severity: medium
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'http\.Redirect\(.*,\s*.*\.(FormValue|Get)\(.*\)'
+
+  - id: REDIR-JS-01
+    name: js-express-redirect
+    description: "Express res.redirect with query params"
+    severity: medium
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'res\.redirect\(.*req\.(query|body|params)\.[a-zA-Z_].*\)'
+
+  - id: REDIR-PY-01
+    name: py-flask-redirect
+    description: "Flask redirect with user input"
+    severity: medium
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: 'redirect\(.*request\.(args|form)\.get\(.*\)'
+
+  - id: REDIR-PHP-01
+    name: php-header-location
+    description: "PHP header Location redirect"
+    severity: medium
+    confidence: medium
+    languages: [php]
+    patterns:
+      - regex: '(?i)header\(\s*["\']Location:\s*["\'].*\$.*\)'
+
+  - id: REDIR-JAVA-01
+    name: java-sendredirect
+    description: "Java sendRedirect with user input"
+    severity: medium
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'sendRedirect\(.*request\.getParameter\(.*\)'
+

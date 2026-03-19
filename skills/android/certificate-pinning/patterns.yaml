@@ -1,0 +1,62 @@
+rules:
+  - id: AND-CERT-001
+    name: android-trust-all-certs
+    description: "Custom X509TrustManager with empty checkServerTrusted — accepts all certs"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "checkServerTrusted\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+      - regex: "X509TrustManager.*checkServerTrusted[^{]*\\{[^}]*\\}"
+      - regex: "getAcceptedIssuers\\s*\\(\\s*\\)\\s*\\{\\s*return\\s*(?:null|new\\s+X509Certificate\\[\\s*0\\s*\\])"
+
+  - id: AND-CERT-002
+    name: android-hostname-verifier-always-true
+    description: "HostnameVerifier implementation always returns true — hostname not validated"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "verify\\s*\\(\\s*String\\s+\\w+\\s*,\\s*SSLSession\\s+\\w+\\s*\\)\\s*\\{\\s*return\\s*true"
+      - regex: "HttpsURLConnection\\.setDefaultHostnameVerifier\\s*\\(\\s*(?:new\\s+)?(?:HostnameVerifier|\\(hostname,\\s*session\\)\\s*->\\s*true)"
+      - regex: "ALLOW_ALL_HOSTNAME_VERIFIER"
+
+  - id: AND-CERT-003
+    name: android-okhttp-no-certificate-pinner
+    description: "OkHttp client configured without CertificatePinner — no certificate pinning"
+    severity: medium
+    confidence: low
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "OkHttpClient\\.Builder\\s*\\(\\s*\\)(?![^;]*certificatePinner)"
+      - regex: "new\\s+OkHttpClient\\s*\\(\\s*\\)(?![^;]*certificatePinner)"
+
+  - id: AND-CERT-004
+    name: android-ssl-error-proceed
+    description: "WebViewClient.onReceivedSslError() calls handler.proceed() — ignores SSL errors"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "onReceivedSslError[^{]*\\{[^}]*handler\\.proceed\\s*\\("
+      - regex: "SslErrorHandler.*handler\\.proceed"
+
+  - id: AND-CERT-005
+    name: android-network-security-config-allow-cleartext
+    description: "Android Network Security Config allows cleartext HTTP traffic"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "cleartextTrafficPermitted\\s*=\\s*['\"]true['\"]"
+      - regex: "android:usesCleartextTraffic\\s*=\\s*['\"]true['\"]"

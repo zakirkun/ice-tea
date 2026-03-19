@@ -1,0 +1,59 @@
+rules:
+  - id: CRYPTO-KEY-001
+    name: private-key-in-source
+    description: "PEM-encoded private key hardcoded in source code"
+    severity: critical
+    confidence: high
+    cwe: [CWE-321]
+    owasp: [A07:2025]
+    languages: [generic, javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "-----BEGIN\\s+(?:RSA\\s+|EC\\s+|DSA\\s+|OPENSSH\\s+)?PRIVATE\\s+KEY-----"
+      - regex: "-----BEGIN\\s+ENCRYPTED\\s+PRIVATE\\s+KEY-----"
+
+  - id: CRYPTO-KEY-002
+    name: certificate-in-source
+    description: "X.509 certificate embedded in source code"
+    severity: high
+    confidence: high
+    cwe: [CWE-321]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "-----BEGIN\\s+CERTIFICATE-----"
+      - regex: "-----BEGIN\\s+CERTIFICATE\\s+REQUEST-----"
+
+  - id: CRYPTO-KEY-003
+    name: ssh-private-key
+    description: "SSH private key format in source file"
+    severity: critical
+    confidence: high
+    cwe: [CWE-321]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "-----BEGIN\\s+OPENSSH\\s+PRIVATE\\s+KEY-----"
+      - regex: "ssh-rsa\\s+AAAA[a-zA-Z0-9+/]+"
+
+  - id: CRYPTO-KEY-004
+    name: pgp-private-key
+    description: "PGP private key block in source"
+    severity: critical
+    confidence: high
+    cwe: [CWE-321]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "-----BEGIN\\s+PGP\\s+PRIVATE\\s+KEY\\s+BLOCK-----"
+
+  - id: CRYPTO-KEY-005
+    name: jwt-private-key-hardcoded
+    description: "JWT RS256 or ES256 private key content hardcoded"
+    severity: critical
+    confidence: high
+    cwe: [CWE-321]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "privateKey\\s*=\\s*['\"]-----BEGIN"
+      - regex: "JWT_PRIVATE_KEY\\s*=\\s*['\"]-----BEGIN"

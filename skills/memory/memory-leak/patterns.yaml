@@ -1,0 +1,36 @@
+rules:
+  - id: MEM-LEAK-001
+    name: c-malloc-no-free-in-function
+    description: "malloc() in function without corresponding free() in all exit paths"
+    severity: medium
+    confidence: low
+    cwe: [CWE-401]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\w+\\s*=\\s*malloc\\s*\\([^)]+\\)\\s*;(?:[^}]*;){0,10}[^}]*return\\s*(?!free)"
+      - regex: "\\w+\\s*=\\s*malloc\\s*\\([^)]+\\)\\s*;[^}]*if\\s*\\([^)]*error[^)]*\\)\\s*\\{[^}]*return(?![^}]*free)"
+
+  - id: MEM-LEAK-002
+    name: go-goroutine-no-cancel
+    description: "Go goroutine launched without context cancellation — goroutine leak"
+    severity: medium
+    confidence: low
+    cwe: [CWE-401]
+    owasp: [A06:2025]
+    languages: [go]
+    patterns:
+      - regex: "go\\s+func\\s*\\(\\s*\\)\\s*\\{(?![^}]*context|[^}]*ctx|[^}]*done)"
+      - regex: "go\\s+\\w+\\s*\\([^)]*\\)(?![^;\\n]*ctx|[^;\\n]*context|[^;\\n]*cancel)"
+
+  - id: MEM-LEAK-003
+    name: java-resource-no-close
+    description: "Java resource opened without close() in finally block"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-401]
+    owasp: [A06:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+(?:FileInputStream|FileOutputStream|Connection|PreparedStatement)\\s*\\([^)]+\\)(?![^;]*try-with-resources|[^;]*AutoCloseable)"
+      - regex: "(?:InputStream|OutputStream|Connection)\\s+\\w+\\s*=\\s*new\\s+\\w+\\s*\\([^)]+\\)(?![^;]*finally|[^;]*close)"

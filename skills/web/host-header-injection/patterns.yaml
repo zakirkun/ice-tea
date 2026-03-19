@@ -1,0 +1,37 @@
+rules:
+  - id: WEB-HOST-001
+    name: host-header-in-reset-link
+    description: "Password reset URL generated using HTTP Host header value"
+    severity: high
+    confidence: high
+    cwe: [CWE-113]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php, go]
+    patterns:
+      - regex: "req\\.(?:headers?\\.host|hostname|host).*(?:reset|password|confirm|activate)"
+      - regex: "request\\.(?:META\\.HTTP_HOST|get_host\\(\\)).*(?:reset|password|confirm)"
+      - regex: "\\$_SERVER\\[\\s*['\"]HTTP_HOST['\"]\\s*\\].*(?:reset|password|confirm)"
+
+  - id: WEB-HOST-002
+    name: host-header-canonical-url
+    description: "Canonical URL or redirect built from Host header without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php, go, ruby]
+    patterns:
+      - regex: "(?:https?://).*req\\.headers?\\.host"
+      - regex: "(?:https?://).*request\\.(?:META\\.HTTP_HOST|get_host\\(\\))"
+
+  - id: WEB-HOST-003
+    name: django-allowed-hosts-empty
+    description: "Django ALLOWED_HOSTS not configured — accepts any Host header"
+    severity: high
+    confidence: high
+    cwe: [CWE-113]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "ALLOWED_HOSTS\\s*=\\s*\\[\\s*\\]"
+      - regex: "ALLOWED_HOSTS\\s*=\\s*\\[\\s*['\"]\\*['\"]\\s*\\]"

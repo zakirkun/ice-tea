@@ -1,0 +1,49 @@
+rules:
+  - id: INJ-EL-001
+    name: spring-spel-user-input
+    description: "Spring SpEL parseExpression() with user-controlled input"
+    severity: critical
+    confidence: high
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "parseExpression\\s*\\(\\s*request\\.getParameter"
+      - regex: "expressionParser\\.parseExpression\\s*\\([^)]*\\+"
+      - regex: "new\\s+SpelExpressionParser\\s*\\(\\s*\\)\\.parseExpression\\s*\\([^)]*getParameter"
+
+  - id: INJ-EL-002
+    name: thymeleaf-user-template
+    description: "Thymeleaf template processed with user-controlled string — EL injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "templateEngine\\.process\\s*\\([^,]*request\\.getParameter"
+      - regex: "ClassLoaderTemplateResolver.*request\\.getParameter"
+
+  - id: INJ-EL-003
+    name: jsp-el-user-expression
+    description: "JSP page contains user-controlled EL expression"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "\\$\\{param\\.\\w+\\}"
+      - regex: "\\$\\{request\\.getParameter\\(['\"]\\w+['\"]\\)\\}"
+
+  - id: INJ-EL-004
+    name: ognl-user-input
+    description: "OGNL expression evaluated with user input — Struts/Spring RCE"
+    severity: critical
+    confidence: high
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "Ognl\\.getValue\\s*\\([^,]*request\\.getParameter"
+      - regex: "OgnlContext.*request\\.getParameter"

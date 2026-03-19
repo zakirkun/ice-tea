@@ -1,0 +1,35 @@
+rules:
+  - id: BL-WF-001
+    name: step-in-client-state
+    description: "Workflow step number stored in client-visible form field or cookie"
+    severity: high
+    confidence: medium
+    cwe: [CWE-284]
+    owasp: [A01:2025]
+    languages: [php, javascript, typescript, python]
+    patterns:
+      - regex: "<input[^>]*(?:name|id)\\s*=\\s*['\"](?:step|current_step|stage|phase)['\"][^>]*>"
+      - regex: "setcookie\\s*\\(['\"](?:step|workflow_step|stage)['\"]"
+      - regex: "localStorage\\.setItem\\s*\\(['\"](?:step|currentStep|stage)['\"]"
+
+  - id: BL-WF-002
+    name: checkout-step-no-server-validation
+    description: "Checkout flow endpoint without verifying previous steps completed"
+    severity: high
+    confidence: low
+    cwe: [CWE-284]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:app|router)\\.post\\(['\"][^'\"]*(?:checkout|confirm|payment|complete)[^'\"]*['\"](?![^)]*step|[^)]*session)"
+
+  - id: BL-WF-003
+    name: payment-skip-to-confirmation
+    description: "Payment confirmation endpoint accessible without verifying payment completion"
+    severity: critical
+    confidence: low
+    cwe: [CWE-284]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:order|payment).*(?:confirm|success|complete)(?![^;]*(?:payment_id|transaction_id|paid|charged))"

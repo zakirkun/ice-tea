@@ -1,0 +1,35 @@
+rules:
+  - id: RC-ATOM-001
+    name: go-map-read-write-no-mutex
+    description: "Go map read and write in different goroutines without mutex"
+    severity: high
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [go]
+    patterns:
+      - regex: "go\\s+func\\s*\\(\\s*\\)\\s*\\{[^}]*\\w+\\[\\w+\\](?![^}]*sync\\.Mutex|[^}]*sync\\.RWMutex)"
+      - regex: "go\\s+func\\s*\\(\\s*\\)\\s*\\{[^}]*\\w+\\[\\w+\\]\\s*=[^}]*\\}"
+
+  - id: RC-ATOM-002
+    name: java-non-atomic-check-act
+    description: "Java check-then-act pattern without synchronization"
+    severity: high
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [java]
+    patterns:
+      - regex: "if\\s*\\(!\\s*\\w+\\.contains(?:[^)]*\\))[^{]*\\{[^}]*\\w+\\.add\\s*\\("
+      - regex: "if\\s*\\(\\w+\\.get\\([^)]+\\)\\s*==\\s*null\\)[^{]*\\{[^}]*\\w+\\.put\\s*\\("
+
+  - id: RC-ATOM-003
+    name: balance-check-then-deduct-no-lock
+    description: "Balance check then deduction without database transaction or lock"
+    severity: critical
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "if\\s*\\([^)]*balance\\s*>=\\s*amount[^)]*\\)(?:[^;]*;){0,5}[^;]*balance\\s*-=\\s*amount(?![^;]*transaction|[^;]*BEGIN)"

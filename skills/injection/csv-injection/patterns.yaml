@@ -1,0 +1,48 @@
+rules:
+  - id: INJ-CSV-001
+    name: csv-field-no-sanitization
+    description: "CSV export includes user data without sanitizing formula-starting characters"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1236]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "csv.*(?:req\\.body|request\\.form|\\$_POST)(?![^;]*replace|[^;]*sanitize)"
+      - regex: "\\.join\\s*\\(\\s*['\",]['\"]\\s*\\).*(?:user|username|name|email)(?![^;]*sanitize|[^;]*replace)"
+
+  - id: INJ-CSV-002
+    name: python-csv-writer-user-data
+    description: "Python csv.writer writes user data directly without sanitization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1236]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "writer\\.writerow\\s*\\([^)]*(?:request\\.(?:args|form|json)|user_input)"
+      - regex: "csvwriter\\.writerow\\s*\\([^)]*\\+"
+
+  - id: INJ-CSV-003
+    name: excel-export-user-data
+    description: "Excel/spreadsheet export without formula injection prevention"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1236]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, java]
+    patterns:
+      - regex: "ExcelJS|xlsx|openpyxl|xlwt.*(?:req\\.body|request\\.form|user)"
+      - regex: "worksheet\\.(?:write|addRow)\\s*\\([^)]*(?:req\\.body|user_input|request\\.form)"
+
+  - id: INJ-CSV-004
+    name: csv-download-response-unsanitized
+    description: "CSV response built from user data without escaping formula characters"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1236]
+    owasp: [A03:2025]
+    languages: [python, go, javascript, php]
+    patterns:
+      - regex: "text/csv.*Content-Disposition(?![^;\\n]*sanitize)"
+      - regex: "Content-Disposition.*attachment.*\\.csv(?![^;\\n]*sanitize|[^;\\n]*escape)"

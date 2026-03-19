@@ -1,0 +1,60 @@
+rules:
+  - id: MEM-NPD-001
+    name: c-malloc-no-null-check
+    description: "malloc()/calloc()/realloc() result used without NULL check"
+    severity: high
+    confidence: medium
+    cwe: [CWE-476]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:\\w+)\\s*=\\s*(?:malloc|calloc|realloc)\\s*\\([^)]+\\)\\s*;[^;]*(?:strcpy|memcpy|strlen|\\*)"
+      - regex: "(?:malloc|calloc|realloc)\\s*\\([^)]+\\)\\s*;\\s*(?!if)"
+
+  - id: MEM-NPD-002
+    name: c-fopen-no-null-check
+    description: "fopen() result used without NULL check — dereference on missing file"
+    severity: high
+    confidence: medium
+    cwe: [CWE-476]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:FILE\\s*\\*\\s*)?\\w+\\s*=\\s*fopen\\s*\\([^)]+\\)\\s*;[^;]*(?:fgets|fputs|fprintf|fscanf|fread|fwrite)"
+      - regex: "fp\\s*=\\s*fopen\\s*\\([^)]+\\)\\s*;\\s*(?!if\\s*\\(\\s*(?:fp|!fp))"
+
+  - id: MEM-NPD-003
+    name: java-null-deref-no-check
+    description: "Java method return value used without null check"
+    severity: medium
+    confidence: low
+    cwe: [CWE-476]
+    owasp: [A06:2025]
+    languages: [java]
+    patterns:
+      - regex: "(?:find|get|lookup)\\w*\\s*\\([^)]+\\)\\.\\w+"
+      - regex: "map\\.get\\s*\\([^)]+\\)\\.\\w+"
+      - regex: "repository\\.findById\\s*\\([^)]+\\)\\.get\\s*\\(\\s*\\)"
+
+  - id: MEM-NPD-004
+    name: go-error-not-checked
+    description: "Go function returning error where error is ignored — potential nil dereference"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-476]
+    owasp: [A06:2025]
+    languages: [go]
+    patterns:
+      - regex: "\\w+\\s*,\\s*_\\s*:?=\\s*(?:os\\.Open|os\\.Create|sql\\.Open|http\\.Get)"
+      - regex: "\\w+\\s*,\\s*err\\s*:?=\\s*\\w+(?:[^\\n]*\\n){0,2}(?!if\\s+err)"
+
+  - id: MEM-NPD-005
+    name: c-strdup-no-check
+    description: "strdup() result not checked for NULL (can fail when memory is low)"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-476]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\w+\\s*=\\s*strdup\\s*\\([^)]+\\)\\s*;[^;]*(?:strcpy|strlen|\\*\\w)"

@@ -1,0 +1,38 @@
+rules:
+  - id: MASS-JS-01
+    name: js-sequelize-update
+    description: "Sequelize/Mongoose update with req.body"
+    severity: high
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: '\.update\(\s*req\.body\s*\)'
+      - regex: '\.create\(\s*req\.body\s*\)'
+
+  - id: MASS-GO-01
+    name: go-gorm-updates
+    description: "GORM updates with raw struct parsing"
+    severity: high
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'db\.Model\(.*\)\.Updates\(.*\)'
+
+  - id: MASS-PY-01
+    name: py-django-update
+    description: "Django update passing kwargs directly"
+    severity: high
+    confidence: medium
+    languages: [python]
+    patterns:
+      - regex: '\.update\(\s*\*\*request\.(data|POST)\s*\)'
+
+  - id: MASS-RUBY-01
+    name: ruby-rails-update
+    description: "Rails update without strong parameters"
+    severity: medium
+    confidence: medium
+    languages: [ruby]
+    patterns:
+      - regex: '\.update\(params\[:[a-zA-Z_]+\]\)'
+

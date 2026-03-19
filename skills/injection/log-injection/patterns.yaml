@@ -1,0 +1,76 @@
+rules:
+  - id: INJ-LOG-001
+    name: nodejs-log-user-input
+    description: "Node.js logger writes user request data directly into log message string"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-117]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:console\\.log|logger?\\.(?:info|warn|error|debug|log))\\s*\\(`[^`]*\\$\\{req\\.(?:body|query|params|headers)"
+      - regex: "(?:console\\.log|logger?\\.(?:info|warn|error|debug|log))\\s*\\([^)]*\\+\\s*req\\.(?:body|query|params)"
+      - regex: "(?:console\\.log|log\\.(?:info|warn|error)).*req\\.(?:body|query|params)\\."
+
+  - id: INJ-LOG-002
+    name: python-log-user-input
+    description: "Python logging writes user input directly to log message via %s or f-string"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-117]
+    owasp: [A09:2025]
+    languages: [python]
+    patterns:
+      - regex: "logging\\.(?:info|warning|error|debug|critical)\\s*\\(\\s*f['\"].*(?:request\\.(?:args|form|json|data)|username|user_input)"
+      - regex: "logger\\.(?:info|warning|error|debug)\\s*\\(\\s*['\"][^'\"]*%s[^'\"]*['\"]\\s*%\\s*(?:username|user|request)"
+      - regex: "logging\\.info\\s*\\([^)]*request\\.(?:args|form|values|json)"
+
+  - id: INJ-LOG-003
+    name: go-log-user-input
+    description: "Go log package writes request parameters directly to log"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-117]
+    owasp: [A09:2025]
+    languages: [go]
+    patterns:
+      - regex: "log\\.(?:Printf|Println|Fatalf|Fatal)\\s*\\([^)]*r\\.(?:URL\\.Query|FormValue|Header\\.Get)"
+      - regex: "log\\.(?:Printf|Sprintf)\\s*\\([^)]*%s[^)]*,\\s*r\\."
+      - regex: "zap\\.(?:String|Any)\\s*\\([^,]+,\\s*r\\.(?:URL\\.Query|FormValue)"
+
+  - id: INJ-LOG-004
+    name: java-log-user-input
+    description: "Java logger writes user-controlled request parameter (Log4j injection risk)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-117]
+    owasp: [A09:2025]
+    languages: [java]
+    patterns:
+      - regex: "log(?:ger)?\\.(?:info|warn|error|debug)\\s*\\([^)]*request\\.getParameter"
+      - regex: "LOG\\.(?:info|warn|error)\\s*\\([^)]*request\\.getHeader"
+      - regex: "Logger.*log\\s*\\(.*request\\.getParameter"
+
+  - id: INJ-LOG-005
+    name: php-error-log-injection
+    description: "PHP error_log() or log function with unsanitized user input"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-117]
+    owasp: [A09:2025]
+    languages: [php]
+    patterns:
+      - regex: "error_log\\s*\\([^)]*\\$_(?:GET|POST|REQUEST|SERVER)"
+      - regex: "file_put_contents\\s*\\([^,]*log[^,]*,\\s*[^)]*\\$_(?:GET|POST|REQUEST)"
+
+  - id: INJ-LOG-006
+    name: log4shell-jndi-pattern
+    description: "Potential Log4Shell: JNDI lookup string in log input (${jndi:ldap://...})"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A06:2025]
+    languages: [java]
+    patterns:
+      - regex: "\\$\\{jndi:"
+      - regex: "\\$\\{(?:lower|upper):j}\\$\\{(?:lower|upper):n}"

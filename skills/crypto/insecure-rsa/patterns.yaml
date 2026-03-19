@@ -1,0 +1,66 @@
+rules:
+  - id: CRYPTO-RSA-001
+    name: rsa-key-size-too-small
+    description: "RSA key generated with fewer than 2048 bits"
+    severity: high
+    confidence: high
+    cwe: [CWE-326]
+    owasp: [A02:2025]
+    languages: [python, javascript, typescript, java, go]
+    patterns:
+      - regex: "RSA\\.generate\\s*\\(\\s*(?:512|1024|768)\\s*\\)"
+      - regex: "generateKeyPair\\s*\\(['\"]rsa['\"].*modulusLength\\s*:\\s*(?:512|1024|768)"
+      - regex: "KeyPairGenerator.*RSA.*initialize\\s*\\(\\s*(?:512|768|1024)\\s*\\)"
+      - regex: "rsa\\.GenerateKey\\s*\\([^,]+,\\s*(?:512|1024|768)\\s*\\)"
+
+  - id: CRYPTO-RSA-002
+    name: rsa-pkcs1v15-padding
+    description: "RSA encryption using PKCS#1 v1.5 padding — vulnerable to Bleichenbacher attack"
+    severity: high
+    confidence: high
+    cwe: [CWE-780]
+    owasp: [A02:2025]
+    languages: [python, java, javascript, typescript, go]
+    patterns:
+      - regex: "PKCS1_v1_5\\.new\\s*\\("
+      - regex: "(?i)RSA/ECB/PKCS1Padding(?!OAEPWith)"
+      - regex: "(?i)Cipher\\.getInstance\\s*\\(['\"]RSA/ECB/PKCS1Padding['\"]\\)"
+      - regex: "rsa\\.EncryptPKCS1v15\\s*\\("
+
+  - id: CRYPTO-RSA-003
+    name: rsa-no-oaep
+    description: "RSA encryption without OAEP padding"
+    severity: high
+    confidence: medium
+    cwe: [CWE-780]
+    owasp: [A02:2025]
+    languages: [python, java, javascript, typescript, go]
+    patterns:
+      - regex: "PKCS1_v1_5\\.new\\s*\\(\\s*(?:key|rsa_key|pub_key)"
+      - regex: "(?i)RSA.*encrypt(?!.*OAEP)"
+      - regex: "(?i)Cipher\\.getInstance\\s*\\(['\"]RSA['\"]\\)"
+
+  - id: CRYPTO-RSA-004
+    name: rsa-small-exponent
+    description: "RSA using small public exponent e=3 — vulnerable to low-exponent attacks"
+    severity: high
+    confidence: high
+    cwe: [CWE-326]
+    owasp: [A02:2025]
+    languages: [python, java, javascript]
+    patterns:
+      - regex: "RSA\\.generate\\s*\\([^,]+,\\s*3\\s*\\)"
+      - regex: "public_exponent\\s*=\\s*3(?![0-9])"
+      - regex: "e\\s*=\\s*3(?![0-9]).*RSA|RSA.*e\\s*=\\s*3(?![0-9])"
+
+  - id: CRYPTO-RSA-005
+    name: rsa-direct-data-encryption
+    description: "RSA encrypting large data directly instead of using hybrid encryption"
+    severity: medium
+    confidence: low
+    cwe: [CWE-326]
+    owasp: [A02:2025]
+    languages: [python, java, javascript, typescript]
+    patterns:
+      - regex: "PKCS1_OAEP\\.new.*encrypt\\s*\\([^)]*(?:data|message|plaintext|content)\\b"
+      - regex: "cipher\\.doFinal\\s*\\([^)]*message\\.getBytes\\(\\)\\)"

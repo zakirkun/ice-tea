@@ -1,0 +1,49 @@
+rules:
+  - id: PRIV-PII-001
+    name: email-in-log
+    description: "Email address field passed directly to logger"
+    severity: high
+    confidence: medium
+    cwe: [CWE-532]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?:console\\.log|logger?\\.(?:info|debug|warn|error)).*(?:\\.email|\\[.email.\\]|email=)"
+      - regex: "logging\\.(?:info|debug).*(?:email|Email)"
+      - regex: "log\\.(?:Printf|Println).*(?:email|Email)"
+
+  - id: PRIV-PII-002
+    name: phone-in-log
+    description: "Phone number field logged"
+    severity: high
+    confidence: medium
+    cwe: [CWE-532]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*(?:phone|mobile|cellphone)"
+      - regex: "logging\\.(?:info|debug).*(?:phone|mobile)"
+
+  - id: PRIV-PII-003
+    name: full-name-in-log
+    description: "Full name or personal identifier logged"
+    severity: medium
+    confidence: low
+    cwe: [CWE-532]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*(?:fullName|full_name|firstName|lastName)"
+      - regex: "logging\\.(?:info|debug).*(?:full_name|first_name|last_name)"
+
+  - id: PRIV-PII-004
+    name: request-body-with-pii-logged
+    description: "Full request body with potential PII logged without filtering"
+    severity: high
+    confidence: medium
+    cwe: [CWE-532]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug))\\s*\\(\\s*(?:JSON\\.stringify\\s*\\()?req\\.body"
+      - regex: "logging\\.(?:info|debug)\\s*\\(.*request\\.data"

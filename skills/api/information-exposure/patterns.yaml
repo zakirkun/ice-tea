@@ -1,0 +1,30 @@
+rules:
+  - id: INFO-JS-01
+    name: js-express-err-stack
+    description: "Sending err.stack in response"
+    severity: low
+    confidence: medium
+    languages: [javascript]
+    patterns:
+      - regex: 'res\.(send|json)\([^)]*err\.stack[^)]*\)'
+      - regex: 'res\.(send|json)\([^)]*err\.message[^)]*\)'
+
+  - id: INFO-GO-01
+    name: go-http-error-print
+    description: "Writing err.Error() to HTTP response"
+    severity: low
+    confidence: medium
+    languages: [go]
+    patterns:
+      - regex: 'http\.Error\(.*,\s*err\.Error\(\).*\)'
+      - regex: 'fmt\.Fprintf\(.*,\s*.*%[sv].*,\s*err.*\)'
+
+  - id: INFO-JAVA-01
+    name: java-printstacktrace-response
+    description: "printStackTrace to HTTP response stream"
+    severity: low
+    confidence: medium
+    languages: [java]
+    patterns:
+      - regex: 'e\.printStackTrace\(response\.getWriter\(\)\)'
+

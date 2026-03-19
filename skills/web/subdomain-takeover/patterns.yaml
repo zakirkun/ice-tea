@@ -1,0 +1,36 @@
+rules:
+  - id: WEB-SUBT-001
+    name: cname-takeover-services
+    description: "DNS CNAME pointing to services known to be vulnerable to subdomain takeover"
+    severity: high
+    confidence: medium
+    cwe: [CWE-350]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "CNAME.*\\.github\\.io"
+      - regex: "CNAME.*\\.herokuapp\\.com"
+      - regex: "CNAME.*\\.s3-website.*\\.amazonaws\\.com"
+      - regex: "CNAME.*\\.azurewebsites\\.net"
+
+  - id: WEB-SUBT-002
+    name: external-domain-in-cors
+    description: "CORS allowlist includes external domain that may be takeover-vulnerable"
+    severity: medium
+    confidence: low
+    cwe: [CWE-350]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "allowedOrigins?.*\\.(?:github\\.io|herokuapp\\.com|s3-website)"
+
+  - id: WEB-SUBT-003
+    name: hardcoded-cname-endpoint
+    description: "Hardcoded reference to cloud service endpoint that may become dangling"
+    severity: low
+    confidence: low
+    cwe: [CWE-350]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, yaml, generic]
+    patterns:
+      - regex: "https?://[a-zA-Z0-9\\-]+\\.(?:github\\.io|herokuapp\\.com|netlify\\.app)['\"]"

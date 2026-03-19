@@ -1,0 +1,24 @@
+rules:
+  - id: IOS-NSUD-001
+    name: nsuserdefaults-password
+    description: "Password or credential stored in NSUserDefaults"
+    severity: critical
+    confidence: high
+    cwe: [CWE-312]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "UserDefaults\\.standard\\.set\\s*\\([^,]+,\\s*forKey:\\s*['\"](?:password|token|secret|key|credential)"
+      - regex: "\\[NSUserDefaults\\s+standardUserDefaults\\]\\s*setObject:[^;]*forKey:@\"(?:password|token|secret)"
+
+  - id: IOS-NSUD-002
+    name: nsuserdefaults-auth-token
+    description: "Authentication token stored in NSUserDefaults"
+    severity: critical
+    confidence: high
+    cwe: [CWE-312]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "UserDefaults\\.standard\\.set\\s*\\([^,]+,\\s*forKey:\\s*['\"](?:authToken|accessToken|jwtToken|bearerToken)"
+      - regex: "defaults\\.set.*authToken|defaults\\.set.*accessToken"

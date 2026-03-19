@@ -1,0 +1,47 @@
+rules:
+  - id: INJ-EMAIL-001
+    name: python-smtp-user-to-header
+    description: "Python smtplib sending email with user-controlled To/From without CRLF stripping"
+    severity: high
+    confidence: medium
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "msg\\[\\s*['\"](?:To|From|Subject|CC|BCC)['\"]\\s*\\]\\s*=.*request\\.(?:args|form|json)"
+      - regex: "sendmail\\s*\\([^)]*request\\.(?:args|form|json)"
+
+  - id: INJ-EMAIL-002
+    name: php-mail-user-headers
+    description: "PHP mail() function with user input in additional headers parameter"
+    severity: high
+    confidence: high
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "mail\\s*\\([^,]+,\\s*[^,]+,\\s*[^,]+,\\s*[^)]*\\$_(?:GET|POST|REQUEST)"
+      - regex: "mail\\s*\\([^,]+,\\s*\\$_(?:GET|POST|REQUEST)"
+
+  - id: INJ-EMAIL-003
+    name: node-nodemailer-user-headers
+    description: "Nodemailer sending with user-controlled to/from/subject without sanitization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "transporter\\.sendMail\\s*\\(\\s*\\{[^}]*(?:to|from|subject)\\s*:\\s*req\\.(?:body|query)"
+      - regex: "to\\s*:\\s*req\\.(?:body|query)\\.(?:email|to|recipient)(?![^}]*replace|[^}]*sanitize)"
+
+  - id: INJ-EMAIL-004
+    name: email-subject-crlf
+    description: "Email subject line includes user input without CRLF sanitization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-93]
+    owasp: [A03:2025]
+    languages: [python, php, javascript, java, ruby]
+    patterns:
+      - regex: "subject.*=.*(?:request|\\$_(?:GET|POST)|req\\.(?:body|query))(?![^;]*replace.*(?:\\\\r|\\\\n)|[^;]*sanitize)"

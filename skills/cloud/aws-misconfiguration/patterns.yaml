@@ -1,0 +1,88 @@
+rules:
+  - id: CLOUD-AWS-001
+    name: aws-access-key-hardcoded
+    description: "AWS Access Key ID hardcoded in source code"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A05:2025]
+    languages: [generic, javascript, typescript, python, go, java, yaml]
+    patterns:
+      - regex: "AKIA[0-9A-Z]{16}"
+      - regex: "(?i)aws_access_key_id\\s*[=:]\\s*['\"]AKIA[0-9A-Z]{16}['\"]"
+      - regex: "(?i)aws_secret_access_key\\s*[=:]\\s*['\"][a-zA-Z0-9/+]{40}['\"]"
+
+  - id: CLOUD-AWS-002
+    name: s3-public-acl
+    description: "S3 bucket or object configured with public-read or public-read-write ACL"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [python, javascript, typescript, go, yaml, generic]
+    patterns:
+      - regex: "(?i)ACL\\s*[=:]\\s*['\"](?:public-read|public-read-write|authenticated-read)['\"]"
+      - regex: "(?i)s3.*acl.*public-read"
+      - regex: "(?i)bucket.*public.*access.*true"
+
+  - id: CLOUD-AWS-003
+    name: iam-wildcard-action
+    description: "IAM policy with wildcard Action (*) granting all permissions"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "Action:\\s*['\"]?\\*['\"]?"
+      - regex: "\"Action\":\\s*\"\\*\""
+      - regex: "Action:\\s*\\[?\\s*['\"]?\\*['\"]?"
+
+  - id: CLOUD-AWS-004
+    name: iam-wildcard-resource
+    description: "IAM policy with wildcard Resource (*) applying to all resources"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "Resource:\\s*['\"]?\\*['\"]?"
+      - regex: "\"Resource\":\\s*\"\\*\""
+
+  - id: CLOUD-AWS-005
+    name: security-group-all-open
+    description: "AWS Security Group allows all ingress traffic from 0.0.0.0/0"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "cidr_ip:\\s*['\"]?0\\.0\\.0\\.0/0['\"]?"
+      - regex: "CidrIp:\\s*['\"]?0\\.0\\.0\\.0/0['\"]?"
+      - regex: "from_port:\\s*0.*to_port:\\s*65535"
+
+  - id: CLOUD-AWS-006
+    name: s3-no-encryption
+    description: "S3 bucket without server-side encryption configuration"
+    severity: high
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [yaml, python, javascript, go]
+    patterns:
+      - regex: "(?i)aws_s3_bucket(?![\\s\\S]*?server_side_encryption)"
+      - regex: "(?i)ServerSideEncryption:\\s*(?!AES256|aws:kms)"
+
+  - id: CLOUD-AWS-007
+    name: rds-publicly-accessible
+    description: "AWS RDS instance configured as publicly accessible"
+    severity: critical
+    confidence: high
+    cwe: [CWE-668]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "(?i)publicly_accessible:\\s*true"
+      - regex: "(?i)PubliclyAccessible:\\s*true"

@@ -1,0 +1,48 @@
+rules:
+  - id: CRYPTO-TIME-001
+    name: python-string-compare-token
+    description: "Python token/secret compared with == instead of hmac.compare_digest()"
+    severity: high
+    confidence: high
+    cwe: [CWE-208]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "(?:token|secret|signature|hmac|hash)\\s*==\\s*(?:provided|expected|request|user)"
+      - regex: "if\\s+(?:token|secret|signature)\\s*===?\\s*[^:]+:"
+
+  - id: CRYPTO-TIME-002
+    name: go-token-compare-no-subtle
+    description: "Go secret comparison without crypto/subtle package"
+    severity: high
+    confidence: medium
+    cwe: [CWE-208]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "(?:token|signature|secret|hmac)\\s*==\\s*(?:expected|provided|request)"
+      - regex: "string\\s*\\(\\s*\\w+\\s*\\)\\s*==\\s*string\\s*\\("
+
+  - id: CRYPTO-TIME-003
+    name: js-token-compare-no-crypto
+    description: "JavaScript token comparison using === instead of crypto.timingSafeEqual"
+    severity: high
+    confidence: high
+    cwe: [CWE-208]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:token|secret|hmac|signature)\\s*===\\s*(?:expectedToken|computedHmac|signature)"
+      - regex: "req\\.headers\\[.authorization.\\]\\s*===\\s*(?:token|apiKey|secret)"
+
+  - id: CRYPTO-TIME-004
+    name: php-token-compare-no-hash-equals
+    description: "PHP string comparison for tokens without hash_equals()"
+    severity: high
+    confidence: high
+    cwe: [CWE-208]
+    owasp: [A02:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$(?:token|secret|signature)\\s*===?\\s*\\$(?:expected|provided|computed)"
+      - regex: "strcmp\\s*\\(\\s*\\$(?:token|secret|hmac)\\s*,"

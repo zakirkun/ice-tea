@@ -1,0 +1,71 @@
+rules:
+  - id: CLOUD-IAC-001
+    name: terraform-s3-no-versioning
+    description: "Terraform S3 bucket without versioning enabled"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "resource\\s+['\"]aws_s3_bucket['\"](?![\\s\\S]*?versioning\\s*\\{[\\s\\S]*?enabled\\s*=\\s*true)"
+      - regex: "versioning\\s*\\{[^}]*enabled\\s*=\\s*false"
+
+  - id: CLOUD-IAC-002
+    name: terraform-rds-no-encryption
+    description: "Terraform RDS instance without storage encryption"
+    severity: high
+    confidence: high
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "resource\\s+['\"]aws_db_instance['\"](?![\\s\\S]*?storage_encrypted\\s*=\\s*true)"
+      - regex: "storage_encrypted\\s*=\\s*false"
+
+  - id: CLOUD-IAC-003
+    name: terraform-security-group-ssh-world
+    description: "Terraform security group allows SSH (port 22) from 0.0.0.0/0"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "from_port\\s*=\\s*22[\\s\\S]*?cidr_blocks\\s*=\\s*\\[?['\"]?0\\.0\\.0\\.0/0"
+      - regex: "cidr_blocks\\s*=\\s*\\[?['\"]?0\\.0\\.0\\.0/0['\"]?[\\s\\S]*?from_port\\s*=\\s*22"
+
+  - id: CLOUD-IAC-004
+    name: terraform-cloudtrail-disabled
+    description: "Terraform CloudTrail resource with logging disabled"
+    severity: high
+    confidence: high
+    cwe: [CWE-778]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "resource\\s+['\"]aws_cloudtrail['\"](?![\\s\\S]*?enable_logging\\s*=\\s*true)"
+      - regex: "enable_logging\\s*=\\s*false"
+
+  - id: CLOUD-IAC-005
+    name: terraform-no-mfa-delete
+    description: "Terraform S3 bucket versioning without MFA Delete protection"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-311]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "versioning\\s*\\{[^}]*mfa_delete\\s*=\\s*['\"]?(?:Disabled|false|disabled)['\"]?"
+
+  - id: CLOUD-IAC-006
+    name: terraform-ec2-imdsv1-enabled
+    description: "EC2 instance with IMDSv1 enabled (allows SSRF to metadata service)"
+    severity: high
+    confidence: high
+    cwe: [CWE-918]
+    owasp: [A05:2025]
+    languages: [generic]
+    patterns:
+      - regex: "http_tokens\\s*=\\s*['\"]optional['\"]"
+      - regex: "metadata_options\\s*\\{[^}]*http_endpoint\\s*=\\s*['\"]enabled['\"](?![^}]*http_tokens\\s*=\\s*['\"]required['\"])"

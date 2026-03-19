@@ -1,0 +1,71 @@
+rules:
+  - id: AUTH-BF-001
+    name: express-login-no-rate-limit
+    description: "Express.js login route defined without rate limiting middleware"
+    severity: high
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?i)(?:app|router)\\.post\\s*\\(\\s*['\"][^'\"]*(?:login|signin|auth|authenticate)[^'\"]*['\"](?!(?:[^)]*rateLimit|[^)]*limiter|[^)]*throttle))"
+      - regex: "(?i)router\\.post\\(['\"](?:/)?(?:login|signin)['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
+
+  - id: AUTH-BF-002
+    name: flask-login-no-rate-limit
+    description: "Flask login route without Flask-Limiter or manual rate limiting"
+    severity: high
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [python]
+    patterns:
+      - regex: "@(?:app|blueprint)\\.route\\(['\"][^'\"]*(?:login|signin|auth)[^'\"]*['\"]"
+      - regex: "def\\s+(?:login|sign_in|authenticate)\\s*\\((?!.*limiter|.*rate_limit)"
+
+  - id: AUTH-BF-003
+    name: go-login-no-rate-limit
+    description: "Go login handler without rate limiting"
+    severity: high
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [go]
+    patterns:
+      - regex: "(?i)func\\s+(?:Login|SignIn|Authenticate)Handler"
+      - regex: "(?i)http\\.HandleFunc\\(\"(?:/)?(?:login|signin|auth)\""
+
+  - id: AUTH-BF-004
+    name: no-account-lockout
+    description: "Login logic checks credentials without tracking failed attempts"
+    severity: medium
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [php, python, javascript, java, go, ruby]
+    patterns:
+      - regex: "(?i)(?:invalid|incorrect|wrong)\\s+(?:password|credentials)(?!(?:[^\\n]*\\n){0,5}[^\\n]*(?:attempts|lockout|lock|block|ban))"
+
+  - id: AUTH-BF-005
+    name: php-login-no-protection
+    description: "PHP login handler without sleep() delay or attempt tracking"
+    severity: high
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [php]
+    patterns:
+      - regex: "(?i)if\\s*\\(\\s*\\$(?:password|pass)\\s*===?\\s*\\$(?:stored|db|user|row)"
+      - regex: "(?i)password_verify\\s*\\([^)]+\\)(?![^}]{0,200}sleep|[^}]{0,200}attempts)"
+
+  - id: AUTH-BF-006
+    name: java-login-no-lockout
+    description: "Java Spring Security or Servlet login without lockout configuration"
+    severity: high
+    confidence: low
+    cwe: [CWE-307]
+    owasp: [A07:2025]
+    languages: [java]
+    patterns:
+      - regex: "(?i)@PostMapping\\(['\"](?:/)?(?:login|signin|auth)['\"]\\)"
+      - regex: "(?i)authenticate\\s*\\([^)]+\\)(?![^;]{0,300}lockout|[^;]{0,300}maxAttempts)"

@@ -41,7 +41,7 @@ skills:
   trust_external: false
 
 llm:
-  enabled: true
+  enabled: false
   provider: "openai" # openai, anthropic, ollama
   model: "gpt-4o"
   api_key_env: "OPENAI_KEY"

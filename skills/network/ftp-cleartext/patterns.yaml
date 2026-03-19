@@ -1,0 +1,50 @@
+rules:
+  - id: NET-FTP-001
+    name: python-ftplib-plaintext
+    description: "Python ftplib FTP connection without TLS"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "from\\s+ftplib\\s+import\\s+FTP(?!_TLS)"
+      - regex: "ftplib\\.FTP\\s*\\((?!.*TLS|.*tls)"
+      - regex: "FTP\\s*\\(\\s*['\"][^'\"]+['\"]\\s*\\)(?![^;]*TLS|[^;]*tls)"
+
+  - id: NET-FTP-002
+    name: java-ftp-no-tls
+    description: "Java FTP client without TLS/SSL"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "import\\s+org\\.apache\\.commons\\.net\\.ftp\\.FTPClient"
+      - regex: "new\\s+FTPClient\\s*\\(\\s*\\)(?![^;]*FTPSClient)"
+
+  - id: NET-FTP-003
+    name: ftp-url-in-code
+    description: "FTP URL hardcoded in source — cleartext protocol"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "['\"]ftp://[^'\"]+['\"]"
+      - regex: "FTP_URL\\s*=\\s*['\"]ftp://[^'\"]+['\"]"
+
+  - id: NET-FTP-004
+    name: node-ftp-package
+    description: "Node.js ftp package usage — plaintext FTP"
+    severity: high
+    confidence: medium
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "require\\s*\\(['\"]ftp['\"]\\)"
+      - regex: "from\\s+['\"]ftp['\"]"
+      - regex: "new\\s+Ftp\\s*\\(\\s*\\)(?![^;]*SFTP|[^;]*sftp)"

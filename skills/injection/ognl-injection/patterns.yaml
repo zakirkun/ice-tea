@@ -1,0 +1,37 @@
+rules:
+  - id: INJ-OGNL-001
+    name: struts-ognl-evaluate
+    description: "Apache Struts OGNL evaluation with user parameter"
+    severity: critical
+    confidence: high
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "Ognl\\.getValue\\s*\\([^,]*getParameter"
+      - regex: "OgnlUtil.*findValue.*request\\.getParameter"
+      - regex: "import\\s+ognl\\.Ognl"
+
+  - id: INJ-OGNL-002
+    name: struts-outdated-import
+    description: "Apache Struts framework import — check for vulnerable version"
+    severity: high
+    confidence: medium
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "import\\s+org\\.apache\\.struts2?"
+      - regex: "struts-core.*[12]\\.[0-3]\\."
+
+  - id: INJ-OGNL-003
+    name: ognl-expression-pattern
+    description: "OGNL expression pattern in HTTP parameter value"
+    severity: critical
+    confidence: high
+    cwe: [CWE-917]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "%\\{.*Runtime.*exec"
+      - regex "#\\{.*T\\(java\\.lang\\.Runtime\\)"

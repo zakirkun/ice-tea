@@ -1,0 +1,87 @@
+rules:
+  - id: INFRA-DBG-001
+    name: flask-debug-true
+    description: "Flask app.run() with debug=True — exposes interactive debugger"
+    severity: critical
+    confidence: high
+    cwe: [CWE-215]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "app\\.run\\s*\\([^)]*debug\\s*=\\s*True"
+      - regex: "app\\.run\\s*\\(\\s*debug\\s*=\\s*True"
+
+  - id: INFRA-DBG-002
+    name: django-debug-true
+    description: "Django DEBUG = True in settings file"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [python]
+    patterns:
+      - regex: "DEBUG\\s*=\\s*True"
+      - regex: "DJANGO_DEBUG\\s*=\\s*True|DEBUG\\s*=\\s*1"
+
+  - id: INFRA-DBG-003
+    name: node-debug-mode
+    description: "Node.js application with debug-enabling environment variable"
+    severity: medium
+    confidence: high
+    cwe: [CWE-215]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "process\\.env\\.NODE_ENV\\s*===?\\s*['\"]development['\"]"
+      - regex: "DEBUG\\s*=\\s*['\"]\\*['\"]"
+      - regex: "app\\.set\\s*\\(\\s*['\"]env['\"]\\s*,\\s*['\"]development['\"]"
+
+  - id: INFRA-DBG-004
+    name: spring-actuator-all-exposed
+    description: "Spring Boot actuator exposes all endpoints including sensitive ones"
+    severity: high
+    confidence: high
+    cwe: [CWE-215]
+    owasp: [A05:2025]
+    languages: [java]
+    patterns:
+      - regex: "management\\.endpoints\\.web\\.exposure\\.include\\s*=\\s*\\*"
+      - regex: "management\\.endpoint\\.env\\.enabled\\s*=\\s*true"
+      - regex: "management\\.endpoint\\.heapdump\\.enabled\\s*=\\s*true"
+
+  - id: INFRA-DBG-005
+    name: php-display-errors-on
+    description: "PHP display_errors enabled — stack traces visible to users"
+    severity: high
+    confidence: high
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [php]
+    patterns:
+      - regex: "ini_set\\s*\\(\\s*['\"]display_errors['\"]\\s*,\\s*['\"]?1['\"]?\\s*\\)"
+      - regex: "ini_set\\s*\\(\\s*['\"]display_errors['\"]\\s*,\\s*['\"]On['\"]\\s*\\)"
+      - regex: "display_errors\\s*=\\s*(?:On|1|true)"
+
+  - id: INFRA-DBG-006
+    name: go-panic-expose
+    description: "Go HTTP handler recovers from panic and exposes stack trace to client"
+    severity: high
+    confidence: medium
+    cwe: [CWE-209]
+    owasp: [A05:2025]
+    languages: [go]
+    patterns:
+      - regex: "recover\\s*\\(\\s*\\)(?:[^}]*fmt\\.Fprintf\\s*\\(\\s*w|[^}]*http\\.Error.*err)"
+      - regex: "debug\\.Stack\\s*\\(\\s*\\)(?![^}]*log\\.|[^}]*zap\\.)"
+
+  - id: INFRA-DBG-007
+    name: rails-config-debug
+    description: "Rails config.log_level set to :debug with verbose output in production"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-215]
+    owasp: [A05:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "config\\.log_level\\s*=\\s*:debug"
+      - regex: "config\\.consider_all_requests_local\\s*=\\s*true"

@@ -1,0 +1,78 @@
+rules:
+  - id: CRYPTO-IV-001
+    name: python-zero-iv
+    description: "Python AES using zero-filled IV bytes(16) or b'\\x00'*16"
+    severity: high
+    confidence: high
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "iv\\s*=\\s*b['\"]\\\\x00[^'\"]*['\"]"
+      - regex: "iv\\s*=\\s*bytes\\s*\\(\\s*16\\s*\\)"
+      - regex: "nonce\\s*=\\s*b['\"]\\\\x00[^'\"]*['\"]"
+      - regex: "AES\\.new\\s*\\([^)]*b['\"][^'\"]{0,32}['\"]\\s*\\)"
+
+  - id: CRYPTO-IV-002
+    name: java-static-iv
+    description: "Java AES cipher initialized with static IV byte array"
+    severity: high
+    confidence: high
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "IvParameterSpec\\s*\\(\\s*new\\s+byte\\s*\\["
+      - regex: "IvParameterSpec\\s*\\(\\s*['\"]\\w+['\"]\\s*\\.getBytes\\(\\)"
+      - regex: "new\\s+byte\\[16\\](?![^;]*SecureRandom)"
+
+  - id: CRYPTO-IV-003
+    name: go-static-iv
+    description: "Go AES IV set from hardcoded byte slice instead of random source"
+    severity: high
+    confidence: high
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "iv\\s*:?=\\s*\\[\\]byte\\s*\\{[^}]*\\}"
+      - regex: "iv\\s*:?=\\s*make\\(\\[\\]byte,\\s*(?:aes\\.BlockSize|16)\\)(?![^;\\n]*rand\\.Read)"
+      - regex: "nonce\\s*:?=\\s*make\\(\\[\\]byte,\\s*12\\)(?![^;\\n]*rand\\.Read)"
+
+  - id: CRYPTO-IV-004
+    name: node-static-iv
+    description: "Node.js crypto createCipheriv with hardcoded IV string"
+    severity: high
+    confidence: high
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "createCipheriv\\s*\\([^,]+,\\s*[^,]+,\\s*['\"][^'\"]{16}['\"]\\)"
+      - regex: "createCipheriv\\s*\\([^,]+,\\s*[^,]+,\\s*Buffer\\.from\\(['\"][^'\"]+['\"]\\)\\)"
+      - regex: "iv\\s*=\\s*['\"][0-9a-fA-F]{32}['\"]"
+
+  - id: CRYPTO-IV-005
+    name: php-static-iv
+    description: "PHP openssl_encrypt with hardcoded IV string"
+    severity: high
+    confidence: high
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [php]
+    patterns:
+      - regex: "openssl_encrypt\\s*\\([^)]*,\\s*['\"][^'\"]+['\"]\\s*\\)"
+      - regex: "\\$iv\\s*=\\s*['\"][0-9a-zA-Z]{16}['\"]"
+      - regex: "\\$iv\\s*=\\s*str_repeat\\s*\\("
+
+  - id: CRYPTO-IV-006
+    name: cbc-mode-static-iv-pattern
+    description: "CBC mode encryption with non-random IV literal"
+    severity: high
+    confidence: medium
+    cwe: [CWE-329]
+    owasp: [A02:2025]
+    languages: [python, java, javascript, go, php]
+    patterns:
+      - regex: "MODE_CBC.*iv\\s*=\\s*b?['\"][^'\"]*['\"]"
+      - regex: "AES/CBC/.*IvParameterSpec.*['\"][^'\"]{16,}['\"]"

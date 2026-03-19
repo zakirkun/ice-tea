@@ -1,0 +1,61 @@
+rules:
+  - id: WEB-CRFL-001
+    name: java-crlf-location-header
+    description: "Java response.sendRedirect() with user parameter (CRLF injection in Location)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "response\\.sendRedirect\\s*\\([^)]*request\\.getParameter"
+      - regex: "response\\.setHeader\\s*\\(\\s*['\"]Location['\"]\\s*,\\s*[^)]*request\\.getParameter"
+      - regex: "response\\.addHeader\\s*\\(\\s*['\"](?:Location|Set-Cookie)['\"].*request\\.getParameter"
+
+  - id: WEB-CRFL-002
+    name: python-crlf-header
+    description: "Python Flask/Django response header from unvalidated user input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "make_response.*headers\\[.+\\]\\s*=.*request\\.(?:args|form|values|json)"
+      - regex: "HttpResponse\\(\\)\\[.+\\]\\s*=.*request\\.(?:GET|POST)"
+
+  - id: WEB-CRFL-003
+    name: php-header-crlf
+    description: "PHP header() call with user input containing potential CRLF"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "header\\s*\\(\\s*['\"]Location:\\s*[^'\"]*['\"]\\s*\\.\\s*\\$_(?:GET|POST|REQUEST)"
+      - regex: "header\\s*\\(\\s*\"Location:\\s*\"\\s*\\.\\s*\\$"
+
+  - id: WEB-CRFL-004
+    name: node-header-crlf
+    description: "Node.js response header set from user input without CRLF sanitization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "res\\.(?:redirect|location)\\s*\\(\\s*req\\.(?:query|body|params)"
+      - regex: "res\\.setHeader\\s*\\(['\"]Location['\"]\\s*,\\s*req\\.(?:query|body|params)"
+
+  - id: WEB-CRFL-005
+    name: go-crlf-redirect
+    description: "Go HTTP redirect with user-controlled URL (CRLF in Location header)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-113]
+    owasp: [A03:2025]
+    languages: [go]
+    patterns:
+      - regex: "http\\.Redirect\\s*\\(\\s*w\\s*,\\s*r\\s*,\\s*[^,]*r\\.(?:URL\\.Query|FormValue)"
+      - regex: "http\\.Redirect\\s*\\(w,\\s*r,\\s*(?:url|redirect|location),"

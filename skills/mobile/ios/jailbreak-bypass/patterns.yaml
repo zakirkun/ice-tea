@@ -1,0 +1,36 @@
+rules:
+  - id: IOS-JB-001
+    name: single-cydia-file-check
+    description: "Jailbreak detection relying only on Cydia app file check"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-656]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "FileManager\\.default\\.fileExists.*Cydia"
+      - regex: "fileExistsAtPath.*\\.app/Cydia"
+
+  - id: IOS-JB-002
+    name: jailbreak-file-check-only
+    description: "Jailbreak detection using only filesystem path check (easily bypassed)"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-656]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?:/Applications/Cydia\\.app|/usr/sbin/sshd|/etc/apt)"
+      - regex: "jailbreak.*fileExists|fileExists.*jailbreak"
+
+  - id: IOS-JB-003
+    name: canOpenURL-cydia-check
+    description: "canOpenURL used for jailbreak detection — bypassable"
+    severity: medium
+    confidence: high
+    cwe: [CWE-656]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "canOpenURL.*cydia://"
+      - regex: "UIApplication.*openURL.*cydia://"

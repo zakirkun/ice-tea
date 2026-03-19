@@ -1,0 +1,61 @@
+rules:
+  - id: DESER-JAVA-001
+    name: java-objectinputstream-readobject
+    description: "Java ObjectInputStream.readObject() — insecure deserialization"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+ObjectInputStream\\s*\\("
+      - regex: "\\.readObject\\s*\\(\\s*\\)(?![^;]*filter|[^;]*Filter)"
+      - ast_node_type: "call_expression"
+        function: "readObject"
+
+  - id: DESER-JAVA-002
+    name: java-xmldecoder-unsafe
+    description: "Java XMLDecoder deserializes XML to objects — RCE risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+XMLDecoder\\s*\\("
+      - regex: "XMLDecoder.*readObject"
+
+  - id: DESER-JAVA-003
+    name: java-kryo-unsafe
+    description: "Kryo deserialization of untrusted data without class registration"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "kryo\\.readObject\\s*\\("
+      - regex: "Kryo\\s+kryo\\s*=\\s*new\\s+Kryo\\s*\\(\\s*\\)(?![^;]*register)"
+
+  - id: DESER-JAVA-004
+    name: java-native-deserialization-endpoint
+    description: "Servlet reading raw InputStream for deserialization"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "request\\.getInputStream\\s*\\(\\s*\\).*ObjectInputStream"
+      - regex: "new\\s+ObjectInputStream\\s*\\(\\s*request\\.getInputStream"
+
+  - id: DESER-JAVA-005
+    name: java-no-deserialization-filter
+    description: "ObjectInputStream without setObjectInputFilter — all classes allowed"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [java]
+    patterns:
+      - regex: "ObjectInputStream\\s+\\w+\\s*=\\s*new\\s+ObjectInputStream(?![^;]*setObjectInputFilter)"

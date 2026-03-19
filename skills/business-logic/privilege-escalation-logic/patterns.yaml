@@ -1,0 +1,36 @@
+rules:
+  - id: BL-PRIV-001
+    name: role-from-client-registration
+    description: "User role set from client-submitted value during registration"
+    severity: critical
+    confidence: high
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "role\\s*=\\s*(?:req\\.body\\.role|request\\.form\\.get\\(['\"]role['\"]\\)|\\$_POST\\[\\s*['\"]role['\"]\\])"
+      - regex: "new\\s+User\\s*\\(\\s*\\{[^}]*role\\s*:\\s*req\\.body\\.role"
+
+  - id: BL-PRIV-002
+    name: role-update-no-permission-check
+    description: "Role update endpoint without verifying caller has permission to grant that role"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "user\\.role\\s*=\\s*(?:req\\.body\\.role|body\\[.role.\\]|request\\.json\\.get\\(['\"]role['\"]\\))"
+      - regex: "UPDATE\\s+users\\s+SET\\s+role\\s*=\\s*\\?.*WHERE.*id\\s*=(?![^;]*admin|[^;]*superuser)"
+
+  - id: BL-PRIV-003
+    name: group-invite-no-role-check
+    description: "Group/organization invite without checking inviter's permission level"
+    severity: high
+    confidence: low
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "invite.*role\\s*:\\s*(?:req\\.body|request\\.json)(?![^;]*admin|[^;]*owner)"
+      - regex: "Invitation\\.create\\s*\\(\\s*\\{[^}]*role\\s*:\\s*req\\.body"

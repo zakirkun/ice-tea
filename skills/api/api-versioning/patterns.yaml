@@ -1,0 +1,63 @@
+rules:
+  - id: API-VER-001
+    name: multiple-api-versions-active
+    description: "Multiple API version prefixes registered (v1, v2) — old version may lack security controls"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-1059]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "['\"](?:/api/v[0-9]+|/v[0-9]+/)['\"]"
+      - regex: "(?:app|router)\\.use\\s*\\(['\"][/]?v[0-9]+['\"]"
+      - regex: "prefix\\s*=\\s*['\"](?:/api)?/v[01]['\"]"
+
+  - id: API-VER-002
+    name: deprecated-endpoint-comment
+    description: "Code comment indicates deprecated endpoint still active"
+    severity: medium
+    confidence: high
+    cwe: [CWE-1059]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?i)//\\s*(?:deprecated|legacy|old|v1|TODO.*remove)"
+      - regex: "(?i)#\\s*(?:deprecated|legacy|old|TODO.*remove)"
+      - regex: "(?i)@deprecated"
+
+  - id: API-VER-003
+    name: v1-route-without-auth-v2-has-auth
+    description: "API v1 route may lack authentication middleware present in v2"
+    severity: high
+    confidence: low
+    cwe: [CWE-1059]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:app|router)\\.(?:get|post|put|delete)\\s*\\(['\"][^'\"]*v1[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
+      - regex: "route\\(['\"][^'\"]*(?:/v1/|v1/)[^'\"]*['\"]\\)"
+
+  - id: API-VER-004
+    name: swagger-exposes-all-versions
+    description: "Swagger/OpenAPI definition exposes all API versions including deprecated ones"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-200]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, java]
+    patterns:
+      - regex: "swaggerUi\\.setup\\s*\\((?![^)]*filter)"
+      - regex: "swagger-ui-express.*(?:apis|definition).*v[0-9]"
+
+  - id: API-VER-005
+    name: beta-debug-endpoint-active
+    description: "Beta, test, or debug API endpoint registered in production code"
+    severity: high
+    confidence: medium
+    cwe: [CWE-1188]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "['\"][/](?:debug|test|beta|internal|dev|sandbox)[/'\"]"
+      - regex: "(?:app|router)\\.(?:get|post|use)\\s*\\(['\"][^'\"]*(?:debug|test|beta)[^'\"]*['\"]"
+      - regex "@(?:app|bp)\\.route\\(['\"][^'\"]*(?:debug|test|beta|internal)[^'\"]*['\"]"

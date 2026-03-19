@@ -1,0 +1,46 @@
+rules:
+  - id: RC-TOCTOU-001
+    name: c-access-then-open
+    description: "access() check followed by open() — TOCTOU race window"
+    severity: high
+    confidence: medium
+    cwe: [CWE-367]
+    owasp: [A01:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "access\\s*\\([^,]+,\\s*(?:R_OK|W_OK|X_OK)\\s*\\)\\s*(?:==\\s*0|!=\\s*-1)"
+      - regex: "if\\s*\\(\\s*access\\s*\\([^)]+\\)\\s*==\\s*0\\s*\\)[^{]*\\{[^}]*open\\s*\\("
+
+  - id: RC-TOCTOU-002
+    name: python-os-access-then-open
+    description: "Python os.access() check before open() — TOCTOU race"
+    severity: high
+    confidence: medium
+    cwe: [CWE-367]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "os\\.access\\s*\\([^,]+,\\s*os\\.(?:R_OK|W_OK|X_OK)\\s*\\)"
+      - regex: "if\\s+os\\.access\\s*\\([^)]+\\)(?:[^\\n]*\\n){0,3}[^\\n]*open\\s*\\("
+
+  - id: RC-TOCTOU-003
+    name: python-exists-then-open
+    description: "Python os.path.exists() check before open() — TOCTOU race"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-367]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "if\\s+os\\.path\\.exists\\s*\\([^)]+\\)\\s*:(?:[^\\n]*\\n){0,3}[^\\n]*open\\s*\\("
+
+  - id: RC-TOCTOU-004
+    name: go-stat-then-open
+    description: "Go os.Stat() followed by os.Open() — TOCTOU race"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-367]
+    owasp: [A01:2025]
+    languages: [go]
+    patterns:
+      - regex: "os\\.Stat\\s*\\([^)]+\\)(?:[^\\n]*\\n){0,5}[^\\n]*os\\.Open\\s*\\("

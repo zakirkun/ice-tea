@@ -1,0 +1,89 @@
+rules:
+  - id: CRYPTO-TLS-001
+    name: go-insecure-skip-verify
+    description: "Go TLS InsecureSkipVerify set to true — certificate verification disabled"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [go]
+    patterns:
+      - regex: "InsecureSkipVerify\\s*:\\s*true"
+      - ast_node_type: "composite_literal"
+        function: "tls.Config"
+
+  - id: CRYPTO-TLS-002
+    name: python-requests-verify-false
+    description: "Python requests library called with verify=False — SSL cert validation disabled"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "requests\\.(?:get|post|put|patch|delete|head|request)\\s*\\([^)]*verify\\s*=\\s*False"
+      - regex: "session\\.(?:get|post|put|patch|delete)\\s*\\([^)]*verify\\s*=\\s*False"
+
+  - id: CRYPTO-TLS-003
+    name: python-ssl-no-verify
+    description: "Python ssl context created without certificate verification"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "ssl\\.create_default_context\\s*\\(\\s*\\)(?:[^)]*check_hostname\\s*=\\s*False|[^)]*verify_mode\\s*=\\s*ssl\\.CERT_NONE)"
+      - regex: "context\\.check_hostname\\s*=\\s*False"
+      - regex: "context\\.verify_mode\\s*=\\s*ssl\\.CERT_NONE"
+
+  - id: CRYPTO-TLS-004
+    name: node-reject-unauthorized-false
+    description: "Node.js HTTPS request with rejectUnauthorized: false"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "rejectUnauthorized\\s*:\\s*false"
+      - regex: "process\\.env\\.NODE_TLS_REJECT_UNAUTHORIZED\\s*=\\s*['\"]0['\"]"
+
+  - id: CRYPTO-TLS-005
+    name: tls-version-1-0-or-1-1
+    description: "TLS 1.0 or 1.1 explicitly allowed (deprecated, vulnerable protocols)"
+    severity: high
+    confidence: high
+    cwe: [CWE-326]
+    owasp: [A02:2025]
+    languages: [go, java, python, javascript, typescript, php]
+    patterns:
+      - regex: "(?i)(?:MinVersion|min_version|TLS_VERSION)\\s*[=:]\\s*(?:tls\\.VersionTLS10|tls\\.VersionTLS11|SSL3|TLSv1[^._]|TLSv1\\.1)"
+      - regex: "(?i)SSLv3|TLSv1(?:\\.0)?(?![._])"
+      - regex: "(?i)ssl\\.PROTOCOL_TLSv1(?:[^_]|$)"
+
+  - id: CRYPTO-TLS-006
+    name: weak-cipher-suite
+    description: "Weak cipher suites enabled: RC4, DES, 3DES, EXPORT, NULL"
+    severity: high
+    confidence: high
+    cwe: [CWE-327]
+    owasp: [A02:2025]
+    languages: [go, java, python, javascript, typescript]
+    patterns:
+      - regex: "(?i)(?:RC4|DES|3DES|EXPORT|NULL|ANON).*cipher"
+      - regex: "(?i)cipher.*(?:RC4|DES|3DES|_EXPORT_|_NULL_|_anon_)"
+      - regex: "tls\\.(?:TLS_RSA_WITH_RC4|TLS_ECDHE_RSA_WITH_RC4)"
+
+  - id: CRYPTO-TLS-007
+    name: java-ssl-trust-all-certs
+    description: "Java TrustManager implementation that accepts all certificates"
+    severity: critical
+    confidence: high
+    cwe: [CWE-295]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "X509TrustManager.*checkServerTrusted.*\\{\\s*\\}"
+      - regex: "getAcceptedIssuers\\(\\)\\s*\\{\\s*return\\s*null"
+      - regex: "TrustManager\\[\\].*\\{\\s*new\\s+X509TrustManager"

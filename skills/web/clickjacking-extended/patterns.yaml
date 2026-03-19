@@ -1,0 +1,37 @@
+rules:
+  - id: WEB-CJX-001
+    name: javascript-framebusting-only
+    description: "JavaScript-only framebusting — bypassable via sandbox attribute"
+    severity: high
+    confidence: high
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "if\\s*\\(\\s*(?:window\\.top|top)\\s*!==?\\s*(?:window\\.self|self|window)\\s*\\)"
+      - regex: "if\\s*\\(\\s*(?:self|window)\\s*!==?\\s*top\\s*\\)"
+      - regex: "top\\.location\\s*=\\s*(?:self|window)\\.location"
+
+  - id: WEB-CJX-002
+    name: csp-frame-ancestors-wildcard
+    description: "CSP frame-ancestors allows all origins — no clickjacking protection"
+    severity: high
+    confidence: high
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "frame-ancestors\\s+'?\\*'?"
+      - regex: "frame-ancestors\\s+\\*"
+
+  - id: WEB-CJX-003
+    name: xframe-options-allowall
+    description: "X-Frame-Options set to ALLOWALL — permits framing from all origins"
+    severity: high
+    confidence: high
+    cwe: [CWE-1021]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?i)X-Frame-Options.*ALLOWALL"
+      - regex: "(?i)x-frame-options.*allow-from \\*"

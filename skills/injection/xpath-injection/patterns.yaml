@@ -1,0 +1,63 @@
+rules:
+  - id: INJ-XPATH-001
+    name: java-xpath-string-concat
+    description: "Java XPath expression built via string concatenation with user input"
+    severity: high
+    confidence: medium
+    cwe: [CWE-643]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "xpath\\.evaluate\\s*\\(['\"].*\\+\\s*(?:request\\.getParameter|username|password)"
+      - regex: "XPath.*compile\\s*\\(['\"].*\\+\\s*\\w+"
+      - regex: "compile\\s*\\(\\s*['\"]//.*\\+\\s*(?:username|user|input)"
+
+  - id: INJ-XPATH-002
+    name: python-xpath-injection
+    description: "Python lxml/ElementTree XPath with user input via format string"
+    severity: high
+    confidence: medium
+    cwe: [CWE-643]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "\\.xpath\\s*\\(\\s*f['\"].*\\{.*(?:username|user|input|request)"
+      - regex: "\\.xpath\\s*\\(\\s*['\"].*%s.*%\\s*(?:username|user|input)"
+      - regex: "\\.xpath\\s*\\(\\s*['\"].*'\\s*\\+\\s*(?:username|user|request)"
+
+  - id: INJ-XPATH-003
+    name: php-xpath-injection
+    description: "PHP DOMXPath::query() with user-controlled expression"
+    severity: high
+    confidence: medium
+    cwe: [CWE-643]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "->query\\s*\\([^)]*\\$_(?:GET|POST|REQUEST)"
+      - regex: "->evaluate\\s*\\([^)]*\\$_(?:GET|POST|REQUEST)"
+      - regex: "DOMXPath.*query.*\\."
+
+  - id: INJ-XPATH-004
+    name: javascript-xpath-injection
+    description: "JavaScript document.evaluate() with user-controlled XPath"
+    severity: high
+    confidence: medium
+    cwe: [CWE-643]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "document\\.evaluate\\s*\\([^)]*(?:req\\.body|req\\.query|userInput|\\+)"
+      - regex: "xpath\\.select\\s*\\([^)]*(?:\\+|req\\.)"
+
+  - id: INJ-XPATH-005
+    name: xpath-auth-bypass-pattern
+    description: "XPath authentication query with string concatenation (bypass risk)"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-643]
+    owasp: [A03:2025]
+    languages: [java, python, php, javascript]
+    patterns:
+      - regex: "//(?:user|account|login|member)\\[.*\\+.*(?:username|password|user|pass)"
+      - regex: "\\[name\\s*=\\s*['\"]\\s*\\+\\s*(?:username|user)"

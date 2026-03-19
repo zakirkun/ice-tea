@@ -1,0 +1,36 @@
+rules:
+  - id: SC-INTEG-001
+    name: curl-pipe-shell-no-verify
+    description: "curl | sh pattern — downloads and executes without integrity check"
+    severity: critical
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [generic, yaml]
+    patterns:
+      - regex: "curl\\s+[^|]+\\|\\s*(?:sh|bash|python|node)"
+      - regex: "wget\\s+-O-?\\s+[^|]+\\|\\s*(?:sh|bash)"
+      - regex: "curl.*-sSL.*\\|.*sh"
+
+  - id: SC-INTEG-002
+    name: script-tag-no-sri
+    description: "HTML script tag loading from CDN without Subresource Integrity (SRI) hash"
+    severity: medium
+    confidence: high
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [javascript, typescript, generic]
+    patterns:
+      - regex: "<script\\s+src\\s*=\\s*['\"]https://(?:cdn|unpkg|jsdelivr|cdnjs)[^'\"]+['\"](?![^>]*integrity)"
+      - regex: "<link\\s+href\\s*=\\s*['\"]https://cdn[^'\"]+['\"](?![^>]*integrity)"
+
+  - id: SC-INTEG-003
+    name: download-without-checksum
+    description: "File downloaded from URL without hash verification in script"
+    severity: high
+    confidence: medium
+    cwe: [CWE-494]
+    owasp: [A06:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "(?:curl|wget)\\s+[^\\n]*https?://[^\\n]+\\.(?:tar\\.gz|zip|deb|rpm|exe)(?![\\s\\S]{0,200}sha256|[\\s\\S]{0,200}checksum|[\\s\\S]{0,200}md5)"

@@ -1,0 +1,60 @@
+rules:
+  - id: LOG-INSUF-001
+    name: login-failure-not-logged
+    description: "Login failure handler does not log the failed attempt"
+    severity: medium
+    confidence: low
+    cwe: [CWE-778]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?i)(?:invalid|wrong|incorrect|failed)\\s+(?:password|credentials|login)(?![^;\\n]{0,200}(?:log|audit|warn|error))"
+      - regex: "(?i)return\\s+res\\.(?:status\\(401\\)|json\\(\\{[^}]*error)\\)(?![^;]*log)"
+
+  - id: LOG-INSUF-002
+    name: admin-action-not-logged
+    description: "Administrative action (delete, ban, promote) without audit logging"
+    severity: medium
+    confidence: low
+    cwe: [CWE-778]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?:User|Account)\\.(?:delete|destroy|remove)\\s*\\([^)]+\\)(?![^;\\n]*(?:log|audit))"
+      - regex: "(?i)(?:ban|suspend|deactivate)(?:User|Account)(?![^;\\n]*(?:log|audit))"
+
+  - id: LOG-INSUF-003
+    name: password-change-not-logged
+    description: "Password change operation without security event log entry"
+    severity: medium
+    confidence: low
+    cwe: [CWE-778]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?:user|account)\\.(?:password|pass)\\s*=\\s*(?:newPassword|hashedPassword)(?![^;\\n]*(?:log|audit))"
+      - regex: "(?i)changePassword|resetPassword(?![^;\\n]*(?:log|audit|logger))"
+
+  - id: LOG-INSUF-004
+    name: access-denied-not-logged
+    description: "403 Forbidden response returned without logging the access denial"
+    severity: low
+    confidence: low
+    cwe: [CWE-778]
+    owasp: [A09:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "res\\.(?:status\\s*\\(\\s*403\\s*\\)|sendStatus\\s*\\(\\s*403\\s*\\))(?![^;\\n]*log)"
+      - regex: "http\\.Error\\s*\\(w,\\s*[^,]+,\\s*http\\.StatusForbidden\\)(?![^;\\n]*log)"
+
+  - id: LOG-INSUF-005
+    name: auth-token-validation-not-logged
+    description: "JWT/token validation failure without security log entry"
+    severity: medium
+    confidence: low
+    cwe: [CWE-778]
+    owasp: [A09:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "jwt\\.verify\\s*\\([^)]*,\\s*\\([^)]*err[^)]*\\)\\s*=>\\s*\\{[^}]*next\\s*\\(err\\)(?![^}]*log)"
+      - regex: "JsonWebTokenError.*next\\(err\\)(?![^}]*log)"

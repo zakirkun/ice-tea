@@ -1,0 +1,64 @@
+rules:
+  - id: AND-STOR-001
+    name: android-sharedprefs-sensitive
+    description: "Sensitive data stored in SharedPreferences in plaintext"
+    severity: high
+    confidence: high
+    cwe: [CWE-312]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "putString\\s*\\(\\s*['\"](?:password|token|secret|key|pin|credit_card|ssn)['\"]"
+      - regex: "SharedPreferences.*edit\\(\\).*putString.*(?:password|token|secret)"
+      - regex: "preferences\\.edit\\(\\)\\.putString\\(\\s*['\"](?:password|token|auth)"
+
+  - id: AND-STOR-002
+    name: android-external-storage-sensitive
+    description: "Sensitive data written to external/SD card storage"
+    severity: high
+    confidence: high
+    cwe: [CWE-922]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "Environment\\.getExternalStorageDirectory\\s*\\(\\s*\\)"
+      - regex: "getExternalFilesDir\\s*\\(\\s*\\)"
+      - regex: "new\\s+File\\s*\\(\\s*Environment\\.getExternalStorageDirectory"
+
+  - id: AND-STOR-003
+    name: android-log-sensitive
+    description: "Android Log.d/i/v writing sensitive data to logcat"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-532]
+    owasp: [A09:2025]
+    languages: [java]
+    patterns:
+      - regex: "Log\\.[diwe]\\s*\\([^)]*(?:password|token|secret|key|pin)"
+      - regex: "Log\\.v\\s*\\(\\s*TAG\\s*,\\s*[^)]*password"
+      - regex: "Log\\.d\\s*\\([^,]+,\\s*['\"](?:Token|Password|Secret):"
+
+  - id: AND-STOR-004
+    name: android-world-readable-file
+    description: "File created with MODE_WORLD_READABLE — accessible by all apps"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "MODE_WORLD_READABLE"
+      - regex: "openFileOutput\\s*\\([^,]+,\\s*Context\\.MODE_WORLD_READABLE"
+
+  - id: AND-STOR-005
+    name: android-sqlite-no-encryption
+    description: "SQLite database storing sensitive data without SQLCipher encryption"
+    severity: high
+    confidence: medium
+    cwe: [CWE-312]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "SQLiteOpenHelper.*onCreate.*(?:password|token|credit_card|ssn)"
+      - regex: "SQLiteDatabase\\.openOrCreateDatabase\\s*\\("
+      - regex: "db\\.execSQL\\s*\\(\\s*['\"]CREATE TABLE.*(?:password|token|secret)"

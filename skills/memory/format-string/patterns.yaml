@@ -1,0 +1,73 @@
+rules:
+  - id: MEM-FMT-001
+    name: c-printf-user-format
+    description: "printf() called with user-controlled variable as format string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bprintf\\s*\\(\\s*(?![\"\\'L])\\w+"
+      - regex: "\\bprintf\\s*\\(\\s*(?:buf|input|str|msg|data|argv|line)\\s*[,)]"
+      - ast_node_type: "call_expression"
+        function: "printf"
+
+  - id: MEM-FMT-002
+    name: c-fprintf-user-format
+    description: "fprintf() with user-controlled format string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bfprintf\\s*\\(\\s*(?:stderr|stdout|fp|file)\\s*,\\s*(?![\"\\'L])\\w+"
+      - regex: "\\bfprintf\\s*\\([^,]+,\\s*(?:buf|input|str|msg)\\s*[,)]"
+
+  - id: MEM-FMT-003
+    name: c-sprintf-user-format
+    description: "sprintf() with user-controlled format string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bsprintf\\s*\\([^,]+,\\s*(?![\"\\'L])\\w+[^,)]*[,)]"
+      - regex: "\\bsprintf\\s*\\([^,]+,\\s*(?:buf|input|str|msg|format)\\s*[,)]"
+
+  - id: MEM-FMT-004
+    name: c-syslog-user-format
+    description: "syslog() with user-controlled format string"
+    severity: critical
+    confidence: high
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bsyslog\\s*\\([^,]+,\\s*(?![\"\\'L])\\w+"
+      - regex: "\\bsyslog\\s*\\([^,]+,\\s*(?:buf|input|str|msg)\\s*[,)]"
+
+  - id: MEM-FMT-005
+    name: c-snprintf-user-format
+    description: "snprintf() with user-controlled format argument"
+    severity: high
+    confidence: high
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bsnprintf\\s*\\([^,]+,\\s*[^,]+,\\s*(?![\"\\'L])\\w+[^,)]*[,)]"
+
+  - id: MEM-FMT-006
+    name: c-perror-argv-exposure
+    description: "Error message printed with user-controlled content via perror or puts"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-134]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bperror\\s*\\(\\s*(?:argv|buf|input|str)\\s*\\[?\\d*\\]?\\s*\\)"
+      - regex: "\\bputs\\s*\\(\\s*argv\\s*\\[\\s*\\d+\\s*\\]\\s*\\)"

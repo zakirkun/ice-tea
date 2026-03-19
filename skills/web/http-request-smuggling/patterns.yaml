@@ -1,0 +1,36 @@
+rules:
+  - id: WEB-SMUG-001
+    name: transfer-encoding-content-length-both
+    description: "HTTP response sets both Transfer-Encoding and Content-Length — smuggling risk"
+    severity: high
+    confidence: medium
+    cwe: [CWE-444]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?i)Transfer-Encoding.*chunked[^\\n]*\\n[^\\n]*Content-Length"
+      - regex: "(?i)Content-Length.*\\n[^\\n]*Transfer-Encoding.*chunked"
+
+  - id: WEB-SMUG-002
+    name: proxy-forward-all-headers
+    description: "Proxy configuration forwards all client headers including Transfer-Encoding to backend"
+    severity: high
+    confidence: low
+    cwe: [CWE-444]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "headers\\s*:\\s*req\\.headers(?![^}]*filter|[^}]*omit|[^}]*pick)"
+      - regex: "Object\\.assign\\s*\\(\\s*\\{\\s*\\}\\s*,\\s*req\\.headers\\s*\\)"
+
+  - id: WEB-SMUG-003
+    name: chunked-encoding-manual
+    description: "Manual chunked transfer encoding implementation — smuggling risk"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-444]
+    owasp: [A03:2025]
+    languages: [go, java, python]
+    patterns:
+      - regex: "Transfer-Encoding.*chunked"
+      - regex: "\\bchunked\\b.*Transfer-Encoding|Transfer-Encoding.*\\bchunked\\b"

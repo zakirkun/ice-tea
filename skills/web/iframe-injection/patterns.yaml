@@ -1,0 +1,35 @@
+rules:
+  - id: WEB-IFRAME-001
+    name: iframe-src-user-input
+    description: "iframe src attribute set from user input — iframe injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "iframe\\.src\\s*=\\s*(?:req\\.(?:body|query|params)|userInput|url)"
+      - regex: "\\.setAttribute\\s*\\(['\"]src['\"]\\s*,\\s*(?:req\\.(?:body|query)|userInput)"
+
+  - id: WEB-IFRAME-002
+    name: iframe-src-from-url-param
+    description: "iframe src attribute reflected from URL parameter"
+    severity: high
+    confidence: high
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [php, python, javascript]
+    patterns:
+      - regex: "<iframe[^>]*src\\s*=\\s*['\"]?\\$_(?:GET|POST)\\[\\s*['\"](?:url|src|embed)['\"]\\s*\\]"
+      - regex: "<iframe[^>]*src\\s*=\\s*['\"]?{{\\s*(?:url|src|embed)\\s*}}"
+
+  - id: WEB-IFRAME-003
+    name: iframe-no-sandbox
+    description: "iframe without sandbox attribute — full privileges for embedded content"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [javascript, typescript, php, python, generic]
+    patterns:
+      - regex: "<iframe\\s+src\\s*=\\s*['\"]https?://[^'\"]+['\"][^>]*>(?![^<]*sandbox)"

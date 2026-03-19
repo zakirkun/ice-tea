@@ -1,0 +1,87 @@
+rules:
+  - id: FS-UPL-001
+    name: php-move-uploaded-file-no-validation
+    description: "PHP move_uploaded_file() without extension or MIME type validation"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [php]
+    patterns:
+      - regex: "move_uploaded_file\\s*\\([^)]+\\)"
+      - regex: "move_uploaded_file\\s*\\([^)]*\\$_FILES[^)]*\\)(?![^;]*(?:extension|mime|type|whitelist))"
+
+  - id: FS-UPL-002
+    name: php-upload-content-type-only
+    description: "PHP file upload validated only by Content-Type header (user-controlled)"
+    severity: high
+    confidence: high
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$_FILES\\[.*\\]\\[\\s*['\"]type['\"]\\s*\\]\\s*===?\\s*['\"](?:image|video|audio)"
+      - regex: "\\$_FILES\\[.*type.*===.*image(?!/.*finfo|/.*mime_content_type)"
+
+  - id: FS-UPL-003
+    name: multer-no-file-filter
+    description: "Node.js multer configured without fileFilter for extension validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "multer\\s*\\(\\s*\\{[^}]*storage[^}]*\\}\\s*\\)(?!(?:[^)]*fileFilter))"
+      - regex: "multer\\s*\\(\\s*\\{\\s*dest\\s*:"
+      - regex: "upload\\.single\\(['\"][^'\"]+['\"]\\)(?![^)]*fileFilter)"
+
+  - id: FS-UPL-004
+    name: python-flask-upload-no-validation
+    description: "Flask file upload without filename extension whitelist check"
+    severity: high
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [python]
+    patterns:
+      - regex: "file\\.save\\s*\\([^)]*os\\.path\\.join"
+      - regex: "request\\.files\\.get\\([^)]+\\)\\.save\\s*\\("
+      - regex: "f\\.save\\s*\\(\\s*os\\.path\\.join(?![^)]*ALLOWED_EXTENSIONS)"
+
+  - id: FS-UPL-005
+    name: upload-in-webroot
+    description: "Uploaded file stored directly in web-accessible directory"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [php, python, javascript, java]
+    patterns:
+      - regex: "(?:uploads?|public|static|www|htdocs|webroot).*move_uploaded_file"
+      - regex: "move_uploaded_file.*(?:uploads?|public|static|www)"
+      - regex: "UPLOAD_FOLDER\\s*=\\s*['\"](?:static|public|www|uploads?)"
+
+  - id: FS-UPL-006
+    name: java-servlet-no-extension-check
+    description: "Java Servlet file upload without extension validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [java]
+    patterns:
+      - regex: "Part.*getSubmittedFileName\\(\\)(?![^;]*\\.(endsWith|contains|matches))"
+      - regex: "fileItem\\.write\\s*\\((?![^;]*(?:extension|type|whitelist))"
+
+  - id: FS-UPL-007
+    name: go-file-upload-no-validation
+    description: "Go multipart file upload saved without validating extension"
+    severity: high
+    confidence: medium
+    cwe: [CWE-434]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - regex: "r\\.FormFile\\s*\\([^)]+\\)(?![^;\\n]*(?:extension|mime|type|whitelist))"
+      - regex: "os\\.Create\\s*\\([^)]*header\\.Filename\\s*\\)"

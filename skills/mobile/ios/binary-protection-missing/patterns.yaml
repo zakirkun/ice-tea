@@ -1,0 +1,35 @@
+rules:
+  - id: IOS-BIN-001
+    name: xcode-no-pie
+    description: "Xcode build settings with GENERATE_POSITION_INDEPENDENT_EXECUTABLE = NO"
+    severity: medium
+    confidence: high
+    cwe: [CWE-693]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "GENERATE_POSITION_INDEPENDENT_EXECUTABLE\\s*=\\s*NO"
+      - regex: "GCC_GENERATE_DEBUGGING_SYMBOLS\\s*=\\s*YES.*RELEASE"
+
+  - id: IOS-BIN-002
+    name: xcode-no-arc
+    description: "Xcode build without ARC — memory management vulnerabilities"
+    severity: medium
+    confidence: high
+    cwe: [CWE-693]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "CLANG_ENABLE_OBJC_ARC\\s*=\\s*NO"
+      - regex: "ENABLE_OBJC_ARC\\s*=\\s*NO"
+
+  - id: IOS-BIN-003
+    name: debugger-detection-disabled
+    description: "App does not use PT_DENY_ATTACH anti-debugging"
+    severity: low
+    confidence: low
+    cwe: [CWE-693]
+    owasp: [A08:2025]
+    languages: [generic]
+    patterns:
+      - regex: "PT_DENY_ATTACH"

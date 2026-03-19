@@ -1,0 +1,35 @@
+rules:
+  - id: WEB-CACHE-001
+    name: x-forwarded-host-in-response
+    description: "X-Forwarded-Host header value used in response without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-524]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "req\\.headers?\\.['\"]x-forwarded-host['\"]"
+      - regex: "request\\.META\\.get\\(['\"]HTTP_X_FORWARDED_HOST['\"]\\)"
+      - regex: "\\$_SERVER\\[\\s*['\"]HTTP_X_FORWARDED_HOST['\"]"
+
+  - id: WEB-CACHE-002
+    name: response-with-unkeyed-header
+    description: "Response content derived from header not in cache key"
+    severity: medium
+    confidence: low
+    cwe: [CWE-524]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "req\\.headers?\\.['\"](?:x-forwarded-for|x-real-ip|cf-connecting-ip)['\"].*(?:res\\.(?:send|json|render)|response\\.(?:write|json))"
+
+  - id: WEB-CACHE-003
+    name: cache-control-no-store-missing
+    description: "Sensitive endpoint response without Cache-Control: no-store"
+    severity: medium
+    confidence: low
+    cwe: [CWE-524]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?:app|router)\\.get\\(['\"][^'\"]*(?:profile|account|dashboard|admin)[^'\"]*['\"](?![^)]*cache-control|[^)]*no-store))"

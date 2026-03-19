@@ -1,0 +1,34 @@
+rules:
+  - id: WEB-HIST-001
+    name: sensitive-token-in-url-history
+    description: "Token or sensitive parameter in URL that persists in browser history"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "window\\.location\\.(?:href|search).*(?:token|key|secret|password)"
+      - regex: "(?:URLSearchParams|new URL).*(?:token|api_key|secret)"
+
+  - id: WEB-HIST-002
+    name: history-replace-state-missing
+    description: "Sensitive token in URL without history.replaceState to clean it"
+    severity: medium
+    confidence: low
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "location\\.search.*(?:token|code|access_token)(?![^;]*replaceState|[^;]*pushState)"
+
+  - id: WEB-HIST-003
+    name: oauth-code-in-url-not-cleared
+    description: "OAuth authorization code in URL not cleared from history"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-359]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:URLSearchParams|location\\.search).*\\bcode\\b(?![^;]*replaceState)"

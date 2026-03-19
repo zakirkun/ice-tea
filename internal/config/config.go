@@ -15,6 +15,21 @@ type Config struct {
 	Skills  SkillsConfig  `mapstructure:"skills"`
 	LLM     LLMConfig     `mapstructure:"llm"`
 	Output  OutputConfig  `mapstructure:"output"`
+	Notify  NotifyConfig  `mapstructure:"notify"`
+}
+
+// NotifyConfig holds notification settings
+type NotifyConfig struct {
+	Telegram TelegramConfig `mapstructure:"telegram"`
+}
+
+// TelegramConfig holds Telegram bot notification settings
+type TelegramConfig struct {
+	Enabled        bool   `mapstructure:"enabled"`
+	BotToken       string `mapstructure:"bot_token"`
+	ChatID         string `mapstructure:"chat_id"`
+	MinSeverity    string `mapstructure:"min_severity"`
+	OnlyOnFindings bool   `mapstructure:"only_on_findings"`
 }
 
 // ScanConfig holds scan-related settings
@@ -102,6 +117,11 @@ func setDefaults() {
 	viper.SetDefault("output.format", "console")
 	viper.SetDefault("output.verbose", false)
 	viper.SetDefault("output.color", true)
+
+	// Notify defaults
+	viper.SetDefault("notify.telegram.enabled", false)
+	viper.SetDefault("notify.telegram.min_severity", "high")
+	viper.SetDefault("notify.telegram.only_on_findings", true)
 }
 
 // Load reads configuration from file, env, and flags
@@ -162,10 +182,10 @@ func validate(cfg *Config) error {
 
 	// Validate output format
 	validFormats := map[string]bool{
-		"console": true, "sarif": true, "gitlab": true, "json": true,
+		"console": true, "sarif": true, "gitlab": true, "json": true, "pdf": true,
 	}
 	if !validFormats[strings.ToLower(cfg.Output.Format)] {
-		return fmt.Errorf("invalid format: %q (must be console, sarif, gitlab, or json)", cfg.Output.Format)
+		return fmt.Errorf("invalid format: %q (must be console, sarif, gitlab, json, or pdf)", cfg.Output.Format)
 	}
 
 	// Validate concurrency

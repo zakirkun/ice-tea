@@ -1,0 +1,60 @@
+rules:
+  - id: API-BFLA-001
+    name: express-admin-route-no-role-check
+    description: "Express.js admin route handler without role/permission middleware"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-285]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:app|router)\\.(?:delete|put|post)\\s*\\(['\"][^'\"]*admin[^'\"]*['\"](?![^)]*(?:role|admin|isAdmin|authorize|permission))"
+      - regex: "router\\.(?:delete|put)\\s*\\(['\"][^'\"]*['\"]\\s*,\\s*(?:auth|authenticate)\\s*,\\s*async"
+
+  - id: API-BFLA-002
+    name: flask-admin-endpoint-no-role
+    description: "Flask admin endpoint without role check decorator"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-285]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "@(?:app|bp)\\.route\\(['\"][^'\"]*admin[^'\"]*['\"](?![^@]*@.*(?:admin_required|role_required|permission_required))"
+      - regex: "def\\s+(?:delete|ban|promote|demote)_\\w+\\s*\\((?![^:]*current_user\\.is_admin)"
+
+  - id: API-BFLA-003
+    name: java-no-preauthorize-admin
+    description: "Java Spring MVC admin endpoint without @PreAuthorize or @Secured"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-285]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "@(?:DeleteMapping|PutMapping|PostMapping)\\(['\"][^'\"]*admin[^'\"]*['\"]\\)(?![^@]*@(?:PreAuthorize|Secured))"
+      - regex: "@RestController.*admin(?![^}]*@PreAuthorize|[^}]*@Secured)"
+
+  - id: API-BFLA-004
+    name: go-admin-handler-no-role
+    description: "Go admin HTTP handler without role verification"
+    severity: critical
+    confidence: low
+    cwe: [CWE-285]
+    owasp: [A01:2025]
+    languages: [go]
+    patterns:
+      - regex: "(?i)func\\s+(?:Admin|Delete|Ban|Promote)\\w+Handler(?![^}]*(?:role|admin|isAdmin))"
+      - regex: "http\\.HandleFunc\\s*\\(['\"][^'\"]*admin[^'\"]*['\"](?![^)]*(?:AdminOnly|RequireAdmin|RoleMiddleware))"
+
+  - id: API-BFLA-005
+    name: php-admin-no-session-check
+    description: "PHP admin functionality executed without session role validation"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-285]
+    owasp: [A01:2025]
+    languages: [php]
+    patterns:
+      - regex: "(?:DELETE|DROP|TRUNCATE|ALTER).*FROM.*(?!.*(?:role|admin|permission).*\\$_SESSION)"
+      - regex: "\\$_POST\\[.*(?:delete|ban|promote|deactivate).*\\](?![^;]*\\$_SESSION\\[.*(?:role|admin|is_admin))"

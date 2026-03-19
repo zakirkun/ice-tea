@@ -1,0 +1,63 @@
+rules:
+  - id: CLOUD-GCP-001
+    name: gcs-allusers-access
+    description: "GCS bucket grants access to allUsers — publicly accessible"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic, python, javascript]
+    patterns:
+      - regex: "allUsers"
+      - regex: "allAuthenticatedUsers"
+      - regex: "(?i)storage\\.objects\\.(?:get|list|create).*allUsers"
+
+  - id: CLOUD-GCP-002
+    name: gcp-service-account-key-file
+    description: "GCP service account key JSON file referenced or committed"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A05:2025]
+    languages: [generic, python, javascript, go, yaml]
+    patterns:
+      - regex: "\"type\":\\s*\"service_account\""
+      - regex: "\"private_key_id\":\\s*\"[a-f0-9]{40}\""
+      - regex: "(?i)GOOGLE_APPLICATION_CREDENTIALS\\s*[=:]\\s*['\"][^'\"]*\\.json['\"]"
+
+  - id: CLOUD-GCP-003
+    name: gcp-overprivileged-role
+    description: "GCP IAM binding with owner or editor role — too permissive"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "roles/(?:owner|editor|iam\\.securityAdmin|compute\\.admin)"
+      - regex: "role:\\s*roles/owner"
+      - regex: "role:\\s*roles/editor"
+
+  - id: CLOUD-GCP-004
+    name: gke-legacy-abac
+    description: "GKE cluster with legacy ABAC authorization enabled"
+    severity: high
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "enable_legacy_abac:\\s*true"
+      - regex: "legacyAbac:\\s*enabled:\\s*true"
+
+  - id: CLOUD-GCP-005
+    name: gcp-firewall-all-traffic
+    description: "GCP firewall rule allows all traffic from all sources"
+    severity: critical
+    confidence: high
+    cwe: [CWE-732]
+    owasp: [A05:2025]
+    languages: [yaml, generic]
+    patterns:
+      - regex: "source_ranges:\\s*\\[?['\"]?0\\.0\\.0\\.0/0['\"]?"
+      - regex: "allowed:\\s*[\\s\\S]*?ports:\\s*\\[?['\"]?all['\"]?"

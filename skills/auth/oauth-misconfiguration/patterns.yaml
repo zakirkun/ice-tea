@@ -1,0 +1,72 @@
+rules:
+  - id: AUTH-OA-001
+    name: oauth-missing-state-parameter
+    description: "OAuth authorization URL constructed without state parameter (CSRF risk)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-352]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)response_type=(?:code|token)(?!(?:[^'\"\\n]*&|[^'\"\\n]*\\+)[^'\"\\n]*state=)"
+      - regex: "(?i)oauth.*authorize.*(?:response_type|client_id)(?![^\\n]*state)"
+
+  - id: AUTH-OA-002
+    name: oauth-implicit-flow
+    description: "OAuth implicit flow (response_type=token) is deprecated and insecure"
+    severity: high
+    confidence: high
+    cwe: [CWE-287]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)response_type\\s*[=:]\\s*['\"]?token['\"]?"
+      - regex: "(?i)response_type=token"
+
+  - id: AUTH-OA-003
+    name: oauth-hardcoded-client-secret
+    description: "OAuth client secret hardcoded in source code"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)client_secret\\s*[=:]\\s*['\"][a-zA-Z0-9_\\-]{16,}['\"]"
+      - regex: "(?i)CLIENT_SECRET\\s*=\\s*['\"][^'\"]{10,}['\"]"
+
+  - id: AUTH-OA-004
+    name: oauth-token-in-url
+    description: "OAuth access token passed as URL query parameter (exposed in logs/history)"
+    severity: high
+    confidence: medium
+    cwe: [CWE-598]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php, ruby]
+    patterns:
+      - regex: "(?i)[?&]access_token=[^&\"'\\s]+"
+      - regex: "(?i)[?&]token=[a-zA-Z0-9\\-_.]{20,}"
+
+  - id: AUTH-OA-005
+    name: oauth-redirect-uri-wildcard
+    description: "OAuth redirect_uri validated with wildcard or regex that allows open redirect"
+    severity: high
+    confidence: medium
+    cwe: [CWE-601]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?i)redirect_uri.*\\*"
+      - regex: "(?i)redirect_uri.*startsWith|redirect_uri.*includes"
+
+  - id: AUTH-OA-006
+    name: oauth-no-pkce
+    description: "OAuth 2.0 public client flow without PKCE code_challenge parameter"
+    severity: medium
+    confidence: low
+    cwe: [CWE-287]
+    owasp: [A07:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?i)response_type=code(?![^\\n]*code_challenge)"
+      - regex: "(?i)grant_type=authorization_code(?![^\\n]*code_verifier)"

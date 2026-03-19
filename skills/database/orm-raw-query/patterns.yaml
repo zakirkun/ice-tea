@@ -1,0 +1,80 @@
+rules:
+  - id: DB-ORM-001
+    name: sqlalchemy-raw-execute
+    description: "SQLAlchemy db.execute() with f-string or concatenated SQL — SQL injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "db\\.execute\\s*\\(\\s*f['\"]"
+      - regex: "session\\.execute\\s*\\(\\s*f['\"]"
+      - regex: "connection\\.execute\\s*\\(\\s*f['\"]"
+      - regex: "\\.execute\\s*\\(['\"][^'\"]*['\"]\\s*%\\s*(?:username|user|id|input)"
+
+  - id: DB-ORM-002
+    name: sequelize-raw-query-concat
+    description: "Sequelize raw query with string concatenation — SQL injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "sequelize\\.query\\s*\\(['\"][^'\"]*['\"]\\s*\\+\\s*\\w"
+      - regex: "sequelize\\.query\\s*\\(`[^`]*\\$\\{(?:req|user|input)"
+      - regex: "\\.literal\\s*\\(['\"][^'\"]*['\"]\\s*\\+"
+
+  - id: DB-ORM-003
+    name: hibernate-native-query-concat
+    description: "Hibernate createNativeQuery() with string concatenation — SQL injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "createNativeQuery\\s*\\(['\"][^'\"]*['\"]\\s*\\+\\s*\\w"
+      - regex: "createQuery\\s*\\(['\"][^'\"]*['\"]\\s*\\+\\s*\\w"
+      - regex: "entityManager\\.createNativeQuery\\s*\\([^)]*\\+"
+
+  - id: DB-ORM-004
+    name: gorm-raw-query
+    description: "GORM Raw() or Exec() with string formatting — SQL injection"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [go]
+    patterns:
+      - regex: "\\.Raw\\s*\\(\\s*fmt\\.Sprintf"
+      - regex: "\\.Exec\\s*\\(\\s*fmt\\.Sprintf"
+      - regex: "\\.Where\\s*\\(\\s*fmt\\.Sprintf"
+      - regex: "db\\.Raw\\s*\\(['\"][^'\"]*['\"]\\s*\\+"
+
+  - id: DB-ORM-005
+    name: active-record-raw-sql
+    description: "ActiveRecord find_by_sql or execute with string interpolation"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "find_by_sql\\s*\\(\\s*['\"][^'\"]*#\\{\\w"
+      - regex: "execute\\s*\\(\\s*['\"][^'\"]*#\\{(?:params|request)"
+      - regex: "ActiveRecord::Base\\.connection\\.execute\\s*\\(['\"].*\\+"
+
+  - id: DB-ORM-006
+    name: eloquent-raw-concat
+    description: "Laravel Eloquent DB::select or whereRaw with string concatenation"
+    severity: high
+    confidence: high
+    cwe: [CWE-89]
+    owasp: [A03:2025]
+    languages: [php]
+    patterns:
+      - regex: "DB::select\\s*\\(['\"][^'\"]*['\"]\\s*\\.\\s*\\$"
+      - regex: "whereRaw\\s*\\(['\"][^'\"]*['\"]\\s*\\.\\s*\\$"
+      - regex: "DB::statement\\s*\\(['\"][^'\"]*['\"]\\s*\\.\\s*\\$"

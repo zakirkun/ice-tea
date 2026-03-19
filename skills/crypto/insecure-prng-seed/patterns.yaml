@@ -1,0 +1,48 @@
+rules:
+  - id: CRYPTO-PRNG-001
+    name: python-random-seed-time
+    description: "Python random.seed() with time-based value — predictable"
+    severity: high
+    confidence: high
+    cwe: [CWE-335]
+    owasp: [A02:2025]
+    languages: [python]
+    patterns:
+      - regex: "random\\.seed\\s*\\(\\s*(?:time\\.time|int\\s*\\(\\s*time|datetime|os\\.getpid)"
+      - regex: "random\\.seed\\s*\\(\\s*[0-9]+\\s*\\)"
+
+  - id: CRYPTO-PRNG-002
+    name: java-random-seed-time
+    description: "Java Random seeded with System.currentTimeMillis() — predictable"
+    severity: high
+    confidence: high
+    cwe: [CWE-335]
+    owasp: [A02:2025]
+    languages: [java]
+    patterns:
+      - regex: "new\\s+Random\\s*\\(\\s*System\\.currentTimeMillis\\s*\\(\\s*\\)"
+      - regex: "new\\s+Random\\s*\\(\\s*[0-9]+\\s*\\)"
+
+  - id: CRYPTO-PRNG-003
+    name: c-srand-time
+    description: "C srand() seeded with time() — predictable within ~1 second window"
+    severity: high
+    confidence: high
+    cwe: [CWE-335]
+    owasp: [A02:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "srand\\s*\\(\\s*time\\s*\\(\\s*(?:NULL|0)\\s*\\)\\s*\\)"
+      - regex: "srand\\s*\\(\\s*[0-9]+\\s*\\)"
+
+  - id: CRYPTO-PRNG-004
+    name: php-mt-rand-seed
+    description: "PHP mt_srand() with predictable value or srand() used for security"
+    severity: high
+    confidence: high
+    cwe: [CWE-335]
+    owasp: [A02:2025]
+    languages: [php]
+    patterns:
+      - regex: "mt_srand\\s*\\(\\s*(?:time|microtime|getmypid)"
+      - regex: "srand\\s*\\(\\s*(?:time|microtime)\\s*\\("

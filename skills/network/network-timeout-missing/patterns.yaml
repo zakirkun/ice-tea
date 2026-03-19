@@ -1,0 +1,49 @@
+rules:
+  - id: NET-TOUT-001
+    name: python-requests-no-timeout
+    description: "Python requests.get/post without timeout parameter"
+    severity: medium
+    confidence: high
+    cwe: [CWE-400]
+    owasp: [A04:2025]
+    languages: [python]
+    patterns:
+      - regex: "requests\\.(?:get|post|put|patch|delete)\\s*\\([^)]*\\)(?![^;]*timeout)"
+      - regex: "session\\.(?:get|post|put)\\s*\\([^)]*\\)(?![^;]*timeout)"
+
+  - id: NET-TOUT-002
+    name: go-http-no-timeout
+    description: "Go http.Get/Post without context timeout or custom http.Client"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-400]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - regex: "http\\.Get\\s*\\([^)]+\\)(?![^;]*context|[^;]*WithTimeout)"
+      - regex: "http\\.Post\\s*\\([^)]+\\)(?![^;]*context|[^;]*WithTimeout)"
+      - regex: "http\\.DefaultClient\\.Do\\s*\\("
+
+  - id: NET-TOUT-003
+    name: node-http-no-timeout
+    description: "Node.js http.request without timeout option"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-400]
+    owasp: [A04:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "axios\\.(?:get|post|put)\\s*\\([^)]*\\)(?![^;]*timeout)"
+      - regex: "fetch\\s*\\([^,)]+\\)(?![^;]*signal|[^;]*timeout|[^;]*AbortController)"
+
+  - id: NET-TOUT-004
+    name: java-httpclient-no-timeout
+    description: "Java HttpClient or HttpURLConnection without timeout"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-400]
+    owasp: [A04:2025]
+    languages: [java]
+    patterns:
+      - regex: "HttpURLConnection.*openConnection\\s*\\(\\s*\\)(?![^;]*setConnectTimeout|[^;]*setReadTimeout)"
+      - regex: "new\\s+OkHttpClient\\.Builder\\s*\\(\\s*\\)(?![^;]*timeout)"

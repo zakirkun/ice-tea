@@ -1,0 +1,35 @@
+rules:
+  - id: RC-CNT-001
+    name: go-counter-no-atomic
+    description: "Go shared counter increment without sync/atomic — race condition"
+    severity: medium
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [go]
+    patterns:
+      - regex: "\\bcount\\+\\+(?![^;]*atomic)"
+      - regex: "\\bcount\\s*\\+=\\s*1(?![^;]*atomic)"
+
+  - id: RC-CNT-002
+    name: java-counter-not-atomic
+    description: "Java int/long counter increment in multi-threaded context without AtomicInteger"
+    severity: medium
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [java]
+    patterns:
+      - regex: "(?:private|protected|public)\\s+(?:static\\s+)?(?:int|long)\\s+(?:count|counter|requestCount)(?![^;]*AtomicInteger|[^;]*AtomicLong)"
+
+  - id: RC-CNT-003
+    name: c-counter-no-atomic
+    description: "C/C++ global counter without atomic or mutex"
+    severity: high
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:int|long)\\s+(?:count|counter|requests)\\s*=\\s*0(?![^;]*atomic|[^;]*mutex)"
+      - regex: "(?:count|counter|requests)\\+\\+(?![^;]*mutex_lock|[^;]*atomic)"

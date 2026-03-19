@@ -1,0 +1,60 @@
+rules:
+  - id: API-RL-001
+    name: express-no-rate-limit-sensitive
+    description: "Express.js sensitive API endpoint (password reset, OTP) without rate limiting"
+    severity: high
+    confidence: low
+    cwe: [CWE-770]
+    owasp: [A04:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:app|router)\\.post\\s*\\(['\"][^'\"]*(?:reset|forgot|otp|verify|2fa)[^'\"]*['\"](?![^)]*(?:rateLimit|limiter|throttle))"
+      - regex: "router\\.post\\(['\"][^'\"]*password[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
+
+  - id: API-RL-002
+    name: flask-no-rate-limit
+    description: "Flask sensitive endpoint without Flask-Limiter decorator"
+    severity: high
+    confidence: low
+    cwe: [CWE-770]
+    owasp: [A04:2025]
+    languages: [python]
+    patterns:
+      - regex: "@(?:app|bp)\\.route\\(['\"][^'\"]*(?:reset|forgot|otp|verify)[^'\"]*['\"].*\\)(?![^@]*@limiter|[^\\n]*@limiter)"
+      - regex: "def\\s+(?:forgot_password|reset_password|verify_otp)\\s*\\((?!(?:[^:]*\\n){0,2}[^:]*limiter)"
+
+  - id: API-RL-003
+    name: go-api-no-rate-limit
+    description: "Go API handler without rate limiter middleware"
+    severity: medium
+    confidence: low
+    cwe: [CWE-770]
+    owasp: [A04:2025]
+    languages: [go]
+    patterns:
+      - regex: "(?i)func\\s+(?:ForgotPassword|ResetPassword|VerifyOTP|SendOTP)Handler"
+      - regex: "http\\.HandleFunc\\s*\\(['\"][^'\"]*(?:reset|forgot|otp|verify)[^'\"]*['\"]"
+
+  - id: API-RL-004
+    name: no-pagination-limit
+    description: "API list endpoint without maximum page size limit — data scraping risk"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-770]
+    owasp: [A04:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "limit\\s*=\\s*(?:req\\.query\\.limit|request\\.args\\.get\\(['\"]limit['\"]\\))"
+      - regex: "LIMIT\\s+\\$?(?:limit|pageSize|size)(?![^;]*Math\\.min|[^;]*min\\()"
+
+  - id: API-RL-005
+    name: express-rate-limit-too-high
+    description: "Express rate limiter with very high max requests (ineffective)"
+    severity: low
+    confidence: high
+    cwe: [CWE-770]
+    owasp: [A04:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "rateLimit\\s*\\(\\s*\\{[^}]*max\\s*:\\s*(?:[5-9][0-9]{3}|[0-9]{5,})"
+      - regex: "max\\s*:\\s*(?:[5-9]\\d{3}|\\d{5,})[^}]*windowMs"

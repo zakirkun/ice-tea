@@ -1,0 +1,58 @@
+rules:
+  - id: AND-EXP-001
+    name: android-activity-exported-no-permission
+    description: "Android Activity exported without permission restriction"
+    severity: high
+    confidence: high
+    cwe: [CWE-926]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<activity[^>]*android:exported\\s*=\\s*['\"]true['\"](?![^>]*android:permission)[^>]*/>"
+      - regex: "<activity[^>]*android:exported\\s*=\\s*['\"]true['\"][^>]*>(?![^<]*android:permission)"
+
+  - id: AND-EXP-002
+    name: android-service-exported-no-permission
+    description: "Android Service exported without permission restriction"
+    severity: high
+    confidence: high
+    cwe: [CWE-926]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<service[^>]*android:exported\\s*=\\s*['\"]true['\"](?![^>]*android:permission)"
+
+  - id: AND-EXP-003
+    name: android-receiver-exported-no-permission
+    description: "Android BroadcastReceiver exported without permission restriction"
+    severity: high
+    confidence: high
+    cwe: [CWE-926]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<receiver[^>]*android:exported\\s*=\\s*['\"]true['\"](?![^>]*android:permission)"
+
+  - id: AND-EXP-004
+    name: android-contentprovider-no-permission
+    description: "Android ContentProvider exported without read/write permission"
+    severity: critical
+    confidence: high
+    cwe: [CWE-926]
+    owasp: [A01:2025]
+    languages: [generic]
+    patterns:
+      - regex: "<provider[^>]*android:exported\\s*=\\s*['\"]true['\"](?![^>]*(?:readPermission|writePermission))"
+      - regex: "<provider(?![^>]*android:readPermission)[^>]*android:exported\\s*=\\s*['\"]true['\"]"
+
+  - id: AND-EXP-005
+    name: android-no-caller-permission-check
+    description: "Android exported component handler does not verify caller permissions"
+    severity: high
+    confidence: medium
+    cwe: [CWE-284]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "getIntent\\(\\)(?![^;\\n]*checkCallingPermission|[^;\\n]*checkCallingOrSelfPermission)"
+      - regex: "@Override[\\s\\S]{0,50}public\\s+void\\s+onReceive\\s*\\([^)]+\\)(?![^}]*checkCallingPermission)"

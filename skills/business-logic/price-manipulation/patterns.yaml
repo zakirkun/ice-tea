@@ -1,0 +1,47 @@
+rules:
+  - id: BL-PRICE-001
+    name: client-price-trusted
+    description: "Price value taken directly from request body without server-side validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "(?:req\\.body\\.price|req\\.body\\.amount|req\\.body\\.total)(?![^;]*server|[^;]*catalog|[^;]*product)"
+      - regex: "price\\s*=\\s*req\\.body\\.(?:price|amount|cost)(?![^;]*lookup|[^;]*db|[^;]*fetch)"
+
+  - id: BL-PRICE-002
+    name: python-price-from-request
+    description: "Python payment handler using price from request data"
+    severity: high
+    confidence: medium
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [python]
+    patterns:
+      - regex: "price\\s*=\\s*request\\.(?:form|json|args)\\.get\\(['\"]price['\"]\\)"
+      - regex: "amount\\s*=\\s*float\\s*\\(\\s*request\\.(?:form|json|args)\\.get\\(['\"](?:price|amount)['\"]\\)"
+
+  - id: BL-PRICE-003
+    name: php-price-from-post
+    description: "PHP payment processing using POST price value"
+    severity: high
+    confidence: medium
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [php]
+    patterns:
+      - regex: "\\$(?:price|amount|total)\\s*=\\s*\\$_POST\\[\\s*['\"](?:price|amount|total)['\"]"
+      - regex: "\\$(?:price|amount)\\s*=\\s*\\(float\\)\\s*\\$_(?:GET|POST|REQUEST)\\[\\s*['\"]price['\"]"
+
+  - id: BL-PRICE-004
+    name: negative-price-no-validation
+    description: "Price or amount field not validated for negative values"
+    severity: high
+    confidence: low
+    cwe: [CWE-840]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php, java, go]
+    patterns:
+      - regex: "(?:price|amount|total|quantity).*(?:req\\.body|request\\.form|\\$_POST)(?![^;]*>\\s*0|[^;]*min\\b|[^;]*positive)"

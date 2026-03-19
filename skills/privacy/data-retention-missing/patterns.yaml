@@ -1,0 +1,35 @@
+rules:
+  - id: PRIV-RET-001
+    name: redis-set-no-ttl
+    description: "Redis SET command without expiry time on data containing personal info"
+    severity: medium
+    confidence: low
+    cwe: [CWE-272]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:client|redis)\\.set\\s*\\([^,]+,\\s*[^,]+\\s*\\)(?![^;]*EX\\s|[^;]*expire|[^;]*TTL|[^;]*ex:\\s)"
+      - regex: "redis\\.set\\s*\\(['\"](?:user|session|token|email|profile)[^'\"]*['\"]"
+
+  - id: PRIV-RET-002
+    name: user-data-never-deleted
+    description: "User table or model without soft-delete or hard-delete mechanism"
+    severity: medium
+    confidence: low
+    cwe: [CWE-272]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, python, go, java]
+    patterns:
+      - regex: "(?:Model|Schema).*User(?![\\s\\S]*(?:deleted_at|deletedAt|soft_delete|purge))"
+
+  - id: PRIV-RET-003
+    name: log-no-rotation-config
+    description: "Logging configured without rotation or max size"
+    severity: low
+    confidence: low
+    cwe: [CWE-272]
+    owasp: [A05:2025]
+    languages: [python, go, java]
+    patterns:
+      - regex: "logging\\.basicConfig\\s*\\([^)]*(?!maxBytes|backupCount)[^)]*\\)"
+      - regex: "FileHandler\\s*\\([^)]*\\)(?![^;]*rotation|[^;]*maxBytes)"

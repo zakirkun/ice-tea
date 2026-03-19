@@ -1,0 +1,49 @@
+rules:
+  - id: BL-ENUM-001
+    name: unlimited-list-endpoint
+    description: "API list endpoint returning all records without pagination or limit"
+    severity: high
+    confidence: low
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "\\.find\\s*\\(\\s*\\{\\s*\\}\\s*\\)(?![^;]*limit|[^;]*paginate)"
+      - regex: "\\.findAll\\s*\\(\\s*\\)(?![^;]*limit|[^;]*offset)"
+      - regex: "SELECT\\s+\\*\\s+FROM\\s+\\w+(?!.*LIMIT)"
+
+  - id: BL-ENUM-002
+    name: sequential-id-in-url
+    description: "API endpoint using sequential numeric ID exposing IDOR and enumeration"
+    severity: medium
+    confidence: low
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, go, java, php]
+    patterns:
+      - regex: "(?:app|router)\\.get\\(['\"][^'\"]*/:(?:id|userId|orderId)['\"]"
+      - regex: "@GetMapping\\(['\"][^'\"]*\\{(?:id|userId|orderId)\\}['\"]\\)"
+
+  - id: BL-ENUM-003
+    name: user-enumeration-via-response
+    description: "Authentication endpoint returns different responses for valid vs invalid usernames"
+    severity: medium
+    confidence: low
+    cwe: [CWE-204]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, go, php]
+    patterns:
+      - regex: "User\\s+not\\s+found|username.*(?:does not exist|not registered|invalid)"
+      - regex: "\"error\"\\s*:\\s*\"(?:User not found|No account|Username not registered)\""
+
+  - id: BL-ENUM-004
+    name: unbounded-search-endpoint
+    description: "Search endpoint without result count limit"
+    severity: medium
+    confidence: low
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "(?:app|router)\\.get\\(['\"][^'\"]*search[^'\"]*['\"](?![^)]*limit)"
+      - regex "LIKE\\s+['\"]%.*%['\"](?![^;]*LIMIT)"

@@ -1,0 +1,34 @@
+rules:
+  - id: MEM-RACE-001
+    name: c-global-var-no-mutex
+    description: "C/C++ global variable modified in multiple threads without mutex"
+    severity: high
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "(?:static|global)\\s+(?:int|char|long)\\s+\\w+\\s*=\\s*[0-9]+(?![^;]*pthread_mutex|[^;]*std::mutex)"
+
+  - id: MEM-RACE-002
+    name: go-goroutine-shared-variable
+    description: "Go shared variable modified in goroutine without synchronization"
+    severity: high
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [go]
+    patterns:
+      - regex: "go\\s+func\\s*\\(\\s*\\)\\s*\\{[^}]*\\w+\\s*=\\s*[^=][^}]*\\}\\s*\\(\\s*\\)"
+      - regex: "go\\s+func\\s*\\(\\s*\\)\\s*\\{[^}]*\\w+\\+\\+[^}]*\\}(?![^;]*mutex|[^;]*sync\\.Mutex)"
+
+  - id: MEM-RACE-003
+    name: cpp-class-no-thread-safety
+    description: "C++ class with public data member modified from multiple threads"
+    severity: medium
+    confidence: low
+    cwe: [CWE-362]
+    owasp: [A06:2025]
+    languages: [cpp]
+    patterns:
+      - regex: "public:\\s*(?:int|bool|std::string)\\s+\\w+\\s*;(?![^}]*std::mutex|[^}]*std::atomic)"

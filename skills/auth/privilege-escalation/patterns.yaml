@@ -1,0 +1,36 @@
+rules:
+  - id: AUTH-PE-001
+    name: mongoose-update-allows-role
+    description: "Mongoose findByIdAndUpdate with entire request body — mass assignment role escalation"
+    severity: critical
+    confidence: high
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "findByIdAndUpdate\\s*\\([^,]+,\\s*req\\.body\\s*[,)]"
+      - regex: "User\\.update\\s*\\(\\s*\\{[^}]*id[^}]*\\}\\s*,\\s*req\\.body\\s*[,)]"
+
+  - id: AUTH-PE-002
+    name: role-field-in-update-endpoint
+    description: "User update endpoint that allows role field to be changed"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "User\\.(?:update|save).*req\\.body(?![^;]*(?:omit|pick|exclude).*role)"
+      - regex: "user_update.*request\\.json(?![^;]*(?:pop|exclude|del).*role)"
+
+  - id: AUTH-PE-003
+    name: escalation-via-direct-assignment
+    description: "Admin flag or role directly set from user-supplied value"
+    severity: critical
+    confidence: high
+    cwe: [CWE-269]
+    owasp: [A01:2025]
+    languages: [javascript, typescript, python, php]
+    patterns:
+      - regex: "(?:user|account)\\.(?:isAdmin|is_admin|admin)\\s*=\\s*(?:req\\.body|request\\.json|\\$_POST)"
+      - regex: "(?:user|account)\\.(?:role|permission)\\s*=\\s*req\\.body\\.(?:role|permission)"

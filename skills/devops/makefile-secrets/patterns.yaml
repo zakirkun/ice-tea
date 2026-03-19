@@ -1,0 +1,35 @@
+rules:
+  - id: DEVOPS-MAKE-001
+    name: makefile-api-key
+    description: "Makefile variable containing hardcoded API key or token"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)(?:API_KEY|SECRET_KEY|ACCESS_TOKEN|AUTH_TOKEN)\\s*:?=\\s*[a-zA-Z0-9+/\\-_]{20,}"
+      - regex: "(?i)(?:PASSWORD|PASSWD|PWD)\\s*:?=\\s*[a-zA-Z0-9@#$!]{6,}"
+
+  - id: DEVOPS-MAKE-002
+    name: makefile-aws-credentials
+    description: "Makefile with hardcoded AWS credentials"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "AWS_ACCESS_KEY_ID\\s*:?=\\s*AKIA[0-9A-Z]{16}"
+      - regex: "AWS_SECRET_ACCESS_KEY\\s*:?=\\s*[a-zA-Z0-9/+]{40}"
+
+  - id: DEVOPS-MAKE-003
+    name: makefile-ssh-key-embed
+    description: "SSH private key content embedded in Makefile"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "-----BEGIN\\s+(?:RSA\\s+)?PRIVATE\\s+KEY-----"

@@ -1,0 +1,88 @@
+rules:
+  - id: MEM-BOF-001
+    name: c-gets-unsafe
+    description: "gets() function reads unbounded input — guaranteed buffer overflow"
+    severity: critical
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bgets\\s*\\("
+      - ast_node_type: "call_expression"
+        function: "gets"
+
+  - id: MEM-BOF-002
+    name: c-strcpy-unsafe
+    description: "strcpy() copies without bounds check — buffer overflow risk"
+    severity: high
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bstrcpy\\s*\\("
+      - ast_node_type: "call_expression"
+        function: "strcpy"
+
+  - id: MEM-BOF-003
+    name: c-strcat-unsafe
+    description: "strcat() appends without bounds check — buffer overflow risk"
+    severity: high
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bstrcat\\s*\\("
+      - ast_node_type: "call_expression"
+        function: "strcat"
+
+  - id: MEM-BOF-004
+    name: c-sprintf-unsafe
+    description: "sprintf() formats without output size limit — buffer overflow risk"
+    severity: high
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bsprintf\\s*\\("
+      - ast_node_type: "call_expression"
+        function: "sprintf"
+
+  - id: MEM-BOF-005
+    name: c-scanf-no-width
+    description: "scanf() with %s without width specifier — buffer overflow"
+    severity: high
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "scanf\\s*\\(\\s*['\"]%s[^'\"]*['\"]"
+      - regex: "fscanf\\s*\\([^,]+,\\s*['\"]%s"
+
+  - id: MEM-BOF-006
+    name: c-memcpy-no-check
+    description: "memcpy() size derived from user input without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-787]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "memcpy\\s*\\([^)]*,\\s*[^,]+,\\s*(?:strlen|atoi|atol)\\s*\\([^)]*\\)\\s*\\)"
+      - regex: "memcpy\\s*\\([^)]*,\\s*[^,]+,\\s*len\\s*\\)"
+
+  - id: MEM-BOF-007
+    name: c-vsprintf-unsafe
+    description: "vsprintf() without size limit — buffer overflow from format arguments"
+    severity: high
+    confidence: high
+    cwe: [CWE-120]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "\\bvsprintf\\s*\\("
+      - regex: "\\bvsnprintf\\b(?!.*size)"

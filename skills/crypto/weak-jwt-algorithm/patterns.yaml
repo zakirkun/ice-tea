@@ -1,0 +1,49 @@
+rules:
+  - id: CRYPTO-JWT-001
+    name: jwt-hs256-short-secret
+    description: "JWT signed with HS256 and short hardcoded secret"
+    severity: critical
+    confidence: high
+    cwe: [CWE-327]
+    owasp: [A02:2025]
+    languages: [javascript, typescript, python, java, go]
+    patterns:
+      - regex: "jwt\\.sign\\s*\\([^,]+,\\s*['\"][^'\"]{1,31}['\"]"
+      - regex: "jwt\\.encode\\s*\\([^,]+,\\s*['\"][^'\"]{1,31}['\"]"
+
+  - id: CRYPTO-JWT-002
+    name: jwt-verify-no-algorithm-restriction
+    description: "JWT verification without specifying allowed algorithms — algorithm confusion attack"
+    severity: critical
+    confidence: high
+    cwe: [CWE-347]
+    owasp: [A02:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "jwt\\.verify\\s*\\([^,]+,\\s*[^,]+\\s*,\\s*(?:function|\\()(?![^)]*algorithms)"
+      - regex: "jwt\\.verify\\s*\\([^)]+\\)(?![^;]*algorithms)"
+
+  - id: CRYPTO-JWT-003
+    name: jwt-no-expiry
+    description: "JWT signed without expiration claim (exp) — token valid indefinitely"
+    severity: high
+    confidence: medium
+    cwe: [CWE-613]
+    owasp: [A02:2025]
+    languages: [javascript, typescript, python, go]
+    patterns:
+      - regex: "jwt\\.sign\\s*\\(\\s*\\{[^}]*\\}\\s*,\\s*[^,)]+\\s*\\)(?![^;]*expiresIn|[^;]*exp\\b)"
+      - regex: "jwt\\.encode\\s*\\(\\s*\\{[^}]*\\}(?![^}]*exp\\b)"
+
+  - id: CRYPTO-JWT-004
+    name: jwt-decode-no-verify
+    description: "JWT decoded without signature verification — auth bypass"
+    severity: critical
+    confidence: high
+    cwe: [CWE-347]
+    owasp: [A02:2025]
+    languages: [javascript, typescript, python]
+    patterns:
+      - regex: "jwt\\.decode\\s*\\([^)]+\\)(?![^;]*verify|[^;]*secret)"
+      - regex: "PyJWT.*decode.*verify\\s*=\\s*False"
+      - regex: "options\\s*=\\s*\\{[^}]*verify\\s*:\\s*false"

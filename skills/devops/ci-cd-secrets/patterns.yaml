@@ -1,0 +1,47 @@
+rules:
+  - id: DEVOPS-CI-001
+    name: gitlab-ci-hardcoded-variable
+    description: "GitLab CI variable with hardcoded secret value"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "variables:\\s*\\n(?:\\s+\\w+:\\s*['\"]?[a-zA-Z0-9+/]{20,}['\"]?\\s*\\n)+"
+      - regex: "(?i)(?:API_KEY|SECRET|PASSWORD|TOKEN):\\s*['\"]?[a-zA-Z0-9+/\\-_]{16,}['\"]?"
+
+  - id: DEVOPS-CI-002
+    name: circleci-hardcoded-env
+    description: "CircleCI config with hardcoded environment variable value"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [yaml]
+    patterns:
+      - regex: "environment:\\s*\\n(?:\\s+[A-Z_]+:\\s*[a-zA-Z0-9+/]{20,}\\s*\\n)+"
+
+  - id: DEVOPS-CI-003
+    name: jenkinsfile-hardcoded-credential
+    description: "Jenkinsfile with hardcoded credential or password"
+    severity: critical
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "withCredentials.*password.*['\"][a-zA-Z0-9@#$%]{8,}['\"]"
+      - regex: "env\\.(?:PASSWORD|SECRET|TOKEN|API_KEY)\\s*=\\s*['\"][^'\"]{8,}['\"]"
+
+  - id: DEVOPS-CI-004
+    name: makefile-secret
+    description: "Makefile with hardcoded API key or credential"
+    severity: high
+    confidence: high
+    cwe: [CWE-798]
+    owasp: [A07:2025]
+    languages: [generic]
+    patterns:
+      - regex: "(?i)(?:API_KEY|SECRET|PASSWORD|TOKEN)\\s*:?=\\s*[a-zA-Z0-9+/\\-_]{16,}"
+      - regex: "export\\s+(?:API_KEY|SECRET|PASSWORD)=[a-zA-Z0-9+/\\-_]{16,}"

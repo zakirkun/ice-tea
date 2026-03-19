@@ -1,0 +1,61 @@
+rules:
+  - id: DESER-YAML-001
+    name: python-yaml-load-unsafe
+    description: "Python yaml.load() without SafeLoader — executes embedded Python code"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "yaml\\.load\\s*\\([^)]*(?!Loader\\s*=\\s*yaml\\.(?:Safe|Base|Full)Loader)[^)]*\\)"
+      - regex: "yaml\\.load\\s*\\(\\s*(?:f|data|stream|content)\\s*\\)(?![^;]*SafeLoader)"
+      - regex: "yaml\\.load\\s*\\([^,)]+\\)(?![^;\\n]*Loader)"
+
+  - id: DESER-YAML-002
+    name: python-yaml-load-user-input
+    description: "Python yaml.load() with request/user data — RCE via YAML injection"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "yaml\\.load\\s*\\(\\s*request\\.(?:data|body|form|files|get_data)"
+      - regex: "yaml\\.load\\s*\\(\\s*(?:user_input|data|payload)"
+
+  - id: DESER-YAML-003
+    name: ruby-yaml-load-unsafe
+    description: "Ruby YAML.load() without safe flag — RCE risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "YAML\\.load\\s*\\("
+      - regex: "Psych\\.load\\s*\\("
+
+  - id: DESER-YAML-004
+    name: js-yaml-load-unsafe
+    description: "js-yaml load() with unsafe: true option"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "yaml\\.load\\s*\\([^,)]+,\\s*\\{[^}]*unsafe\\s*:\\s*true"
+      - regex: "jsYaml\\.load\\s*\\([^,)]+,\\s*\\{[^}]*schema\\s*:\\s*jsYaml\\.DEFAULT_FULL_SCHEMA"
+
+  - id: DESER-YAML-005
+    name: yaml-load-from-file-unvalidated
+    description: "YAML loaded from file path controlled by user"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python, ruby]
+    patterns:
+      - regex: "yaml\\.load\\s*\\(\\s*open\\s*\\([^)]*(?:request|user|param|input)"
+      - regex: "yaml\\.load\\s*\\(\\s*File\\.read\\s*\\([^)]*(?:params|request)"

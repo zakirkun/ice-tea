@@ -1,0 +1,36 @@
+rules:
+  - id: MEM-HEAP-001
+    name: c-memcpy-heap-overflow
+    description: "memcpy() copies more bytes than destination heap buffer can hold"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-122]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "memcpy\\s*\\([^,]+,\\s*[^,]+,\\s*(?:strlen|sizeof)\\s*\\(\\s*src\\s*\\)\\s*\\)"
+      - regex: "memcpy\\s*\\([^,]+,\\s*[^,]+,\\s*len\\s*\\)(?![^;]*len\\s*<=|[^;]*len\\s*<)"
+
+  - id: MEM-HEAP-002
+    name: c-realloc-integer-overflow
+    description: "realloc() size calculation may overflow before heap allocation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-190]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "realloc\\s*\\([^,]+,\\s*\\w+\\s*\\*\\s*\\w+\\s*\\)"
+      - regex: "realloc\\s*\\([^,]+,\\s*\\w+\\s*\\+\\s*\\w+\\s*\\)"
+
+  - id: MEM-HEAP-003
+    name: c-heap-corruption-check
+    description: "Heap block size manipulated or checked without bounds — heap corruption"
+    severity: high
+    confidence: medium
+    cwe: [CWE-122]
+    owasp: [A06:2025]
+    languages: [c, cpp]
+    patterns:
+      - regex: "malloc\\s*\\(\\s*\\w+\\s*-\\s*\\w+\\s*\\)"
+      - regex: "calloc\\s*\\(\\s*[^,]+,\\s*\\w+\\s*-\\s*[0-9]+\\s*\\)"

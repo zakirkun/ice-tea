@@ -1,0 +1,47 @@
+rules:
+  - id: IOS-ATS-001
+    name: nstransport-allows-arbitrary-loads
+    description: "iOS NSAllowsArbitraryLoads completely disables ATS"
+    severity: critical
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "NSAllowsArbitraryLoads\\s*</key>\\s*<true/>"
+      - regex: "NSAllowsArbitraryLoads.*true"
+
+  - id: IOS-ATS-002
+    name: ats-insecure-http-loads
+    description: "iOS NSExceptionAllowsInsecureHTTPLoads for domain"
+    severity: high
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "NSExceptionAllowsInsecureHTTPLoads\\s*</key>\\s*<true/>"
+      - regex: "NSExceptionAllowsInsecureHTTPLoads.*true"
+
+  - id: IOS-ATS-003
+    name: ats-minimum-tls-version-old
+    description: "iOS ATS configured with TLS 1.0 or 1.1 minimum version"
+    severity: high
+    confidence: high
+    cwe: [CWE-326]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "NSExceptionMinimumTLSVersion.*TLSv1\\.(?:0|1)"
+      - regex: "NSExceptionMinimumTLSVersion\\s*</key>\\s*<string>TLSv1\\.[01]"
+
+  - id: IOS-ATS-004
+    name: ats-allow-web-content
+    description: "NSAllowsArbitraryLoadsForMedia or NSAllowsArbitraryLoadsInWebContent enabled"
+    severity: medium
+    confidence: high
+    cwe: [CWE-319]
+    owasp: [A02:2025]
+    languages: [generic]
+    patterns:
+      - regex: "NSAllowsArbitraryLoads(?:ForMedia|InWebContent)\\s*</key>\\s*<true/>"

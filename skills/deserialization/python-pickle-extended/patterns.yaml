@@ -1,0 +1,60 @@
+rules:
+  - id: DESER-PY-001
+    name: python-shelve-open-user-path
+    description: "Python shelve.open() with user-controlled path — pickle deserialization"
+    severity: critical
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "shelve\\.open\\s*\\(\\s*(?:request\\.args|request\\.form|user_input|params)"
+      - regex: "shelve\\.open\\s*\\([^)]*\\+[^)]*(?:request|user|input)"
+
+  - id: DESER-PY-002
+    name: python-marshal-loads
+    description: "Python marshal.loads() — bytecode deserialization, highly dangerous"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "marshal\\.loads\\s*\\("
+      - regex: "import\\s+marshal"
+
+  - id: DESER-PY-003
+    name: python-pickle-cookie
+    description: "Python pickle deserialization from cookie value"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "pickle\\.loads\\s*\\(\\s*base64\\.b64decode\\s*\\(\\s*request\\.cookies"
+      - regex: "pickle\\.loads\\s*\\(\\s*(?:request\\.cookies|session)"
+
+  - id: DESER-PY-004
+    name: python-dill-loads
+    description: "Python dill.loads() — extended pickle with even more dangerous capabilities"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "dill\\.loads\\s*\\("
+      - regex: "import\\s+dill"
+
+  - id: DESER-PY-005
+    name: python-jsonpickle-decode
+    description: "jsonpickle.decode() — JSON that reconstructs arbitrary Python objects"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [python]
+    patterns:
+      - regex: "jsonpickle\\.decode\\s*\\("
+      - regex: "import\\s+jsonpickle"

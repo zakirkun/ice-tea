@@ -1,0 +1,37 @@
+rules:
+  - id: DESER-RUBY-001
+    name: ruby-marshal-load-user-input
+    description: "Ruby Marshal.load() on user-controlled data — code execution risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "Marshal\\.load\\s*\\(\\s*(?:params|request|cookie)"
+      - regex: "Marshal\\.load\\s*\\(\\s*Base64\\.decode64\\s*\\(\\s*(?:params|cookie)"
+      - regex: "Marshal\\.restore\\s*\\(\\s*(?:params|request|cookie)"
+
+  - id: DESER-RUBY-002
+    name: ruby-marshal-load-generic
+    description: "Ruby Marshal.load() — verify input source is trusted"
+    severity: high
+    confidence: low
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "Marshal\\.load\\s*\\("
+      - regex: "Marshal\\.restore\\s*\\("
+
+  - id: DESER-RUBY-003
+    name: rails-cookie-marshal
+    description: "Rails session cookie using Marshal serializer — legacy insecure default"
+    severity: high
+    confidence: medium
+    cwe: [CWE-502]
+    owasp: [A08:2025]
+    languages: [ruby]
+    patterns:
+      - regex: "config\\.session_store.*cookie_store"
+      - regex: "Marshal\\.dump.*session|session.*Marshal\\.dump"

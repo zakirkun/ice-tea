@@ -1,0 +1,62 @@
+rules:
+  - id: AND-WV-001
+    name: android-webview-javascript-enabled
+    description: "WebView JavaScript enabled — code execution risk if combined with bridge"
+    severity: medium
+    confidence: high
+    cwe: [CWE-749]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "setJavaScriptEnabled\\s*\\(\\s*true\\s*\\)"
+      - ast_node_type: "call_expression"
+        function: "setJavaScriptEnabled"
+
+  - id: AND-WV-002
+    name: android-webview-javascript-interface
+    description: "WebView addJavascriptInterface exposes Java methods to JavaScript — RCE risk"
+    severity: critical
+    confidence: high
+    cwe: [CWE-749]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "addJavascriptInterface\\s*\\("
+      - ast_node_type: "call_expression"
+        function: "addJavascriptInterface"
+
+  - id: AND-WV-003
+    name: android-webview-file-access
+    description: "WebView with setAllowFileAccessFromFileURLs(true) — XSS reads local files"
+    severity: critical
+    confidence: high
+    cwe: [CWE-200]
+    owasp: [A01:2025]
+    languages: [java]
+    patterns:
+      - regex: "setAllowFileAccessFromFileURLs\\s*\\(\\s*true\\s*\\)"
+      - regex: "setAllowUniversalAccessFromFileURLs\\s*\\(\\s*true\\s*\\)"
+
+  - id: AND-WV-004
+    name: android-webview-debug-enabled
+    description: "WebView debugging enabled — exposes app to Chrome DevTools remotely"
+    severity: medium
+    confidence: high
+    cwe: [CWE-215]
+    owasp: [A05:2025]
+    languages: [java]
+    patterns:
+      - regex: "WebView\\.setWebContentsDebuggingEnabled\\s*\\(\\s*true\\s*\\)"
+      - regex: "setWebContentsDebuggingEnabled\\s*\\(\\s*BuildConfig\\.DEBUG\\s*\\)"
+
+  - id: AND-WV-005
+    name: android-webview-load-untrusted-url
+    description: "WebView loading URL from Intent or external input without validation"
+    severity: high
+    confidence: medium
+    cwe: [CWE-749]
+    owasp: [A03:2025]
+    languages: [java]
+    patterns:
+      - regex: "webView\\.loadUrl\\s*\\(\\s*(?:intent\\.getStringExtra|getIntent\\(\\)\\.getStringExtra|url)\\s*\\)"
+      - regex: "loadUrl\\s*\\(\\s*getIntent\\(\\)\\.getData\\(\\)\\.toString"

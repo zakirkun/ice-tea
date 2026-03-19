@@ -1,0 +1,36 @@
+rules:
+  - id: WEB-TAB-001
+    name: blank-target-no-noopener
+    description: "HTML anchor with target='_blank' missing rel='noopener' — tabnapping risk"
+    severity: medium
+    confidence: high
+    cwe: [CWE-1022]
+    owasp: [A05:2025]
+    languages: [javascript, typescript, php, python, generic]
+    patterns:
+      - regex: "<a\\s[^>]*target\\s*=\\s*['\"]_blank['\"][^>]*>(?![^<]*rel\\s*=\\s*['\"][^'\"]*noopener)"
+      - regex: "<a\\s[^>]*target\\s*=\\s*['\"]_blank['\"](?![^>]*rel\\s*=\\s*['\"][^'\"]*noopener)[^>]*>"
+
+  - id: WEB-TAB-002
+    name: jsx-blank-target-no-noopener
+    description: "React JSX anchor with target='_blank' missing rel='noopener noreferrer'"
+    severity: medium
+    confidence: high
+    cwe: [CWE-1022]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "target\\s*=\\s*['\"]_blank['\"](?![^>]*rel\\s*=\\s*['\"][^'\"]*noopener)"
+      - regex: "target=\\{?['\"]_blank['\"]\\}?(?![^>]*rel=)"
+
+  - id: WEB-TAB-003
+    name: window-open-no-noopener
+    description: "JavaScript window.open() without 'noopener' feature string"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-1022]
+    owasp: [A05:2025]
+    languages: [javascript, typescript]
+    patterns:
+      - regex: "window\\.open\\s*\\([^)]*(?!noopener)[^)]*\\)"
+      - regex: "window\\.open\\s*\\([^,)]+,\\s*['\"]_blank['\"](?![^)]*noopener)"

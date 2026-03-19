@@ -1,0 +1,36 @@
+rules:
+  - id: WEB-DMARK-001
+    name: html-attribute-injection
+    description: "User input inserted into HTML attribute value without encoding"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [php, python, javascript, typescript]
+    patterns:
+      - regex: "<[a-zA-Z]+\\s+[a-zA-Z]+\\s*=\\s*['\"][^'\"]*\\$_(?:GET|POST|REQUEST)"
+      - regex: "href\\s*=\\s*['\"][^'\"]*\\$\\{(?:req\\.query|user)"
+      - regex: "<[a-zA-Z]+ [^>]*=\\s*['\"][^'\"]*%s[^'\"]*['\"].*%\\s*(?:username|name|input)"
+
+  - id: WEB-DMARK-002
+    name: unescaped-html-in-template
+    description: "Jinja2/Flask render without escaping user variable in HTML attribute"
+    severity: medium
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [python]
+    patterns:
+      - regex: "\\|\\s*safe\\s*}}"
+      - regex: "Markup\\s*\\(\\s*[^)]*(?:request\\.args|request\\.form)"
+
+  - id: WEB-DMARK-003
+    name: unencoded-href-attribute
+    description: "User input in href attribute without URL encoding"
+    severity: high
+    confidence: medium
+    cwe: [CWE-79]
+    owasp: [A03:2025]
+    languages: [php, python, javascript]
+    patterns:
+      - regex: "href\\s*=\\s*['\"][^'\"]*(?:\\$_(?:GET|POST)|request\\.(?:args|form)\\.[^'\"]*)[^'\"]*['\"]"
