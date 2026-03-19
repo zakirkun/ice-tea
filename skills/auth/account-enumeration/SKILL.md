@@ -1,13 +1,29 @@
 ---
-name: Account Enumeration
-version: 1.0.0
-description: Detects authentication and registration endpoints that reveal whether a username or email exists, enabling targeted attacks.
-tags: [auth, enumeration, information-disclosure, owasp-a07]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: high
-cwe: [CWE-204]
-owasp: [A07:2025]
+cwe:
+    - CWE-204
+description: Detects authentication and registration endpoints that reveal whether a username or email exists, enabling targeted attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Account Enumeration
+owasp:
+    - A07:2025
+severity: medium
+tags:
+    - auth
+    - enumeration
+    - information-disclosure
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Account Enumeration

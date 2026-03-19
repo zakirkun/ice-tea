@@ -1,13 +1,29 @@
 ---
-name: NoSQL Injection
-version: 1.0.0
-description: Detects NoSQL query injection vulnerabilities in MongoDB, Redis, and other NoSQL databases.
-tags: [nosql, injection, mongodb, owasp-a03]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-943]
-owasp: [A03:2025]
+cwe:
+    - CWE-943
+description: Detects NoSQL query injection vulnerabilities in MongoDB, Redis, and other NoSQL databases.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: NoSQL Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - nosql
+    - injection
+    - mongodb
+    - owasp-a03
+version: 1.0.0
 ---
 
 # NoSQL Injection

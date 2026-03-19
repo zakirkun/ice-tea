@@ -1,13 +1,30 @@
 ---
-name: Timing Attack Vulnerability
-version: 1.0.0
-description: Detects comparison operations on secrets using non-constant-time functions, enabling timing side-channel attacks.
-tags: [crypto, timing-attack, side-channel, owasp-a02]
-languages: [python, javascript, typescript, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-208]
-owasp: [A02:2025]
+cwe:
+    - CWE-208
+description: Detects comparison operations on secrets using non-constant-time functions, enabling timing side-channel attacks.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Timing Attack Vulnerability
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - timing-attack
+    - side-channel
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Timing Attack Vulnerability

@@ -1,13 +1,32 @@
 ---
-name: OAuth Misconfiguration
-version: 1.0.0
-description: Detects common OAuth 2.0 implementation mistakes including missing state parameter, open redirect in redirect_uri, and token exposure.
-tags: [oauth, auth, csrf, owasp-a07]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-287, CWE-601, CWE-352]
-owasp: [A07:2025]
+cwe:
+    - CWE-287
+    - CWE-601
+    - CWE-352
+description: Detects common OAuth 2.0 implementation mistakes including missing state parameter, open redirect in redirect_uri, and token exposure.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: OAuth Misconfiguration
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - oauth
+    - auth
+    - csrf
+    - owasp-a07
+version: 1.0.0
 ---
 
 # OAuth Misconfiguration

@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-522]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "ApiKey\\.create\\s*\\(\\s*\\{[^}]*\\}\\s*\\)"
         - regex: "generateApiKey\\s*\\([^)]+\\)"

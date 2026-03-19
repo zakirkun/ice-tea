@@ -1,13 +1,25 @@
 ---
-name: Server-Side Include (SSI) Injection
-version: 1.0.0
-description: Detects user-controlled input reflected in pages processed by SSI, enabling file disclosure and command execution.
-tags: [injection, ssi, rce, owasp-a03]
-languages: [php, generic]
-severity: critical
 confidence: medium
-cwe: [CWE-97]
-owasp: [A03:2025]
+cwe:
+    - CWE-97
+description: Detects user-controlled input reflected in pages processed by SSI, enabling file disclosure and command execution.
+languages:
+    - php
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Server-Side Include (SSI) Injection
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - injection
+    - ssi
+    - rce
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Server-Side Include Injection

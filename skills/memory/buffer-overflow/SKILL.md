@@ -1,13 +1,28 @@
 ---
-name: Buffer Overflow
-version: 1.0.0
-description: Detects unsafe C/C++ functions that copy data without bounds checking, enabling stack and heap buffer overflows.
-tags: [buffer-overflow, memory, c, cpp, owasp-a06]
-languages: [c, cpp]
-severity: critical
 confidence: high
-cwe: [CWE-120, CWE-119, CWE-787]
-owasp: [A06:2025]
+cwe:
+    - CWE-120
+    - CWE-119
+    - CWE-787
+description: Detects unsafe C/C++ functions that copy data without bounds checking, enabling stack and heap buffer overflows.
+languages:
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Buffer Overflow
+owasp:
+    - A06:2025
+severity: critical
+tags:
+    - buffer-overflow
+    - memory
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Buffer Overflow

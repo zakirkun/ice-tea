@@ -1,13 +1,27 @@
 ---
-name: Atomicity Violation
-version: 1.0.0
-description: Detects code sequences that must be atomic but are not protected by synchronization, allowing interleaving that violates invariants.
-tags: [race-condition, concurrency, atomicity, owasp-a06]
-languages: [go, java, javascript, typescript]
-severity: high
 confidence: low
-cwe: [CWE-362]
-owasp: [A06:2025]
+cwe:
+    - CWE-362
+description: Detects code sequences that must be atomic but are not protected by synchronization, allowing interleaving that violates invariants.
+languages:
+    - go
+    - java
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Atomicity Violation
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - race-condition
+    - concurrency
+    - atomicity
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Atomicity Violation

@@ -52,7 +52,7 @@ rules:
       confidence: medium
       cwe: [CWE-434]
       owasp: ['A04:2025']
-      languages: [php, python, javascript, java]
+      languages: [php, python, javascript, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:uploads?|public|static|www|htdocs|webroot).*move_uploaded_file"
         - regex: "move_uploaded_file.*(?:uploads?|public|static|www)"

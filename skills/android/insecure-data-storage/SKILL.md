@@ -1,13 +1,25 @@
 ---
-name: Android Insecure Data Storage
-version: 1.0.0
-description: Detects sensitive data stored in plaintext in SharedPreferences, SQLite databases, or external storage in Android applications.
-tags: [android, mobile, data-storage, owasp-m2]
-languages: [java]
-severity: high
 confidence: high
-cwe: [CWE-312, CWE-922]
-owasp: [A02:2025]
+cwe:
+    - CWE-312
+    - CWE-922
+description: Detects sensitive data stored in plaintext in SharedPreferences, SQLite databases, or external storage in Android applications.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Android Insecure Data Storage
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - android
+    - mobile
+    - data-storage
+    - owasp-m2
+version: 1.0.0
 ---
 
 # Android Insecure Data Storage

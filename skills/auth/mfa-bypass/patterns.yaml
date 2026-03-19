@@ -51,7 +51,7 @@ rules:
       confidence: medium
       cwe: [CWE-287]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:req\\.session|session|\\$_SESSION)\\s*\\.?\\[?\\s*['\"]?(?:mfa_verified|2fa_passed|mfa_done|totp_ok)['\"]?\\s*\\]?\\s*=\\s*true"
     - id: AUTH-MFA-006
@@ -61,7 +61,7 @@ rules:
       confidence: high
       cwe: [CWE-798]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)backup_codes?\\s*[=:]\\s*\\[[^\\]]+\\]"
         - regex: "(?i)recovery_codes?\\s*=\\s*\\[['\"]\\w{8,}['\"]"
@@ -72,6 +72,6 @@ rules:
       confidence: low
       cwe: [CWE-287]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:store|save|set).*(?:otp|code|token)"

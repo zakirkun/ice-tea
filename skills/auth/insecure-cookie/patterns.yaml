@@ -82,7 +82,7 @@ rules:
       confidence: high
       cwe: [CWE-352]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, php, python, go, java, ruby]
+      languages: [javascript, typescript, php, python, go, java, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)SameSite\\s*=\\s*None"
         - regex: "(?i)samesite\\s*:\\s*['\"]none['\"]"

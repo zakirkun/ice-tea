@@ -1,13 +1,23 @@
 ---
-name: Insecure Deserialization
-version: 1.0.0
-description: Detects deserialization of untrusted data which can lead to Remote Code Execution.
-tags: [deserialization, rce, owasp-a08]
-languages: [generic]
-severity: critical
 confidence: medium
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects deserialization of untrusted data which can lead to Remote Code Execution.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Deserialization
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Insecure Deserialization

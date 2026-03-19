@@ -1,13 +1,29 @@
 ---
-name: Extended SSRF Detection (Cloud Metadata & Protocol Exploits)
-version: 1.0.0
-description: Detects SSRF vulnerabilities targeting cloud metadata services, internal networks, and non-HTTP protocols.
-tags: [ssrf, network, cloud, owasp-a10]
-languages: [javascript, typescript, python, go, java, php]
-severity: critical
 confidence: high
-cwe: [CWE-918]
-owasp: [A10:2025]
+cwe:
+    - CWE-918
+description: Detects SSRF vulnerabilities targeting cloud metadata services, internal networks, and non-HTTP protocols.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Extended SSRF Detection (Cloud Metadata & Protocol Exploits)
+owasp:
+    - A10:2025
+severity: critical
+tags:
+    - ssrf
+    - network
+    - cloud
+    - owasp-a10
+version: 1.0.0
 ---
 
 # Extended SSRF Detection (Cloud Metadata & Protocol Exploits)

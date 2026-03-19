@@ -1,13 +1,25 @@
 ---
-name: iOS URL Scheme Hijacking
-version: 1.0.0
-description: Detects iOS custom URL scheme handling that processes sensitive data without sender verification.
-tags: [ios, mobile, url-scheme, owasp-m1]
-languages: [generic, java]
-severity: high
 confidence: medium
-cwe: [CWE-940]
-owasp: [A01:2025]
+cwe:
+    - CWE-940
+description: Detects iOS custom URL scheme handling that processes sensitive data without sender verification.
+languages:
+    - generic
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS URL Scheme Hijacking
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - url-scheme
+    - owasp-m1
+version: 1.0.0
 ---
 
 # iOS URL Scheme Hijacking

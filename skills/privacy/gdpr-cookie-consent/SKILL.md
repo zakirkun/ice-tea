@@ -1,13 +1,26 @@
 ---
-name: Missing GDPR Cookie Consent
-version: 1.0.0
-description: Detects analytics and tracking scripts loaded without cookie consent mechanisms.
-tags: [privacy, gdpr, cookie-consent, owasp-a05]
-languages: [javascript, typescript, generic]
-severity: medium
 confidence: medium
-cwe: [CWE-311]
-owasp: [A05:2025]
+cwe:
+    - CWE-311
+description: Detects analytics and tracking scripts loaded without cookie consent mechanisms.
+languages:
+    - javascript
+    - typescript
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing GDPR Cookie Consent
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - privacy
+    - gdpr
+    - cookie-consent
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Missing GDPR Cookie Consent

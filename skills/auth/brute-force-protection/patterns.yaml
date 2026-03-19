@@ -39,7 +39,7 @@ rules:
       confidence: low
       cwe: [CWE-307]
       owasp: ['A07:2025']
-      languages: [php, python, javascript, java, go, ruby]
+      languages: [php, python, javascript, java, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:invalid|incorrect|wrong)\\s+(?:password|credentials)"
     - id: AUTH-BF-005

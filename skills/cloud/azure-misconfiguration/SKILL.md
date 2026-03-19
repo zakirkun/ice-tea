@@ -1,13 +1,28 @@
 ---
-name: Azure Misconfiguration
-version: 1.0.0
-description: Detects common Azure security misconfigurations including public blob storage, overprivileged managed identities, and insecure ARM templates.
-tags: [azure, cloud, arm-template, owasp-a05]
-languages: [yaml, generic, python, javascript]
-severity: critical
 confidence: high
-cwe: [CWE-732, CWE-798]
-owasp: [A05:2025]
+cwe:
+    - CWE-732
+    - CWE-798
+description: Detects common Azure security misconfigurations including public blob storage, overprivileged managed identities, and insecure ARM templates.
+languages:
+    - yaml
+    - generic
+    - python
+    - javascript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Azure Misconfiguration
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - azure
+    - cloud
+    - arm-template
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Azure Misconfiguration

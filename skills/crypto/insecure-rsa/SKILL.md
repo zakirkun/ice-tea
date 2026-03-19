@@ -1,13 +1,30 @@
 ---
-name: Insecure RSA Configuration
-version: 1.0.0
-description: Detects RSA usage with insufficient key sizes, PKCS#1 v1.5 padding (vulnerable to padding oracle), or direct message encryption without hybrid scheme.
-tags: [crypto, rsa, oaep, owasp-a02]
-languages: [python, javascript, typescript, java, go, php]
-severity: high
 confidence: high
-cwe: [CWE-780, CWE-326]
-owasp: [A02:2025]
+cwe:
+    - CWE-780
+    - CWE-326
+description: Detects RSA usage with insufficient key sizes, PKCS#1 v1.5 padding (vulnerable to padding oracle), or direct message encryption without hybrid scheme.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure RSA Configuration
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - rsa
+    - oaep
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure RSA Configuration

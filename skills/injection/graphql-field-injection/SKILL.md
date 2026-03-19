@@ -1,13 +1,28 @@
 ---
-name: GraphQL Field-Level Injection
-version: 1.0.0
-description: Detects GraphQL resolvers vulnerable to injection through unsanitized field arguments and dynamic query construction.
-tags: [injection, graphql, sql-injection, owasp-a03]
-languages: [javascript, typescript, python, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-89]
-owasp: [A03:2025]
+cwe:
+    - CWE-89
+description: Detects GraphQL resolvers vulnerable to injection through unsanitized field arguments and dynamic query construction.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: GraphQL Field-Level Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - injection
+    - graphql
+    - sql-injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # GraphQL Field-Level Injection

@@ -1,13 +1,25 @@
 ---
-name: PII in Analytics Events
-version: 1.0.0
-description: Detects PII being sent to analytics platforms like Google Analytics, Mixpanel, or Amplitude in event properties.
-tags: [privacy, analytics, pii, owasp-a09]
-languages: [javascript, typescript]
-severity: high
 confidence: medium
-cwe: [CWE-359]
-owasp: [A09:2025]
+cwe:
+    - CWE-359
+description: Detects PII being sent to analytics platforms like Google Analytics, Mixpanel, or Amplitude in event properties.
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: PII in Analytics Events
+owasp:
+    - A09:2025
+severity: high
+tags:
+    - privacy
+    - analytics
+    - pii
+    - owasp-a09
+version: 1.0.0
 ---
 
 # PII in Analytics Events

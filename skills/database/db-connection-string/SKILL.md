@@ -1,13 +1,32 @@
 ---
-name: Hardcoded Database Connection String
-version: 1.0.0
-description: Detects database connection strings with embedded credentials hardcoded in source code.
-tags: [database, secrets, hardcoded, owasp-a07]
-languages: [javascript, typescript, python, go, java, php, ruby, generic]
-severity: critical
 confidence: high
-cwe: [CWE-312, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-312
+    - CWE-798
+description: Detects database connection strings with embedded credentials hardcoded in source code.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded Database Connection String
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - database
+    - secrets
+    - hardcoded
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Hardcoded Database Connection String

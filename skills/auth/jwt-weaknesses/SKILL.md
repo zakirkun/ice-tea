@@ -1,13 +1,25 @@
 ---
-name: JSON Web Token (JWT) Weaknesses
-version: 1.0.0
-description: Detects insecure JWT implementations, such as accepting 'none' algorithms or using hardcoded secrets.
-tags: [jwt, auth, crypto, owasp-a07]
-languages: [generic]
-severity: critical
 confidence: medium
-cwe: [CWE-347, CWE-287]
-owasp: [A07:2025]
+cwe:
+    - CWE-347
+    - CWE-287
+description: Detects insecure JWT implementations, such as accepting 'none' algorithms or using hardcoded secrets.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: JSON Web Token (JWT) Weaknesses
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - jwt
+    - auth
+    - crypto
+    - owasp-a07
+version: 1.0.0
 ---
 
 # JSON Web Token (JWT) Weaknesses

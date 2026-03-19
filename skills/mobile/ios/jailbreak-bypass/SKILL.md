@@ -1,13 +1,24 @@
 ---
-name: iOS Jailbreak Detection Bypass Vulnerability
-version: 1.0.0
-description: Detects weak jailbreak detection implementations that can be easily bypassed.
-tags: [ios, mobile, jailbreak, owasp-m8]
-languages: [generic]
-severity: medium
 confidence: medium
-cwe: [CWE-656]
-owasp: [A08:2025]
+cwe:
+    - CWE-656
+description: Detects weak jailbreak detection implementations that can be easily bypassed.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS Jailbreak Detection Bypass Vulnerability
+owasp:
+    - A08:2025
+severity: medium
+tags:
+    - ios
+    - mobile
+    - jailbreak
+    - owasp-m8
+version: 1.0.0
 ---
 
 # iOS Jailbreak Detection Bypass

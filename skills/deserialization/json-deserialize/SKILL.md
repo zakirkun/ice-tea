@@ -1,13 +1,26 @@
 ---
-name: Insecure JSON Deserialization with Type Polymorphism
-version: 1.0.0
-description: Detects JSON deserialization configurations that allow polymorphic type instantiation, enabling object injection attacks.
-tags: [deserialization, json, owasp-a08]
-languages: [java, javascript, typescript, python]
-severity: high
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects JSON deserialization configurations that allow polymorphic type instantiation, enabling object injection attacks.
+languages:
+    - java
+    - javascript
+    - typescript
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure JSON Deserialization with Type Polymorphism
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - deserialization
+    - json
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Insecure JSON Deserialization

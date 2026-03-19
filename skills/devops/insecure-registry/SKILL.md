@@ -1,13 +1,25 @@
 ---
-name: Insecure Container Registry Configuration
-version: 1.0.0
-description: Detects Docker/container registry configurations using unauthenticated or HTTP (non-HTTPS) registries.
-tags: [devops, docker, registry, owasp-a05]
-languages: [generic, yaml]
-severity: high
 confidence: high
-cwe: [CWE-327]
-owasp: [A05:2025]
+cwe:
+    - CWE-327
+description: Detects Docker/container registry configurations using unauthenticated or HTTP (non-HTTPS) registries.
+languages:
+    - generic
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Container Registry Configuration
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - devops
+    - docker
+    - registry
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Insecure Container Registry Configuration

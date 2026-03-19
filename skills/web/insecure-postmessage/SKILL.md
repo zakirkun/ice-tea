@@ -1,13 +1,25 @@
 ---
-name: Insecure PostMessage Configuration
-version: 1.0.0
-description: Detects careless use of the HTML5 Web Messaging API (postMessage), such as sending messages to the generic '*' origin.
-tags: [web, frontend, postmessage, cors]
-languages: [generic]
-severity: medium
 confidence: medium
-cwe: [CWE-346, CWE-942]
-owasp: [A05:2025]
+cwe:
+    - CWE-346
+    - CWE-942
+description: Detects careless use of the HTML5 Web Messaging API (postMessage), such as sending messages to the generic '*' origin.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure PostMessage Configuration
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - web
+    - frontend
+    - postmessage
+    - cors
+version: 1.0.0
 ---
 
 # Insecure PostMessage Configuration

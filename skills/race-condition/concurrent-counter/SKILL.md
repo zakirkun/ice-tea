@@ -1,13 +1,29 @@
 ---
-name: Non-Atomic Counter Increment Race Condition
-version: 1.0.0
-description: Detects concurrent counter increments and decrements without atomic operations or mutex protection.
-tags: [race-condition, concurrency, counter, owasp-a06]
-languages: [go, java, javascript, typescript, c, cpp]
-severity: medium
 confidence: low
-cwe: [CWE-362]
-owasp: [A06:2025]
+cwe:
+    - CWE-362
+description: Detects concurrent counter increments and decrements without atomic operations or mutex protection.
+languages:
+    - go
+    - java
+    - javascript
+    - typescript
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Non-Atomic Counter Increment Race Condition
+owasp:
+    - A06:2025
+severity: medium
+tags:
+    - race-condition
+    - concurrency
+    - counter
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Non-Atomic Counter Race Condition

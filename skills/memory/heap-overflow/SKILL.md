@@ -1,13 +1,26 @@
 ---
-name: Heap Buffer Overflow
-version: 1.0.0
-description: Detects heap buffer overflows from unsafe memory operations and insufficient size validation.
-tags: [memory, heap-overflow, c, cpp, owasp-a06]
-languages: [c, cpp]
-severity: critical
 confidence: medium
-cwe: [CWE-122]
-owasp: [A06:2025]
+cwe:
+    - CWE-122
+description: Detects heap buffer overflows from unsafe memory operations and insufficient size validation.
+languages:
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Heap Buffer Overflow
+owasp:
+    - A06:2025
+severity: critical
+tags:
+    - memory
+    - heap-overflow
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Heap Buffer Overflow

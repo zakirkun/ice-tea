@@ -1,13 +1,29 @@
 ---
-name: Missing Input Size Limits
-version: 1.0.0
-description: Detects API endpoints without request body size limits, enabling denial of service via oversized payloads.
-tags: [api, dos, resource-exhaustion, owasp-a04]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: low
-cwe: [CWE-770]
-owasp: [A04:2025]
+cwe:
+    - CWE-770
+description: Detects API endpoints without request body size limits, enabling denial of service via oversized payloads.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing Input Size Limits
+owasp:
+    - A04:2025
+severity: high
+tags:
+    - api
+    - dos
+    - resource-exhaustion
+    - owasp-a04
+version: 1.0.0
 ---
 
 # Missing Input Size Limits

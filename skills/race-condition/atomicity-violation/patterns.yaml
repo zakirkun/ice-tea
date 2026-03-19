@@ -28,6 +28,6 @@ rules:
       confidence: low
       cwe: [CWE-362]
       owasp: ['A06:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "if\\s*\\([^)]*balance\\s*>=\\s*amount[^)]*\\)(?:[^;]*;){0,5}[^;]*balance\\s*-=\\s*amount"

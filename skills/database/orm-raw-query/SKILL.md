@@ -1,13 +1,30 @@
 ---
-name: ORM Raw Query Injection
-version: 1.0.0
-description: Detects raw SQL queries embedded within ORM frameworks that bypass parameterization, reintroducing SQL injection risk.
-tags: [database, sql-injection, orm, owasp-a03]
-languages: [javascript, typescript, python, java, go, php, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-89]
-owasp: [A03:2025]
+cwe:
+    - CWE-89
+description: Detects raw SQL queries embedded within ORM frameworks that bypass parameterization, reintroducing SQL injection risk.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: ORM Raw Query Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - database
+    - sql-injection
+    - orm
+    - owasp-a03
+version: 1.0.0
 ---
 
 # ORM Raw Query Injection

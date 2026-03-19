@@ -1,13 +1,28 @@
 ---
-name: XPath Injection
-version: 1.0.0
-description: Detects XPath queries built from user input without escaping, enabling authentication bypass and data disclosure.
-tags: [xpath, injection, xml, owasp-a03]
-languages: [java, python, javascript, typescript, php]
-severity: high
 confidence: medium
-cwe: [CWE-643]
-owasp: [A03:2025]
+cwe:
+    - CWE-643
+description: Detects XPath queries built from user input without escaping, enabling authentication bypass and data disclosure.
+languages:
+    - java
+    - python
+    - javascript
+    - typescript
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: XPath Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - xpath
+    - injection
+    - xml
+    - owasp-a03
+version: 1.0.0
 ---
 
 # XPath Injection

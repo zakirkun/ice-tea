@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-352]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)response_type=(?:code|token)"
         - regex: "(?i)oauth.*authorize.*(?:response_type|client_id)"
@@ -17,7 +17,7 @@ rules:
       confidence: high
       cwe: [CWE-287]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)response_type\\s*[=:]\\s*['\"]?token['\"]?"
         - regex: "(?i)response_type=token"
@@ -28,7 +28,7 @@ rules:
       confidence: high
       cwe: [CWE-798]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)client_secret\\s*[=:]\\s*['\"][a-zA-Z0-9_\\-]{16,}['\"]"
         - regex: "(?i)CLIENT_SECRET\\s*=\\s*['\"][^'\"]{10,}['\"]"
@@ -39,7 +39,7 @@ rules:
       confidence: medium
       cwe: [CWE-598]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)[?&]access_token=[^&\"'\\s]+"
         - regex: "(?i)[?&]token=[a-zA-Z0-9\\-_.]{20,}"
@@ -50,7 +50,7 @@ rules:
       confidence: medium
       cwe: [CWE-601]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)redirect_uri.*\\*"
         - regex: "(?i)redirect_uri.*startsWith|redirect_uri.*includes"
@@ -61,7 +61,7 @@ rules:
       confidence: low
       cwe: [CWE-287]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)response_type=code"
         - regex: "(?i)grant_type=authorization_code"

@@ -1,13 +1,31 @@
 ---
-name: Insecure Password Storage
-version: 1.0.0
-description: Detects passwords stored in plaintext or hashed with weak/unsalted algorithms instead of bcrypt/argon2/scrypt.
-tags: [password, auth, hashing, owasp-a02]
-languages: [php, python, javascript, java, go, ruby]
-severity: critical
 confidence: high
-cwe: [CWE-521, CWE-916, CWE-327]
-owasp: [A02:2025]
+cwe:
+    - CWE-521
+    - CWE-916
+    - CWE-327
+description: Detects passwords stored in plaintext or hashed with weak/unsalted algorithms instead of bcrypt/argon2/scrypt.
+languages:
+    - php
+    - python
+    - javascript
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Password Storage
+owasp:
+    - A02:2025
+severity: critical
+tags:
+    - password
+    - auth
+    - hashing
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure Password Storage

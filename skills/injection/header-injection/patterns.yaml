@@ -1,72 +1,67 @@
 rules:
-  - id: INJ-HDR-001
-    name: python-response-header-user-input
-    description: "Python HTTP response header set from user-controlled request parameter"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [python]
-    patterns:
-      - regex: "response\\.headers\\s*\\[\\s*['\"][^'\"]+['\"]\\s*\\]\\s*=\\s*request\\."
-      - regex: "headers\\[\\s*['\"](?:Location|Set-Cookie|Content-Type)['\"]\\s*\\]\\s*=.*request\\.(?:args|form|values)"
-
-  - id: INJ-HDR-002
-    name: java-response-setheader-user-input
-    description: "Java response.setHeader() with user-controlled parameter value"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [java]
-    patterns:
-      - regex: "response\\.setHeader\\s*\\([^,]+,\\s*request\\.getParameter"
-      - regex: "response\\.addHeader\\s*\\([^,]+,\\s*request\\.getParameter"
-      - regex: "response\\.sendRedirect\\s*\\(\\s*request\\.getParameter"
-
-  - id: INJ-HDR-003
-    name: php-header-injection
-    description: "PHP header() function with user-controlled value (CRLF injection)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [php]
-    patterns:
-      - regex: "header\\s*\\(\\s*['\"](?:Location|Set-Cookie|Content-Type):\\s*['\"]\\s*\\.\\s*\\$_(?:GET|POST|REQUEST)"
-      - regex: "header\\s*\\(\\s*['\"]Location:\\s*['\"]\\s*\\.\\s*\\$"
-
-  - id: INJ-HDR-004
-    name: go-http-header-user-input
-    description: "Go HTTP response header written from request parameter (CRLF risk)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [go]
-    patterns:
-      - regex: "w\\.Header\\(\\)\\.Set\\s*\\([^,]+,\\s*r\\.(?:URL\\.Query|FormValue|Header\\.Get)"
-      - regex: "w\\.Header\\(\\)\\.Add\\s*\\([^,]+,\\s*r\\."
-
-  - id: INJ-HDR-005
-    name: express-response-header-user-input
-    description: "Express.js res.set()/res.header() with user-controlled value"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "res\\.(?:set|header)\\s*\\([^,]+,\\s*req\\.(?:body|query|params|headers)"
-      - regex: "res\\.setHeader\\s*\\([^,]+,\\s*req\\."
-
-  - id: INJ-HDR-006
-    name: crlf-in-redirect
-    description: "Redirect URL constructed from user input without CRLF stripping"
-    severity: high
-    confidence: medium
-    cwe: [CWE-113]
-    owasp: [A03:2025]
-    languages: [python, javascript, typescript, go, php, java, ruby]
-    patterns:
-      - regex: "(?:redirect|sendRedirect|location\\.href)\\s*(?:\\(|=)\\s*[^;)\"']*(?:req\\.|request\\.|\\$_(?:GET|POST))"
+    - id: INJ-HDR-001
+      name: python-response-header-user-input
+      description: "Python HTTP response header set from user-controlled request parameter"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [python]
+      patterns:
+        - regex: "response\\.headers\\s*\\[\\s*['\"][^'\"]+['\"]\\s*\\]\\s*=\\s*request\\."
+        - regex: "headers\\[\\s*['\"](?:Location|Set-Cookie|Content-Type)['\"]\\s*\\]\\s*=.*request\\.(?:args|form|values)"
+    - id: INJ-HDR-002
+      name: java-response-setheader-user-input
+      description: "Java response.setHeader() with user-controlled parameter value"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [java]
+      patterns:
+        - regex: "response\\.setHeader\\s*\\([^,]+,\\s*request\\.getParameter"
+        - regex: "response\\.addHeader\\s*\\([^,]+,\\s*request\\.getParameter"
+        - regex: "response\\.sendRedirect\\s*\\(\\s*request\\.getParameter"
+    - id: INJ-HDR-003
+      name: php-header-injection
+      description: "PHP header() function with user-controlled value (CRLF injection)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [php]
+      patterns:
+        - regex: "header\\s*\\(\\s*['\"](?:Location|Set-Cookie|Content-Type):\\s*['\"]\\s*\\.\\s*\\$_(?:GET|POST|REQUEST)"
+        - regex: "header\\s*\\(\\s*['\"]Location:\\s*['\"]\\s*\\.\\s*\\$"
+    - id: INJ-HDR-004
+      name: go-http-header-user-input
+      description: "Go HTTP response header written from request parameter (CRLF risk)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [go]
+      patterns:
+        - regex: "w\\.Header\\(\\)\\.Set\\s*\\([^,]+,\\s*r\\.(?:URL\\.Query|FormValue|Header\\.Get)"
+        - regex: "w\\.Header\\(\\)\\.Add\\s*\\([^,]+,\\s*r\\."
+    - id: INJ-HDR-005
+      name: express-response-header-user-input
+      description: "Express.js res.set()/res.header() with user-controlled value"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "res\\.(?:set|header)\\s*\\([^,]+,\\s*req\\.(?:body|query|params|headers)"
+        - regex: "res\\.setHeader\\s*\\([^,]+,\\s*req\\."
+    - id: INJ-HDR-006
+      name: crlf-in-redirect
+      description: "Redirect URL constructed from user input without CRLF stripping"
+      severity: high
+      confidence: medium
+      cwe: [CWE-113]
+      owasp: ['A03:2025']
+      languages: [python, javascript, typescript, go, php, java, ruby, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:redirect|sendRedirect|location\\.href)\\s*(?:\\(|=)\\s*[^;)\"']*(?:req\\.|request\\.|\\$_(?:GET|POST))"

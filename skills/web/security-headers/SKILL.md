@@ -1,13 +1,31 @@
 ---
-name: Missing Security Headers
-version: 1.0.0
-description: Detects missing or misconfigured HTTP security headers that protect against common browser-based attacks.
-tags: [security-headers, web, csp, hsts, owasp-a05]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: medium
 confidence: medium
-cwe: [CWE-16]
-owasp: [A05:2025]
+cwe:
+    - CWE-16
+description: Detects missing or misconfigured HTTP security headers that protect against common browser-based attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing Security Headers
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - security-headers
+    - web
+    - csp
+    - hsts
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Missing Security Headers

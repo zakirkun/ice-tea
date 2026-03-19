@@ -1,13 +1,30 @@
 ---
-name: Sensitive Data in Logs
-version: 1.0.0
-description: Detects passwords, tokens, credit card numbers, and other sensitive data written to log files.
-tags: [logging, sensitive-data, pii, owasp-a09]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-532]
-owasp: [A09:2025]
+cwe:
+    - CWE-532
+description: Detects passwords, tokens, credit card numbers, and other sensitive data written to log files.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Sensitive Data in Logs
+owasp:
+    - A09:2025
+severity: high
+tags:
+    - logging
+    - sensitive-data
+    - pii
+    - owasp-a09
+version: 1.0.0
 ---
 
 # Sensitive Data in Logs

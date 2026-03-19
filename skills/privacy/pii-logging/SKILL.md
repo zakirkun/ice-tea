@@ -1,13 +1,30 @@
 ---
-name: PII (Personally Identifiable Information) in Logs
-version: 1.0.0
-description: Detects Personally Identifiable Information (PII) such as email addresses, phone numbers, and SSNs being written to log files.
-tags: [privacy, gdpr, pii, logging, owasp-a09]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-532]
-owasp: [A09:2025]
+cwe:
+    - CWE-532
+description: Detects Personally Identifiable Information (PII) such as email addresses, phone numbers, and SSNs being written to log files.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: PII (Personally Identifiable Information) in Logs
+owasp:
+    - A09:2025
+severity: high
+tags:
+    - privacy
+    - gdpr
+    - pii
+    - logging
+    - owasp-a09
+version: 1.0.0
 ---
 
 # PII in Logs

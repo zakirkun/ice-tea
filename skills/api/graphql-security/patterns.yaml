@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-200]
       owasp: ['A08:2025']
-      languages: [javascript, typescript, python, java]
+      languages: [javascript, typescript, python, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "introspection\\s*:\\s*true"
         - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*"
@@ -30,7 +30,7 @@ rules:
       confidence: high
       cwe: [CWE-200]
       owasp: ['A08:2025']
-      languages: [javascript, typescript, python, java]
+      languages: [javascript, typescript, python, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "playground\\s*:\\s*true"
         - regex: "graphiql\\s*:\\s*true"

@@ -1,13 +1,29 @@
 ---
-name: Session Fixation
-version: 1.0.0
-description: Detects missing session regeneration after login, allowing session fixation attacks.
-tags: [session, auth, fixation, owasp-a07]
-languages: [php, python, javascript, java, go, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-384]
-owasp: [A07:2025]
+cwe:
+    - CWE-384
+description: Detects missing session regeneration after login, allowing session fixation attacks.
+languages:
+    - php
+    - python
+    - javascript
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Session Fixation
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - session
+    - auth
+    - fixation
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Session Fixation

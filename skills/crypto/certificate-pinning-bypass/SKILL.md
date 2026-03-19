@@ -1,13 +1,28 @@
 ---
-name: Certificate Pinning Bypass
-version: 1.0.0
-description: Detects network configurations and code patterns that disable or bypass certificate pinning, weakening TLS security.
-tags: [crypto, certificate-pinning, tls, owasp-a02]
-languages: [java, javascript, typescript, go, python]
-severity: critical
 confidence: high
-cwe: [CWE-295]
-owasp: [A02:2025]
+cwe:
+    - CWE-295
+description: Detects network configurations and code patterns that disable or bypass certificate pinning, weakening TLS security.
+languages:
+    - java
+    - javascript
+    - typescript
+    - go
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Certificate Pinning Bypass
+owasp:
+    - A02:2025
+severity: critical
+tags:
+    - crypto
+    - certificate-pinning
+    - tls
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Certificate Pinning Bypass

@@ -1,13 +1,28 @@
 ---
-name: Unpinned Dependency Versions
-version: 1.0.0
-description: Detects dependencies specified with loose version constraints that may install different code between builds.
-tags: [supply-chain, dependencies, version-pinning, owasp-a06]
-languages: [generic, python, javascript, typescript, go]
-severity: medium
 confidence: medium
-cwe: [CWE-494]
-owasp: [A06:2025]
+cwe:
+    - CWE-494
+description: Detects dependencies specified with loose version constraints that may install different code between builds.
+languages:
+    - generic
+    - python
+    - javascript
+    - typescript
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Unpinned Dependency Versions
+owasp:
+    - A06:2025
+severity: medium
+tags:
+    - supply-chain
+    - dependencies
+    - version-pinning
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Unpinned Dependency Versions

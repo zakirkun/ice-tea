@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-1059]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.(?:get|post|put|delete)\\s*\\(['\"][^'\"]*v1[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\(req)"
         - regex: "prefix\\s*[=:]\\s*['\"](?:/api)?/v1['\"]"
@@ -17,7 +17,7 @@ rules:
       confidence: high
       cwe: [CWE-1059]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, java]
+      languages: [javascript, typescript, python, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "@deprecated.*\\n.*@(?:GetMapping|PostMapping|app\\.route)"
         - regex "(?:// DEPRECATED|# deprecated|@Deprecated).*\\n.*(?:app|router)\\.(?:get|post)"

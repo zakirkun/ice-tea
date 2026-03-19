@@ -1,77 +1,72 @@
 rules:
-  - id: LOG-SENS-001
-    name: password-in-log
-    description: "Password value passed directly to logging function"
-    severity: high
-    confidence: high
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug|warn|error)).*password"
-      - regex: "logging\\.(?:info|debug|warning).*password"
-      - regex: "log\\.(?:Printf|Println).*(?:password|passwd|pwd)"
-      - regex: "log(?:ger)?\\.(?:info|debug|warn)\\s*\\([^)]*\\.password"
-
-  - id: LOG-SENS-002
-    name: token-in-log
-    description: "Authentication token or API key passed to logger"
-    severity: high
-    confidence: high
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?:console\\.log|logger?\\.(?:info|debug)).*(?:token|api_key|apiKey|secret|bearer)"
-      - regex: "logging\\.(?:info|debug).*(?:token|api_key|secret)"
-      - regex: "log\\.(?:Printf|Println).*(?:token|secret|bearer)"
-
-  - id: LOG-SENS-003
-    name: credit-card-in-log
-    description: "Credit card number pattern logged"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*(?:card|ccn|credit|pan)"
-      - regex: "log.*[0-9]{4}[\\s-]?[0-9]{4}[\\s-]?[0-9]{4}[\\s-]?[0-9]{4}"
-
-  - id: LOG-SENS-004
-    name: ssn-in-log
-    description: "Social Security Number (SSN) pattern in log statement"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "log.*\\b[0-9]{3}-[0-9]{2}-[0-9]{4}\\b"
-      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*ssn"
-
-  - id: LOG-SENS-005
-    name: request-body-logged-wholesale
-    description: "Entire request body logged without field filtering (PII/secrets exposure)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go, java]
-    patterns:
-      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug))\\s*\\(\\s*(?:JSON\\.stringify\\s*\\(\\s*)?req\\.body\\s*[,))]"
-      - regex: "logging\\.(?:info|debug)\\s*\\(.*request\\.data"
-      - regex: "log\\.(?:Printf|Println).*r\\.Body"
-
-  - id: LOG-SENS-006
-    name: java-log-sensitive
-    description: "Java logger logging password or sensitive field"
-    severity: high
-    confidence: high
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [java]
-    patterns:
-      - regex: "log(?:ger)?\\.(?:info|debug|warn)\\s*\\(.*['\"].*password['\"]"
-      - regex: "LOG\\.(?:info|debug)\\s*\\(.*getPassword\\s*\\("
-      - regex: "logger\\.debug\\s*\\(.*password|.*token|.*secret"
+    - id: LOG-SENS-001
+      name: password-in-log
+      description: "Password value passed directly to logging function"
+      severity: high
+      confidence: high
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug|warn|error)).*password"
+        - regex: "logging\\.(?:info|debug|warning).*password"
+        - regex: "log\\.(?:Printf|Println).*(?:password|passwd|pwd)"
+        - regex: "log(?:ger)?\\.(?:info|debug|warn)\\s*\\([^)]*\\.password"
+    - id: LOG-SENS-002
+      name: token-in-log
+      description: "Authentication token or API key passed to logger"
+      severity: high
+      confidence: high
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:console\\.log|logger?\\.(?:info|debug)).*(?:token|api_key|apiKey|secret|bearer)"
+        - regex: "logging\\.(?:info|debug).*(?:token|api_key|secret)"
+        - regex: "log\\.(?:Printf|Println).*(?:token|secret|bearer)"
+    - id: LOG-SENS-003
+      name: credit-card-in-log
+      description: "Credit card number pattern logged"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*(?:card|ccn|credit|pan)"
+        - regex: "log.*[0-9]{4}[\\s-]?[0-9]{4}[\\s-]?[0-9]{4}[\\s-]?[0-9]{4}"
+    - id: LOG-SENS-004
+      name: ssn-in-log
+      description: "Social Security Number (SSN) pattern in log statement"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "log.*\\b[0-9]{3}-[0-9]{2}-[0-9]{4}\\b"
+        - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug)).*ssn"
+    - id: LOG-SENS-005
+      name: request-body-logged-wholesale
+      description: "Entire request body logged without field filtering (PII/secrets exposure)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug))\\s*\\(\\s*(?:JSON\\.stringify\\s*\\(\\s*)?req\\.body\\s*[,))]"
+        - regex: "logging\\.(?:info|debug)\\s*\\(.*request\\.data"
+        - regex: "log\\.(?:Printf|Println).*r\\.Body"
+    - id: LOG-SENS-006
+      name: java-log-sensitive
+      description: "Java logger logging password or sensitive field"
+      severity: high
+      confidence: high
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [java]
+      patterns:
+        - regex: "log(?:ger)?\\.(?:info|debug|warn)\\s*\\(.*['\"].*password['\"]"
+        - regex: "LOG\\.(?:info|debug)\\s*\\(.*getPassword\\s*\\("
+        - regex: "logger\\.debug\\s*\\(.*password|.*token|.*secret"

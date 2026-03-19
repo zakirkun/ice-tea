@@ -1,13 +1,27 @@
 ---
-name: Subdomain Takeover Risk
-version: 1.0.0
-description: Detects CNAME records pointing to cloud services that may be dangling, and configurations referencing external services vulnerable to takeover.
-tags: [web, subdomain-takeover, dns, owasp-a05]
-languages: [javascript, typescript, yaml, generic]
-severity: high
 confidence: medium
-cwe: [CWE-350]
-owasp: [A05:2025]
+cwe:
+    - CWE-350
+description: Detects CNAME records pointing to cloud services that may be dangling, and configurations referencing external services vulnerable to takeover.
+languages:
+    - javascript
+    - typescript
+    - yaml
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Subdomain Takeover Risk
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - web
+    - subdomain-takeover
+    - dns
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Subdomain Takeover Risk

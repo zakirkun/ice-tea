@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-16]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, go, python]
+      languages: [javascript, typescript, go, python, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.post\\s*\\([^)]+\\)"
         - regex: "(?:req\\.body|request\\.json)"

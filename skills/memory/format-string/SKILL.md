@@ -1,13 +1,26 @@
 ---
-name: Format String Vulnerability
-version: 1.0.0
-description: Detects format string vulnerabilities where user-controlled input is passed directly as the format argument to printf-family functions.
-tags: [format-string, memory, c, cpp, owasp-a06]
-languages: [c, cpp]
-severity: critical
 confidence: high
-cwe: [CWE-134]
-owasp: [A06:2025]
+cwe:
+    - CWE-134
+description: Detects format string vulnerabilities where user-controlled input is passed directly as the format argument to printf-family functions.
+languages:
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Format String Vulnerability
+owasp:
+    - A06:2025
+severity: critical
+tags:
+    - format-string
+    - memory
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Format String Vulnerability

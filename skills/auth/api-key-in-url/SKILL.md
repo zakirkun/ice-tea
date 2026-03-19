@@ -1,13 +1,30 @@
 ---
-name: API Key Exposed in URL
-version: 1.0.0
-description: Detects API keys and tokens passed as URL query parameters, which are logged in server logs, browser history, and Referer headers.
-tags: [auth, api-key, information-disclosure, owasp-a07]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-598]
-owasp: [A07:2025]
+cwe:
+    - CWE-598
+description: Detects API keys and tokens passed as URL query parameters, which are logged in server logs, browser history, and Referer headers.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: API Key Exposed in URL
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - auth
+    - api-key
+    - information-disclosure
+    - owasp-a07
+version: 1.0.0
 ---
 
 # API Key Exposed in URL

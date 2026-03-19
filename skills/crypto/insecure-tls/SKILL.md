@@ -1,13 +1,31 @@
 ---
-name: Insecure TLS Configuration
-version: 1.0.0
-description: Detects insecure TLS settings including disabled certificate verification, outdated protocol versions, and weak cipher suites.
-tags: [tls, ssl, crypto, owasp-a02]
-languages: [go, python, javascript, typescript, java, php]
-severity: critical
 confidence: high
-cwe: [CWE-295, CWE-326, CWE-327]
-owasp: [A02:2025]
+cwe:
+    - CWE-295
+    - CWE-326
+    - CWE-327
+description: Detects insecure TLS settings including disabled certificate verification, outdated protocol versions, and weak cipher suites.
+languages:
+    - go
+    - python
+    - javascript
+    - typescript
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure TLS Configuration
+owasp:
+    - A02:2025
+severity: critical
+tags:
+    - tls
+    - ssl
+    - crypto
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure TLS Configuration

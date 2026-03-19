@@ -1,13 +1,31 @@
 ---
-name: MFA / 2FA Bypass Vulnerabilities
-version: 1.0.0
-description: Detects insecure multi-factor authentication implementations that can be bypassed.
-tags: [mfa, 2fa, auth, bypass, owasp-a07]
-languages: [javascript, typescript, python, go, java, php]
-severity: critical
 confidence: medium
-cwe: [CWE-287, CWE-303]
-owasp: [A07:2025]
+cwe:
+    - CWE-287
+    - CWE-303
+description: Detects insecure multi-factor authentication implementations that can be bypassed.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: MFA / 2FA Bypass Vulnerabilities
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - mfa
+    - 2fa
+    - auth
+    - bypass
+    - owasp-a07
+version: 1.0.0
 ---
 
 # MFA / 2FA Bypass Vulnerabilities

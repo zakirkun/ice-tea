@@ -1,13 +1,28 @@
 ---
-name: Reverse Tabnapping
-version: 1.0.0
-description: Detects anchor tags with target="_blank" without rel="noopener noreferrer", allowing opened pages to manipulate the opener.
-tags: [web, tabnapping, xss, owasp-a05]
-languages: [javascript, typescript, php, python, generic]
-severity: medium
 confidence: high
-cwe: [CWE-1022]
-owasp: [A05:2025]
+cwe:
+    - CWE-1022
+description: Detects anchor tags with target="_blank" without rel="noopener noreferrer", allowing opened pages to manipulate the opener.
+languages:
+    - javascript
+    - typescript
+    - php
+    - python
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Reverse Tabnapping
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - web
+    - tabnapping
+    - xss
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Reverse Tabnapping

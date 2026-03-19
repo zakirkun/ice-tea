@@ -1,13 +1,28 @@
 ---
-name: PDF / Document Injection
-version: 1.0.0
-description: Detects user input embedded in PDF or document generation without sanitization, enabling XSS through PDF rendering and data exfiltration.
-tags: [injection, pdf, document, owasp-a03]
-languages: [javascript, typescript, python, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-79
+description: Detects user input embedded in PDF or document generation without sanitization, enabling XSS through PDF rendering and data exfiltration.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: PDF / Document Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - injection
+    - pdf
+    - document
+    - owasp-a03
+version: 1.0.0
 ---
 
 # PDF / Document Injection

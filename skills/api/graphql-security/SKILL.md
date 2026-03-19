@@ -1,13 +1,29 @@
 ---
-name: GraphQL Security Issues
-version: 1.0.0
-description: Detects insecure GraphQL configurations including enabled introspection, unbounded query depth, and missing authentication on resolvers.
-tags: [graphql, api, introspection, owasp-api8]
-languages: [javascript, typescript, python, java, go]
-severity: high
 confidence: high
-cwe: [CWE-200, CWE-400]
-owasp: [A08:2025]
+cwe:
+    - CWE-200
+    - CWE-400
+description: Detects insecure GraphQL configurations including enabled introspection, unbounded query depth, and missing authentication on resolvers.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: GraphQL Security Issues
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - graphql
+    - api
+    - introspection
+    - owasp-api8
+version: 1.0.0
 ---
 
 # GraphQL Security Issues

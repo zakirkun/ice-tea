@@ -1,36 +1,34 @@
 rules:
-  - id: WEB-CORPN-001
-    name: allow-private-network-wildcard
-    description: "Access-Control-Allow-Private-Network: true with wildcard origin"
-    severity: high
-    confidence: high
-    cwe: [CWE-942]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Access-Control-Allow-Private-Network.*true"
-      - regex: "allowPrivateNetwork.*true"
-
-  - id: WEB-CORPN-002
-    name: cors-allow-all-internal-endpoint
-    description: "Internal API endpoint with CORS wildcard — exposed to cross-origin requests"
-    severity: high
-    confidence: medium
-    cwe: [CWE-942]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "(?:app|router)\\.(?:get|post|use)\\(['\"][^'\"]*(?:internal|admin|api)[^'\"]*['\"].*cors.*\\*"
-      - regex: "Access-Control-Allow-Origin.*\\*.*(?:internal|admin|private)"
-
-  - id: WEB-CORPN-003
-    name: cors-allows-null-origin
-    description: "CORS allows null origin — enables sandbox iframe CSRF"
-    severity: high
-    confidence: high
-    cwe: [CWE-942]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)allowedOrigins?.*['\"]null['\"]"
-      - regex: "Access-Control-Allow-Origin.*\\bnull\\b"
+    - id: WEB-CORPN-001
+      name: allow-private-network-wildcard
+      description: "Access-Control-Allow-Private-Network: true with wildcard origin"
+      severity: high
+      confidence: high
+      cwe: [CWE-942]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)Access-Control-Allow-Private-Network.*true"
+        - regex: "allowPrivateNetwork.*true"
+    - id: WEB-CORPN-002
+      name: cors-allow-all-internal-endpoint
+      description: "Internal API endpoint with CORS wildcard — exposed to cross-origin requests"
+      severity: high
+      confidence: medium
+      cwe: [CWE-942]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:app|router)\\.(?:get|post|use)\\(['\"][^'\"]*(?:internal|admin|api)[^'\"]*['\"].*cors.*\\*"
+        - regex: "Access-Control-Allow-Origin.*\\*.*(?:internal|admin|private)"
+    - id: WEB-CORPN-003
+      name: cors-allows-null-origin
+      description: "CORS allows null origin — enables sandbox iframe CSRF"
+      severity: high
+      confidence: high
+      cwe: [CWE-942]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)allowedOrigins?.*['\"]null['\"]"
+        - regex: "Access-Control-Allow-Origin.*\\bnull\\b"

@@ -1,13 +1,28 @@
 ---
-name: Database Backup File Exposure
-version: 1.0.0
-description: Detects database backup files stored in web-accessible directories or referenced with predictable names.
-tags: [database, backup, information-disclosure, owasp-a05]
-languages: [generic, php, python, javascript, go]
-severity: critical
 confidence: medium
-cwe: [CWE-530]
-owasp: [A05:2025]
+cwe:
+    - CWE-530
+description: Detects database backup files stored in web-accessible directories or referenced with predictable names.
+languages:
+    - generic
+    - php
+    - python
+    - javascript
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Database Backup File Exposure
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - database
+    - backup
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Database Backup File Exposure

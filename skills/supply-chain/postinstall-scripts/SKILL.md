@@ -1,13 +1,26 @@
 ---
-name: Dangerous Package Lifecycle Scripts
-version: 1.0.0
-description: Detects npm/pip package lifecycle scripts that download and execute code, a common malicious package technique.
-tags: [supply-chain, npm, lifecycle-scripts, owasp-a06]
-languages: [javascript, typescript, generic]
-severity: high
 confidence: high
-cwe: [CWE-506]
-owasp: [A06:2025]
+cwe:
+    - CWE-506
+description: Detects npm/pip package lifecycle scripts that download and execute code, a common malicious package technique.
+languages:
+    - javascript
+    - typescript
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Dangerous Package Lifecycle Scripts
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - supply-chain
+    - npm
+    - lifecycle-scripts
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Dangerous Package Lifecycle Scripts

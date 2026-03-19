@@ -1,13 +1,29 @@
 ---
-name: LDAP Injection
-version: 1.0.0
-description: Detects LDAP queries constructed from user input without proper escaping, enabling authentication bypass and data exfiltration.
-tags: [ldap, injection, auth, owasp-a03]
-languages: [java, python, javascript, typescript, php, go]
-severity: high
 confidence: medium
-cwe: [CWE-90]
-owasp: [A03:2025]
+cwe:
+    - CWE-90
+description: Detects LDAP queries constructed from user input without proper escaping, enabling authentication bypass and data exfiltration.
+languages:
+    - java
+    - python
+    - javascript
+    - typescript
+    - php
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: LDAP Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - ldap
+    - injection
+    - auth
+    - owasp-a03
+version: 1.0.0
 ---
 
 # LDAP Injection

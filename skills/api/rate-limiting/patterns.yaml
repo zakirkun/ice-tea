@@ -39,7 +39,7 @@ rules:
       confidence: medium
       cwe: [CWE-770]
       owasp: ['A04:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "limit\\s*=\\s*(?:req\\.query\\.limit|request\\.args\\.get\\(['\"]limit['\"]\\))"
         - regex: "LIMIT\\s+\\$?(?:limit|pageSize|size)"

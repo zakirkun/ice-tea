@@ -1,13 +1,30 @@
 ---
-name: CSV / Formula Injection (Spreadsheet Injection)
-version: 1.0.0
-description: Detects user-controlled data written to CSV files without sanitization, enabling formula injection in spreadsheet applications.
-tags: [injection, csv, formula-injection, owasp-a03]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-1236]
-owasp: [A03:2025]
+cwe:
+    - CWE-1236
+description: Detects user-controlled data written to CSV files without sanitization, enabling formula injection in spreadsheet applications.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: CSV / Formula Injection (Spreadsheet Injection)
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - injection
+    - csv
+    - formula-injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # CSV / Formula Injection

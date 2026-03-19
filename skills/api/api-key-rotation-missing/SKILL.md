@@ -1,13 +1,29 @@
 ---
-name: API Key Without Rotation or Expiration
-version: 1.0.0
-description: Detects API key implementations without expiration dates or rotation mechanisms, creating long-lived credentials.
-tags: [api, api-key, rotation, owasp-a07]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: low
-cwe: [CWE-522]
-owasp: [A07:2025]
+cwe:
+    - CWE-522
+description: Detects API key implementations without expiration dates or rotation mechanisms, creating long-lived credentials.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: API Key Without Rotation or Expiration
+owasp:
+    - A07:2025
+severity: medium
+tags:
+    - api
+    - api-key
+    - rotation
+    - owasp-a07
+version: 1.0.0
 ---
 
 # API Key Without Rotation

@@ -1,13 +1,27 @@
 ---
-name: SNMP Weak Community String
-version: 1.0.0
-description: Detects SNMP configurations using default or weak community strings that allow unauthorized network device management.
-tags: [network, snmp, credentials, owasp-a07]
-languages: [python, go, javascript, generic]
-severity: high
 confidence: high
-cwe: [CWE-1392]
-owasp: [A07:2025]
+cwe:
+    - CWE-1392
+description: Detects SNMP configurations using default or weak community strings that allow unauthorized network device management.
+languages:
+    - python
+    - go
+    - javascript
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: SNMP Weak Community String
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - network
+    - snmp
+    - credentials
+    - owasp-a07
+version: 1.0.0
 ---
 
 # SNMP Weak Community String

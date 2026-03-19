@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-269]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "User\\.(?:update|save).*req\\.body"
         - regex: "user_update.*request\\.json"
@@ -28,7 +28,7 @@ rules:
       confidence: high
       cwe: [CWE-269]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:user|account)\\.(?:isAdmin|is_admin|admin)\\s*=\\s*(?:req\\.body|request\\.json|\\$_POST)"
         - regex: "(?:user|account)\\.(?:role|permission)\\s*=\\s*req\\.body\\.(?:role|permission)"

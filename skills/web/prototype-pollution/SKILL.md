@@ -1,13 +1,25 @@
 ---
-name: Prototype Pollution
-version: 1.0.0
-description: Detects JavaScript prototype pollution vulnerabilities where attacker-controlled keys can modify Object.prototype.
-tags: [prototype-pollution, javascript, web, owasp-a08]
-languages: [javascript, typescript]
-severity: high
 confidence: medium
-cwe: [CWE-1321]
-owasp: [A08:2025]
+cwe:
+    - CWE-1321
+description: Detects JavaScript prototype pollution vulnerabilities where attacker-controlled keys can modify Object.prototype.
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Prototype Pollution
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - prototype-pollution
+    - javascript
+    - web
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Prototype Pollution

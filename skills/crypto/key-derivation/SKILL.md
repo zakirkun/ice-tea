@@ -1,13 +1,31 @@
 ---
-name: Insecure Key Derivation
-version: 1.0.0
-description: Detects passwords used directly as encryption keys or hashed with fast algorithms instead of proper KDFs (PBKDF2, bcrypt, Argon2, scrypt).
-tags: [crypto, kdf, pbkdf2, argon2, owasp-a02]
-languages: [python, javascript, typescript, java, go, php]
-severity: high
 confidence: high
-cwe: [CWE-916, CWE-760]
-owasp: [A02:2025]
+cwe:
+    - CWE-916
+    - CWE-760
+description: Detects passwords used directly as encryption keys or hashed with fast algorithms instead of proper KDFs (PBKDF2, bcrypt, Argon2, scrypt).
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Key Derivation
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - kdf
+    - pbkdf2
+    - argon2
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure Key Derivation

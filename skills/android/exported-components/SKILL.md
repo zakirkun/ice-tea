@@ -1,13 +1,26 @@
 ---
-name: Android Exported Components Without Permission
-version: 1.0.0
-description: Detects Android Activities, Services, BroadcastReceivers, and ContentProviders exported without proper permission checks.
-tags: [android, mobile, exported-components, owasp-m1]
-languages: [java, generic]
-severity: high
 confidence: high
-cwe: [CWE-926, CWE-284]
-owasp: [A01:2025]
+cwe:
+    - CWE-926
+    - CWE-284
+description: Detects Android Activities, Services, BroadcastReceivers, and ContentProviders exported without proper permission checks.
+languages:
+    - java
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Android Exported Components Without Permission
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - android
+    - mobile
+    - exported-components
+    - owasp-m1
+version: 1.0.0
 ---
 
 # Android Exported Components Without Permission

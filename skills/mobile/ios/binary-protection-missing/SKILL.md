@@ -1,13 +1,24 @@
 ---
-name: iOS Binary Protection Missing
-version: 1.0.0
-description: Detects iOS app configurations missing binary hardening features like ASLR, stack canaries, and ARC.
-tags: [ios, mobile, binary-protection, owasp-m8]
-languages: [generic]
-severity: medium
 confidence: medium
-cwe: [CWE-693]
-owasp: [A08:2025]
+cwe:
+    - CWE-693
+description: Detects iOS app configurations missing binary hardening features like ASLR, stack canaries, and ARC.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS Binary Protection Missing
+owasp:
+    - A08:2025
+severity: medium
+tags:
+    - ios
+    - mobile
+    - binary-protection
+    - owasp-m8
+version: 1.0.0
 ---
 
 # iOS Binary Protection Missing

@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-284]
       owasp: ['A01:2025']
-      languages: [php, javascript, typescript, python]
+      languages: [php, javascript, typescript, python, kotlin, dart, zig, elixir]
       patterns:
         - regex: "<input[^>]*(?:name|id)\\s*=\\s*['\"](?:step|current_step|stage|phase)['\"][^>]*>"
         - regex: "setcookie\\s*\\(['\"](?:step|workflow_step|stage)['\"]"
@@ -18,7 +18,7 @@ rules:
       confidence: low
       cwe: [CWE-284]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.post\\(['\"][^'\"]*(?:checkout|confirm|payment|complete)[^'\"]*['\"]"
     - id: BL-WF-003
@@ -28,6 +28,6 @@ rules:
       confidence: low
       cwe: [CWE-284]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:order|payment).*(?:confirm|success|complete)"

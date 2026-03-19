@@ -1,13 +1,25 @@
 ---
-name: OGNL Injection (Apache Struts)
-version: 1.0.0
-description: Detects Apache Struts and other OGNL-using frameworks vulnerable to expression injection through request parameters.
-tags: [injection, ognl, struts, rce, owasp-a03]
-languages: [java]
-severity: critical
 confidence: high
-cwe: [CWE-917]
-owasp: [A03:2025]
+cwe:
+    - CWE-917
+description: Detects Apache Struts and other OGNL-using frameworks vulnerable to expression injection through request parameters.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: OGNL Injection (Apache Struts)
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - injection
+    - ognl
+    - struts
+    - rce
+    - owasp-a03
+version: 1.0.0
 ---
 
 # OGNL Injection

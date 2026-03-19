@@ -42,7 +42,7 @@ rules:
       confidence: medium
       cwe: [CWE-798]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:password|token|secret)\\s*[=:]\\s*['\"](?:test|demo|sample|example|foo|bar|baz|qwerty|asdf)['\"]"
         - regex: "(?i)api_key\\s*[=:]\\s*['\"](?:test|demo|fake|sample|example)[_-]?(?:key|token)?['\"]"
@@ -53,7 +53,7 @@ rules:
       confidence: high
       cwe: [CWE-1392]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go, java, php, yaml]
+      languages: [javascript, typescript, python, go, java, php, yaml, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:password|secret|passwd|pwd)\\s*[=:]\\s*['\"]['\"]"
         - regex: "(?i)JWT_SECRET\\s*=\\s*['\"]['\"]"

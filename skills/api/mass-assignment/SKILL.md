@@ -1,13 +1,24 @@
 ---
-name: Mass Assignment
-version: 1.0.0
-description: Detects frameworks binding raw HTTP payload bodies directly to database models or internal objects without field allow-lists.
-tags: [api, backend, mass-assignment, owasp-a08]
-languages: [generic]
-severity: high
 confidence: medium
-cwe: [CWE-915]
-owasp: [A08:2025]
+cwe:
+    - CWE-915
+description: Detects frameworks binding raw HTTP payload bodies directly to database models or internal objects without field allow-lists.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Mass Assignment
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - api
+    - backend
+    - mass-assignment
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Mass Assignment

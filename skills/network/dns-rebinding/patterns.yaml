@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-350]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:hostname|host)\\s*===?\\s*['\"](?:localhost|127\\.0\\.0\\.1)['\"]"
         - regex: "allowedHosts\\.includes\\s*\\(\\s*(?:req\\.hostname|host)\\s*\\)"
@@ -18,7 +18,7 @@ rules:
       confidence: medium
       cwe: [CWE-350]
       owasp: ['A10:2025']
-      languages: [python, javascript, typescript, go, java]
+      languages: [python, javascript, typescript, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "socket\\.gethostbyname\\s*\\([^)]+\\)"
         - regex: "dns\\.resolve\\s*\\([^)]+,\\s*function)"

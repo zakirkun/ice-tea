@@ -1,13 +1,25 @@
 ---
-name: SQL Wildcard GRANT Privilege
-version: 1.0.0
-description: Detects SQL GRANT statements with wildcard privileges that over-privilege database users.
-tags: [database, sql, privilege, owasp-a01]
-languages: [generic, sql]
-severity: high
 confidence: high
-cwe: [CWE-732]
-owasp: [A01:2025]
+cwe:
+    - CWE-732
+description: Detects SQL GRANT statements with wildcard privileges that over-privilege database users.
+languages:
+    - generic
+    - sql
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: SQL Wildcard GRANT Privilege
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - database
+    - sql
+    - privilege
+    - owasp-a01
+version: 1.0.0
 ---
 
 # SQL Wildcard GRANT Privilege

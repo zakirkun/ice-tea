@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [php, python, javascript, java, go, ruby]
+      languages: [php, python, javascript, java, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)md5\\s*\\(\\s*\\$?password"
         - regex: "(?i)hashlib\\.md5\\s*\\(.*password"
@@ -19,7 +19,7 @@ rules:
       confidence: high
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [php, python, javascript, java, go, ruby]
+      languages: [php, python, javascript, java, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)sha1\\s*\\(\\s*\\$?password"
         - regex: "(?i)hashlib\\.sha1\\s*\\(.*password"
@@ -32,7 +32,7 @@ rules:
       confidence: high
       cwe: [CWE-521]
       owasp: ['A02:2025']
-      languages: [php, python, javascript, java, go, ruby]
+      languages: [php, python, javascript, java, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)password\\s*==\\s*\\$?(?:user|db|stored)_?password"
         - regex: "(?i)if\\s*\\(\\s*\\$?(?:input)?password\\s*===?\\s*\\$?(?:stored|db|user)"
@@ -77,7 +77,7 @@ rules:
       confidence: medium
       cwe: [CWE-312]
       owasp: ['A02:2025']
-      languages: [php, python, javascript, java, go, ruby]
+      languages: [php, python, javascript, java, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)setcookie\\s*\\(\\s*['\"]password['\"]"
         - regex: "(?i)res\\.cookie\\s*\\(\\s*['\"]password['\"]"

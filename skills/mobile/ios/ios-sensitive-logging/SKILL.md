@@ -1,13 +1,24 @@
 ---
-name: iOS Sensitive Data in NSLog / os_log
-version: 1.0.0
-description: Detects sensitive data passed to NSLog, print, or os_log that ends up in device logs accessible via Xcode/Console.
-tags: [ios, mobile, logging, owasp-m4]
-languages: [generic]
-severity: high
 confidence: high
-cwe: [CWE-532]
-owasp: [A09:2025]
+cwe:
+    - CWE-532
+description: Detects sensitive data passed to NSLog, print, or os_log that ends up in device logs accessible via Xcode/Console.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS Sensitive Data in NSLog / os_log
+owasp:
+    - A09:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - logging
+    - owasp-m4
+version: 1.0.0
 ---
 
 # iOS Sensitive Data in Logs

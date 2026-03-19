@@ -1,36 +1,34 @@
 rules:
-  - id: AUTH-APIURL-001
-    name: api-key-in-url-param
-    description: "API key or token passed as URL query parameter"
-    severity: high
-    confidence: high
-    cwe: [CWE-598]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java, php, ruby]
-    patterns:
-      - regex: "\\?(?:api_key|apikey|api-key|token|access_token|auth_token|key)=[a-zA-Z0-9\\-_]{10,}"
-      - regex: "['\"]\\?api[_-]?key=['\"]|['\"]&api[_-]?key=['\"]"
-
-  - id: AUTH-APIURL-002
-    name: http-client-key-in-url
-    description: "HTTP client call with API key embedded in URL string"
-    severity: high
-    confidence: high
-    cwe: [CWE-598]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java]
-    patterns:
-      - regex: "(?:fetch|axios\\.get|requests\\.get|http\\.Get)\\s*\\(['\"][^'\"]*(?:api_key|apikey|token|key)=[a-zA-Z0-9\\-_]{10,}"
-      - regex: "(?:curl|wget)\\s+['\"][^'\"]*(?:api_key|token|key)=[a-zA-Z0-9]{10,}"
-
-  - id: AUTH-APIURL-003
-    name: oauth-token-in-url-call
-    description: "OAuth token appended to URL instead of Authorization header"
-    severity: high
-    confidence: high
-    cwe: [CWE-598]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "\\?access_token=[a-zA-Z0-9\\-_\\.]+"
-      - regex: "['\"][^'\"]*\\?access_token=['\"]\\s*\\+"
+    - id: AUTH-APIURL-001
+      name: api-key-in-url-param
+      description: "API key or token passed as URL query parameter"
+      severity: high
+      confidence: high
+      cwe: [CWE-598]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "\\?(?:api_key|apikey|api-key|token|access_token|auth_token|key)=[a-zA-Z0-9\\-_]{10,}"
+        - regex: "['\"]\\?api[_-]?key=['\"]|['\"]&api[_-]?key=['\"]"
+    - id: AUTH-APIURL-002
+      name: http-client-key-in-url
+      description: "HTTP client call with API key embedded in URL string"
+      severity: high
+      confidence: high
+      cwe: [CWE-598]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:fetch|axios\\.get|requests\\.get|http\\.Get)\\s*\\(['\"][^'\"]*(?:api_key|apikey|token|key)=[a-zA-Z0-9\\-_]{10,}"
+        - regex: "(?:curl|wget)\\s+['\"][^'\"]*(?:api_key|token|key)=[a-zA-Z0-9]{10,}"
+    - id: AUTH-APIURL-003
+      name: oauth-token-in-url-call
+      description: "OAuth token appended to URL instead of Authorization header"
+      severity: high
+      confidence: high
+      cwe: [CWE-598]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "\\?access_token=[a-zA-Z0-9\\-_\\.]+"
+        - regex: "['\"][^'\"]*\\?access_token=['\"]\\s*\\+"

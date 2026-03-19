@@ -1,13 +1,28 @@
 ---
-name: Workflow Step Bypass
-version: 1.0.0
-description: Detects multi-step workflows where step validation relies on client-side state or is insufficiently enforced server-side.
-tags: [business-logic, workflow, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: high
 confidence: low
-cwe: [CWE-284]
-owasp: [A01:2025]
+cwe:
+    - CWE-284
+description: Detects multi-step workflows where step validation relies on client-side state or is insufficiently enforced server-side.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Workflow Step Bypass
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - business-logic
+    - workflow
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Workflow Step Bypass

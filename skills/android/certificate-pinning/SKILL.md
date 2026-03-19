@@ -1,13 +1,25 @@
 ---
-name: Android Insecure Certificate Validation
-version: 1.0.0
-description: Detects Android TrustManager implementations that accept all certificates, disabling SSL/TLS security.
-tags: [android, mobile, certificate-pinning, ssl, owasp-m3]
-languages: [java]
-severity: critical
 confidence: high
-cwe: [CWE-295]
-owasp: [A02:2025]
+cwe:
+    - CWE-295
+description: Detects Android TrustManager implementations that accept all certificates, disabling SSL/TLS security.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Android Insecure Certificate Validation
+owasp:
+    - A02:2025
+severity: critical
+tags:
+    - android
+    - mobile
+    - certificate-pinning
+    - ssl
+    - owasp-m3
+version: 1.0.0
 ---
 
 # Android Insecure Certificate Validation

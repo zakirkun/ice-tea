@@ -1,13 +1,26 @@
 ---
-name: Infrastructure as Code Security Issues
-version: 1.0.0
-description: Detects security misconfigurations in Terraform, Pulumi, and CloudFormation templates including overly permissive resources and disabled security features.
-tags: [iac, terraform, cloudformation, owasp-a05]
-languages: [generic, yaml]
-severity: high
 confidence: high
-cwe: [CWE-732, CWE-311]
-owasp: [A05:2025]
+cwe:
+    - CWE-732
+    - CWE-311
+description: Detects security misconfigurations in Terraform, Pulumi, and CloudFormation templates including overly permissive resources and disabled security features.
+languages:
+    - generic
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Infrastructure as Code Security Issues
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - iac
+    - terraform
+    - cloudformation
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Infrastructure as Code Security Issues

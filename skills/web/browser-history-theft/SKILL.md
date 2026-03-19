@@ -1,13 +1,25 @@
 ---
-name: Browser History / Visited Link Theft
-version: 1.0.0
-description: Detects CSS-based browser history sniffing patterns and sensitive data in browser history.
-tags: [web, privacy, information-disclosure, owasp-a05]
-languages: [javascript, typescript]
-severity: medium
 confidence: medium
-cwe: [CWE-359]
-owasp: [A05:2025]
+cwe:
+    - CWE-359
+description: Detects CSS-based browser history sniffing patterns and sensitive data in browser history.
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Browser History / Visited Link Theft
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - web
+    - privacy
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Browser History Theft

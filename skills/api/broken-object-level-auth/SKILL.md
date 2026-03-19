@@ -1,13 +1,31 @@
 ---
-name: Broken Object Level Authorization (BOLA / IDOR)
-version: 1.0.0
-description: Detects API endpoints that use user-supplied IDs to access objects without verifying the requesting user owns or has permission to access that object.
-tags: [bola, idor, api, auth, owasp-api1]
-languages: [javascript, typescript, python, go, java, php]
-severity: critical
 confidence: medium
-cwe: [CWE-284, CWE-639]
-owasp: [A01:2025]
+cwe:
+    - CWE-284
+    - CWE-639
+description: Detects API endpoints that use user-supplied IDs to access objects without verifying the requesting user owns or has permission to access that object.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Broken Object Level Authorization (BOLA / IDOR)
+owasp:
+    - A01:2025
+severity: critical
+tags:
+    - bola
+    - idor
+    - api
+    - auth
+    - owasp-api1
+version: 1.0.0
 ---
 
 # Broken Object Level Authorization (BOLA / IDOR)

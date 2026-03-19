@@ -1,13 +1,28 @@
 ---
-name: Memory Race Condition
-version: 1.0.0
-description: Detects concurrent memory access without proper synchronization in C/C++ and Go programs.
-tags: [memory, race-condition, concurrency, c, cpp, owasp-a06]
-languages: [c, cpp, go]
-severity: high
 confidence: low
-cwe: [CWE-362]
-owasp: [A06:2025]
+cwe:
+    - CWE-362
+description: Detects concurrent memory access without proper synchronization in C/C++ and Go programs.
+languages:
+    - c
+    - cpp
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Memory Race Condition
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - memory
+    - race-condition
+    - concurrency
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Memory Race Condition

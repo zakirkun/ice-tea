@@ -1,13 +1,29 @@
 ---
-name: Insecure Remember-Me / Persistent Session
-version: 1.0.0
-description: Detects insecure persistent login implementations using predictable tokens or insufficient expiration policies.
-tags: [auth, remember-me, session, owasp-a07]
-languages: [javascript, typescript, python, php, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-613]
-owasp: [A07:2025]
+cwe:
+    - CWE-613
+description: Detects insecure persistent login implementations using predictable tokens or insufficient expiration policies.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Remember-Me / Persistent Session
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - auth
+    - remember-me
+    - session
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Insecure Remember-Me

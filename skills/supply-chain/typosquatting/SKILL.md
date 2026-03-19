@@ -1,13 +1,26 @@
 ---
-name: Typosquatting Package Names
-version: 1.0.0
-description: Detects imports of known typosquatting package names that mimic popular packages with malicious intent.
-tags: [supply-chain, typosquatting, malware, owasp-a06]
-languages: [javascript, typescript, python]
-severity: critical
 confidence: high
-cwe: [CWE-494]
-owasp: [A06:2025]
+cwe:
+    - CWE-494
+description: Detects imports of known typosquatting package names that mimic popular packages with malicious intent.
+languages:
+    - javascript
+    - typescript
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Typosquatting Package Names
+owasp:
+    - A06:2025
+severity: critical
+tags:
+    - supply-chain
+    - typosquatting
+    - malware
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Typosquatting Package Names

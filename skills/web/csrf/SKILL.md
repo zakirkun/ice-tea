@@ -1,13 +1,30 @@
 ---
-name: Cross-Site Request Forgery (CSRF)
-version: 1.0.0
-description: Detects web forms and state-changing endpoints that lack CSRF token protection.
-tags: [csrf, web, auth, owasp-a01]
-languages: [javascript, typescript, python, php, java, go, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-352]
-owasp: [A01:2025]
+cwe:
+    - CWE-352
+description: Detects web forms and state-changing endpoints that lack CSRF token protection.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Cross-Site Request Forgery (CSRF)
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - csrf
+    - web
+    - auth
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Cross-Site Request Forgery (CSRF)

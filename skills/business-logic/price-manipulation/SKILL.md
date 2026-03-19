@@ -1,13 +1,28 @@
 ---
-name: Price Manipulation Vulnerability
-version: 1.0.0
-description: Detects e-commerce logic that trusts client-submitted prices instead of server-side calculation.
-tags: [business-logic, ecommerce, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-840]
-owasp: [A01:2025]
+cwe:
+    - CWE-840
+description: Detects e-commerce logic that trusts client-submitted prices instead of server-side calculation.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Price Manipulation Vulnerability
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - business-logic
+    - ecommerce
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Price Manipulation Vulnerability

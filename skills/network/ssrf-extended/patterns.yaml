@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "169\\.254\\.169\\.254"
         - regex: "169\\.254\\.170\\.2"
@@ -17,7 +17,7 @@ rules:
       confidence: high
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "metadata\\.google\\.internal"
         - regex: "metadata\\.google\\.internal/computeMetadata"
@@ -28,7 +28,7 @@ rules:
       confidence: high
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "file://(?:[^\"'\\s]+)"
         - regex: "['\"]file://[^'\"]*['\"]"
@@ -39,7 +39,7 @@ rules:
       confidence: high
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "gopher://[^'\"\\s]+"
         - regex: "['\"]gopher://[^'\"]*['\"]"
@@ -50,7 +50,7 @@ rules:
       confidence: medium
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:fetch|axios\\.get|requests\\.get|http\\.Get|curl_exec)\\s*\\([^)]*(?:req\\.body\\.url|req\\.query\\.url|\\$_GET\\[.url|request\\.args\\.get\\(['\"]url['\"]\\))"
         - regex: "http\\.Get\\s*\\(\\s*r\\.(?:URL\\.Query\\(\\)\\.Get|FormValue)\\s*\\(['\"]url['\"]\\)\\s*\\)"
@@ -61,7 +61,7 @@ rules:
       confidence: medium
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "maxRedirects\\s*:\\s*(?:[5-9]|[1-9][0-9]+)"
         - regex: "allow_redirects\\s*=\\s*True.*(?:req\\.|request\\.)(?:args|form)"
@@ -72,7 +72,7 @@ rules:
       confidence: medium
       cwe: [CWE-918]
       owasp: ['A10:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "dns\\.lookup\\s*\\(\\s*(?:req\\.body|req\\.query|user_input)"
         - regex: "socket\\.gethostbyname\\s*\\(\\s*(?:request\\.args|user_input)"

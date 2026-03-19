@@ -1,13 +1,24 @@
 ---
-name: Java Insecure Deserialization (ObjectInputStream)
-version: 1.0.0
-description: Detects Java ObjectInputStream.readObject() on untrusted data, enabling remote code execution via gadget chains.
-tags: [deserialization, java, rce, owasp-a08]
-languages: [java]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects Java ObjectInputStream.readObject() on untrusted data, enabling remote code execution via gadget chains.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Java Insecure Deserialization (ObjectInputStream)
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - java
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Java Insecure Deserialization

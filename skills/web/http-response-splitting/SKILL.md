@@ -1,13 +1,30 @@
 ---
-name: HTTP Response Splitting
-version: 1.0.0
-description: Detects HTTP response splitting via CRLF injection in response headers, enabling cache poisoning and XSS.
-tags: [crlf, http-response-splitting, web, owasp-a03]
-languages: [java, python, javascript, typescript, php, go, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-113]
-owasp: [A03:2025]
+cwe:
+    - CWE-113
+description: Detects HTTP response splitting via CRLF injection in response headers, enabling cache poisoning and XSS.
+languages:
+    - java
+    - python
+    - javascript
+    - typescript
+    - php
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: HTTP Response Splitting
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - crlf
+    - http-response-splitting
+    - web
+    - owasp-a03
+version: 1.0.0
 ---
 
 # HTTP Response Splitting

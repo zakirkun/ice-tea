@@ -1,13 +1,28 @@
 ---
-name: Regular Expression Denial of Service (ReDoS)
-version: 1.0.0
-description: Detects catastrophically backtracking regular expressions applied to user-controlled input, causing CPU-intensive denial of service.
-tags: [redos, regex, dos, owasp-a06]
-languages: [javascript, typescript, python, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-1333]
-owasp: [A06:2025]
+cwe:
+    - CWE-1333
+description: Detects catastrophically backtracking regular expressions applied to user-controlled input, causing CPU-intensive denial of service.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Regular Expression Denial of Service (ReDoS)
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - redos
+    - regex
+    - dos
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Regular Expression Denial of Service (ReDoS)

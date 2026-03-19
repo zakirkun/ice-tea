@@ -1,13 +1,30 @@
 ---
-name: XML External Entity (XXE) Injection
-version: 1.0.0
-description: Detects XML parsers configured to process external entities, enabling file disclosure and SSRF.
-tags: [xxe, xml, injection, owasp-a05]
-languages: [java, python, php, go, javascript, typescript, ruby]
-severity: critical
 confidence: high
-cwe: [CWE-611]
-owasp: [A05:2025]
+cwe:
+    - CWE-611
+description: Detects XML parsers configured to process external entities, enabling file disclosure and SSRF.
+languages:
+    - java
+    - python
+    - php
+    - go
+    - javascript
+    - typescript
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: XML External Entity (XXE) Injection
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - xxe
+    - xml
+    - injection
+    - owasp-a05
+version: 1.0.0
 ---
 
 # XML External Entity (XXE) Injection

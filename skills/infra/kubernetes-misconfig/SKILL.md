@@ -1,13 +1,26 @@
 ---
-name: Kubernetes Misconfiguration
-version: 1.0.0
-description: Detects insecure Kubernetes pod and container configurations including privileged containers, hostPID, hostNetwork, and missing resource limits.
-tags: [kubernetes, k8s, container, infra, owasp-a05]
-languages: [yaml]
-severity: high
 confidence: high
-cwe: [CWE-732, CWE-250]
-owasp: [A05:2025]
+cwe:
+    - CWE-732
+    - CWE-250
+description: Detects insecure Kubernetes pod and container configurations including privileged containers, hostPID, hostNetwork, and missing resource limits.
+languages:
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Kubernetes Misconfiguration
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - kubernetes
+    - k8s
+    - container
+    - infra
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Kubernetes Misconfiguration

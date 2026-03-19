@@ -1,13 +1,28 @@
 ---
-name: JWT Without Expiration
-version: 1.0.0
-description: Detects JWTs issued without expiration claims, creating tokens that remain valid indefinitely.
-tags: [api, jwt, session, owasp-a07]
-languages: [javascript, typescript, python, go, java]
-severity: high
 confidence: high
-cwe: [CWE-613]
-owasp: [A07:2025]
+cwe:
+    - CWE-613
+description: Detects JWTs issued without expiration claims, creating tokens that remain valid indefinitely.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: JWT Without Expiration
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - api
+    - jwt
+    - session
+    - owasp-a07
+version: 1.0.0
 ---
 
 # JWT Without Expiration

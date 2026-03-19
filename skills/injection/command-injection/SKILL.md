@@ -1,13 +1,27 @@
 ---
-name: Command Injection Detection
-version: 1.0.0
-description: Detects command injection vulnerabilities where user input is passed to OS command execution
-tags: [injection, command, os, owasp-a05]
-languages: [go, python, javascript, php]
-severity: critical
 confidence: high
-cwe: [CWE-78]
-owasp: [A05:2025]
+cwe:
+    - CWE-78
+description: Detects command injection vulnerabilities where user input is passed to OS command execution
+languages:
+    - go
+    - python
+    - javascript
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Command Injection Detection
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - injection
+    - command
+    - os
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Command Injection Detection

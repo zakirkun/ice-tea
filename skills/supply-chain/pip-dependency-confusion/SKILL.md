@@ -1,13 +1,26 @@
 ---
-name: Python Pip Dependency Confusion
-version: 1.0.0
-description: Detects Python package configurations vulnerable to dependency confusion attacks through PyPI.
-tags: [supply-chain, pip, python, dependency-confusion, owasp-a06]
-languages: [python, generic]
-severity: high
 confidence: medium
-cwe: [CWE-494]
-owasp: [A06:2025]
+cwe:
+    - CWE-494
+description: Detects Python package configurations vulnerable to dependency confusion attacks through PyPI.
+languages:
+    - python
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Python Pip Dependency Confusion
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - supply-chain
+    - pip
+    - python
+    - dependency-confusion
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Python Pip Dependency Confusion

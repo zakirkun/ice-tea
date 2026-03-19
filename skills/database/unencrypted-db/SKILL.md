@@ -1,13 +1,29 @@
 ---
-name: Unencrypted Database
-version: 1.0.0
-description: Detects database configurations and connections missing encryption at rest and in transit.
-tags: [database, encryption, owasp-a02]
-languages: [python, javascript, typescript, go, java, php, yaml]
-severity: high
 confidence: medium
-cwe: [CWE-311]
-owasp: [A02:2025]
+cwe:
+    - CWE-311
+description: Detects database configurations and connections missing encryption at rest and in transit.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Unencrypted Database
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - database
+    - encryption
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Unencrypted Database

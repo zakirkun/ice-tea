@@ -1,13 +1,29 @@
 ---
-name: CORS Private Network Access Misconfiguration
-version: 1.0.0
-description: Detects CORS configurations that allow access from public origins to private network endpoints.
-tags: [web, cors, private-network, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-942]
-owasp: [A05:2025]
+cwe:
+    - CWE-942
+description: Detects CORS configurations that allow access from public origins to private network endpoints.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: CORS Private Network Access Misconfiguration
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - web
+    - cors
+    - private-network
+    - owasp-a05
+version: 1.0.0
 ---
 
 # CORS Private Network Access Misconfiguration

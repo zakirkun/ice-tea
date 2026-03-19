@@ -1,13 +1,30 @@
 ---
-name: Log Injection
-version: 1.0.0
-description: Detects user-controlled input written to log files without sanitization, enabling log forging and potential log viewer attacks.
-tags: [log-injection, logging, injection, owasp-a09]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: medium
 confidence: medium
-cwe: [CWE-117]
-owasp: [A09:2025]
+cwe:
+    - CWE-117
+description: Detects user-controlled input written to log files without sanitization, enabling log forging and potential log viewer attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Log Injection
+owasp:
+    - A09:2025
+severity: medium
+tags:
+    - log-injection
+    - logging
+    - injection
+    - owasp-a09
+version: 1.0.0
 ---
 
 # Log Injection

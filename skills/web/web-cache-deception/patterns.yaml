@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-524]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.get\\(['\"][^'\"]*(?:profile|account|dashboard|settings|me)[^'\"]*['\"].*(?:auth|jwt|session))"
     - id: WEB-WCD-002

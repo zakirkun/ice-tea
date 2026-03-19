@@ -1,13 +1,25 @@
 ---
-name: JavaScript Prototype Chain Manipulation
-version: 1.0.0
-description: Detects patterns that allow direct manipulation of the JavaScript prototype chain, enabling prototype pollution and security bypass.
-tags: [injection, prototype-chain, javascript, owasp-a08]
-languages: [javascript, typescript]
-severity: high
 confidence: medium
-cwe: [CWE-1321]
-owasp: [A08:2025]
+cwe:
+    - CWE-1321
+description: Detects patterns that allow direct manipulation of the JavaScript prototype chain, enabling prototype pollution and security bypass.
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: JavaScript Prototype Chain Manipulation
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - injection
+    - prototype-chain
+    - javascript
+    - owasp-a08
+version: 1.0.0
 ---
 
 # JavaScript Prototype Chain Manipulation

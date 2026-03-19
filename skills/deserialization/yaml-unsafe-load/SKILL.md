@@ -1,13 +1,27 @@
 ---
-name: Unsafe YAML Deserialization
-version: 1.0.0
-description: Detects YAML parsing using unsafe loaders that execute arbitrary Python or Ruby code embedded in YAML.
-tags: [deserialization, yaml, rce, owasp-a08]
-languages: [python, ruby, javascript, typescript]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects YAML parsing using unsafe loaders that execute arbitrary Python or Ruby code embedded in YAML.
+languages:
+    - python
+    - ruby
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Unsafe YAML Deserialization
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - yaml
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Unsafe YAML Deserialization

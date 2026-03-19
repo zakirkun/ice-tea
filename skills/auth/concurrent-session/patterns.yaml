@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-613]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:jwt\\.sign|createSession|generateToken)\\s*\\([^)]+\\)"
     - id: AUTH-CONC-002
@@ -16,7 +16,7 @@ rules:
       confidence: low
       cwe: [CWE-613]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "Session\\.create\\s*\\([^)]+\\)"
     - id: AUTH-CONC-003
@@ -26,7 +26,7 @@ rules:
       confidence: low
       cwe: [CWE-613]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "req\\.session\\.destroy\\s*\\(\\s*\\)"
         - regex: "session\\.flush\\s*\\(\\s*\\)"

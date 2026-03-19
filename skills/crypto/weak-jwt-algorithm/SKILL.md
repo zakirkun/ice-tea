@@ -1,13 +1,29 @@
 ---
-name: Weak JWT Algorithm
-version: 1.0.0
-description: Detects JWT usage with weak or insecure signing algorithms including HS256 with short secrets, RS256 key confusion, and algorithm downgrade.
-tags: [crypto, jwt, algorithm, owasp-a02]
-languages: [javascript, typescript, python, java, go]
-severity: high
 confidence: high
-cwe: [CWE-327, CWE-347]
-owasp: [A02:2025]
+cwe:
+    - CWE-327
+    - CWE-347
+description: Detects JWT usage with weak or insecure signing algorithms including HS256 with short secrets, RS256 key confusion, and algorithm downgrade.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Weak JWT Algorithm
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - jwt
+    - algorithm
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Weak JWT Algorithm

@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-319]
       owasp: ['A02:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "http://[^'\"/\\s]+(?:api|auth|login|token|payment|checkout)"
         - regex: "['\"]http://[^'\"]+['\"]"

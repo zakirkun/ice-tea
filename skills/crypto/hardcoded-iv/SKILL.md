@@ -1,13 +1,32 @@
 ---
-name: Hardcoded IV / Nonce
-version: 1.0.0
-description: Detects static or hardcoded Initialization Vectors (IV) or nonces in symmetric encryption, breaking confidentiality.
-tags: [crypto, iv, nonce, aes, owasp-a02]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-329, CWE-330]
-owasp: [A02:2025]
+cwe:
+    - CWE-329
+    - CWE-330
+description: Detects static or hardcoded Initialization Vectors (IV) or nonces in symmetric encryption, breaking confidentiality.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded IV / Nonce
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - iv
+    - nonce
+    - aes
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Hardcoded IV / Nonce

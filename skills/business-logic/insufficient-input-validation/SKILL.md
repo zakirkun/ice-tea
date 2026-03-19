@@ -1,13 +1,28 @@
 ---
-name: Insufficient Business Logic Input Validation
-version: 1.0.0
-description: Detects missing or inadequate server-side validation of business-critical fields that could be manipulated.
-tags: [business-logic, validation, owasp-a03]
-languages: [javascript, typescript, python, php, java, go]
-severity: medium
 confidence: low
-cwe: [CWE-20]
-owasp: [A03:2025]
+cwe:
+    - CWE-20
+description: Detects missing or inadequate server-side validation of business-critical fields that could be manipulated.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insufficient Business Logic Input Validation
+owasp:
+    - A03:2025
+severity: medium
+tags:
+    - business-logic
+    - validation
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Insufficient Business Logic Input Validation

@@ -1,13 +1,29 @@
 ---
-name: FTP Cleartext Communication
-version: 1.0.0
-description: Detects use of FTP protocol which transmits credentials and data in cleartext.
-tags: [network, ftp, cleartext, owasp-a02]
-languages: [python, javascript, typescript, go, java, php]
-severity: high
 confidence: high
-cwe: [CWE-319]
-owasp: [A02:2025]
+cwe:
+    - CWE-319
+description: Detects use of FTP protocol which transmits credentials and data in cleartext.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: FTP Cleartext Communication
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - network
+    - ftp
+    - cleartext
+    - owasp-a02
+version: 1.0.0
 ---
 
 # FTP Cleartext Communication

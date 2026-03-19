@@ -1,13 +1,28 @@
 ---
-name: Code Injection (eval / dynamic execution)
-version: 1.0.0
-description: Detects user-controlled input passed to code evaluation functions like eval, exec, or dynamic code generation.
-tags: [injection, code-injection, rce, owasp-a03]
-languages: [python, php, javascript, typescript, ruby]
-severity: critical
 confidence: high
-cwe: [CWE-94]
-owasp: [A03:2025]
+cwe:
+    - CWE-94
+description: Detects user-controlled input passed to code evaluation functions like eval, exec, or dynamic code generation.
+languages:
+    - python
+    - php
+    - javascript
+    - typescript
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Code Injection (eval / dynamic execution)
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - injection
+    - code-injection
+    - rce
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Code Injection

@@ -1,13 +1,28 @@
 ---
-name: Web Cache Deception
-version: 1.0.0
-description: Detects server configurations that may serve personalized content under cacheable URLs, enabling web cache deception attacks.
-tags: [web, cache-deception, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: low
-cwe: [CWE-524]
-owasp: [A05:2025]
+cwe:
+    - CWE-524
+description: Detects server configurations that may serve personalized content under cacheable URLs, enabling web cache deception attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Web Cache Deception
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - web
+    - cache-deception
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Web Cache Deception

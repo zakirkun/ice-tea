@@ -1,13 +1,30 @@
 ---
-name: HTTP Header Injection / CRLF Injection
-version: 1.0.0
-description: Detects user-controlled data written into HTTP response headers without CRLF stripping, enabling header injection and response splitting.
-tags: [header-injection, crlf, http, owasp-a03]
-languages: [java, python, javascript, typescript, php, go, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-113]
-owasp: [A03:2025]
+cwe:
+    - CWE-113
+description: Detects user-controlled data written into HTTP response headers without CRLF stripping, enabling header injection and response splitting.
+languages:
+    - java
+    - python
+    - javascript
+    - typescript
+    - php
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: HTTP Header Injection / CRLF Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - header-injection
+    - crlf
+    - http
+    - owasp-a03
+version: 1.0.0
 ---
 
 # HTTP Header Injection / CRLF Injection

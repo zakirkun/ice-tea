@@ -1,13 +1,30 @@
 ---
-name: Missing Brute Force Protection
-version: 1.0.0
-description: Detects login and authentication endpoints that lack rate limiting, account lockout, or CAPTCHA protection.
-tags: [brute-force, auth, rate-limiting, owasp-a07]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: low
-cwe: [CWE-307]
-owasp: [A07:2025]
+cwe:
+    - CWE-307
+description: Detects login and authentication endpoints that lack rate limiting, account lockout, or CAPTCHA protection.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing Brute Force Protection
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - brute-force
+    - auth
+    - rate-limiting
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Missing Brute Force Protection

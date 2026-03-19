@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-1059]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "['\"](?:/api/v[0-9]+|/v[0-9]+/)['\"]"
         - regex: "(?:app|router)\\.use\\s*\\(['\"][/]?v[0-9]+['\"]"
@@ -18,7 +18,7 @@ rules:
       confidence: high
       cwe: [CWE-1059]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)//\\s*(?:deprecated|legacy|old|v1|TODO.*remove)"
         - regex: "(?i)#\\s*(?:deprecated|legacy|old|TODO.*remove)"
@@ -30,7 +30,7 @@ rules:
       confidence: low
       cwe: [CWE-1059]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.(?:get|post|put|delete)\\s*\\(['\"][^'\"]*v1[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
         - regex: "route\\(['\"][^'\"]*(?:/v1/|v1/)[^'\"]*['\"]\\)"
@@ -41,7 +41,7 @@ rules:
       confidence: medium
       cwe: [CWE-200]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, java]
+      languages: [javascript, typescript, python, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "swaggerUi\\.setup\\s*\\("
         - regex: "swagger-ui-express.*(?:apis|definition).*v[0-9]"
@@ -52,7 +52,7 @@ rules:
       confidence: medium
       cwe: [CWE-1188]
       owasp: ['A09:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "['\"][/](?:debug|test|beta|internal|dev|sandbox)[/'\"]"
         - regex: "(?:app|router)\\.(?:get|post|use)\\s*\\(['\"][^'\"]*(?:debug|test|beta)[^'\"]*['\"]"

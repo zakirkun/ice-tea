@@ -1,13 +1,25 @@
 ---
-name: iOS Insecure Keychain Usage
-version: 1.0.0
-description: Detects iOS Keychain items stored with insecure accessibility attributes that allow access when device is locked or without user authentication.
-tags: [ios, mobile, keychain, owasp-m2]
-languages: [java, generic]
-severity: high
 confidence: high
-cwe: [CWE-312]
-owasp: [A02:2025]
+cwe:
+    - CWE-312
+description: Detects iOS Keychain items stored with insecure accessibility attributes that allow access when device is locked or without user authentication.
+languages:
+    - java
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS Insecure Keychain Usage
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - keychain
+    - owasp-m2
+version: 1.0.0
 ---
 
 # iOS Insecure Keychain Usage

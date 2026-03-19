@@ -1,13 +1,28 @@
 ---
-name: Swagger / OpenAPI Documentation Exposed in Production
-version: 1.0.0
-description: Detects Swagger UI, Redoc, or OpenAPI documentation endpoints accessible without authentication in production.
-tags: [api, swagger, information-disclosure, owasp-a05]
-languages: [javascript, typescript, python, java, go]
-severity: medium
 confidence: high
-cwe: [CWE-200]
-owasp: [A05:2025]
+cwe:
+    - CWE-200
+description: Detects Swagger UI, Redoc, or OpenAPI documentation endpoints accessible without authentication in production.
+languages:
+    - javascript
+    - typescript
+    - python
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Swagger / OpenAPI Documentation Exposed in Production
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - api
+    - swagger
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Swagger / OpenAPI Exposed in Production

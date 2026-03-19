@@ -52,7 +52,7 @@ rules:
       confidence: high
       cwe: [CWE-326]
       owasp: ['A02:2025']
-      languages: [go, java, python, javascript, typescript, php]
+      languages: [go, java, python, javascript, typescript, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:MinVersion|min_version|TLS_VERSION)\\s*[=:]\\s*(?:tls\\.VersionTLS10|tls\\.VersionTLS11|SSL3|TLSv1[^._]|TLSv1\\.1)"
         - regex: "(?i)SSLv3|TLSv1(?:\\.0)?"
@@ -64,7 +64,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [go, java, python, javascript, typescript]
+      languages: [go, java, python, javascript, typescript, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:RC4|DES|3DES|EXPORT|NULL|ANON).*cipher"
         - regex: "(?i)cipher.*(?:RC4|DES|3DES|_EXPORT_|_NULL_|_anon_)"

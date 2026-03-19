@@ -1,36 +1,34 @@
 rules:
-  - id: WEB-REF-001
-    name: token-in-url-param
-    description: "Authentication token or session ID passed as URL query parameter"
-    severity: high
-    confidence: high
-    cwe: [CWE-598]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "\\?(?:token|access_token|auth_token|session_id|api_key)=[a-zA-Z0-9\\-_]+"
-      - regex: "['\"]\\?token=['\"]|['\"]&token=['\"]"
-
-  - id: WEB-REF-002
-    name: password-reset-token-in-url
-    description: "Password reset token sent as URL parameter — exposed in Referer header"
-    severity: high
-    confidence: medium
-    cwe: [CWE-598]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?:reset|forgot).*?token=[a-zA-Z0-9]+"
-      - regex: "password.*reset.*\\?.*token="
-
-  - id: WEB-REF-003
-    name: referrer-policy-not-set
-    description: "HTTP response without Referrer-Policy header"
-    severity: low
-    confidence: low
-    cwe: [CWE-598]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, go, python]
-    patterns:
-      - regex: "helmet\\(\\s*\\{[^}]*referrerPolicy\\s*:\\s*false"
-      - regex: "Referrer-Policy.*unsafe-url"
+    - id: WEB-REF-001
+      name: token-in-url-param
+      description: "Authentication token or session ID passed as URL query parameter"
+      severity: high
+      confidence: high
+      cwe: [CWE-598]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "\\?(?:token|access_token|auth_token|session_id|api_key)=[a-zA-Z0-9\\-_]+"
+        - regex: "['\"]\\?token=['\"]|['\"]&token=['\"]"
+    - id: WEB-REF-002
+      name: password-reset-token-in-url
+      description: "Password reset token sent as URL parameter — exposed in Referer header"
+      severity: high
+      confidence: medium
+      cwe: [CWE-598]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:reset|forgot).*?token=[a-zA-Z0-9]+"
+        - regex: "password.*reset.*\\?.*token="
+    - id: WEB-REF-003
+      name: referrer-policy-not-set
+      description: "HTTP response without Referrer-Policy header"
+      severity: low
+      confidence: low
+      cwe: [CWE-598]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, go, python, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "helmet\\(\\s*\\{[^}]*referrerPolicy\\s*:\\s*false"
+        - regex: "Referrer-Policy.*unsafe-url"

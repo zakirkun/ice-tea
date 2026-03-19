@@ -1,13 +1,25 @@
 ---
-name: iOS App Transport Security (ATS) Disabled
-version: 1.0.0
-description: Detects iOS ATS exceptions that allow insecure HTTP connections or disable certificate validation.
-tags: [ios, mobile, ats, tls, owasp-m3]
-languages: [generic]
-severity: high
 confidence: high
-cwe: [CWE-319]
-owasp: [A02:2025]
+cwe:
+    - CWE-319
+description: Detects iOS ATS exceptions that allow insecure HTTP connections or disable certificate validation.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS App Transport Security (ATS) Disabled
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - ats
+    - tls
+    - owasp-m3
+version: 1.0.0
 ---
 
 # iOS App Transport Security Disabled

@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-200]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "\\.find\\s*\\(\\s*\\{\\s*\\}\\s*\\)"
         - regex: "\\.findAll\\s*\\(\\s*\\)"
@@ -18,7 +18,7 @@ rules:
       confidence: low
       cwe: [CWE-200]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.get\\(['\"][^'\"]*/:(?:id|userId|orderId)['\"]"
         - regex: "@GetMapping\\(['\"][^'\"]*\\{(?:id|userId|orderId)\\}['\"]\\)"
@@ -29,7 +29,7 @@ rules:
       confidence: low
       cwe: [CWE-204]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, go, php]
+      languages: [javascript, typescript, python, go, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "User\\s+not\\s+found|username.*(?:does not exist|not registered|invalid)"
         - regex: "\"error\"\\s*:\\s*\"(?:User not found|No account|Username not registered)\""
@@ -40,7 +40,7 @@ rules:
       confidence: low
       cwe: [CWE-200]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.get\\(['\"][^'\"]*search[^'\"]*['\"]"
         - regex "LIKE\\s+['\"]%.*%['\"](?![^;]*LIMIT)"

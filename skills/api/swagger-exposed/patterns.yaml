@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-200]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, java, go]
+      languages: [javascript, typescript, python, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.use\\s*\\(['\"][^'\"]*(?:api-docs|swagger|openapi)[^'\"]*['\"]\\s*,\\s*swaggerUi"
         - regex: "swagger_ui_view\\s*\\([^)]*\\)"

@@ -1,13 +1,29 @@
 ---
-name: Insufficient Security Event Logging
-version: 1.0.0
-description: Detects authentication and authorization events that are not logged, hampering incident detection and forensics.
-tags: [logging, audit, monitoring, owasp-a09]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: low
-cwe: [CWE-778]
-owasp: [A09:2025]
+cwe:
+    - CWE-778
+description: Detects authentication and authorization events that are not logged, hampering incident detection and forensics.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insufficient Security Event Logging
+owasp:
+    - A09:2025
+severity: medium
+tags:
+    - logging
+    - audit
+    - monitoring
+    - owasp-a09
+version: 1.0.0
 ---
 
 # Insufficient Security Event Logging

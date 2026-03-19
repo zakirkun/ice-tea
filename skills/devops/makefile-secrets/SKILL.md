@@ -1,13 +1,24 @@
 ---
-name: Hardcoded Secrets in Makefiles
-version: 1.0.0
-description: Detects API keys, tokens, and passwords hardcoded in Makefile targets and variables.
-tags: [devops, makefile, secrets, owasp-a07]
-languages: [generic]
-severity: critical
 confidence: high
-cwe: [CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-798
+description: Detects API keys, tokens, and passwords hardcoded in Makefile targets and variables.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded Secrets in Makefiles
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - devops
+    - makefile
+    - secrets
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Hardcoded Secrets in Makefiles

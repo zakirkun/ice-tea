@@ -1,13 +1,25 @@
 ---
-name: ARP Spoofing Defense Missing
-version: 1.0.0
-description: Detects network configurations and code patterns that are vulnerable to ARP spoofing attacks.
-tags: [network, arp, mitm, owasp-a02]
-languages: [python, generic]
-severity: medium
 confidence: low
-cwe: [CWE-923]
-owasp: [A02:2025]
+cwe:
+    - CWE-923
+description: Detects network configurations and code patterns that are vulnerable to ARP spoofing attacks.
+languages:
+    - python
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: ARP Spoofing Defense Missing
+owasp:
+    - A02:2025
+severity: medium
+tags:
+    - network
+    - arp
+    - mitm
+    - owasp-a02
+version: 1.0.0
 ---
 
 # ARP Spoofing Defense Missing

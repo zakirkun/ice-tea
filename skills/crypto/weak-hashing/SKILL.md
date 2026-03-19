@@ -1,13 +1,26 @@
 ---
-name: Weak Hashing Algorithms
-version: 1.0.0
-description: Detects the use of cryptographically weak hashing algorithms like MD5 and SHA1.
-tags: [crypto, hash, md5, sha1, owasp-a02]
-languages: [generic]
-severity: high
 confidence: medium
-cwe: [CWE-327, CWE-328]
-owasp: [A02:2025]
+cwe:
+    - CWE-327
+    - CWE-328
+description: Detects the use of cryptographically weak hashing algorithms like MD5 and SHA1.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Weak Hashing Algorithms
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - hash
+    - md5
+    - sha1
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Weak Hashing Algorithms

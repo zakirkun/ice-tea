@@ -1,13 +1,30 @@
 ---
-name: Clickjacking (Missing Frame Protection)
-version: 1.0.0
-description: Detects missing X-Frame-Options or Content-Security-Policy frame-ancestors directives.
-tags: [clickjacking, web, security-headers, owasp-a05]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: medium
 confidence: medium
-cwe: [CWE-1021]
-owasp: [A05:2025]
+cwe:
+    - CWE-1021
+description: Detects missing X-Frame-Options or Content-Security-Policy frame-ancestors directives.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Clickjacking (Missing Frame Protection)
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - clickjacking
+    - web
+    - security-headers
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Clickjacking (Missing Frame Protection)

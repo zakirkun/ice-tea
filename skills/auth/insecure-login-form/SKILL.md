@@ -1,13 +1,29 @@
 ---
-name: Insecure Login Form
-version: 1.0.0
-description: Detects login forms served over HTTP, with autocomplete enabled for password fields, or without CSRF protection.
-tags: [auth, login-form, https, owasp-a07]
-languages: [javascript, typescript, php, python, generic]
-severity: high
 confidence: high
-cwe: [CWE-319, CWE-352]
-owasp: [A07:2025]
+cwe:
+    - CWE-319
+    - CWE-352
+description: Detects login forms served over HTTP, with autocomplete enabled for password fields, or without CSRF protection.
+languages:
+    - javascript
+    - typescript
+    - php
+    - python
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Login Form
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - auth
+    - login-form
+    - https
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Insecure Login Form

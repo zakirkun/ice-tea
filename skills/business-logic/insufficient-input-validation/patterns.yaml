@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-20]
       owasp: ['A03:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:age|birthdate|dob|date_of_birth)\\s*=\\s*(?:req\\.body|request\\.form|\\$_POST)"
     - id: BL-VAL-002
@@ -16,7 +16,7 @@ rules:
       confidence: low
       cwe: [CWE-20]
       owasp: ['A03:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "email.*regex.*@[^[]*\\[^@\\]"
     - id: BL-VAL-003
@@ -26,7 +26,7 @@ rules:
       confidence: low
       cwe: [CWE-20]
       owasp: ['A03:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "quantity\\s*=\\s*parseInt\\s*\\([^)]*\\)"
     - id: BL-VAL-004
@@ -36,6 +36,6 @@ rules:
       confidence: low
       cwe: [CWE-400]
       owasp: ['A03:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:comment|description|notes|bio|message)\\s*=\\s*(?:req\\.body|request\\.form|\\$_POST)"

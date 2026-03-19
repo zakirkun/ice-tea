@@ -1,13 +1,32 @@
 ---
-name: Default Credentials
-version: 1.0.0
-description: Detects use of common default usernames and passwords in application configuration and code.
-tags: [default-credentials, auth, infra, owasp-a07]
-languages: [generic, javascript, typescript, python, go, java, php, yaml]
-severity: critical
 confidence: high
-cwe: [CWE-1392, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-1392
+    - CWE-798
+description: Detects use of common default usernames and passwords in application configuration and code.
+languages:
+    - generic
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Default Credentials
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - default-credentials
+    - auth
+    - infra
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Default Credentials

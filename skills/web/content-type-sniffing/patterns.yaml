@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-16]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, go, python, java]
+      languages: [javascript, typescript, go, python, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.use\\s*\\(\\s*[^)]*\\)"
         - regex: "helmet\\s*\\(\\s*\\{[^}]*contentTypeOptions\\s*:\\s*false"
@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-79]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, php, go]
+      languages: [javascript, typescript, python, php, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:express\\.static|send(?:File)?).*(?:uploads?|user[-_]files?|attachments?)"
         - regex: "app\\.use\\s*\\(['\"][^'\"]*['\"]\\s*,\\s*express\\.static\\s*\\(['\"](?:uploads?|files)"

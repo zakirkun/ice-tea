@@ -1,13 +1,28 @@
 ---
-name: Null Pointer Dereference
-version: 1.0.0
-description: Detects code that dereferences pointers or return values that could be NULL without validation, causing crashes or privilege escalation.
-tags: [null-pointer, memory, c, cpp, owasp-a06]
-languages: [c, cpp, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-476]
-owasp: [A06:2025]
+cwe:
+    - CWE-476
+description: Detects code that dereferences pointers or return values that could be NULL without validation, causing crashes or privilege escalation.
+languages:
+    - c
+    - cpp
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Null Pointer Dereference
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - null-pointer
+    - memory
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Null Pointer Dereference

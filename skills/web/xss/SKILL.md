@@ -1,13 +1,25 @@
 ---
-name: Cross-Site Scripting (XSS) Detection
-version: 1.0.0
-description: Detects DOM-based Cross-Site Scripting (XSS) vulnerabilities in JavaScript
-tags: [xss, web, injection, owasp-a03]
-languages: [javascript, typescript]
-severity: high
 confidence: medium
-cwe: [CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-79
+description: Detects DOM-based Cross-Site Scripting (XSS) vulnerabilities in JavaScript
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Cross-Site Scripting (XSS) Detection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - xss
+    - web
+    - injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Cross-Site Scripting (XSS)

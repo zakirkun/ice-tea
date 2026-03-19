@@ -1,13 +1,24 @@
 ---
-name: Sensitive Data in NSUserDefaults
-version: 1.0.0
-description: Detects storage of sensitive information in NSUserDefaults which is unencrypted and accessible in device backups.
-tags: [ios, mobile, data-storage, owasp-m2]
-languages: [generic]
-severity: high
 confidence: high
-cwe: [CWE-312]
-owasp: [A02:2025]
+cwe:
+    - CWE-312
+description: Detects storage of sensitive information in NSUserDefaults which is unencrypted and accessible in device backups.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Sensitive Data in NSUserDefaults
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - data-storage
+    - owasp-m2
+version: 1.0.0
 ---
 
 # Sensitive Data in NSUserDefaults

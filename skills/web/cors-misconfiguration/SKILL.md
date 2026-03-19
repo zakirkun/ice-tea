@@ -1,13 +1,28 @@
 ---
-name: CORS Misconfiguration
-version: 1.0.0
-description: Detects insecure Cross-Origin Resource Sharing configurations that allow unauthorized cross-origin access.
-tags: [cors, web, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: high
-cwe: [CWE-942]
-owasp: [A05:2025]
+cwe:
+    - CWE-942
+description: Detects insecure Cross-Origin Resource Sharing configurations that allow unauthorized cross-origin access.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: CORS Misconfiguration
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - cors
+    - web
+    - owasp-a05
+version: 1.0.0
 ---
 
 # CORS Misconfiguration

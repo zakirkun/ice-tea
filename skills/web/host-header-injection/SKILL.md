@@ -1,13 +1,30 @@
 ---
-name: Host Header Injection
-version: 1.0.0
-description: Detects applications that use the HTTP Host header for URL generation, password reset links, or routing without validation.
-tags: [web, host-header, injection, owasp-a01]
-languages: [javascript, typescript, python, php, java, go, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-113]
-owasp: [A01:2025]
+cwe:
+    - CWE-113
+description: Detects applications that use the HTTP Host header for URL generation, password reset links, or routing without validation.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Host Header Injection
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - web
+    - host-header
+    - injection
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Host Header Injection

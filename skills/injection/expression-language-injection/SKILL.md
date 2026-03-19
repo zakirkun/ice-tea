@@ -1,13 +1,24 @@
 ---
-name: Expression Language Injection (EL Injection)
-version: 1.0.0
-description: Detects user-controlled input evaluated by Java EL, Spring SpEL, Thymeleaf, or JSP Expression Language.
-tags: [injection, el-injection, spel, owasp-a03]
-languages: [java]
-severity: critical
 confidence: high
-cwe: [CWE-917]
-owasp: [A03:2025]
+cwe:
+    - CWE-917
+description: Detects user-controlled input evaluated by Java EL, Spring SpEL, Thymeleaf, or JSP Expression Language.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Expression Language Injection (EL Injection)
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - injection
+    - el-injection
+    - spel
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Expression Language Injection

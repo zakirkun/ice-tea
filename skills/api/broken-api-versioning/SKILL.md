@@ -1,13 +1,28 @@
 ---
-name: Broken API Versioning Security
-version: 1.0.0
-description: Detects API versioning patterns where newer security controls do not apply to older API versions still in use.
-tags: [api, versioning, owasp-api9]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-1059]
-owasp: [A09:2025]
+cwe:
+    - CWE-1059
+description: Detects API versioning patterns where newer security controls do not apply to older API versions still in use.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Broken API Versioning Security
+owasp:
+    - A09:2025
+severity: high
+tags:
+    - api
+    - versioning
+    - owasp-api9
+version: 1.0.0
 ---
 
 # Broken API Versioning Security

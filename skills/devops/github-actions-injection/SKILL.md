@@ -1,13 +1,25 @@
 ---
-name: GitHub Actions Command Injection
-version: 1.0.0
-description: Detects GitHub Actions workflow files that interpolate untrusted event data into run steps, enabling CI/CD pipeline injection.
-tags: [devops, github-actions, ci-cd, injection, owasp-a03]
-languages: [yaml]
-severity: critical
 confidence: high
-cwe: [CWE-77]
-owasp: [A03:2025]
+cwe:
+    - CWE-77
+description: Detects GitHub Actions workflow files that interpolate untrusted event data into run steps, enabling CI/CD pipeline injection.
+languages:
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: GitHub Actions Command Injection
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - devops
+    - github-actions
+    - ci-cd
+    - injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # GitHub Actions Command Injection

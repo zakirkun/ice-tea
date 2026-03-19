@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-840]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:coupon|promo|discount).*(?:valid|active|exists)"
         - regex: "Coupon\\.findOne\\s*\\(\\s*\\{\\s*code\\s*:\\s*"
@@ -17,7 +17,7 @@ rules:
       confidence: low
       cwe: [CWE-362]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "coupon\\.used\\s*=\\s*true"
         - regex: "UPDATE.*coupons.*SET.*used.*WHERE.*code"
@@ -28,7 +28,7 @@ rules:
       confidence: low
       cwe: [CWE-840]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "coupons?\\.push\\s*\\([^)]+\\)"
         - regex: "appliedCoupons\\.length"

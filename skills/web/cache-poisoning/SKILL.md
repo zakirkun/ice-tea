@@ -1,13 +1,28 @@
 ---
-name: Web Cache Poisoning
-version: 1.0.0
-description: Detects applications that include unvalidated request headers or parameters in cached responses, enabling cache poisoning attacks.
-tags: [web, cache-poisoning, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-524]
-owasp: [A05:2025]
+cwe:
+    - CWE-524
+description: Detects applications that include unvalidated request headers or parameters in cached responses, enabling cache poisoning attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Web Cache Poisoning
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - web
+    - cache-poisoning
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Web Cache Poisoning

@@ -1,13 +1,29 @@
 ---
-name: Mass Enumeration / Data Harvesting
-version: 1.0.0
-description: Detects API endpoints that expose lists without pagination limits, enabling automated data harvesting.
-tags: [business-logic, enumeration, api, owasp-a01]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-200]
-owasp: [A01:2025]
+cwe:
+    - CWE-200
+description: Detects API endpoints that expose lists without pagination limits, enabling automated data harvesting.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Mass Enumeration / Data Harvesting
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - business-logic
+    - enumeration
+    - api
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Mass Enumeration / Data Harvesting

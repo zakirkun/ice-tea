@@ -1,13 +1,24 @@
 ---
-name: Python Pickle/Shelve Extended Deserialization
-version: 1.0.0
-description: Detects extended use of pickle, shelve, and marshal for deserializing untrusted data beyond basic patterns.
-tags: [deserialization, python, rce, owasp-a08]
-languages: [python]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects extended use of pickle, shelve, and marshal for deserializing untrusted data beyond basic patterns.
+languages:
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Python Pickle/Shelve Extended Deserialization
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - python
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Python Pickle Extended Deserialization

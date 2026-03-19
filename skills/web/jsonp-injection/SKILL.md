@@ -1,13 +1,29 @@
 ---
-name: JSONP Injection
-version: 1.0.0
-description: Detects JSONP endpoints that reflect user-controlled callback names without validation, enabling XSS.
-tags: [web, jsonp, xss, owasp-a03]
-languages: [javascript, typescript, python, php, go, java]
-severity: high
 confidence: high
-cwe: [CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-79
+description: Detects JSONP endpoints that reflect user-controlled callback names without validation, enabling XSS.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: JSONP Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - web
+    - jsonp
+    - xss
+    - owasp-a03
+version: 1.0.0
 ---
 
 # JSONP Callback Injection

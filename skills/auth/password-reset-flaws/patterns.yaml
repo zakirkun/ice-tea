@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-640]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "resetToken.*=.*(?:uuid|crypto\\.randomBytes|secrets\\.token)"
         - regex: "User\\.(?:update|save).*resetToken"
@@ -28,7 +28,7 @@ rules:
       confidence: high
       cwe: [CWE-640]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php, go]
+      languages: [javascript, typescript, python, php, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:https?://).*req\\.headers?\\.host.*(?:reset|token|password)"
         - regex: "reset.*link.*\\$_SERVER\\[.HTTP_HOST.\\]"
@@ -39,7 +39,7 @@ rules:
       confidence: medium
       cwe: [CWE-640]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "password.*updated"
         - regex: "user\\.password\\s*=.*newPassword"
@@ -50,7 +50,7 @@ rules:
       confidence: medium
       cwe: [CWE-204]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "Email not found|User not found|No account.*email"
         - regex: "res\\.json.*(?:email.*not.*found|invalid.*email|user.*does.*not.*exist)"

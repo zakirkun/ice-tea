@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-942]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]\\*['\"]"
         - regex: "origin\\s*:\\s*['\"]\\*['\"]"
@@ -18,7 +18,7 @@ rules:
       confidence: high
       cwe: [CWE-942]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)Access-Control-Allow-Origin.*req(?:uest)?\\.(?:headers?|get)\\(['\"]origin['\"]\\)"
         - regex: "(?i)res\\.(?:set|header)\\(['\"]Access-Control-Allow-Origin['\"],\\s*req\\.headers?.origin\\)"
@@ -30,7 +30,7 @@ rules:
       confidence: high
       cwe: [CWE-942]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]null['\"]"
         - regex: "(?i)allowedOrigins?.*['\"]null['\"]"
@@ -42,7 +42,7 @@ rules:
       confidence: high
       cwe: [CWE-942]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "Access-Control-Allow-Credentials['\"]?\\s*[=:]\\s*['\"]?true['\"]?"
         - regex: "credentials\\s*:\\s*true"

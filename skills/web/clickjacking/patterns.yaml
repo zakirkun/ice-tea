@@ -17,7 +17,7 @@ rules:
       confidence: high
       cwe: [CWE-1021]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php, ruby]
+      languages: [javascript, typescript, python, go, java, php, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)X-Frame-Options['\"]?\\s*[=:]\\s*['\"]?ALLOWALL['\"]?"
         - regex: "(?i)X-Frame-Options.*ALLOWALL"
@@ -28,7 +28,7 @@ rules:
       confidence: low
       cwe: [CWE-1021]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "Content-Security-Policy['\"]?\\s*[=:]\\s*['\"][^'\"]*"
     - id: WEB-CJ-004

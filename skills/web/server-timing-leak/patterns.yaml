@@ -1,35 +1,33 @@
 rules:
-  - id: WEB-TIME-001
-    name: server-timing-exposes-services
-    description: "Server-Timing header exposing internal service names"
-    severity: low
-    confidence: high
-    cwe: [CWE-208]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Server-Timing.*(?:db|database|redis|cache|sql|query|auth|service)"
-      - regex: "(?i)res\\.setHeader\\s*\\(['\"]Server-Timing['\"]"
-
-  - id: WEB-TIME-002
-    name: server-timing-all-origins
-    description: "Timing-Allow-Origin set to wildcard — cross-origin timing attacks"
-    severity: medium
-    confidence: high
-    cwe: [CWE-208]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Timing-Allow-Origin.*\\*"
-
-  - id: WEB-TIME-003
-    name: performance-timing-exposed
-    description: "Server performance data included in JSON API response"
-    severity: low
-    confidence: medium
-    cwe: [CWE-208]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "(?:duration|elapsed|timing|executionTime).*res\\.json\\s*\\("
-      - regex: "json\\s*\\(\\s*\\{[^}]*(?:duration|elapsed|query_time|execution_time)"
+    - id: WEB-TIME-001
+      name: server-timing-exposes-services
+      description: "Server-Timing header exposing internal service names"
+      severity: low
+      confidence: high
+      cwe: [CWE-208]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)Server-Timing.*(?:db|database|redis|cache|sql|query|auth|service)"
+        - regex: "(?i)res\\.setHeader\\s*\\(['\"]Server-Timing['\"]"
+    - id: WEB-TIME-002
+      name: server-timing-all-origins
+      description: "Timing-Allow-Origin set to wildcard — cross-origin timing attacks"
+      severity: medium
+      confidence: high
+      cwe: [CWE-208]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)Timing-Allow-Origin.*\\*"
+    - id: WEB-TIME-003
+      name: performance-timing-exposed
+      description: "Server performance data included in JSON API response"
+      severity: low
+      confidence: medium
+      cwe: [CWE-208]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:duration|elapsed|timing|executionTime).*res\\.json\\s*\\("
+        - regex: "json\\s*\\(\\s*\\{[^}]*(?:duration|elapsed|query_time|execution_time)"

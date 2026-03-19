@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, java, go, php]
+      languages: [python, javascript, typescript, java, go, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "AES\\.new\\s*\\(\\s*password"
         - regex: "createCipheriv\\s*\\([^,]+,\\s*password"
@@ -18,7 +18,7 @@ rules:
       confidence: high
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, java, go, php]
+      languages: [python, javascript, typescript, java, go, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "hashlib\\.sha256\\s*\\(\\s*password\\.encode\\s*\\(\\s*\\)\\s*\\)\\.digest\\s*\\(\\s*\\)"
         - regex: "crypto\\.createHash\\(['\"]sha256['\"]\\)\\.update\\(password\\)\\.digest\\("
@@ -30,7 +30,7 @@ rules:
       confidence: high
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, java]
+      languages: [python, javascript, typescript, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "PBKDF2HMAC.*iterations\\s*=\\s*[0-9]{1,5}"
         - regex: "pbkdf2(?:Sync)?\\s*\\([^)]*,\\s*[^,]+,\\s*(?:[0-9]{1,4}|[1-9][0-9]{4})"
@@ -42,7 +42,7 @@ rules:
       confidence: high
       cwe: [CWE-760]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, java, php]
+      languages: [python, javascript, typescript, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "salt\\s*=\\s*b?['\"][^'\"]{4,32}['\"]"
         - regex: "salt\\s*=\\s*b?['\"][^'\"]*['\"].*PBKDF2|PBKDF2.*salt\\s*=\\s*b?['\"][^'\"]*['\"]"
@@ -54,7 +54,7 @@ rules:
       confidence: medium
       cwe: [CWE-916]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, go, java, php]
+      languages: [python, javascript, typescript, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "hashlib\\.sha(?:256|512)\\s*\\(\\s*(?:password|passwd|pwd)"
         - regex: "crypto\\.createHash\\(['\"]sha(?:256|512)['\"]\\).*password"

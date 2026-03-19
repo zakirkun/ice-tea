@@ -1,13 +1,24 @@
 ---
-name: Ruby Marshal Deserialization
-version: 1.0.0
-description: Detects Marshal.load() or Marshal.restore() on untrusted data, enabling code execution.
-tags: [deserialization, ruby, rce, owasp-a08]
-languages: [ruby]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects Marshal.load() or Marshal.restore() on untrusted data, enabling code execution.
+languages:
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Ruby Marshal Deserialization
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - ruby
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Ruby Marshal Deserialization

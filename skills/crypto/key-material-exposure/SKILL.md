@@ -1,13 +1,30 @@
 ---
-name: Cryptographic Key Material Exposure
-version: 1.0.0
-description: Detects private keys, certificates, and cryptographic key material hardcoded or committed in source code.
-tags: [crypto, key-material, secrets, owasp-a07]
-languages: [generic, javascript, typescript, python, go, java, php]
-severity: critical
 confidence: high
-cwe: [CWE-321]
-owasp: [A07:2025]
+cwe:
+    - CWE-321
+description: Detects private keys, certificates, and cryptographic key material hardcoded or committed in source code.
+languages:
+    - generic
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Cryptographic Key Material Exposure
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - crypto
+    - key-material
+    - secrets
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Cryptographic Key Material Exposure

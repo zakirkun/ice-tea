@@ -1,13 +1,29 @@
 ---
-name: Verbose Error Messages Exposed to Clients
-version: 1.0.0
-description: Detects stack traces, exception details, and internal error information sent in HTTP responses to end users.
-tags: [error-handling, logging, information-disclosure, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-209]
-owasp: [A05:2025]
+cwe:
+    - CWE-209
+description: Detects stack traces, exception details, and internal error information sent in HTTP responses to end users.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Verbose Error Messages Exposed to Clients
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - error-handling
+    - logging
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Verbose Error Messages Exposed to Clients

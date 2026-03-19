@@ -1,13 +1,25 @@
 ---
-name: Android WebView JavaScript Risks
-version: 1.0.0
-description: Detects insecure Android WebView configurations enabling XSS, JavaScript bridge abuse, and remote code execution.
-tags: [android, webview, javascript, owasp-m1]
-languages: [java]
-severity: critical
 confidence: high
-cwe: [CWE-749, CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-749
+    - CWE-79
+description: Detects insecure Android WebView configurations enabling XSS, JavaScript bridge abuse, and remote code execution.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Android WebView JavaScript Risks
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - android
+    - webview
+    - javascript
+    - owasp-m1
+version: 1.0.0
 ---
 
 # Android WebView JavaScript Risks

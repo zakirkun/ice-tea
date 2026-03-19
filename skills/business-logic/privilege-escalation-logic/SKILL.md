@@ -1,13 +1,29 @@
 ---
-name: Business Logic Privilege Escalation
-version: 1.0.0
-description: Detects application logic that allows users to escalate their own privileges or roles through manipulated requests.
-tags: [business-logic, privilege-escalation, auth, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: critical
 confidence: medium
-cwe: [CWE-269]
-owasp: [A01:2025]
+cwe:
+    - CWE-269
+description: Detects application logic that allows users to escalate their own privileges or roles through manipulated requests.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Business Logic Privilege Escalation
+owasp:
+    - A01:2025
+severity: critical
+tags:
+    - business-logic
+    - privilege-escalation
+    - auth
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Business Logic Privilege Escalation

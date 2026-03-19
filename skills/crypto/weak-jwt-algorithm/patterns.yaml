@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [javascript, typescript, python, java, go]
+      languages: [javascript, typescript, python, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "jwt\\.sign\\s*\\([^,]+,\\s*['\"][^'\"]{1,31}['\"]"
         - regex: "jwt\\.encode\\s*\\([^,]+,\\s*['\"][^'\"]{1,31}['\"]"
@@ -28,7 +28,7 @@ rules:
       confidence: medium
       cwe: [CWE-613]
       owasp: ['A02:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "jwt\\.sign\\s*\\(\\s*\\{[^}]*\\}\\s*,\\s*[^,)]+\\s*\\)"
         - regex: "jwt\\.encode\\s*\\(\\s*\\{[^}]*\\}"

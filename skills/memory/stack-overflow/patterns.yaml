@@ -27,7 +27,7 @@ rules:
       confidence: low
       cwe: [CWE-674]
       owasp: ['A06:2025']
-      languages: [python, java, javascript, go]
+      languages: [python, java, javascript, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "def\\s+\\w+\\s*\\([^)]*\\):[^:]*\\n(?:[^\\n]*\\n){0,10}[^\\n]*\\w+\\s*\\([^)]*\\)"
     - id: MEM-STCK-004

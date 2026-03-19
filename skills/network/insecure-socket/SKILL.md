@@ -1,13 +1,31 @@
 ---
-name: Insecure Network Socket
-version: 1.0.0
-description: Detects plain TCP sockets without TLS wrapping used for sensitive network communication.
-tags: [network, socket, tls, owasp-a02]
-languages: [python, javascript, typescript, go, java, c, cpp]
-severity: high
 confidence: medium
-cwe: [CWE-311, CWE-319]
-owasp: [A02:2025]
+cwe:
+    - CWE-311
+    - CWE-319
+description: Detects plain TCP sockets without TLS wrapping used for sensitive network communication.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Network Socket
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - network
+    - socket
+    - tls
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure Network Socket

@@ -1,13 +1,27 @@
 ---
-name: Dangling Markup Injection
-version: 1.0.0
-description: Detects HTML injection that, even without script execution, can exfiltrate page content via dangling attributes and tags.
-tags: [web, dangling-markup, html-injection, owasp-a03]
-languages: [javascript, typescript, php, python]
-severity: medium
 confidence: medium
-cwe: [CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-79
+description: Detects HTML injection that, even without script execution, can exfiltrate page content via dangling attributes and tags.
+languages:
+    - javascript
+    - typescript
+    - php
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Dangling Markup Injection
+owasp:
+    - A03:2025
+severity: medium
+tags:
+    - web
+    - dangling-markup
+    - html-injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Dangling Markup Injection

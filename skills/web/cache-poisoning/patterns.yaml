@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-524]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, php]
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "req\\.headers?\\.['\"]x-forwarded-host['\"]"
         - regex: "request\\.META\\.get\\(['\"]HTTP_X_FORWARDED_HOST['\"]\\)"
@@ -18,7 +18,7 @@ rules:
       confidence: low
       cwe: [CWE-524]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "req\\.headers?\\.['\"](?:x-forwarded-for|x-real-ip|cf-connecting-ip)['\"].*(?:res\\.(?:send|json|render)|response\\.(?:write|json))"
     - id: WEB-CACHE-003
@@ -28,6 +28,6 @@ rules:
       confidence: low
       cwe: [CWE-524]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:app|router)\\.get\\(['\"][^'\"]*(?:profile|account|dashboard|admin)[^'\"]*['\"])"

@@ -1,13 +1,29 @@
 ---
-name: Race Condition in Purchase / Financial Transaction
-version: 1.0.0
-description: Detects financial transaction code that can be exploited via concurrent requests to exceed balance limits or purchase limits.
-tags: [business-logic, race-condition, concurrency, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: high
 confidence: low
-cwe: [CWE-362]
-owasp: [A01:2025]
+cwe:
+    - CWE-362
+description: Detects financial transaction code that can be exploited via concurrent requests to exceed balance limits or purchase limits.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Race Condition in Purchase / Financial Transaction
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - business-logic
+    - race-condition
+    - concurrency
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Race Condition in Purchase / Financial Transaction

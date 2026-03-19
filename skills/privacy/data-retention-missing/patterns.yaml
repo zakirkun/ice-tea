@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-272]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:client|redis)\\.set\\s*\\([^,]+,\\s*[^,]+\\s*\\)"
         - regex: "redis\\.set\\s*\\(['\"](?:user|session|token|email|profile)[^'\"]*['\"]"
@@ -17,7 +17,7 @@ rules:
       confidence: low
       cwe: [CWE-272]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java]
+      languages: [javascript, typescript, python, go, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:Model|Schema).*User"
     - id: PRIV-RET-003

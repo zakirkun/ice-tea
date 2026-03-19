@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, php, go, ruby]
+      languages: [python, java, javascript, typescript, php, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+DES"
         - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DES['\"]"
@@ -19,7 +19,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, php, go, ruby]
+      languages: [python, java, javascript, typescript, php, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:DES3|TripleDES|DESede|3DES|des-ede)"
         - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DESede"
@@ -32,7 +32,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, php, go, ruby]
+      languages: [python, java, javascript, typescript, php, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:RC4|ARC4|ARCFOUR|RC4-MD5)"
         - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+ARC4"
@@ -44,7 +44,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, php, go, ruby]
+      languages: [python, java, javascript, typescript, php, go, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)AES\\.MODE_ECB"
         - regex: "(?i)AES/ECB"
@@ -57,7 +57,7 @@ rules:
       confidence: high
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, php]
+      languages: [python, java, javascript, typescript, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:Blowfish|BF-CBC|BF-ECB)"
         - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+Blowfish"
@@ -69,7 +69,7 @@ rules:
       confidence: medium
       cwe: [CWE-327]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, php, go, java, ruby]
+      languages: [python, javascript, typescript, php, go, java, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)(?:encrypt|cipher).*\\^\\s*key\\[\\w+\\s*%"
         - regex: "(?i)for.*in.*plaintext.*\\^=.*key"

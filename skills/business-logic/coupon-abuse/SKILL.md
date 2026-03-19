@@ -1,13 +1,29 @@
 ---
-name: Coupon and Discount Code Abuse
-version: 1.0.0
-description: Detects discount/coupon code logic without per-user usage limits, allowing unlimited stacking or reuse.
-tags: [business-logic, coupon, ecommerce, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: medium
 confidence: low
-cwe: [CWE-840]
-owasp: [A01:2025]
+cwe:
+    - CWE-840
+description: Detects discount/coupon code logic without per-user usage limits, allowing unlimited stacking or reuse.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Coupon and Discount Code Abuse
+owasp:
+    - A01:2025
+severity: medium
+tags:
+    - business-logic
+    - coupon
+    - ecommerce
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Coupon and Discount Code Abuse

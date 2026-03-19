@@ -1,13 +1,30 @@
 ---
-name: Cleartext Network Traffic
-version: 1.0.0
-description: Detects unencrypted HTTP connections for transmitting sensitive data, credentials, or API calls.
-tags: [network, http, cleartext, owasp-a02]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: medium
-cwe: [CWE-319]
-owasp: [A02:2025]
+cwe:
+    - CWE-319
+description: Detects unencrypted HTTP connections for transmitting sensitive data, credentials, or API calls.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Cleartext Network Traffic
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - network
+    - http
+    - cleartext
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Cleartext Network Traffic

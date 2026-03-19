@@ -1,13 +1,30 @@
 ---
-name: Server-Side Template Injection (SSTI)
-version: 1.0.0
-description: Detects user-controlled input passed directly into template rendering engines, enabling code execution.
-tags: [ssti, template-injection, injection, owasp-a03]
-languages: [python, javascript, typescript, java, php, ruby, go]
-severity: critical
 confidence: medium
-cwe: [CWE-94]
-owasp: [A03:2025]
+cwe:
+    - CWE-94
+description: Detects user-controlled input passed directly into template rendering engines, enabling code execution.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - php
+    - ruby
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Server-Side Template Injection (SSTI)
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - ssti
+    - template-injection
+    - injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Server-Side Template Injection (SSTI)

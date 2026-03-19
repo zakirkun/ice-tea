@@ -1,13 +1,26 @@
 ---
-name: Use After Free
-version: 1.0.0
-description: Detects potential use-after-free vulnerabilities where memory is accessed after being freed.
-tags: [use-after-free, memory, c, cpp, owasp-a06]
-languages: [c, cpp]
-severity: critical
 confidence: medium
-cwe: [CWE-416]
-owasp: [A06:2025]
+cwe:
+    - CWE-416
+description: Detects potential use-after-free vulnerabilities where memory is accessed after being freed.
+languages:
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Use After Free
+owasp:
+    - A06:2025
+severity: critical
+tags:
+    - use-after-free
+    - memory
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Use After Free

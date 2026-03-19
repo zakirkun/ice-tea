@@ -1,13 +1,30 @@
 ---
-name: Missing API Rate Limiting
-version: 1.0.0
-description: Detects sensitive API endpoints without rate limiting, enabling resource exhaustion, credential stuffing, and enumeration attacks.
-tags: [rate-limiting, api, dos, owasp-api4]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: low
-cwe: [CWE-770, CWE-307]
-owasp: [A04:2025]
+cwe:
+    - CWE-770
+    - CWE-307
+description: Detects sensitive API endpoints without rate limiting, enabling resource exhaustion, credential stuffing, and enumeration attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing API Rate Limiting
+owasp:
+    - A04:2025
+severity: high
+tags:
+    - rate-limiting
+    - api
+    - dos
+    - owasp-api4
+version: 1.0.0
 ---
 
 # Missing API Rate Limiting

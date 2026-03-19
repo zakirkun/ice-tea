@@ -1,13 +1,26 @@
 ---
-name: Secrets in Environment Files and Configuration
-version: 1.0.0
-description: Detects sensitive secrets hardcoded in .env files, configuration files, and infrastructure definitions that may be committed to version control.
-tags: [secrets, env, configuration, owasp-a07]
-languages: [generic, yaml]
-severity: critical
 confidence: high
-cwe: [CWE-526, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-526
+    - CWE-798
+description: Detects sensitive secrets hardcoded in .env files, configuration files, and infrastructure definitions that may be committed to version control.
+languages:
+    - generic
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Secrets in Environment Files and Configuration
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - secrets
+    - env
+    - configuration
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Secrets in Environment Files and Configuration

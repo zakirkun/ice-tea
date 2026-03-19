@@ -1,13 +1,24 @@
 ---
-name: Sensitive Data in LocalStorage
-version: 1.0.0
-description: Detects potential storage of sensitive credentials or JWTs directly in the browser's localStorage or sessionStorage.
-tags: [frontend, storage, secrets, owasp-a02]
-languages: [generic]
-severity: medium
 confidence: medium
-cwe: [CWE-312]
-owasp: [A02:2025]
+cwe:
+    - CWE-312
+description: Detects potential storage of sensitive credentials or JWTs directly in the browser's localStorage or sessionStorage.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Sensitive Data in LocalStorage
+owasp:
+    - A02:2025
+severity: medium
+tags:
+    - frontend
+    - storage
+    - secrets
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Sensitive Data in LocalStorage

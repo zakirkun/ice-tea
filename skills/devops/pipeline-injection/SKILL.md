@@ -1,13 +1,25 @@
 ---
-name: CI/CD Pipeline Code Injection
-version: 1.0.0
-description: Detects CI/CD pipeline scripts that incorporate untrusted input into shell commands, enabling pipeline injection attacks.
-tags: [devops, ci-cd, injection, owasp-a03]
-languages: [yaml, generic]
-severity: critical
 confidence: medium
-cwe: [CWE-77]
-owasp: [A03:2025]
+cwe:
+    - CWE-77
+description: Detects CI/CD pipeline scripts that incorporate untrusted input into shell commands, enabling pipeline injection attacks.
+languages:
+    - yaml
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: CI/CD Pipeline Code Injection
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - devops
+    - ci-cd
+    - injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # CI/CD Pipeline Code Injection

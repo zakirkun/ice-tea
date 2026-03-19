@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-311]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, go, java, php]
+      languages: [python, javascript, typescript, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)sslmode\\s*=\\s*(?:disable|disabled)"
         - regex: "(?i)ssl_mode\\s*=\\s*['\"]?disable['\"]?"
@@ -18,7 +18,7 @@ rules:
       confidence: high
       cwe: [CWE-311]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, go, php]
+      languages: [python, javascript, typescript, go, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)ssl\\s*:\\s*false"
         - regex: "(?i)ssl_disabled\\s*=\\s*True"
@@ -30,7 +30,7 @@ rules:
       confidence: low
       cwe: [CWE-311]
       owasp: ['A02:2025']
-      languages: [python, javascript, go, java, php]
+      languages: [python, javascript, go, java, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "sqlite3\\.connect\\s*\\(['\"][^'\"]+\\.(?:db|sqlite)['\"]\\)"
         - regex: "import\\s+sqlite3"
@@ -52,7 +52,7 @@ rules:
       confidence: medium
       cwe: [CWE-311]
       owasp: ['A02:2025']
-      languages: [javascript, typescript, python, go]
+      languages: [javascript, typescript, python, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)tls\\s*:\\s*false"
         - regex: "(?i)ssl\\s*:\\s*false.*mongo|mongo.*ssl\\s*:\\s*false"

@@ -1,13 +1,28 @@
 ---
-name: Double-Checked Locking Anti-Pattern
-version: 1.0.0
-description: Detects broken double-checked locking implementations that create race conditions in singleton initialization.
-tags: [race-condition, concurrency, java, go, owasp-a06]
-languages: [java, go, c, cpp]
-severity: high
 confidence: medium
-cwe: [CWE-609]
-owasp: [A06:2025]
+cwe:
+    - CWE-609
+description: Detects broken double-checked locking implementations that create race conditions in singleton initialization.
+languages:
+    - java
+    - go
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Double-Checked Locking Anti-Pattern
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - race-condition
+    - concurrency
+    - java
+    - go
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Double-Checked Locking Race Condition

@@ -1,13 +1,28 @@
 ---
-name: MongoDB Without Authentication
-version: 1.0.0
-description: Detects MongoDB connections without authentication credentials or configurations that disable authorization.
-tags: [database, mongodb, auth, owasp-a05]
-languages: [javascript, typescript, python, go, java]
-severity: critical
 confidence: high
-cwe: [CWE-306]
-owasp: [A05:2025]
+cwe:
+    - CWE-306
+description: Detects MongoDB connections without authentication credentials or configurations that disable authorization.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: MongoDB Without Authentication
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - database
+    - mongodb
+    - auth
+    - owasp-a05
+version: 1.0.0
 ---
 
 # MongoDB Without Authentication

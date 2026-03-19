@@ -1,13 +1,30 @@
 ---
-name: HTML Injection
-version: 1.0.0
-description: Detects user-controlled input reflected in HTML without proper encoding, enabling HTML injection that may not execute scripts but can redirect or spoof content.
-tags: [injection, html-injection, xss, owasp-a03]
-languages: [python, php, javascript, typescript, java, go, ruby]
-severity: medium
 confidence: medium
-cwe: [CWE-80]
-owasp: [A03:2025]
+cwe:
+    - CWE-80
+description: Detects user-controlled input reflected in HTML without proper encoding, enabling HTML injection that may not execute scripts but can redirect or spoof content.
+languages:
+    - python
+    - php
+    - javascript
+    - typescript
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: HTML Injection
+owasp:
+    - A03:2025
+severity: medium
+tags:
+    - injection
+    - html-injection
+    - xss
+    - owasp-a03
+version: 1.0.0
 ---
 
 # HTML Injection

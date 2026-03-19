@@ -1,13 +1,24 @@
 ---
-name: Android Intent Redirection
-version: 1.0.0
-description: Detects Android intent redirection vulnerabilities where attacker-controlled intents are re-sent or forwarded, enabling privilege escalation.
-tags: [android, mobile, intent, owasp-m1]
-languages: [java]
-severity: high
 confidence: medium
-cwe: [CWE-940]
-owasp: [A01:2025]
+cwe:
+    - CWE-940
+description: Detects Android intent redirection vulnerabilities where attacker-controlled intents are re-sent or forwarded, enabling privilege escalation.
+languages:
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Android Intent Redirection
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - android
+    - mobile
+    - intent
+    - owasp-m1
+version: 1.0.0
 ---
 
 # Android Intent Redirection

@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-338]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "rememberToken.*=.*(?:md5|sha1|base64).*(?:userId|username|email|Date\\.now)"
         - regex: "remember_token.*=.*btoa|remember.*token.*Buffer\\.from.*username"
@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-613]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "maxAge\\s*:\\s*(?:[3-9][0-9]{7,}|[0-9]{9,})"
         - regex: "expires\\s*=.*\\+\\s*(?:365|730|1000)\\s*\\*\\s*24\\s*\\*\\s*60\\s*\\*\\s*60"
@@ -28,6 +28,6 @@ rules:
       confidence: low
       cwe: [CWE-613]
       owasp: ['A07:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "password.*update|user\\.save.*password"

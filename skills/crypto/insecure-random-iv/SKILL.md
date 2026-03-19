@@ -1,13 +1,29 @@
 ---
-name: Insecure Random IV Generation
-version: 1.0.0
-description: Detects initialization vectors generated using non-cryptographic random functions, compromising cipher security.
-tags: [crypto, iv, random, owasp-a02]
-languages: [python, javascript, typescript, java, go, php]
-severity: high
 confidence: high
-cwe: [CWE-330]
-owasp: [A02:2025]
+cwe:
+    - CWE-330
+description: Detects initialization vectors generated using non-cryptographic random functions, compromising cipher security.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Random IV Generation
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - iv
+    - random
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure Random IV Generation

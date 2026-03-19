@@ -1,13 +1,29 @@
 ---
-name: Sensitive URL in Referrer Header
-version: 1.0.0
-description: Detects pages that expose sensitive parameters (tokens, IDs) in URLs that get leaked via the Referer header to external resources.
-tags: [web, referrer, information-disclosure, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-598]
-owasp: [A05:2025]
+cwe:
+    - CWE-598
+description: Detects pages that expose sensitive parameters (tokens, IDs) in URLs that get leaked via the Referer header to external resources.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Sensitive URL in Referrer Header
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - web
+    - referrer
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Sensitive URL Referrer Leakage

@@ -1,13 +1,29 @@
 ---
-name: Missing or Incorrect Content-Type Validation
-version: 1.0.0
-description: Detects API endpoints that do not validate or enforce Content-Type headers, enabling MIME-type confusion and CSRF attacks.
-tags: [api, content-type, csrf, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-16]
-owasp: [A05:2025]
+cwe:
+    - CWE-16
+description: Detects API endpoints that do not validate or enforce Content-Type headers, enabling MIME-type confusion and CSRF attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing or Incorrect Content-Type Validation
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - api
+    - content-type
+    - csrf
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Missing Content-Type Validation

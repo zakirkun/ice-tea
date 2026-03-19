@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-269]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "role\\s*=\\s*(?:req\\.body\\.role|request\\.form\\.get\\(['\"]role['\"]\\)|\\$_POST\\[\\s*['\"]role['\"]\\])"
         - regex: "new\\s+User\\s*\\(\\s*\\{[^}]*role\\s*:\\s*req\\.body\\.role"
@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-269]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "user\\.role\\s*=\\s*(?:req\\.body\\.role|body\\[.role.\\]|request\\.json\\.get\\(['\"]role['\"]\\))"
         - regex: "UPDATE\\s+users\\s+SET\\s+role\\s*=\\s*\\?.*WHERE.*id\\s*="
@@ -28,7 +28,7 @@ rules:
       confidence: low
       cwe: [CWE-269]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "invite.*role\\s*:\\s*(?:req\\.body|request\\.json)"
         - regex: "Invitation\\.create\\s*\\(\\s*\\{[^}]*role\\s*:\\s*req\\.body"

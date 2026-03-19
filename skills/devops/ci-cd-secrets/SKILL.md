@@ -1,13 +1,26 @@
 ---
-name: CI/CD Pipeline Secrets Exposure
-version: 1.0.0
-description: Detects secrets hardcoded in CI/CD configuration files (GitLab CI, GitHub Actions, CircleCI, Jenkins).
-tags: [devops, ci-cd, secrets, owasp-a07]
-languages: [yaml, generic]
-severity: critical
 confidence: high
-cwe: [CWE-312, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-312
+    - CWE-798
+description: Detects secrets hardcoded in CI/CD configuration files (GitLab CI, GitHub Actions, CircleCI, Jenkins).
+languages:
+    - yaml
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: CI/CD Pipeline Secrets Exposure
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - devops
+    - ci-cd
+    - secrets
+    - owasp-a07
+version: 1.0.0
 ---
 
 # CI/CD Pipeline Secrets Exposure

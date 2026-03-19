@@ -1,13 +1,31 @@
 ---
-name: Weak Cipher Algorithm Usage
-version: 1.0.0
-description: Detects use of broken or weak symmetric encryption algorithms (DES, 3DES, RC4, Blowfish, ECB mode).
-tags: [crypto, cipher, des, rc4, owasp-a02]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-327]
-owasp: [A02:2025]
+cwe:
+    - CWE-327
+description: Detects use of broken or weak symmetric encryption algorithms (DES, 3DES, RC4, Blowfish, ECB mode).
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Weak Cipher Algorithm Usage
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - cipher
+    - des
+    - rc4
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Weak Cipher Algorithm Usage

@@ -1,13 +1,28 @@
 ---
-name: SQL Injection Detection
-version: 1.0.0
-description: Detects SQL injection vulnerabilities where user input is concatenated into SQL queries
-tags: [injection, sql, database, owasp-a05]
-languages: [go, javascript, python, java, php]
-severity: critical
 confidence: high
-cwe: [CWE-89]
-owasp: [A05:2025]
+cwe:
+    - CWE-89
+description: Detects SQL injection vulnerabilities where user input is concatenated into SQL queries
+languages:
+    - go
+    - javascript
+    - python
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: SQL Injection Detection
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - injection
+    - sql
+    - database
+    - owasp-a05
+version: 1.0.0
 ---
 
 # SQL Injection Detection

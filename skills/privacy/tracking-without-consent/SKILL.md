@@ -1,13 +1,25 @@
 ---
-name: User Tracking Without Consent
-version: 1.0.0
-description: Detects user tracking mechanisms deployed without checking for consent, including session recording, heatmaps, and behavioral analytics.
-tags: [privacy, tracking, gdpr, owasp-a05]
-languages: [javascript, typescript]
-severity: medium
 confidence: medium
-cwe: [CWE-359]
-owasp: [A05:2025]
+cwe:
+    - CWE-359
+description: Detects user tracking mechanisms deployed without checking for consent, including session recording, heatmaps, and behavioral analytics.
+languages:
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: User Tracking Without Consent
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - privacy
+    - tracking
+    - gdpr
+    - owasp-a05
+version: 1.0.0
 ---
 
 # User Tracking Without Consent

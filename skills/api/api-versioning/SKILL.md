@@ -1,13 +1,29 @@
 ---
-name: Deprecated / Unprotected API Versions
-version: 1.0.0
-description: Detects old API versions that may lack current security controls and deprecated endpoints still accessible in production.
-tags: [api-versioning, api, owasp-api9]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-1059, CWE-1188]
-owasp: [A09:2025]
+cwe:
+    - CWE-1059
+    - CWE-1188
+description: Detects old API versions that may lack current security controls and deprecated endpoints still accessible in production.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Deprecated / Unprotected API Versions
+owasp:
+    - A09:2025
+severity: medium
+tags:
+    - api-versioning
+    - api
+    - owasp-api9
+version: 1.0.0
 ---
 
 # Deprecated / Unprotected API Versions

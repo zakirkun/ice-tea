@@ -1,13 +1,29 @@
 ---
-name: Server Timing Information Leak
-version: 1.0.0
-description: Detects Server-Timing headers that expose internal component names and timing data to clients.
-tags: [web, information-disclosure, timing, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: low
 confidence: high
-cwe: [CWE-208]
-owasp: [A05:2025]
+cwe:
+    - CWE-208
+description: Detects Server-Timing headers that expose internal component names and timing data to clients.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Server Timing Information Leak
+owasp:
+    - A05:2025
+severity: low
+tags:
+    - web
+    - information-disclosure
+    - timing
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Server Timing Information Leak

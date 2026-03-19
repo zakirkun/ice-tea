@@ -1,13 +1,29 @@
 ---
-name: Stack Overflow Vulnerability
-version: 1.0.0
-description: Detects code patterns that can cause stack overflows via unbounded recursion or excessive stack allocation.
-tags: [memory, stack-overflow, c, cpp, owasp-a06]
-languages: [c, cpp, java, go, python]
-severity: high
 confidence: medium
-cwe: [CWE-121]
-owasp: [A06:2025]
+cwe:
+    - CWE-121
+description: Detects code patterns that can cause stack overflows via unbounded recursion or excessive stack allocation.
+languages:
+    - c
+    - cpp
+    - java
+    - go
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Stack Overflow Vulnerability
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - memory
+    - stack-overflow
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Stack Overflow

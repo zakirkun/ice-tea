@@ -52,7 +52,7 @@ rules:
       confidence: high
       cwe: [CWE-306]
       owasp: ['A05:2025']
-      languages: [javascript, typescript, python, go, java, ruby]
+      languages: [javascript, typescript, python, go, java, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "['\"]redis://[^:@'\"]+:[0-9]+['\"]"
         - regex: "REDIS_URL\\s*=\\s*['\"]redis://[^'\"]+['\"]"

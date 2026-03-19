@@ -1,13 +1,25 @@
 ---
-name: Secrets Bundled in Published Packages
-version: 1.0.0
-description: Detects API keys, private keys, and credentials accidentally included in npm/pip packages via missing .npmignore or .pypiignore.
-tags: [supply-chain, secrets, npm, owasp-a07]
-languages: [generic]
-severity: critical
 confidence: medium
-cwe: [CWE-312, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-312
+    - CWE-798
+description: Detects API keys, private keys, and credentials accidentally included in npm/pip packages via missing .npmignore or .pypiignore.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Secrets Bundled in Published Packages
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - supply-chain
+    - secrets
+    - npm
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Secrets Bundled in Published Packages

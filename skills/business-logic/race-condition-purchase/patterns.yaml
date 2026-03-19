@@ -6,7 +6,7 @@ rules:
       confidence: low
       cwe: [CWE-362]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php, java, go]
+      languages: [javascript, typescript, python, php, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:balance|credits|stock)\\s*>=\\s*amount[^;]*;[^;]*(?:balance|credits|stock)\\s*-=\\s*amount"
         - regex: "if\\s*\\([^)]*balance\\s*>=\\s*[^)]*\\)[^{]*\\{(?:[^}]*;){1,5}[^}]*balance\\s*-=\\s*"
@@ -17,7 +17,7 @@ rules:
       confidence: low
       cwe: [CWE-362]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php, java, go]
+      languages: [javascript, typescript, python, php, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "SELECT.*balance.*FROM.*(?:accounts|wallets|users)"
         - regex: "\\.findOne.*balance"
@@ -28,7 +28,7 @@ rules:
       confidence: low
       cwe: [CWE-362]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "if\\s*\\([^)]*stock\\s*>\\s*0[^)]*\\)[^{]*\\{[^}]*stock\\s*-[=-]\\s*"
         - regex: "product\\.stock--"

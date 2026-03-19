@@ -1,13 +1,29 @@
 ---
-name: GCP Misconfiguration
-version: 1.0.0
-description: Detects common Google Cloud Platform security misconfigurations including public storage buckets, overprivileged service accounts, and disabled audit logging.
-tags: [gcp, cloud, google-cloud, owasp-a05]
-languages: [yaml, generic, python, javascript, go]
-severity: critical
 confidence: high
-cwe: [CWE-732, CWE-798]
-owasp: [A05:2025]
+cwe:
+    - CWE-732
+    - CWE-798
+description: Detects common Google Cloud Platform security misconfigurations including public storage buckets, overprivileged service accounts, and disabled audit logging.
+languages:
+    - yaml
+    - generic
+    - python
+    - javascript
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: GCP Misconfiguration
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - gcp
+    - cloud
+    - google-cloud
+    - owasp-a05
+version: 1.0.0
 ---
 
 # GCP Misconfiguration

@@ -6,7 +6,7 @@ rules:
       confidence: medium
       cwe: [CWE-840]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php, java, go]
+      languages: [javascript, typescript, python, php, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "quantity\\s*=\\s*(?:parseInt|parseFloat|int|float)\\s*\\([^)]*(?:req\\.body|request\\.form|\\$_POST)"
         - regex: "qty\\s*=\\s*(?:req\\.body|request\\.form\\.get)"
@@ -17,7 +17,7 @@ rules:
       confidence: medium
       cwe: [CWE-840]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php]
+      languages: [javascript, typescript, python, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "amount\\s*=\\s*(?:parseFloat|float)\\s*\\([^)]*(?:req\\.body|\\$_POST|request\\.form)"
     - id: BL-NEG-003
@@ -27,6 +27,6 @@ rules:
       confidence: low
       cwe: [CWE-840]
       owasp: ['A01:2025']
-      languages: [javascript, typescript, python, php, java]
+      languages: [javascript, typescript, python, php, java, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:refund|credit).*(?:req\\.body|request\\.form|\\$_POST).*amount"

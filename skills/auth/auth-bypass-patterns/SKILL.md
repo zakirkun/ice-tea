@@ -1,13 +1,28 @@
 ---
-name: Authentication Bypass Patterns
-version: 1.0.0
-description: Detects common authentication bypass patterns including type juggling, SQL truncation, and logic flaws.
-tags: [auth, bypass, owasp-a07]
-languages: [javascript, typescript, python, php, java, go]
-severity: critical
 confidence: medium
-cwe: [CWE-287]
-owasp: [A07:2025]
+cwe:
+    - CWE-287
+description: Detects common authentication bypass patterns including type juggling, SQL truncation, and logic flaws.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Authentication Bypass Patterns
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - auth
+    - bypass
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Authentication Bypass Patterns

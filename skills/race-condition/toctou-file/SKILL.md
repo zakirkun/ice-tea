@@ -1,13 +1,28 @@
 ---
-name: File Time-of-Check / Time-of-Use (TOCTOU)
-version: 1.0.0
-description: Detects file operations that check file properties before using them, creating a race window exploitable via symlink attacks.
-tags: [race-condition, toctou, filesystem, owasp-a01]
-languages: [c, cpp, python, go, java]
-severity: high
 confidence: medium
-cwe: [CWE-367]
-owasp: [A01:2025]
+cwe:
+    - CWE-367
+description: Detects file operations that check file properties before using them, creating a race window exploitable via symlink attacks.
+languages:
+    - c
+    - cpp
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: File Time-of-Check / Time-of-Use (TOCTOU)
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - race-condition
+    - toctou
+    - filesystem
+    - owasp-a01
+version: 1.0.0
 ---
 
 # File TOCTOU Race Condition

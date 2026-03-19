@@ -1,13 +1,27 @@
 ---
-name: iframe Injection
-version: 1.0.0
-description: Detects user-controlled content injected into iframe src attributes, enabling page embedding of malicious content.
-tags: [web, iframe, xss, owasp-a03]
-languages: [javascript, typescript, php, python]
-severity: high
 confidence: high
-cwe: [CWE-79]
-owasp: [A03:2025]
+cwe:
+    - CWE-79
+description: Detects user-controlled content injected into iframe src attributes, enabling page embedding of malicious content.
+languages:
+    - javascript
+    - typescript
+    - php
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iframe Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - web
+    - iframe
+    - xss
+    - owasp-a03
+version: 1.0.0
 ---
 
 # iframe Injection

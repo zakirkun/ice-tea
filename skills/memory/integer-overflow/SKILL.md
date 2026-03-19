@@ -1,13 +1,29 @@
 ---
-name: Integer Overflow / Underflow
-version: 1.0.0
-description: Detects arithmetic operations that can overflow or underflow integer bounds, leading to heap overflows, logic bypasses, or unexpected behavior.
-tags: [integer-overflow, memory, c, cpp, owasp-a06]
-languages: [c, cpp, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-190, CWE-191]
-owasp: [A06:2025]
+cwe:
+    - CWE-190
+    - CWE-191
+description: Detects arithmetic operations that can overflow or underflow integer bounds, leading to heap overflows, logic bypasses, or unexpected behavior.
+languages:
+    - c
+    - cpp
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Integer Overflow / Underflow
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - integer-overflow
+    - memory
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Integer Overflow / Underflow

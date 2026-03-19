@@ -1,13 +1,24 @@
 ---
-name: PHP Insecure Deserialization (unserialize)
-version: 1.0.0
-description: Detects PHP unserialize() called on user-controlled input, enabling object injection and remote code execution.
-tags: [deserialization, php, rce, owasp-a08]
-languages: [php]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects PHP unserialize() called on user-controlled input, enabling object injection and remote code execution.
+languages:
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: PHP Insecure Deserialization (unserialize)
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - php
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # PHP Insecure Deserialization

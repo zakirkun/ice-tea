@@ -1,13 +1,29 @@
 ---
-name: Health / Medical Data Exposure
-version: 1.0.0
-description: Detects health and medical information logged, transmitted without encryption, or insufficiently protected, violating HIPAA and similar regulations.
-tags: [privacy, hipaa, health-data, owasp-a02]
-languages: [javascript, typescript, python, go, java, php]
-severity: critical
 confidence: medium
-cwe: [CWE-359]
-owasp: [A02:2025]
+cwe:
+    - CWE-359
+description: Detects health and medical information logged, transmitted without encryption, or insufficiently protected, violating HIPAA and similar regulations.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Health / Medical Data Exposure
+owasp:
+    - A02:2025
+severity: critical
+tags:
+    - privacy
+    - hipaa
+    - health-data
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Health / Medical Data Exposure

@@ -1,13 +1,28 @@
 ---
-name: Hardcoded Credentials Detection
-version: 1.0.0
-description: Detects hardcoded passwords, API keys, and tokens in source code
-tags: [credentials, secrets, hardcoded, owasp-a07]
-languages: [go, javascript, python, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-798
+description: Detects hardcoded passwords, API keys, and tokens in source code
+languages:
+    - go
+    - javascript
+    - python
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded Credentials Detection
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - credentials
+    - secrets
+    - hardcoded
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Hardcoded Credentials Detection

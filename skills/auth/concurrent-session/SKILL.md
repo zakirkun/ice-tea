@@ -1,13 +1,29 @@
 ---
-name: Concurrent Session Issues
-version: 1.0.0
-description: Detects missing concurrent session controls that allow multiple active sessions or fail to invalidate old sessions on new login.
-tags: [auth, session, concurrency, owasp-a07]
-languages: [javascript, typescript, python, php, java, go]
-severity: medium
 confidence: low
-cwe: [CWE-613]
-owasp: [A07:2025]
+cwe:
+    - CWE-613
+description: Detects missing concurrent session controls that allow multiple active sessions or fail to invalidate old sessions on new login.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Concurrent Session Issues
+owasp:
+    - A07:2025
+severity: medium
+tags:
+    - auth
+    - session
+    - concurrency
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Concurrent Session Issues

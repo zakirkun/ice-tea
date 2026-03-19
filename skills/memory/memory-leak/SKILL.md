@@ -1,13 +1,28 @@
 ---
-name: Memory Leak
-version: 1.0.0
-description: Detects common memory leak patterns including unreleased heap allocations, unclosed file handles, and missing deallocation in error paths.
-tags: [memory, memory-leak, c, cpp, owasp-a06]
-languages: [c, cpp, go, java]
-severity: medium
 confidence: medium
-cwe: [CWE-401]
-owasp: [A06:2025]
+cwe:
+    - CWE-401
+description: Detects common memory leak patterns including unreleased heap allocations, unclosed file handles, and missing deallocation in error paths.
+languages:
+    - c
+    - cpp
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Memory Leak
+owasp:
+    - A06:2025
+severity: medium
+tags:
+    - memory
+    - memory-leak
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Memory Leak

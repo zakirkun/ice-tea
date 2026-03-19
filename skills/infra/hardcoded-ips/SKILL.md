@@ -1,13 +1,30 @@
 ---
-name: Hardcoded IP Addresses and Hostnames
-version: 1.0.0
-description: Detects internal IP addresses, localhost references, and hardcoded hostnames that indicate misconfiguration or information disclosure.
-tags: [hardcoded-ips, infra, configuration, owasp-a05]
-languages: [generic, javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-912]
-owasp: [A05:2025]
+cwe:
+    - CWE-912
+description: Detects internal IP addresses, localhost references, and hardcoded hostnames that indicate misconfiguration or information disclosure.
+languages:
+    - generic
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded IP Addresses and Hostnames
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - hardcoded-ips
+    - infra
+    - configuration
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Hardcoded IP Addresses and Hostnames

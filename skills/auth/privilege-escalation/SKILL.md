@@ -1,13 +1,28 @@
 ---
-name: Privilege Escalation Through Code Logic
-version: 1.0.0
-description: Detects code patterns that allow users to elevate their own privileges through API manipulation or mass assignment.
-tags: [auth, privilege-escalation, owasp-a01]
-languages: [javascript, typescript, python, php, java, go]
-severity: critical
 confidence: medium
-cwe: [CWE-269]
-owasp: [A01:2025]
+cwe:
+    - CWE-269
+description: Detects code patterns that allow users to elevate their own privileges through API manipulation or mass assignment.
+languages:
+    - javascript
+    - typescript
+    - python
+    - php
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Privilege Escalation Through Code Logic
+owasp:
+    - A01:2025
+severity: critical
+tags:
+    - auth
+    - privilege-escalation
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Privilege Escalation Through Code Logic

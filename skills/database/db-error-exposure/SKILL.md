@@ -1,13 +1,30 @@
 ---
-name: Database Error Information Exposure
-version: 1.0.0
-description: Detects database errors and query details sent directly to HTTP responses, leaking schema information.
-tags: [database, information-disclosure, error-handling, owasp-a05]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-209]
-owasp: [A05:2025]
+cwe:
+    - CWE-209
+description: Detects database errors and query details sent directly to HTTP responses, leaking schema information.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Database Error Information Exposure
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - database
+    - information-disclosure
+    - error-handling
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Database Error Information Exposure

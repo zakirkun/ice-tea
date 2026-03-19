@@ -1,13 +1,28 @@
 ---
-name: DNS Rebinding Vulnerability
-version: 1.0.0
-description: Detects server-side host validation logic vulnerable to DNS rebinding attacks, allowing attackers to bypass IP-based restrictions.
-tags: [dns-rebinding, network, ssrf, owasp-a10]
-languages: [javascript, typescript, python, go, java]
-severity: high
 confidence: medium
-cwe: [CWE-350]
-owasp: [A10:2025]
+cwe:
+    - CWE-350
+description: Detects server-side host validation logic vulnerable to DNS rebinding attacks, allowing attackers to bypass IP-based restrictions.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: DNS Rebinding Vulnerability
+owasp:
+    - A10:2025
+severity: high
+tags:
+    - dns-rebinding
+    - network
+    - ssrf
+    - owasp-a10
+version: 1.0.0
 ---
 
 # DNS Rebinding Vulnerability

@@ -67,7 +67,7 @@ rules:
       confidence: medium
       cwe: [CWE-329]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, go, php]
+      languages: [python, java, javascript, go, php, kotlin, dart, zig, elixir]
       patterns:
         - regex: "MODE_CBC.*iv\\s*=\\s*b?['\"][^'\"]*['\"]"
         - regex: "AES/CBC/.*IvParameterSpec.*['\"][^'\"]{16,}['\"]"

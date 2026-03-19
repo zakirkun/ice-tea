@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-326]
       owasp: ['A02:2025']
-      languages: [python, go, java, javascript]
+      languages: [python, go, java, javascript, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?:DHParameterSpec|generate_parameters|DH\\s*\\(|dh\\.generate_parameters).*(?:512|768|1024)"
         - regex: "OpenSSL.*dhparam.*(?:512|768|1024)"
@@ -17,7 +17,7 @@ rules:
       confidence: high
       cwe: [CWE-326]
       owasp: ['A02:2025']
-      languages: [python, java, go, javascript]
+      languages: [python, java, go, javascript, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)DHE_EXPORT|DH_EXPORT|EXPORT_DHE|_EXPORT_WITH_DH"
     - id: CRYPTO-DH-003

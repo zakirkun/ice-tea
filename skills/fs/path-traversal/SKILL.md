@@ -1,13 +1,25 @@
 ---
-name: Path Traversal Detection
-version: 1.0.0
-description: Detects unsafe file access involving user input
-tags: [fs, traversal, file-access, owasp-a01]
-languages: [go, python]
-severity: high
 confidence: high
-cwe: [CWE-22]
-owasp: [A01:2025]
+cwe:
+    - CWE-22
+description: Detects unsafe file access involving user input
+languages:
+    - go
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Path Traversal Detection
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - fs
+    - traversal
+    - file-access
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Path Traversal

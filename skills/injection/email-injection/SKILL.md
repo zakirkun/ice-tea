@@ -1,13 +1,28 @@
 ---
-name: Email Header Injection
-version: 1.0.0
-description: Detects email sending functions that include user input in email headers without CRLF stripping, enabling spam relay and header manipulation.
-tags: [injection, email, owasp-a03]
-languages: [python, php, javascript, typescript, java, ruby]
-severity: high
 confidence: high
-cwe: [CWE-93]
-owasp: [A03:2025]
+cwe:
+    - CWE-93
+description: Detects email sending functions that include user input in email headers without CRLF stripping, enabling spam relay and header manipulation.
+languages:
+    - python
+    - php
+    - javascript
+    - typescript
+    - java
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Email Header Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - injection
+    - email
+    - owasp-a03
+version: 1.0.0
 ---
 
 # Email Header Injection

@@ -1,13 +1,28 @@
 ---
-name: Thread-Unsafe Singleton Pattern
-version: 1.0.0
-description: Detects singleton implementations that are not thread-safe and can result in multiple instances being created under concurrent access.
-tags: [race-condition, concurrency, singleton, owasp-a06]
-languages: [java, go, python, javascript, typescript]
-severity: medium
 confidence: low
-cwe: [CWE-362]
-owasp: [A06:2025]
+cwe:
+    - CWE-362
+description: Detects singleton implementations that are not thread-safe and can result in multiple instances being created under concurrent access.
+languages:
+    - java
+    - go
+    - python
+    - javascript
+    - typescript
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Thread-Unsafe Singleton Pattern
+owasp:
+    - A06:2025
+severity: medium
+tags:
+    - race-condition
+    - concurrency
+    - singleton
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Thread-Unsafe Singleton

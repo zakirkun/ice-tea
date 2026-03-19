@@ -1,13 +1,31 @@
 ---
-name: Debug Mode Enabled in Production
-version: 1.0.0
-description: Detects debug mode enabled in production configurations, exposing stack traces, internal paths, and sensitive configuration details.
-tags: [debug, infra, configuration, owasp-a05]
-languages: [python, javascript, typescript, go, java, php, ruby]
-severity: high
 confidence: high
-cwe: [CWE-215, CWE-209]
-owasp: [A05:2025]
+cwe:
+    - CWE-215
+    - CWE-209
+description: Detects debug mode enabled in production configurations, exposing stack traces, internal paths, and sensitive configuration details.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Debug Mode Enabled in Production
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - debug
+    - infra
+    - configuration
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Debug Mode Enabled in Production

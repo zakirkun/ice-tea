@@ -1,13 +1,29 @@
 ---
-name: Missing Network Timeout Configuration
-version: 1.0.0
-description: Detects HTTP clients and network connections without timeout configuration, enabling slowloris and resource exhaustion attacks.
-tags: [network, timeout, dos, owasp-a04]
-languages: [python, javascript, typescript, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-400]
-owasp: [A04:2025]
+cwe:
+    - CWE-400
+description: Detects HTTP clients and network connections without timeout configuration, enabling slowloris and resource exhaustion attacks.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing Network Timeout Configuration
+owasp:
+    - A04:2025
+severity: medium
+tags:
+    - network
+    - timeout
+    - dos
+    - owasp-a04
+version: 1.0.0
 ---
 
 # Missing Network Timeout

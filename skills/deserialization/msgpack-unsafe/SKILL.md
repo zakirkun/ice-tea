@@ -1,13 +1,28 @@
 ---
-name: Unsafe MessagePack Deserialization
-version: 1.0.0
-description: Detects MessagePack deserialization configured to allow arbitrary object construction.
-tags: [deserialization, msgpack, rce, owasp-a08]
-languages: [python, javascript, typescript, java, go]
-severity: high
 confidence: medium
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects MessagePack deserialization configured to allow arbitrary object construction.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Unsafe MessagePack Deserialization
+owasp:
+    - A08:2025
+severity: high
+tags:
+    - deserialization
+    - msgpack
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # Unsafe MessagePack Deserialization

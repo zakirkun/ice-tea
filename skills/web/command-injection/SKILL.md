@@ -1,13 +1,24 @@
 ---
-name: Command Injection
-version: 1.0.0
-description: Detects untrusted input passed directly to operating system shell commands.
-tags: [cmdi, rce, injection, os]
-languages: [generic]
-severity: critical
 confidence: medium
-cwe: [CWE-78]
-owasp: [A03:2025]
+cwe:
+    - CWE-78
+description: Detects untrusted input passed directly to operating system shell commands.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Command Injection
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - cmdi
+    - rce
+    - injection
+    - os
+version: 1.0.0
 ---
 
 # Command Injection

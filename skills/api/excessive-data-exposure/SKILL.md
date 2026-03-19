@@ -1,13 +1,28 @@
 ---
-name: Excessive Data Exposure in API Responses
-version: 1.0.0
-description: Detects API endpoints that return more data than required, including sensitive fields that clients should not receive.
-tags: [api, information-disclosure, owasp-api3]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-200]
-owasp: [A01:2025]
+cwe:
+    - CWE-200
+description: Detects API endpoints that return more data than required, including sensitive fields that clients should not receive.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Excessive Data Exposure in API Responses
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - api
+    - information-disclosure
+    - owasp-api3
+version: 1.0.0
 ---
 
 # Excessive Data Exposure

@@ -1,13 +1,29 @@
 ---
-name: Password Reset Vulnerabilities
-version: 1.0.0
-description: Detects insecure password reset implementations including predictable tokens, missing expiration, and host header injection in reset links.
-tags: [auth, password-reset, owasp-a07]
-languages: [javascript, typescript, python, go, java, php]
-severity: high
 confidence: medium
-cwe: [CWE-640, CWE-838]
-owasp: [A07:2025]
+cwe:
+    - CWE-640
+    - CWE-838
+description: Detects insecure password reset implementations including predictable tokens, missing expiration, and host header injection in reset links.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Password Reset Vulnerabilities
+owasp:
+    - A07:2025
+severity: high
+tags:
+    - auth
+    - password-reset
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Password Reset Vulnerabilities

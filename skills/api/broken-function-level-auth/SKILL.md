@@ -1,13 +1,31 @@
 ---
-name: Broken Function Level Authorization
-version: 1.0.0
-description: Detects API endpoints that perform privileged operations without verifying the caller has the required role or permission.
-tags: [bfla, api, auth, rbac, owasp-api5]
-languages: [javascript, typescript, python, go, java, php]
-severity: critical
 confidence: medium
-cwe: [CWE-285, CWE-862]
-owasp: [A01:2025]
+cwe:
+    - CWE-285
+    - CWE-862
+description: Detects API endpoints that perform privileged operations without verifying the caller has the required role or permission.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Broken Function Level Authorization
+owasp:
+    - A01:2025
+severity: critical
+tags:
+    - bfla
+    - api
+    - auth
+    - rbac
+    - owasp-api5
+version: 1.0.0
 ---
 
 # Broken Function Level Authorization

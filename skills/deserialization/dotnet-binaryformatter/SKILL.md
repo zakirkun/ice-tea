@@ -1,13 +1,25 @@
 ---
-name: .NET BinaryFormatter Deserialization
-version: 1.0.0
-description: Detects use of BinaryFormatter, SoapFormatter, and NetDataContractSerializer which are insecure for untrusted data.
-tags: [deserialization, dotnet, csharp, rce, owasp-a08]
-languages: [generic]
-severity: critical
 confidence: high
-cwe: [CWE-502]
-owasp: [A08:2025]
+cwe:
+    - CWE-502
+description: Detects use of BinaryFormatter, SoapFormatter, and NetDataContractSerializer which are insecure for untrusted data.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: .NET BinaryFormatter Deserialization
+owasp:
+    - A08:2025
+severity: critical
+tags:
+    - deserialization
+    - dotnet
+    - csharp
+    - rce
+    - owasp-a08
+version: 1.0.0
 ---
 
 # .NET BinaryFormatter Deserialization

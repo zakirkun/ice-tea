@@ -6,7 +6,7 @@ rules:
       confidence: high
       cwe: [CWE-326]
       owasp: ['A02:2025']
-      languages: [python, javascript, typescript, java, go]
+      languages: [python, javascript, typescript, java, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "RSA\\.generate\\s*\\(\\s*(?:512|1024|768)\\s*\\)"
         - regex: "generateKeyPair\\s*\\(['\"]rsa['\"].*modulusLength\\s*:\\s*(?:512|1024|768)"
@@ -19,7 +19,7 @@ rules:
       confidence: high
       cwe: [CWE-780]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, go]
+      languages: [python, java, javascript, typescript, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "PKCS1_v1_5\\.new\\s*\\("
         - regex: "(?i)RSA/ECB/PKCS1Padding"
@@ -32,7 +32,7 @@ rules:
       confidence: medium
       cwe: [CWE-780]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript, go]
+      languages: [python, java, javascript, typescript, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "PKCS1_v1_5\\.new\\s*\\(\\s*(?:key|rsa_key|pub_key)"
         - regex: "(?i)RSA.*encrypt"
@@ -56,7 +56,7 @@ rules:
       confidence: low
       cwe: [CWE-326]
       owasp: ['A02:2025']
-      languages: [python, java, javascript, typescript]
+      languages: [python, java, javascript, typescript, kotlin, dart, zig, elixir]
       patterns:
         - regex: "PKCS1_OAEP\\.new.*encrypt\\s*\\([^)]*(?:data|message|plaintext|content)\\b"
         - regex: "cipher\\.doFinal\\s*\\([^)]*message\\.getBytes\\(\\)\\)"

@@ -65,7 +65,7 @@ rules:
       confidence: medium
       cwe: [CWE-311]
       owasp: ['A05:2025']
-      languages: [yaml, python, javascript, go]
+      languages: [yaml, python, javascript, go, kotlin, dart, zig, elixir]
       patterns:
         - regex: "(?i)aws_s3_bucket"
         - regex: "(?i)ServerSideEncryption:\\s*"

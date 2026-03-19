@@ -1,13 +1,30 @@
 ---
-name: Insecure Cookie Configuration
-version: 1.0.0
-description: Detects cookies set without Secure, HttpOnly, or SameSite attributes.
-tags: [cookie, auth, session, owasp-a05]
-languages: [php, python, javascript, java, go, ruby]
-severity: medium
 confidence: high
-cwe: [CWE-614, CWE-1004]
-owasp: [A05:2025]
+cwe:
+    - CWE-614
+    - CWE-1004
+description: Detects cookies set without Secure, HttpOnly, or SameSite attributes.
+languages:
+    - php
+    - python
+    - javascript
+    - java
+    - go
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure Cookie Configuration
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - cookie
+    - auth
+    - session
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Insecure Cookie Configuration

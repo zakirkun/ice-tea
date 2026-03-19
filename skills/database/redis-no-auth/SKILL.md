@@ -1,13 +1,30 @@
 ---
-name: Redis Without Authentication
-version: 1.0.0
-description: Detects Redis connections and configurations without authentication, allowing unauthenticated access to the cache.
-tags: [database, redis, auth, owasp-a05]
-languages: [javascript, typescript, python, go, java, php, ruby]
-severity: critical
 confidence: high
-cwe: [CWE-306]
-owasp: [A05:2025]
+cwe:
+    - CWE-306
+description: Detects Redis connections and configurations without authentication, allowing unauthenticated access to the cache.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - ruby
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Redis Without Authentication
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - database
+    - redis
+    - auth
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Redis Without Authentication

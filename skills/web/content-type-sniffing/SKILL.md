@@ -1,13 +1,30 @@
 ---
-name: Content Type Sniffing Vulnerability
-version: 1.0.0
-description: Detects missing X-Content-Type-Options header and incorrect Content-Type that allows MIME sniffing attacks.
-tags: [web, content-type, mime-sniffing, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: medium
-cwe: [CWE-79, CWE-16]
-owasp: [A05:2025]
+cwe:
+    - CWE-79
+    - CWE-16
+description: Detects missing X-Content-Type-Options header and incorrect Content-Type that allows MIME sniffing attacks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Content Type Sniffing Vulnerability
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - web
+    - content-type
+    - mime-sniffing
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Content Type Sniffing

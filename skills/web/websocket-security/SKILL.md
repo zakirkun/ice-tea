@@ -1,13 +1,29 @@
 ---
-name: WebSocket Security Issues
-version: 1.0.0
-description: Detects insecure WebSocket implementations including missing origin validation, lack of authentication, and message injection risks.
-tags: [websocket, web, auth, owasp-a01]
-languages: [javascript, typescript, python, go, java]
-severity: high
 confidence: medium
-cwe: [CWE-345, CWE-284]
-owasp: [A01:2025]
+cwe:
+    - CWE-345
+    - CWE-284
+description: Detects insecure WebSocket implementations including missing origin validation, lack of authentication, and message injection risks.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: WebSocket Security Issues
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - websocket
+    - web
+    - auth
+    - owasp-a01
+version: 1.0.0
 ---
 
 # WebSocket Security Issues

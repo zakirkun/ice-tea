@@ -1,13 +1,25 @@
 ---
-name: Secrets in Dockerfile
-version: 1.0.0
-description: Detects credentials and secrets hardcoded in Dockerfile ENV instructions or ARG values that end up in image layers.
-tags: [devops, docker, secrets, owasp-a07]
-languages: [generic]
-severity: critical
 confidence: high
-cwe: [CWE-312, CWE-798]
-owasp: [A07:2025]
+cwe:
+    - CWE-312
+    - CWE-798
+description: Detects credentials and secrets hardcoded in Dockerfile ENV instructions or ARG values that end up in image layers.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Secrets in Dockerfile
+owasp:
+    - A07:2025
+severity: critical
+tags:
+    - devops
+    - docker
+    - secrets
+    - owasp-a07
+version: 1.0.0
 ---
 
 # Secrets in Dockerfile

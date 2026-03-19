@@ -1,58 +1,54 @@
 rules:
-  - id: INFRA-IP-001
-    name: private-ip-address
-    description: "Private/internal IP address hardcoded in source code"
-    severity: medium
-    confidence: high
-    cwe: [CWE-912]
-    owasp: [A05:2025]
-    languages: [generic, javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "['\"](?:10\\.(?:[0-9]{1,3}\\.){2}[0-9]{1,3}|172\\.(?:1[6-9]|2[0-9]|3[01])\\.[0-9]{1,3}\\.[0-9]{1,3}|192\\.168\\.[0-9]{1,3}\\.[0-9]{1,3})['\"]"
-
-  - id: INFRA-IP-002
-    name: localhost-hardcoded
-    description: "Localhost IP 127.0.0.1 hardcoded with non-standard port"
-    severity: low
-    confidence: medium
-    cwe: [CWE-912]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "['\"]127\\.0\\.0\\.1:[0-9]{4,5}['\"]"
-      - regex: "['\"]localhost:[0-9]{4,5}['\"]"
-
-  - id: INFRA-IP-003
-    name: aws-metadata-endpoint
-    description: "AWS metadata endpoint 169.254.169.254 referenced in code (SSRF target)"
-    severity: high
-    confidence: high
-    cwe: [CWE-918]
-    owasp: [A10:2025]
-    languages: [generic, javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "169\\.254\\.169\\.254"
-
-  - id: INFRA-IP-004
-    name: ipv6-loopback-hardcoded
-    description: "IPv6 loopback or link-local address hardcoded"
-    severity: low
-    confidence: medium
-    cwe: [CWE-912]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "['\"]::1['\"]"
-      - regex: "['\"]fe80::[^'\"]+['\"]"
-
-  - id: INFRA-IP-005
-    name: database-host-hardcoded
-    description: "Database hostname hardcoded directly in source code"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-912]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)(?:DB_HOST|DATABASE_HOST|host)\\s*[=:]\\s*['\"](?:[0-9]{1,3}\\.){3}[0-9]{1,3}['\"]"
-      - regex: "(?i)mysql|postgres|mongodb.*host\\s*[=:]\\s*['\"][^'\"]+(?:internal|prod|staging|db)[^'\"]*['\"]"
+    - id: INFRA-IP-001
+      name: private-ip-address
+      description: "Private/internal IP address hardcoded in source code"
+      severity: medium
+      confidence: high
+      cwe: [CWE-912]
+      owasp: ['A05:2025']
+      languages: [generic, javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "['\"](?:10\\.(?:[0-9]{1,3}\\.){2}[0-9]{1,3}|172\\.(?:1[6-9]|2[0-9]|3[01])\\.[0-9]{1,3}\\.[0-9]{1,3}|192\\.168\\.[0-9]{1,3}\\.[0-9]{1,3})['\"]"
+    - id: INFRA-IP-002
+      name: localhost-hardcoded
+      description: "Localhost IP 127.0.0.1 hardcoded with non-standard port"
+      severity: low
+      confidence: medium
+      cwe: [CWE-912]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "['\"]127\\.0\\.0\\.1:[0-9]{4,5}['\"]"
+        - regex: "['\"]localhost:[0-9]{4,5}['\"]"
+    - id: INFRA-IP-003
+      name: aws-metadata-endpoint
+      description: "AWS metadata endpoint 169.254.169.254 referenced in code (SSRF target)"
+      severity: high
+      confidence: high
+      cwe: [CWE-918]
+      owasp: ['A10:2025']
+      languages: [generic, javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "169\\.254\\.169\\.254"
+    - id: INFRA-IP-004
+      name: ipv6-loopback-hardcoded
+      description: "IPv6 loopback or link-local address hardcoded"
+      severity: low
+      confidence: medium
+      cwe: [CWE-912]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "['\"]::1['\"]"
+        - regex: "['\"]fe80::[^'\"]+['\"]"
+    - id: INFRA-IP-005
+      name: database-host-hardcoded
+      description: "Database hostname hardcoded directly in source code"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-912]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)(?:DB_HOST|DATABASE_HOST|host)\\s*[=:]\\s*['\"](?:[0-9]{1,3}\\.){3}[0-9]{1,3}['\"]"
+        - regex: "(?i)mysql|postgres|mongodb.*host\\s*[=:]\\s*['\"][^'\"]+(?:internal|prod|staging|db)[^'\"]*['\"]"

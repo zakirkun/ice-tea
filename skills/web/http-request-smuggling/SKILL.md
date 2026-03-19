@@ -1,13 +1,27 @@
 ---
-name: HTTP Request Smuggling
-version: 1.0.0
-description: Detects HTTP response headers and server configurations vulnerable to request smuggling via Transfer-Encoding/Content-Length discrepancies.
-tags: [web, http-smuggling, owasp-a03]
-languages: [javascript, typescript, python, go, java]
-severity: critical
 confidence: medium
-cwe: [CWE-444]
-owasp: [A03:2025]
+cwe:
+    - CWE-444
+description: Detects HTTP response headers and server configurations vulnerable to request smuggling via Transfer-Encoding/Content-Length discrepancies.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: HTTP Request Smuggling
+owasp:
+    - A03:2025
+severity: critical
+tags:
+    - web
+    - http-smuggling
+    - owasp-a03
+version: 1.0.0
 ---
 
 # HTTP Request Smuggling

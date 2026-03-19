@@ -1,13 +1,29 @@
 ---
-name: SMTP Command Injection
-version: 1.0.0
-description: Detects user-controlled input in SMTP commands that can inject malicious SMTP commands via CRLF sequences.
-tags: [network, smtp, injection, owasp-a03]
-languages: [python, javascript, typescript, java, php, go]
-severity: high
 confidence: high
-cwe: [CWE-93]
-owasp: [A03:2025]
+cwe:
+    - CWE-93
+description: Detects user-controlled input in SMTP commands that can inject malicious SMTP commands via CRLF sequences.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - php
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: SMTP Command Injection
+owasp:
+    - A03:2025
+severity: high
+tags:
+    - network
+    - smtp
+    - injection
+    - owasp-a03
+version: 1.0.0
 ---
 
 # SMTP Command Injection

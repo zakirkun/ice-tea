@@ -1,13 +1,29 @@
 ---
-name: Hardcoded Salt in Password Hashing
-version: 1.0.0
-description: Detects hardcoded or static salt values used in password hashing, allowing precomputed rainbow table attacks.
-tags: [crypto, salt, password-hashing, owasp-a02]
-languages: [python, javascript, typescript, java, go, php]
-severity: high
 confidence: high
-cwe: [CWE-760]
-owasp: [A02:2025]
+cwe:
+    - CWE-760
+description: Detects hardcoded or static salt values used in password hashing, allowing precomputed rainbow table attacks.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Hardcoded Salt in Password Hashing
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - salt
+    - password-hashing
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Hardcoded Salt

@@ -1,63 +1,59 @@
 rules:
-  - id: WEB-RDOS-001
-    name: nested-quantifiers-regex
-    description: "Regular expression with nested quantifiers — potential catastrophic backtracking"
-    severity: high
-    confidence: medium
-    cwe: [CWE-1333]
-    owasp: [A06:2025]
-    languages: [javascript, typescript, python, java, go]
-    patterns:
-      - regex: "/(?:\\([^)]+\\)[+*])[+*]/"
-      - regex: "new\\s+RegExp\\s*\\(.*(?:\\([^)]+\\)[+*])[+*]"
-      - regex: "re\\.compile\\s*\\(.*(?:\\([^)]+\\)[+*])[+*]"
-
-  - id: WEB-RDOS-002
-    name: user-input-regex-match
-    description: "User-controlled input matched against potentially expensive regex"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-1333]
-    owasp: [A06:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "req\\.(?:body|query|params)\\.\\w+\\.match\\s*\\("
-      - regex: "\\.test\\s*\\(\\s*req\\.(?:body|query|params)"
-      - regex: "regex\\.test\\s*\\(\\s*(?:userInput|input|data)"
-
-  - id: WEB-RDOS-003
-    name: python-user-input-regex
-    description: "Python re.match/search on user-controlled input"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-1333]
-    owasp: [A06:2025]
-    languages: [python]
-    patterns:
-      - regex: "re\\.(?:match|search|fullmatch)\\s*\\([^,]+,\\s*request\\.(?:args|form|json|data)"
-      - regex: "re\\.(?:match|search)\\s*\\([^,]+,\\s*user_input"
-
-  - id: WEB-RDOS-004
-    name: exponential-backtrack-pattern
-    description: "Regex pattern with exponential backtracking risk: (a+)+ or (a|a?)+"
-    severity: high
-    confidence: high
-    cwe: [CWE-1333]
-    owasp: [A06:2025]
-    languages: [javascript, typescript, python, java]
-    patterns:
-      - regex: "(?:\\[\\w\\-]+\\][+*?]\\)[+*]|\\(\\w+[+*]\\)[+*])"
-      - regex: "\\((?:[a-z]|\\[\\w-\\]+)\\+\\)\\+"
-      - regex: "\\(\\?:.*\\|.*\\)\\+"
-
-  - id: WEB-RDOS-005
-    name: java-pattern-compile-user-input
-    description: "Java Pattern.compile() called with user-controlled regex string"
-    severity: high
-    confidence: high
-    cwe: [CWE-1333]
-    owasp: [A06:2025]
-    languages: [java]
-    patterns:
-      - regex: "Pattern\\.compile\\s*\\([^)]*request\\.getParameter"
-      - regex: "Pattern\\.compile\\s*\\(\\s*(?:userInput|pattern|regex)"
+    - id: WEB-RDOS-001
+      name: nested-quantifiers-regex
+      description: "Regular expression with nested quantifiers — potential catastrophic backtracking"
+      severity: high
+      confidence: medium
+      cwe: [CWE-1333]
+      owasp: ['A06:2025']
+      languages: [javascript, typescript, python, java, go, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "/(?:\\([^)]+\\)[+*])[+*]/"
+        - regex: "new\\s+RegExp\\s*\\(.*(?:\\([^)]+\\)[+*])[+*]"
+        - regex: "re\\.compile\\s*\\(.*(?:\\([^)]+\\)[+*])[+*]"
+    - id: WEB-RDOS-002
+      name: user-input-regex-match
+      description: "User-controlled input matched against potentially expensive regex"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-1333]
+      owasp: ['A06:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "req\\.(?:body|query|params)\\.\\w+\\.match\\s*\\("
+        - regex: "\\.test\\s*\\(\\s*req\\.(?:body|query|params)"
+        - regex: "regex\\.test\\s*\\(\\s*(?:userInput|input|data)"
+    - id: WEB-RDOS-003
+      name: python-user-input-regex
+      description: "Python re.match/search on user-controlled input"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-1333]
+      owasp: ['A06:2025']
+      languages: [python]
+      patterns:
+        - regex: "re\\.(?:match|search|fullmatch)\\s*\\([^,]+,\\s*request\\.(?:args|form|json|data)"
+        - regex: "re\\.(?:match|search)\\s*\\([^,]+,\\s*user_input"
+    - id: WEB-RDOS-004
+      name: exponential-backtrack-pattern
+      description: "Regex pattern with exponential backtracking risk: (a+)+ or (a|a?)+"
+      severity: high
+      confidence: high
+      cwe: [CWE-1333]
+      owasp: ['A06:2025']
+      languages: [javascript, typescript, python, java, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?:\\[\\w\\-]+\\][+*?]\\)[+*]|\\(\\w+[+*]\\)[+*])"
+        - regex: "\\((?:[a-z]|\\[\\w-\\]+)\\+\\)\\+"
+        - regex: "\\(\\?:.*\\|.*\\)\\+"
+    - id: WEB-RDOS-005
+      name: java-pattern-compile-user-input
+      description: "Java Pattern.compile() called with user-controlled regex string"
+      severity: high
+      confidence: high
+      cwe: [CWE-1333]
+      owasp: ['A06:2025']
+      languages: [java]
+      patterns:
+        - regex: "Pattern\\.compile\\s*\\([^)]*request\\.getParameter"
+        - regex: "Pattern\\.compile\\s*\\(\\s*(?:userInput|pattern|regex)"

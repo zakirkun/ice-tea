@@ -1,13 +1,26 @@
 ---
-name: Wild Pointer / Uninitialized Pointer
-version: 1.0.0
-description: Detects uninitialized or dangling pointer usage that can lead to arbitrary memory access.
-tags: [memory, wild-pointer, c, cpp, owasp-a06]
-languages: [c, cpp]
-severity: high
 confidence: medium
-cwe: [CWE-457]
-owasp: [A06:2025]
+cwe:
+    - CWE-457
+description: Detects uninitialized or dangling pointer usage that can lead to arbitrary memory access.
+languages:
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Wild Pointer / Uninitialized Pointer
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - memory
+    - wild-pointer
+    - c
+    - cpp
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Wild / Uninitialized Pointer

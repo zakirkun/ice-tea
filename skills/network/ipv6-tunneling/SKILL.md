@@ -1,13 +1,27 @@
 ---
-name: IPv6 Tunneling and Misconfiguration
-version: 1.0.0
-description: Detects network configurations that fail to apply security controls to IPv6, allowing bypass via IPv6 tunneling.
-tags: [network, ipv6, security-bypass, owasp-a05]
-languages: [generic, python, javascript, go]
-severity: medium
 confidence: medium
-cwe: [CWE-319]
-owasp: [A05:2025]
+cwe:
+    - CWE-319
+description: Detects network configurations that fail to apply security controls to IPv6, allowing bypass via IPv6 tunneling.
+languages:
+    - generic
+    - python
+    - javascript
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: IPv6 Tunneling and Misconfiguration
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - network
+    - ipv6
+    - security-bypass
+    - owasp-a05
+version: 1.0.0
 ---
 
 # IPv6 Tunneling and Misconfiguration

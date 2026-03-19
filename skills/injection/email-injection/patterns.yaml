@@ -39,6 +39,6 @@ rules:
       confidence: medium
       cwe: [CWE-93]
       owasp: ['A03:2025']
-      languages: [python, php, javascript, java, ruby]
+      languages: [python, php, javascript, java, ruby, kotlin, dart, zig, elixir]
       patterns:
         - regex: "subject.*=.*(?:request|\\$_(?:GET|POST)|req\\.(?:body|query))"

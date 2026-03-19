@@ -1,13 +1,25 @@
 ---
-name: iOS Realm Database Without Encryption
-version: 1.0.0
-description: Detects iOS Realm database instances configured without encryption key.
-tags: [ios, mobile, database, encryption, owasp-m2]
-languages: [generic]
-severity: high
 confidence: high
-cwe: [CWE-311]
-owasp: [A02:2025]
+cwe:
+    - CWE-311
+description: Detects iOS Realm database instances configured without encryption key.
+languages:
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: iOS Realm Database Without Encryption
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - ios
+    - mobile
+    - database
+    - encryption
+    - owasp-m2
+version: 1.0.0
 ---
 
 # iOS Realm Database Without Encryption

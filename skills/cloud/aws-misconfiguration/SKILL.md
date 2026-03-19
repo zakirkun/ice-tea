@@ -1,13 +1,33 @@
 ---
-name: AWS Misconfiguration
-version: 1.0.0
-description: Detects common AWS security misconfigurations including public S3 buckets, IAM wildcard policies, hardcoded AWS credentials, and unencrypted resources.
-tags: [aws, cloud, s3, iam, owasp-a05]
-languages: [python, javascript, typescript, go, java, yaml, generic]
-severity: critical
 confidence: high
-cwe: [CWE-732, CWE-798, CWE-312]
-owasp: [A05:2025]
+cwe:
+    - CWE-732
+    - CWE-798
+    - CWE-312
+description: Detects common AWS security misconfigurations including public S3 buckets, IAM wildcard policies, hardcoded AWS credentials, and unencrypted resources.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - yaml
+    - generic
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: AWS Misconfiguration
+owasp:
+    - A05:2025
+severity: critical
+tags:
+    - aws
+    - cloud
+    - s3
+    - iam
+    - owasp-a05
+version: 1.0.0
 ---
 
 # AWS Misconfiguration

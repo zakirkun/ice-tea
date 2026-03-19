@@ -1,13 +1,29 @@
 ---
-name: Zip Slip (Archive Path Traversal)
-version: 1.0.0
-description: Detects insecure ZIP/TAR extraction that does not validate entry paths, allowing directory traversal outside the extraction target.
-tags: [zip-slip, path-traversal, filesystem, owasp-a01]
-languages: [java, python, javascript, typescript, go, php]
-severity: high
 confidence: high
-cwe: [CWE-22]
-owasp: [A01:2025]
+cwe:
+    - CWE-22
+description: Detects insecure ZIP/TAR extraction that does not validate entry paths, allowing directory traversal outside the extraction target.
+languages:
+    - java
+    - python
+    - javascript
+    - typescript
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Zip Slip (Archive Path Traversal)
+owasp:
+    - A01:2025
+severity: high
+tags:
+    - zip-slip
+    - path-traversal
+    - filesystem
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Zip Slip (Archive Path Traversal)

@@ -1,13 +1,28 @@
 ---
-name: Internal API Documentation Exposure
-version: 1.0.0
-description: Detects internal API documentation, admin endpoints, and developer tools accidentally exposed in production.
-tags: [api, information-disclosure, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: high
-cwe: [CWE-200]
-owasp: [A05:2025]
+cwe:
+    - CWE-200
+description: Detects internal API documentation, admin endpoints, and developer tools accidentally exposed in production.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Internal API Documentation Exposure
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - api
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Internal API Documentation Exposure

@@ -1,13 +1,29 @@
 ---
-name: Insecure File Upload
-version: 1.0.0
-description: Detects file upload handlers that lack extension validation, MIME type checking, or store files in web-accessible directories.
-tags: [file-upload, web, rce, owasp-a04]
-languages: [php, python, javascript, typescript, go, java]
-severity: critical
 confidence: medium
-cwe: [CWE-434]
-owasp: [A04:2025]
+cwe:
+    - CWE-434
+description: Detects file upload handlers that lack extension validation, MIME type checking, or store files in web-accessible directories.
+languages:
+    - php
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure File Upload
+owasp:
+    - A04:2025
+severity: critical
+tags:
+    - file-upload
+    - web
+    - rce
+    - owasp-a04
+version: 1.0.0
 ---
 
 # Insecure File Upload

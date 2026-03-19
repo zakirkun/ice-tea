@@ -1,13 +1,28 @@
 ---
-name: Extended Clickjacking Detection
-version: 1.0.0
-description: Detects advanced clickjacking vulnerabilities including UI redressing via transparent overlays and framebusting bypasses.
-tags: [web, clickjacking, ui-redressing, owasp-a05]
-languages: [javascript, typescript, python, go, php]
-severity: high
 confidence: medium
-cwe: [CWE-1021]
-owasp: [A05:2025]
+cwe:
+    - CWE-1021
+description: Detects advanced clickjacking vulnerabilities including UI redressing via transparent overlays and framebusting bypasses.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Extended Clickjacking Detection
+owasp:
+    - A05:2025
+severity: high
+tags:
+    - web
+    - clickjacking
+    - ui-redressing
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Extended Clickjacking Detection

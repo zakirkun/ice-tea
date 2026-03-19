@@ -1,13 +1,29 @@
 ---
-name: Missing Data Retention Policy Implementation
-version: 1.0.0
-description: Detects data storage without associated TTL, expiry, or cleanup mechanisms, indicating missing data retention policy.
-tags: [privacy, gdpr, data-retention, owasp-a05]
-languages: [javascript, typescript, python, go, java, php]
-severity: medium
 confidence: low
-cwe: [CWE-272]
-owasp: [A05:2025]
+cwe:
+    - CWE-272
+description: Detects data storage without associated TTL, expiry, or cleanup mechanisms, indicating missing data retention policy.
+languages:
+    - javascript
+    - typescript
+    - python
+    - go
+    - java
+    - php
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Missing Data Retention Policy Implementation
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - privacy
+    - gdpr
+    - data-retention
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Missing Data Retention Policy Implementation

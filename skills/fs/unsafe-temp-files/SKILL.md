@@ -1,13 +1,32 @@
 ---
-name: Unsafe Temporary File Creation
-version: 1.0.0
-description: Detects creation of temporary files with predictable names or in world-writable locations, enabling symlink attacks and race conditions.
-tags: [tempfile, filesystem, race-condition, owasp-a01]
-languages: [python, javascript, typescript, go, java, php, c, cpp]
-severity: medium
 confidence: high
-cwe: [CWE-377, CWE-379]
-owasp: [A01:2025]
+cwe:
+    - CWE-377
+    - CWE-379
+description: Detects creation of temporary files with predictable names or in world-writable locations, enabling symlink attacks and race conditions.
+languages:
+    - python
+    - javascript
+    - typescript
+    - go
+    - java
+    - php
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Unsafe Temporary File Creation
+owasp:
+    - A01:2025
+severity: medium
+tags:
+    - tempfile
+    - filesystem
+    - race-condition
+    - owasp-a01
+version: 1.0.0
 ---
 
 # Unsafe Temporary File Creation

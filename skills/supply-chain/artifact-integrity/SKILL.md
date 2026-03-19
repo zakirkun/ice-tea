@@ -1,13 +1,26 @@
 ---
-name: Artifact Integrity Verification Missing
-version: 1.0.0
-description: Detects download and execution of artifacts without cryptographic hash or signature verification.
-tags: [supply-chain, integrity, owasp-a06]
-languages: [generic, yaml, javascript, python]
-severity: high
 confidence: medium
-cwe: [CWE-494]
-owasp: [A06:2025]
+cwe:
+    - CWE-494
+description: Detects download and execution of artifacts without cryptographic hash or signature verification.
+languages:
+    - generic
+    - yaml
+    - javascript
+    - python
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Artifact Integrity Verification Missing
+owasp:
+    - A06:2025
+severity: high
+tags:
+    - supply-chain
+    - integrity
+    - owasp-a06
+version: 1.0.0
 ---
 
 # Artifact Integrity Verification Missing

@@ -1,13 +1,24 @@
 ---
-name: Exposed Build Artifacts and Debug Files
-version: 1.0.0
-description: Detects build artifacts, debug information, and development files committed to version control or accessible in production.
-tags: [devops, information-disclosure, owasp-a05]
-languages: [generic, yaml]
-severity: medium
 confidence: medium
-cwe: [CWE-530]
-owasp: [A05:2025]
+cwe:
+    - CWE-530
+description: Detects build artifacts, debug information, and development files committed to version control or accessible in production.
+languages:
+    - generic
+    - yaml
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Exposed Build Artifacts and Debug Files
+owasp:
+    - A05:2025
+severity: medium
+tags:
+    - devops
+    - information-disclosure
+    - owasp-a05
+version: 1.0.0
 ---
 
 # Exposed Build Artifacts and Debug Files

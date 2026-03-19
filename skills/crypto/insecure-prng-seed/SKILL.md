@@ -1,13 +1,32 @@
 ---
-name: Insecure PRNG Seed
-version: 1.0.0
-description: Detects cryptographic operations where pseudo-random number generators are seeded with predictable values.
-tags: [crypto, prng, random, owasp-a02]
-languages: [python, javascript, typescript, java, go, php, c, cpp]
-severity: high
 confidence: high
-cwe: [CWE-335, CWE-330]
-owasp: [A02:2025]
+cwe:
+    - CWE-335
+    - CWE-330
+description: Detects cryptographic operations where pseudo-random number generators are seeded with predictable values.
+languages:
+    - python
+    - javascript
+    - typescript
+    - java
+    - go
+    - php
+    - c
+    - cpp
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Insecure PRNG Seed
+owasp:
+    - A02:2025
+severity: high
+tags:
+    - crypto
+    - prng
+    - random
+    - owasp-a02
+version: 1.0.0
 ---
 
 # Insecure PRNG Seed

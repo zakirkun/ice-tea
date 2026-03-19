@@ -1,13 +1,25 @@
 ---
-name: Weak Cryptography Detection
-version: 1.0.0
-description: Detects use of weak or deprecated cryptographic algorithms
-tags: [crypto, hash, weak, owasp-a04]
-languages: [go]
-severity: high
 confidence: high
-cwe: [CWE-327, CWE-328]
-owasp: [A04:2025]
+cwe:
+    - CWE-327
+    - CWE-328
+description: Detects use of weak or deprecated cryptographic algorithms
+languages:
+    - go
+    - kotlin
+    - dart
+    - zig
+    - elixir
+name: Weak Cryptography Detection
+owasp:
+    - A04:2025
+severity: high
+tags:
+    - crypto
+    - hash
+    - weak
+    - owasp-a04
+version: 1.0.0
 ---
 
 # Weak Cryptography Detection

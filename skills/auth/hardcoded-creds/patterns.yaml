@@ -1,22 +1,21 @@
 rules:
-  - id: G101
-    name: hardcoded-password
-    description: "Potential hardcoded password found in source code"
-    severity: high
-    confidence: medium
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [go, javascript, python, java, php]
-    patterns:
-      - regex: "(?i)(password|passwd|pwd|secret|token|api_key|apikey|api-key)\\s*(:=|=)\\s*[\"'][^\"']{8,}[\"']"
-
-  - id: G102
-    name: hardcoded-api-key
-    description: "Potential hardcoded API key found in source code"
-    severity: high
-    confidence: medium
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [go, javascript, python, java, php]
-    patterns:
-      - regex: "(?i)(aws_access_key|aws_secret|github_token|slack_token|stripe_key)\\s*(:=|=)\\s*[\"'][^\"']+[\"']"
+    - id: G101
+      name: hardcoded-password
+      description: "Potential hardcoded password found in source code"
+      severity: high
+      confidence: medium
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [go, javascript, python, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)(password|passwd|pwd|secret|token|api_key|apikey|api-key)\\s*(:=|=)\\s*[\"'][^\"']{8,}[\"']"
+    - id: G102
+      name: hardcoded-api-key
+      description: "Potential hardcoded API key found in source code"
+      severity: high
+      confidence: medium
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [go, javascript, python, java, php, kotlin, dart, zig, elixir]
+      patterns:
+        - regex: "(?i)(aws_access_key|aws_secret|github_token|slack_token|stripe_key)\\s*(:=|=)\\s*[\"'][^\"']+[\"']"
