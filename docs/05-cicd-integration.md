@@ -4,6 +4,21 @@
 
 Ice Tea is designed as a CI/CD-native security scanner. It produces standardized output formats that integrate directly with GitHub Code Scanning and GitLab Security Dashboards.
 
+## Download Binary
+
+Pre-built binaries are available from [GitHub Releases](https://github.com/zakirkun/ice-tea/releases/tag/v1.0.0):
+
+| Platform | Architecture | Download URL |
+|----------|--------------|--------------|
+| Linux | amd64 | `https://github.com/zakirkun/ice-tea/releases/download/v1.0.0/ice-tea-linux-amd64` |
+| Linux | arm64 | `https://github.com/zakirkun/ice-tea/releases/download/v1.0.0/ice-tea-linux-arm64` |
+| Windows | amd64 | `https://github.com/zakirkun/ice-tea/releases/download/v1.0.0/ice-tea-windows-amd64.exe` |
+| macOS | amd64 | `https://github.com/zakirkun/ice-tea/releases/download/v1.0.0/ice-tea-darwin-amd64` |
+| macOS | arm64 | `https://github.com/zakirkun/ice-tea/releases/download/v1.0.0/ice-tea-darwin-arm64` |
+
+For the latest release, use `latest` instead of `v1.0.0` in the URL path, e.g.:
+`https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea-linux-amd64`
+
 ## Output Formats
 
 ### 1. SARIF (Static Analysis Results Interchange Format)
@@ -22,7 +37,7 @@ SARIF v2.1.0 is the primary output format. It is a JSON-based standard adopted b
         "driver": {
           "name": "ice-tea",
           "version": "1.0.0",
-          "informationUri": "https://github.com/user/ice-tea",
+          "informationUri": "https://github.com/zakirkun/ice-tea",
           "rules": [
             {
               "id": "G201",
@@ -207,7 +222,7 @@ runs:
     - name: Download Ice Tea
       shell: bash
       run: |
-        curl -sSfL https://github.com/user/ice-tea/releases/latest/download/ice-tea-linux-amd64 -o /usr/local/bin/ice-tea
+        curl -sSfL https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea-linux-amd64 -o /usr/local/bin/ice-tea
         chmod +x /usr/local/bin/ice-tea
     - name: Run Scan
       shell: bash
@@ -253,7 +268,7 @@ ice-tea-sast:
   stage: test
   image: golang:1.22
   before_script:
-    - curl -sSfL https://github.com/user/ice-tea/releases/latest/download/ice-tea-linux-amd64 -o /usr/local/bin/ice-tea
+    - curl -sSfL https://github.com/zakirkun/ice-tea/releases/latest/download/ice-tea-linux-amd64 -o /usr/local/bin/ice-tea
     - chmod +x /usr/local/bin/ice-tea
   script:
     - ice-tea scan . --format gitlab --output gl-sast-report.json
