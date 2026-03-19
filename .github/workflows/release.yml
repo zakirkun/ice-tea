@@ -24,11 +24,13 @@ jobs:
           
       # Since go-tree-sitter requires CGO, we need cross-compilers for multi-os support using goreleaser natively.
       # For a simpler matrix release we could do it in GitHub natively, but we will use zig as a C/C++ drop-in cross compiler for goreleaser.
+      # Extract to RUNNER_TEMP to avoid polluting workspace (GoReleaser requires clean git state)
       - name: Install Zig for CGO Cross Compilation
         run: |
+          cd $RUNNER_TEMP
           wget -q https://ziglang.org/download/0.11.0/zig-linux-x86_64-0.11.0.tar.xz
-          tar xvf zig-linux-x86_64-0.11.0.tar.xz
-          echo "$PWD/zig-linux-x86_64-0.11.0" >> $GITHUB_PATH
+          tar xf zig-linux-x86_64-0.11.0.tar.xz
+          echo "$RUNNER_TEMP/zig-linux-x86_64-0.11.0" >> $GITHUB_PATH
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
