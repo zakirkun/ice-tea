@@ -55,3 +55,11 @@ output:
   file: "" # empty = stdout
   verbose: false
   color: true
+
+notify:
+  telegram:
+    enabled: false
+    bot_token: "" # or ICE_TEA_TELEGRAM_BOT_TOKEN env
+    chat_id: ""  # or ICE_TEA_TELEGRAM_CHAT_ID env
+    min_severity: high
+    only_on_findings: true

@@ -1,62 +1,58 @@
 rules:
-  - id: DB-REDIS-001
-    name: redis-createclient-no-password
-    description: "Redis client created without password option"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "redis\\.createClient\\s*\\(\\s*\\{[^}]*(?!password)[^}]*\\}\\s*\\)"
-      - regex: "new\\s+Redis\\s*\\(\\s*\\{[^}]*(?!password)[^}]*\\}\\s*\\)"
-      - regex: "createClient\\s*\\(\\s*\\{[^}]*port\\s*:\\s*6379[^}]*\\}\\s*\\)(?![^;]*password)"
-
-  - id: DB-REDIS-002
-    name: python-redis-no-password
-    description: "Python Redis client created without password"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [python]
-    patterns:
-      - regex: "redis\\.Redis\\s*\\([^)]*host\\s*=[^)]*\\)(?![^;]*password)"
-      - regex: "StrictRedis\\s*\\([^)]*(?!password)[^)]*\\)"
-      - regex: "from_url\\s*\\(['\"]redis://[^:@'\"]+['\"]\\)"
-
-  - id: DB-REDIS-003
-    name: go-redis-no-password
-    description: "Go Redis client options without password"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "redis\\.Options\\s*\\{[^}]*Addr\\s*:[^}]*\\}(?![^;]*Password)"
-      - regex: "redis\\.NewClient\\s*\\(\\s*&redis\\.Options\\s*\\{[^}]*\\}\\s*\\)(?![^;]*Password)"
-
-  - id: DB-REDIS-004
-    name: redis-config-no-requirepass
-    description: "Redis configuration file missing requirepass directive"
-    severity: high
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [generic]
-    patterns:
-      - regex: "^#\\s*requirepass"
-      - regex: "bind\\s+0\\.0\\.0\\.0(?![\\s\\S]*requirepass)"
-
-  - id: DB-REDIS-005
-    name: redis-url-no-auth
-    description: "Redis connection URL without authentication credentials"
-    severity: high
-    confidence: high
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, ruby]
-    patterns:
-      - regex: "['\"]redis://[^:@'\"]+:[0-9]+['\"]"
-      - regex: "REDIS_URL\\s*=\\s*['\"]redis://(?!:)[^'\"]+['\"]"
+    - id: DB-REDIS-001
+      name: redis-createclient-no-password
+      description: "Redis client created without password option"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "redis\\.createClient\\s*\\(\\s*\\{[^}]*[^}]*\\}\\s*\\)"
+        - regex: "new\\s+Redis\\s*\\(\\s*\\{[^}]*[^}]*\\}\\s*\\)"
+        - regex: "createClient\\s*\\(\\s*\\{[^}]*port\\s*:\\s*6379[^}]*\\}\\s*\\)"
+    - id: DB-REDIS-002
+      name: python-redis-no-password
+      description: "Python Redis client created without password"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [python]
+      patterns:
+        - regex: "redis\\.Redis\\s*\\([^)]*host\\s*=[^)]*\\)"
+        - regex: "StrictRedis\\s*\\([^)]*[^)]*\\)"
+        - regex: "from_url\\s*\\(['\"]redis://[^:@'\"]+['\"]\\)"
+    - id: DB-REDIS-003
+      name: go-redis-no-password
+      description: "Go Redis client options without password"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "redis\\.Options\\s*\\{[^}]*Addr\\s*:[^}]*\\}"
+        - regex: "redis\\.NewClient\\s*\\(\\s*&redis\\.Options\\s*\\{[^}]*\\}\\s*\\)"
+    - id: DB-REDIS-004
+      name: redis-config-no-requirepass
+      description: "Redis configuration file missing requirepass directive"
+      severity: high
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [generic]
+      patterns:
+        - regex: "^#\\s*requirepass"
+        - regex: "bind\\s+0\\.0\\.0\\.0"
+    - id: DB-REDIS-005
+      name: redis-url-no-auth
+      description: "Redis connection URL without authentication credentials"
+      severity: high
+      confidence: high
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, ruby]
+      patterns:
+        - regex: "['\"]redis://[^:@'\"]+:[0-9]+['\"]"
+        - regex: "REDIS_URL\\s*=\\s*['\"]redis://[^'\"]+['\"]"

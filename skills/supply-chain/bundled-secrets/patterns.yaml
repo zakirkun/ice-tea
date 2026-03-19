@@ -1,46 +1,43 @@
 rules:
-  - id: SC-BSEC-001
-    name: npm-no-npmignore
-    description: "package.json without .npmignore or files field — sensitive files may be published"
-    severity: medium
-    confidence: low
-    cwe: [CWE-312]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "\"name\":\\s*['\"][^'\"]+['\"](?![\\s\\S]*\"files\"\\s*:)"
-
-  - id: SC-BSEC-002
-    name: private-key-in-package
-    description: "Private key file pattern that may be included in npm package"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "-----BEGIN (?:RSA |EC |DSA )?PRIVATE KEY-----"
-      - regex: "-----BEGIN CERTIFICATE-----"
-
-  - id: SC-BSEC-003
-    name: env-file-in-package-files
-    description: ".env file listed in package.json files field — will be published"
-    severity: critical
-    confidence: high
-    cwe: [CWE-312]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "\"files\"\\s*:\\s*\\[[^\\]]*\"\\.env[^'\"]*\""
-
-  - id: SC-BSEC-004
-    name: aws-key-in-source
-    description: "AWS access key embedded in publishable source files"
-    severity: critical
-    confidence: high
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "AKIA[0-9A-Z]{16}"
-      - regex: "(?i)aws_secret_access_key\\s*=\\s*['\"][a-zA-Z0-9/+]{40}['\"]"
+    - id: SC-BSEC-001
+      name: npm-no-npmignore
+      description: "package.json without .npmignore or files field — sensitive files may be published"
+      severity: medium
+      confidence: low
+      cwe: [CWE-312]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "\"name\":\\s*['\"][^'\"]+['\"]"
+    - id: SC-BSEC-002
+      name: private-key-in-package
+      description: "Private key file pattern that may be included in npm package"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "-----BEGIN (?:RSA |EC |DSA )?PRIVATE KEY-----"
+        - regex: "-----BEGIN CERTIFICATE-----"
+    - id: SC-BSEC-003
+      name: env-file-in-package-files
+      description: ".env file listed in package.json files field — will be published"
+      severity: critical
+      confidence: high
+      cwe: [CWE-312]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "\"files\"\\s*:\\s*\\[[^\\]]*\"\\.env[^'\"]*\""
+    - id: SC-BSEC-004
+      name: aws-key-in-source
+      description: "AWS access key embedded in publishable source files"
+      severity: critical
+      confidence: high
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "AKIA[0-9A-Z]{16}"
+        - regex: "(?i)aws_secret_access_key\\s*=\\s*['\"][a-zA-Z0-9/+]{40}['\"]"

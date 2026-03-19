@@ -8,8 +8,10 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/c"
 	"github.com/smacker/go-tree-sitter/cpp"
+	"github.com/smacker/go-tree-sitter/elixir"
 	"github.com/smacker/go-tree-sitter/java"
 	"github.com/smacker/go-tree-sitter/javascript"
+	"github.com/smacker/go-tree-sitter/kotlin"
 	"github.com/smacker/go-tree-sitter/php"
 	"github.com/smacker/go-tree-sitter/python"
 	"github.com/smacker/go-tree-sitter/ruby"
@@ -37,6 +39,8 @@ func New() *TreeSitterParser {
 			p.LangRust:       rust.GetLanguage(),
 			p.LangC:          c.GetLanguage(),
 			p.LangCPP:        cpp.GetLanguage(),
+			p.LangKotlin:     kotlin.GetLanguage(),
+			p.LangElixir:     elixir.GetLanguage(),
 		},
 	}
 }
@@ -156,6 +160,12 @@ func detectLanguageFromFile(filename string) p.Language {
 	}
 	if strings.HasSuffix(filename, ".cpp") || strings.HasSuffix(filename, ".hpp") || strings.HasSuffix(filename, ".cc") {
 		return p.LangCPP
+	}
+	if strings.HasSuffix(filename, ".kt") || strings.HasSuffix(filename, ".kts") {
+		return p.LangKotlin
+	}
+	if strings.HasSuffix(filename, ".ex") || strings.HasSuffix(filename, ".exs") {
+		return p.LangElixir
 	}
 	return "unknown"
 }

@@ -1,47 +1,44 @@
 rules:
-  - id: IOS-LOG-001
-    name: nslog-sensitive-data
-    description: "NSLog statement containing sensitive data fields"
-    severity: high
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [generic]
-    patterns:
-      - regex: "NSLog\\s*\\(@\"[^\"]*(?:password|token|secret|key|pin)"
-      - regex: "NSLog\\s*\\(@\".*%@.*\".*(?:password|token|secret)"
-
-  - id: IOS-LOG-002
-    name: print-sensitive-swift
-    description: "Swift print() statement with sensitive data"
-    severity: high
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [generic]
-    patterns:
-      - regex: "print\\s*\\([^)]*(?:password|token|secret|apiKey|accessToken)"
-      - regex: "debugPrint\\s*\\([^)]*(?:password|token|secret)"
-
-  - id: IOS-LOG-003
-    name: oslog-no-private
-    description: "os_log with sensitive data without %{private} format specifier"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [generic]
-    patterns:
-      - regex: "os_log\\s*\\(.*(?:password|token|secret)(?![^\"]*%\\{private\\})"
-      - regex: "Logger\\(\\)\\.(?:info|debug|error)\\s*\\(\\s*\"[^\"]*(?:password|token|secret)"
-
-  - id: IOS-LOG-004
-    name: nslog-in-production
-    description: "NSLog present in non-debug-guarded code — may appear in production logs"
-    severity: low
-    confidence: low
-    cwe: [CWE-532]
-    owasp: [A09:2025]
-    languages: [generic]
-    patterns:
-      - regex: "NSLog\\s*\\(@\"(?![^}]*#if DEBUG)"
+    - id: IOS-LOG-001
+      name: nslog-sensitive-data
+      description: "NSLog statement containing sensitive data fields"
+      severity: high
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [generic]
+      patterns:
+        - regex: "NSLog\\s*\\(@\"[^\"]*(?:password|token|secret|key|pin)"
+        - regex: "NSLog\\s*\\(@\".*%@.*\".*(?:password|token|secret)"
+    - id: IOS-LOG-002
+      name: print-sensitive-swift
+      description: "Swift print() statement with sensitive data"
+      severity: high
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [generic]
+      patterns:
+        - regex: "print\\s*\\([^)]*(?:password|token|secret|apiKey|accessToken)"
+        - regex: "debugPrint\\s*\\([^)]*(?:password|token|secret)"
+    - id: IOS-LOG-003
+      name: oslog-no-private
+      description: "os_log with sensitive data without %{private} format specifier"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [generic]
+      patterns:
+        - regex: "os_log\\s*\\(.*(?:password|token|secret)"
+        - regex: "Logger\\(\\)\\.(?:info|debug|error)\\s*\\(\\s*\"[^\"]*(?:password|token|secret)"
+    - id: IOS-LOG-004
+      name: nslog-in-production
+      description: "NSLog present in non-debug-guarded code — may appear in production logs"
+      severity: low
+      confidence: low
+      cwe: [CWE-532]
+      owasp: ['A09:2025']
+      languages: [generic]
+      patterns:
+        - regex: "NSLog\\s*\\(@\""

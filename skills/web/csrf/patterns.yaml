@@ -1,71 +1,66 @@
 rules:
-  - id: WEB-CSRF-001
-    name: express-no-csrf-middleware
-    description: "Express.js POST route without CSRF protection middleware"
-    severity: high
-    confidence: low
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "(?:app|router)\\.post\\s*\\([^)]+\\)(?![^}]*csrf|[^}]*csrfProtection)"
-      - regex: "app\\.use\\s*\\((?!.*csurf|.*csrf|.*helmet)"
-
-  - id: WEB-CSRF-002
-    name: flask-no-csrf-protection
-    description: "Flask form handler without Flask-WTF CSRF protection"
-    severity: high
-    confidence: low
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [python]
-    patterns:
-      - regex: "@(?:app|bp)\\.route\\(['\"][^'\"]+['\"]\\s*,\\s*methods\\s*=\\s*\\[[^\\]]*['\"]POST['\"]"
-      - regex: "request\\.form\\.get\\(['\"][^'\"]+['\"]\\)(?![^\\n]*csrf)"
-
-  - id: WEB-CSRF-003
-    name: html-form-no-csrf-token
-    description: "HTML form with POST method missing CSRF token hidden input"
-    severity: high
-    confidence: medium
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [javascript, typescript, php, python]
-    patterns:
-      - regex: "<form[^>]*method\\s*=\\s*['\"]post['\"][^>]*>(?!(?:[\\s\\S]*?)<input[^>]*(?:csrf|_token|authenticity_token))"
-
-  - id: WEB-CSRF-004
-    name: php-form-no-csrf
-    description: "PHP form processing POST data without CSRF token validation"
-    severity: high
-    confidence: medium
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [php]
-    patterns:
-      - regex: "\\$_POST\\[\\s*['\"](?!(?:_token|csrf|nonce))[^'\"]+['\"]\\s*\\](?![^;]*(?:_token|csrf|nonce))"
-      - regex: "if\\s*\\(\\s*\\$_SERVER\\[\\s*['\"]REQUEST_METHOD['\"]\\s*\\]\\s*===?\\s*['\"]POST['\"]\\s*\\)(?![^{]*csrf)"
-
-  - id: WEB-CSRF-005
-    name: go-post-handler-no-csrf
-    description: "Go HTTP POST handler without CSRF token validation"
-    severity: medium
-    confidence: low
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [go]
-    patterns:
-      - regex: "r\\.Method\\s*==\\s*['\"]POST['\"](?![^}]*csrf|[^}]*CSRF|[^}]*token)"
-      - regex: "func\\s+\\w+\\s*\\(\\s*w\\s+http\\.ResponseWriter\\s*,\\s*r\\s*\\*http\\.Request\\)(?![^}]*csrf)"
-
-  - id: WEB-CSRF-006
-    name: cors-credentials-wildcard
-    description: "CORS configured with wildcard origin and credentials — CSRF amplification"
-    severity: high
-    confidence: high
-    cwe: [CWE-352]
-    owasp: [A01:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]\\*['\"]"
-      - regex: "Access-Control-Allow-Credentials['\"]?\\s*[=:]\\s*['\"]?true['\"]?"
+    - id: WEB-CSRF-001
+      name: express-no-csrf-middleware
+      description: "Express.js POST route without CSRF protection middleware"
+      severity: high
+      confidence: low
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "(?:app|router)\\.post\\s*\\([^)]+\\)"
+        - regex: "app\\.use\\s*\\("
+    - id: WEB-CSRF-002
+      name: flask-no-csrf-protection
+      description: "Flask form handler without Flask-WTF CSRF protection"
+      severity: high
+      confidence: low
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [python]
+      patterns:
+        - regex: "@(?:app|bp)\\.route\\(['\"][^'\"]+['\"]\\s*,\\s*methods\\s*=\\s*\\[[^\\]]*['\"]POST['\"]"
+        - regex: "request\\.form\\.get\\(['\"][^'\"]+['\"]\\)"
+    - id: WEB-CSRF-003
+      name: html-form-no-csrf-token
+      description: "HTML form with POST method missing CSRF token hidden input"
+      severity: high
+      confidence: medium
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript, php, python]
+      patterns:
+        - regex: "<form[^>]*method\\s*=\\s*['\"]post['\"][^>]*>"
+    - id: WEB-CSRF-004
+      name: php-form-no-csrf
+      description: "PHP form processing POST data without CSRF token validation"
+      severity: high
+      confidence: medium
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [php]
+      patterns:
+        - regex: "\\$_POST\\[\\s*['\"][^'\"]+['\"]\\s*\\]"
+        - regex: "if\\s*\\(\\s*\\$_SERVER\\[\\s*['\"]REQUEST_METHOD['\"]\\s*\\]\\s*===?\\s*['\"]POST['\"]\\s*\\)"
+    - id: WEB-CSRF-005
+      name: go-post-handler-no-csrf
+      description: "Go HTTP POST handler without CSRF token validation"
+      severity: medium
+      confidence: low
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [go]
+      patterns:
+        - regex: "r\\.Method\\s*==\\s*['\"]POST['\"]"
+        - regex: "func\\s+\\w+\\s*\\(\\s*w\\s+http\\.ResponseWriter\\s*,\\s*r\\s*\\*http\\.Request\\)"
+    - id: WEB-CSRF-006
+      name: cors-credentials-wildcard
+      description: "CORS configured with wildcard origin and credentials — CSRF amplification"
+      severity: high
+      confidence: high
+      cwe: [CWE-352]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "Access-Control-Allow-Origin['\"]?\\s*[=:]\\s*['\"]\\*['\"]"
+        - regex: "Access-Control-Allow-Credentials['\"]?\\s*[=:]\\s*['\"]?true['\"]?"

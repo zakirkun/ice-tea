@@ -1,59 +1,55 @@
 rules:
-  - id: DEVOPS-DOCK-001
-    name: dockerfile-env-secret
-    description: "Dockerfile ENV instruction with API key, password, or secret value"
-    severity: critical
-    confidence: high
-    cwe: [CWE-312]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "^ENV\\s+(?:API_KEY|SECRET|PASSWORD|TOKEN|PRIVATE_KEY|AWS_SECRET)\\s+[^$][^\\s]+"
-      - regex: "ENV\\s+[A-Z_]*(?:KEY|SECRET|PASSWORD|TOKEN)[A-Z_]*\\s+[a-zA-Z0-9+/]{8,}"
-
-  - id: DEVOPS-DOCK-002
-    name: dockerfile-arg-secret
-    description: "Dockerfile ARG with default secret value baked into image"
-    severity: high
-    confidence: high
-    cwe: [CWE-312]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "^ARG\\s+(?:API_KEY|SECRET|PASSWORD|TOKEN|PRIVATE_KEY)=[^$\\s]+"
-
-  - id: DEVOPS-DOCK-003
-    name: dockerfile-hardcoded-credential-run
-    description: "Dockerfile RUN instruction containing credential in shell command"
-    severity: critical
-    confidence: high
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [generic]
-    patterns:
-      - regex: "RUN\\s+.*(?:password|token|secret|api.key)\\s*[=:]\\s*['\"]?[a-zA-Z0-9+/]{8,}"
-      - regex: "RUN\\s+.*mysql.*-p['\"]?[a-zA-Z0-9@#$]{4,}"
-
-  - id: DEVOPS-DOCK-004
-    name: dockerfile-root-user
-    description: "Dockerfile missing USER instruction — container runs as root"
-    severity: high
-    confidence: medium
-    cwe: [CWE-250]
-    owasp: [A05:2025]
-    languages: [generic]
-    patterns:
-      - regex: "USER\\s+root"
-      - regex: "^FROM\\s+\\S+\\s+AS\\s+\\S+$(?![\\s\\S]*^USER\\s+(?!root))"
-
-  - id: DEVOPS-DOCK-005
-    name: dockerfile-curl-pipe-bash
-    description: "Dockerfile downloads and executes script without checksum verification"
-    severity: high
-    confidence: high
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [generic]
-    patterns:
-      - regex: "RUN\\s+(?:curl|wget)\\s+.*\\|\\s*(?:bash|sh|python)"
-      - regex: "RUN\\s+.*curl.*-sSL.*\\|.*sh"
+    - id: DEVOPS-DOCK-001
+      name: dockerfile-env-secret
+      description: "Dockerfile ENV instruction with API key, password, or secret value"
+      severity: critical
+      confidence: high
+      cwe: [CWE-312]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "^ENV\\s+(?:API_KEY|SECRET|PASSWORD|TOKEN|PRIVATE_KEY|AWS_SECRET)\\s+[^$][^\\s]+"
+        - regex: "ENV\\s+[A-Z_]*(?:KEY|SECRET|PASSWORD|TOKEN)[A-Z_]*\\s+[a-zA-Z0-9+/]{8,}"
+    - id: DEVOPS-DOCK-002
+      name: dockerfile-arg-secret
+      description: "Dockerfile ARG with default secret value baked into image"
+      severity: high
+      confidence: high
+      cwe: [CWE-312]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "^ARG\\s+(?:API_KEY|SECRET|PASSWORD|TOKEN|PRIVATE_KEY)=[^$\\s]+"
+    - id: DEVOPS-DOCK-003
+      name: dockerfile-hardcoded-credential-run
+      description: "Dockerfile RUN instruction containing credential in shell command"
+      severity: critical
+      confidence: high
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [generic]
+      patterns:
+        - regex: "RUN\\s+.*(?:password|token|secret|api.key)\\s*[=:]\\s*['\"]?[a-zA-Z0-9+/]{8,}"
+        - regex: "RUN\\s+.*mysql.*-p['\"]?[a-zA-Z0-9@#$]{4,}"
+    - id: DEVOPS-DOCK-004
+      name: dockerfile-root-user
+      description: "Dockerfile missing USER instruction — container runs as root"
+      severity: high
+      confidence: medium
+      cwe: [CWE-250]
+      owasp: ['A05:2025']
+      languages: [generic]
+      patterns:
+        - regex: "USER\\s+root"
+        - regex: "^FROM\\s+\\S+\\s+AS\\s+\\S+$"
+    - id: DEVOPS-DOCK-005
+      name: dockerfile-curl-pipe-bash
+      description: "Dockerfile downloads and executes script without checksum verification"
+      severity: high
+      confidence: high
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [generic]
+      patterns:
+        - regex: "RUN\\s+(?:curl|wget)\\s+.*\\|\\s*(?:bash|sh|python)"
+        - regex: "RUN\\s+.*curl.*-sSL.*\\|.*sh"

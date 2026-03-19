@@ -1,65 +1,61 @@
 rules:
-  - id: CRYPTO-KDF-001
-    name: password-as-aes-key-directly
-    description: "Password used directly as AES key without KDF — trivially reversible"
-    severity: high
-    confidence: high
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, java, go, php]
-    patterns:
-      - regex: "AES\\.new\\s*\\(\\s*password"
-      - regex: "createCipheriv\\s*\\([^,]+,\\s*password"
-      - regex: "SecretKeySpec\\s*\\(\\s*password\\.getBytes"
-
-  - id: CRYPTO-KDF-002
-    name: sha-hash-as-key
-    description: "SHA-256/SHA-1 hash of password used as encryption key (fast hash, no salt)"
-    severity: high
-    confidence: high
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, java, go, php]
-    patterns:
-      - regex: "hashlib\\.sha256\\s*\\(\\s*password\\.encode\\s*\\(\\s*\\)\\s*\\)\\.digest\\s*\\(\\s*\\)"
-      - regex: "crypto\\.createHash\\(['\"]sha256['\"]\\)\\.update\\(password\\)\\.digest\\("
-      - regex: "MessageDigest.*SHA-256.*password"
-
-  - id: CRYPTO-KDF-003
-    name: low-pbkdf2-iterations
-    description: "PBKDF2 configured with too few iterations (< 100,000)"
-    severity: high
-    confidence: high
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, java]
-    patterns:
-      - regex: "PBKDF2HMAC.*iterations\\s*=\\s*[0-9]{1,5}(?![0-9])"
-      - regex: "pbkdf2(?:Sync)?\\s*\\([^)]*,\\s*[^,]+,\\s*(?:[0-9]{1,4}|[1-9][0-9]{4})(?![0-9])"
-      - regex: "SecretKeyFactory.*PBKDF2WithHmacSHA.*PBEKeySpec.*(?:[0-9]{1,4})(?![0-9])"
-
-  - id: CRYPTO-KDF-004
-    name: static-salt-kdf
-    description: "KDF used with static or hardcoded salt — defeats salt purpose"
-    severity: high
-    confidence: high
-    cwe: [CWE-760]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, java, php]
-    patterns:
-      - regex: "salt\\s*=\\s*b?['\"][^'\"]{4,32}['\"]"
-      - regex: "salt\\s*=\\s*b?['\"][^'\"]*['\"].*PBKDF2|PBKDF2.*salt\\s*=\\s*b?['\"][^'\"]*['\"]"
-      - regex: "pbkdf2.*['\"][a-zA-Z0-9]{4,}['\"].*iterations"
-
-  - id: CRYPTO-KDF-005
-    name: no-kdf-password-hash
-    description: "Password hashed with SHA-2 without salt for storage (missing KDF)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, go, java, php]
-    patterns:
-      - regex: "hashlib\\.sha(?:256|512)\\s*\\(\\s*(?:password|passwd|pwd)"
-      - regex: "crypto\\.createHash\\(['\"]sha(?:256|512)['\"]\\).*password"
-      - regex: "sha256\\.Sum(?:256|512)\\(\\[\\]byte\\(password\\)\\)"
+    - id: CRYPTO-KDF-001
+      name: password-as-aes-key-directly
+      description: "Password used directly as AES key without KDF — trivially reversible"
+      severity: high
+      confidence: high
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, java, go, php]
+      patterns:
+        - regex: "AES\\.new\\s*\\(\\s*password"
+        - regex: "createCipheriv\\s*\\([^,]+,\\s*password"
+        - regex: "SecretKeySpec\\s*\\(\\s*password\\.getBytes"
+    - id: CRYPTO-KDF-002
+      name: sha-hash-as-key
+      description: "SHA-256/SHA-1 hash of password used as encryption key (fast hash, no salt)"
+      severity: high
+      confidence: high
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, java, go, php]
+      patterns:
+        - regex: "hashlib\\.sha256\\s*\\(\\s*password\\.encode\\s*\\(\\s*\\)\\s*\\)\\.digest\\s*\\(\\s*\\)"
+        - regex: "crypto\\.createHash\\(['\"]sha256['\"]\\)\\.update\\(password\\)\\.digest\\("
+        - regex: "MessageDigest.*SHA-256.*password"
+    - id: CRYPTO-KDF-003
+      name: low-pbkdf2-iterations
+      description: "PBKDF2 configured with too few iterations (< 100,000)"
+      severity: high
+      confidence: high
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, java]
+      patterns:
+        - regex: "PBKDF2HMAC.*iterations\\s*=\\s*[0-9]{1,5}"
+        - regex: "pbkdf2(?:Sync)?\\s*\\([^)]*,\\s*[^,]+,\\s*(?:[0-9]{1,4}|[1-9][0-9]{4})"
+        - regex: "SecretKeyFactory.*PBKDF2WithHmacSHA.*PBEKeySpec.*(?:[0-9]{1,4})"
+    - id: CRYPTO-KDF-004
+      name: static-salt-kdf
+      description: "KDF used with static or hardcoded salt — defeats salt purpose"
+      severity: high
+      confidence: high
+      cwe: [CWE-760]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, java, php]
+      patterns:
+        - regex: "salt\\s*=\\s*b?['\"][^'\"]{4,32}['\"]"
+        - regex: "salt\\s*=\\s*b?['\"][^'\"]*['\"].*PBKDF2|PBKDF2.*salt\\s*=\\s*b?['\"][^'\"]*['\"]"
+        - regex: "pbkdf2.*['\"][a-zA-Z0-9]{4,}['\"].*iterations"
+    - id: CRYPTO-KDF-005
+      name: no-kdf-password-hash
+      description: "Password hashed with SHA-2 without salt for storage (missing KDF)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, go, java, php]
+      patterns:
+        - regex: "hashlib\\.sha(?:256|512)\\s*\\(\\s*(?:password|passwd|pwd)"
+        - regex: "crypto\\.createHash\\(['\"]sha(?:256|512)['\"]\\).*password"
+        - regex: "sha256\\.Sum(?:256|512)\\(\\[\\]byte\\(password\\)\\)"

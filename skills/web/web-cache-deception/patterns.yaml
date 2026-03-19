@@ -1,33 +1,31 @@
 rules:
-  - id: WEB-WCD-001
-    name: authenticated-route-no-cache-control
-    description: "Authenticated route without Cache-Control: no-store header"
-    severity: high
-    confidence: low
-    cwe: [CWE-524]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java]
-    patterns:
-      - regex: "(?:app|router)\\.get\\(['\"][^'\"]*(?:profile|account|dashboard|settings|me)[^'\"]*['\"].*(?:auth|jwt|session)(?![^)]*no-store|[^)]*Cache-Control))"
-
-  - id: WEB-WCD-002
-    name: express-static-extension-routing
-    description: "Express app routing that ignores file extensions — cache deception risk"
-    severity: medium
-    confidence: low
-    cwe: [CWE-524]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "app\\.use\\s*\\(\\s*['\"][^'\"]*\\*[^'\"]*['\"]"
-
-  - id: WEB-WCD-003
-    name: nginx-location-extension-ignore
-    description: "Nginx or server config that serves all paths regardless of extension"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-524]
-    owasp: [A05:2025]
-    languages: [generic]
-    patterns:
-      - regex: "try_files\\s+\\$uri\\s+\\$uri/\\s+/index\\.php"
+    - id: WEB-WCD-001
+      name: authenticated-route-no-cache-control
+      description: "Authenticated route without Cache-Control: no-store header"
+      severity: high
+      confidence: low
+      cwe: [CWE-524]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java]
+      patterns:
+        - regex: "(?:app|router)\\.get\\(['\"][^'\"]*(?:profile|account|dashboard|settings|me)[^'\"]*['\"].*(?:auth|jwt|session))"
+    - id: WEB-WCD-002
+      name: express-static-extension-routing
+      description: "Express app routing that ignores file extensions — cache deception risk"
+      severity: medium
+      confidence: low
+      cwe: [CWE-524]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "app\\.use\\s*\\(\\s*['\"][^'\"]*\\*[^'\"]*['\"]"
+    - id: WEB-WCD-003
+      name: nginx-location-extension-ignore
+      description: "Nginx or server config that serves all paths regardless of extension"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-524]
+      owasp: ['A05:2025']
+      languages: [generic]
+      patterns:
+        - regex: "try_files\\s+\\$uri\\s+\\$uri/\\s+/index\\.php"

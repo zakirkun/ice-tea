@@ -1,94 +1,88 @@
 rules:
-  - id: CRYPTO-WC-001
-    name: des-usage
-    description: "Use of DES encryption algorithm — 56-bit key, cryptographically broken"
-    severity: critical
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, java, javascript, typescript, php, go, ruby]
-    patterns:
-      - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+DES(?!3)"
-      - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DES(?!/)['\"]"
-      - regex: "(?i)createCipheriv\\s*\\(['\"]des(?!-ede)['\"]"
-      - regex: "(?i)openssl_encrypt\\s*\\([^)]*['\"]des(?!-ede)['\"]"
-
-  - id: CRYPTO-WC-002
-    name: 3des-usage
-    description: "Use of 3DES/TDEA encryption — vulnerable to SWEET32, deprecated"
-    severity: high
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, java, javascript, typescript, php, go, ruby]
-    patterns:
-      - regex: "(?i)(?:DES3|TripleDES|DESede|3DES|des-ede)"
-      - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DESede"
-      - regex: "(?i)createCipheriv\\s*\\(['\"]des-ede"
-      - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+DES3"
-
-  - id: CRYPTO-WC-003
-    name: rc4-usage
-    description: "Use of RC4/ARC4 stream cipher — statistically biased, prohibited in TLS"
-    severity: critical
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, java, javascript, typescript, php, go, ruby]
-    patterns:
-      - regex: "(?i)(?:RC4|ARC4|ARCFOUR|RC4-MD5)"
-      - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+ARC4"
-      - regex: "(?i)createCipheriv\\s*\\(['\"]rc4"
-
-  - id: CRYPTO-WC-004
-    name: aes-ecb-mode
-    description: "AES used in ECB mode — deterministic encryption leaks patterns"
-    severity: high
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, java, javascript, typescript, php, go, ruby]
-    patterns:
-      - regex: "(?i)AES\\.MODE_ECB"
-      - regex: "(?i)AES/ECB"
-      - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]AES/ECB"
-      - regex: "(?i)createCipheriv\\s*\\(['\"]aes-(?:128|192|256)-ecb"
-
-  - id: CRYPTO-WC-005
-    name: blowfish-usage
-    description: "Use of Blowfish cipher — 64-bit block size vulnerable to SWEET32"
-    severity: high
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, java, javascript, typescript, php]
-    patterns:
-      - regex: "(?i)(?:Blowfish|BF-CBC|BF-ECB)"
-      - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+Blowfish"
-      - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]Blowfish"
-
-  - id: CRYPTO-WC-006
-    name: xor-encryption-homemade
-    description: "Custom XOR-based encryption — trivially broken"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, php, go, java, ruby]
-    patterns:
-      - regex: "(?i)(?:encrypt|cipher).*\\^\\s*key\\[\\w+\\s*%"
-      - regex: "(?i)for.*in.*plaintext.*\\^=.*key"
-      - regex: "(?i)xor_encrypt|xorEncrypt|encrypt_xor"
-
-  - id: CRYPTO-WC-007
-    name: php-mcrypt-deprecated
-    description: "PHP mcrypt extension is deprecated and uses weak algorithms"
-    severity: high
-    confidence: high
-    cwe: [CWE-327]
-    owasp: [A02:2025]
-    languages: [php]
-    patterns:
-      - regex: "mcrypt_encrypt\\s*\\("
-      - regex: "mcrypt_decrypt\\s*\\("
-      - regex: "mcrypt_module_open\\s*\\("
+    - id: CRYPTO-WC-001
+      name: des-usage
+      description: "Use of DES encryption algorithm — 56-bit key, cryptographically broken"
+      severity: critical
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, java, javascript, typescript, php, go, ruby]
+      patterns:
+        - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+DES"
+        - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DES['\"]"
+        - regex: "(?i)createCipheriv\\s*\\(['\"]des['\"]"
+        - regex: "(?i)openssl_encrypt\\s*\\([^)]*['\"]des['\"]"
+    - id: CRYPTO-WC-002
+      name: 3des-usage
+      description: "Use of 3DES/TDEA encryption — vulnerable to SWEET32, deprecated"
+      severity: high
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, java, javascript, typescript, php, go, ruby]
+      patterns:
+        - regex: "(?i)(?:DES3|TripleDES|DESede|3DES|des-ede)"
+        - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]DESede"
+        - regex: "(?i)createCipheriv\\s*\\(['\"]des-ede"
+        - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+DES3"
+    - id: CRYPTO-WC-003
+      name: rc4-usage
+      description: "Use of RC4/ARC4 stream cipher — statistically biased, prohibited in TLS"
+      severity: critical
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, java, javascript, typescript, php, go, ruby]
+      patterns:
+        - regex: "(?i)(?:RC4|ARC4|ARCFOUR|RC4-MD5)"
+        - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+ARC4"
+        - regex: "(?i)createCipheriv\\s*\\(['\"]rc4"
+    - id: CRYPTO-WC-004
+      name: aes-ecb-mode
+      description: "AES used in ECB mode — deterministic encryption leaks patterns"
+      severity: high
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, java, javascript, typescript, php, go, ruby]
+      patterns:
+        - regex: "(?i)AES\\.MODE_ECB"
+        - regex: "(?i)AES/ECB"
+        - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]AES/ECB"
+        - regex: "(?i)createCipheriv\\s*\\(['\"]aes-(?:128|192|256)-ecb"
+    - id: CRYPTO-WC-005
+      name: blowfish-usage
+      description: "Use of Blowfish cipher — 64-bit block size vulnerable to SWEET32"
+      severity: high
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, java, javascript, typescript, php]
+      patterns:
+        - regex: "(?i)(?:Blowfish|BF-CBC|BF-ECB)"
+        - regex: "(?i)from\\s+Crypto\\.Cipher\\s+import\\s+Blowfish"
+        - regex: "(?i)Cipher\\.getInstance\\s*\\(\\s*['\"]Blowfish"
+    - id: CRYPTO-WC-006
+      name: xor-encryption-homemade
+      description: "Custom XOR-based encryption — trivially broken"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, php, go, java, ruby]
+      patterns:
+        - regex: "(?i)(?:encrypt|cipher).*\\^\\s*key\\[\\w+\\s*%"
+        - regex: "(?i)for.*in.*plaintext.*\\^=.*key"
+        - regex: "(?i)xor_encrypt|xorEncrypt|encrypt_xor"
+    - id: CRYPTO-WC-007
+      name: php-mcrypt-deprecated
+      description: "PHP mcrypt extension is deprecated and uses weak algorithms"
+      severity: high
+      confidence: high
+      cwe: [CWE-327]
+      owasp: ['A02:2025']
+      languages: [php]
+      patterns:
+        - regex: "mcrypt_encrypt\\s*\\("
+        - regex: "mcrypt_decrypt\\s*\\("
+        - regex: "mcrypt_module_open\\s*\\("

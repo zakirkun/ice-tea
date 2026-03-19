@@ -1,48 +1,45 @@
 rules:
-  - id: AUTH-BYP-001
-    name: php-loose-comparison-password
-    description: "PHP loose comparison (==) for password hash — type juggling bypass"
-    severity: critical
-    confidence: high
-    cwe: [CWE-287]
-    owasp: [A07:2025]
-    languages: [php]
-    patterns:
-      - regex: "\\$(?:hash|password|stored)\\s*==\\s*\\$(?:input|user|pass)(?!\\s*=)"
-      - regex: "md5\\([^)]+\\)\\s*==\\s*\\$(?:stored|hash|db)"
-
-  - id: AUTH-BYP-002
-    name: jwt-algorithm-none
-    description: "JWT verification accepts 'none' algorithm — bypass authentication"
-    severity: critical
-    confidence: high
-    cwe: [CWE-287]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, java, go]
-    patterns:
-      - regex: "algorithms\\s*:\\s*\\[[^\\]]*['\"]none['\"]"
-      - regex: "verify\\s*\\([^,]+,\\s*[^,]+,\\s*\\{[^}]*algorithms\\s*:\\s*\\[[^\\]]*none"
-
-  - id: AUTH-BYP-003
-    name: admin-check-client-side
-    description: "Admin/role check performed only on client side (JavaScript)"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-602]
-    owasp: [A07:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "if\\s*\\(\\s*user\\.(?:isAdmin|role)\\s*===?\\s*['\"]admin['\"]\\s*\\)(?![^}]*server|[^}]*api|[^}]*fetch)"
-      - regex: "localStorage\\.getItem\\s*\\(['\"](?:role|isAdmin|userType)['\"]\\)\\s*===?\\s*['\"]admin['\"]"
-
-  - id: AUTH-BYP-004
-    name: auth-null-user-check
-    description: "Authentication check does not handle null/undefined user properly"
-    severity: high
-    confidence: medium
-    cwe: [CWE-287]
-    owasp: [A07:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "if\\s*\\(\\s*user\\s*\\)\\s*\\{[^}]*next\\s*\\(\\s*\\)(?![^}]*else[^}]*Unauthorized)"
-      - regex: "if\\s*\\(req\\.user\\)(?![^{]*\\{[^}]*403|[^{]*\\{[^}]*Unauthorized)"
+    - id: AUTH-BYP-001
+      name: php-loose-comparison-password
+      description: "PHP loose comparison (==) for password hash — type juggling bypass"
+      severity: critical
+      confidence: high
+      cwe: [CWE-287]
+      owasp: ['A07:2025']
+      languages: [php]
+      patterns:
+        - regex: "\\$(?:hash|password|stored)\\s*==\\s*\\$(?:input|user|pass)"
+        - regex: "md5\\([^)]+\\)\\s*==\\s*\\$(?:stored|hash|db)"
+    - id: AUTH-BYP-002
+      name: jwt-algorithm-none
+      description: "JWT verification accepts 'none' algorithm — bypass authentication"
+      severity: critical
+      confidence: high
+      cwe: [CWE-287]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, java, go]
+      patterns:
+        - regex: "algorithms\\s*:\\s*\\[[^\\]]*['\"]none['\"]"
+        - regex: "verify\\s*\\([^,]+,\\s*[^,]+,\\s*\\{[^}]*algorithms\\s*:\\s*\\[[^\\]]*none"
+    - id: AUTH-BYP-003
+      name: admin-check-client-side
+      description: "Admin/role check performed only on client side (JavaScript)"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-602]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "if\\s*\\(\\s*user\\.(?:isAdmin|role)\\s*===?\\s*['\"]admin['\"]\\s*\\)"
+        - regex: "localStorage\\.getItem\\s*\\(['\"](?:role|isAdmin|userType)['\"]\\)\\s*===?\\s*['\"]admin['\"]"
+    - id: AUTH-BYP-004
+      name: auth-null-user-check
+      description: "Authentication check does not handle null/undefined user properly"
+      severity: high
+      confidence: medium
+      cwe: [CWE-287]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "if\\s*\\(\\s*user\\s*\\)\\s*\\{[^}]*next\\s*\\(\\s*\\)"
+        - regex: "if\\s*\\(req\\.user\\)"

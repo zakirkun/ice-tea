@@ -1,38 +1,36 @@
 rules:
-  - id: NET-SNMP-001
-    name: snmp-default-community-public
-    description: "SNMP community string 'public' — default read-only community"
-    severity: high
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [python, go, javascript, generic]
-    patterns:
-      - regex: "community\\s*[=:]\\s*['\"]public['\"]"
-      - regex: "CommunityData\\s*\\(\\s*['\"]public['\"]"
-      - regex: "snmp.*['\"]public['\"]"
-
-  - id: NET-SNMP-002
-    name: snmp-default-community-private
-    description: "SNMP community string 'private' — default write community"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [python, go, javascript, generic]
-    patterns:
-      - regex: "community\\s*[=:]\\s*['\"]private['\"]"
-      - regex: "CommunityData\\s*\\(\\s*['\"]private['\"]"
-
-  - id: NET-SNMP-003
-    name: snmpv1-v2c-usage
-    description: "SNMP v1 or v2c used instead of SNMPv3 with authentication"
-    severity: high
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [python, javascript, go]
-    patterns:
-      - regex: "version\\s*[=:]\\s*['\"]?(?:1|2c)['\"]?"
-      - regex: "SnmpVersion\\.V(?:1|2c)"
-      - regex: "CommunityData\\s*\\([^)]+\\)(?![^;]*AuthData|[^;]*UsmUserData)"
+    - id: NET-SNMP-001
+      name: snmp-default-community-public
+      description: "SNMP community string 'public' — default read-only community"
+      severity: high
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [python, go, javascript, generic]
+      patterns:
+        - regex: "community\\s*[=:]\\s*['\"]public['\"]"
+        - regex: "CommunityData\\s*\\(\\s*['\"]public['\"]"
+        - regex: "snmp.*['\"]public['\"]"
+    - id: NET-SNMP-002
+      name: snmp-default-community-private
+      description: "SNMP community string 'private' — default write community"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [python, go, javascript, generic]
+      patterns:
+        - regex: "community\\s*[=:]\\s*['\"]private['\"]"
+        - regex: "CommunityData\\s*\\(\\s*['\"]private['\"]"
+    - id: NET-SNMP-003
+      name: snmpv1-v2c-usage
+      description: "SNMP v1 or v2c used instead of SNMPv3 with authentication"
+      severity: high
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [python, javascript, go]
+      patterns:
+        - regex: "version\\s*[=:]\\s*['\"]?(?:1|2c)['\"]?"
+        - regex: "SnmpVersion\\.V(?:1|2c)"
+        - regex: "CommunityData\\s*\\([^)]+\\)"

@@ -1,48 +1,45 @@
 rules:
-  - id: INJ-PROTO-001
-    name: object-setprototypeof-user
-    description: "Object.setPrototypeOf() called with user-controlled prototype"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1321]
-    owasp: [A08:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "Object\\.setPrototypeOf\\s*\\([^,]+,\\s*(?:req\\.body|userInput|JSON\\.parse)"
-      - regex: "Object\\.setPrototypeOf\\s*\\(\\s*\\w+\\s*,\\s*(?:req\\.|user\\.|input\\.)"
-
-  - id: INJ-PROTO-002
-    name: constructor-prototype-set
-    description: "constructor.prototype property set from user-controlled value"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1321]
-    owasp: [A08:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "\\.constructor\\.prototype\\s*="
-      - regex: "obj\\.constructor\\[\\s*['\"]prototype['\"]\\s*\\]"
-
-  - id: INJ-PROTO-003
-    name: object-assign-prototype-key
-    description: "Object.assign with __proto__ or constructor as key in source object"
-    severity: high
-    confidence: medium
-    cwe: [CWE-1321]
-    owasp: [A08:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "Object\\.assign\\s*\\([^)]*['\"]__proto__['\"]"
-      - regex: "Object\\.assign\\s*\\([^)]*['\"]constructor['\"]"
-
-  - id: INJ-PROTO-004
-    name: hasownproperty-bypass
-    description: "Property existence check without hasOwnProperty — prototype pollution risk"
-    severity: medium
-    confidence: low
-    cwe: [CWE-1321]
-    owasp: [A08:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "if\\s*\\(\\s*obj\\[key\\]\\s*\\)(?![^;]*hasOwnProperty)"
-      - regex: "for\\s*\\(.*in\\s+\\w+\\)(?![^}]*hasOwnProperty)"
+    - id: INJ-PROTO-001
+      name: object-setprototypeof-user
+      description: "Object.setPrototypeOf() called with user-controlled prototype"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1321]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "Object\\.setPrototypeOf\\s*\\([^,]+,\\s*(?:req\\.body|userInput|JSON\\.parse)"
+        - regex: "Object\\.setPrototypeOf\\s*\\(\\s*\\w+\\s*,\\s*(?:req\\.|user\\.|input\\.)"
+    - id: INJ-PROTO-002
+      name: constructor-prototype-set
+      description: "constructor.prototype property set from user-controlled value"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1321]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "\\.constructor\\.prototype\\s*="
+        - regex: "obj\\.constructor\\[\\s*['\"]prototype['\"]\\s*\\]"
+    - id: INJ-PROTO-003
+      name: object-assign-prototype-key
+      description: "Object.assign with __proto__ or constructor as key in source object"
+      severity: high
+      confidence: medium
+      cwe: [CWE-1321]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "Object\\.assign\\s*\\([^)]*['\"]__proto__['\"]"
+        - regex: "Object\\.assign\\s*\\([^)]*['\"]constructor['\"]"
+    - id: INJ-PROTO-004
+      name: hasownproperty-bypass
+      description: "Property existence check without hasOwnProperty — prototype pollution risk"
+      severity: medium
+      confidence: low
+      cwe: [CWE-1321]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "if\\s*\\(\\s*obj\\[key\\]\\s*\\)"
+        - regex: "for\\s*\\(.*in\\s+\\w+\\)"

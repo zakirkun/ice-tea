@@ -1,83 +1,77 @@
 rules:
-  - id: WEB-SH-001
-    name: hsts-missing-or-short-maxage
-    description: "Strict-Transport-Security header missing or max-age too short (< 1 year)"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Strict-Transport-Security.*max-age\\s*=\\s*(?:[0-9]{1,4}|[0-9]{5})(?![0-9])"
-      - regex: "(?i)hsts.*max-age\\s*[=:]\\s*0"
-
-  - id: WEB-SH-002
-    name: x-content-type-options-missing
-    description: "X-Content-Type-Options: nosniff header not set"
-    severity: low
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "helmet\\(\\s*\\{[^}]*contentTypeOptions\\s*:\\s*false"
-      - regex: "(?i)X-Content-Type-Options.*(?:sniff|allow)(?!.*nosniff)"
-
-  - id: WEB-SH-003
-    name: csp-unsafe-inline
-    description: "Content-Security-Policy with 'unsafe-inline' which negates XSS protection"
-    severity: high
-    confidence: high
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php, ruby]
-    patterns:
-      - regex: "(?i)Content-Security-Policy.*'unsafe-inline'"
-      - regex: "(?i)csp.*unsafe-inline"
-      - regex: "(?i)script-src.*'unsafe-inline'"
-
-  - id: WEB-SH-004
-    name: csp-unsafe-eval
-    description: "Content-Security-Policy with 'unsafe-eval' allowing eval() and similar"
-    severity: high
-    confidence: high
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Content-Security-Policy.*'unsafe-eval'"
-      - regex: "(?i)script-src.*'unsafe-eval'"
-
-  - id: WEB-SH-005
-    name: referrer-policy-unsafe
-    description: "Referrer-Policy set to 'unsafe-url' leaking full URLs"
-    severity: medium
-    confidence: high
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)Referrer-Policy.*unsafe-url"
-      - regex: "(?i)referrerPolicy.*unsafe-url"
-
-  - id: WEB-SH-006
-    name: permissions-policy-missing-dangerous
-    description: "Permissions-Policy not restricting sensitive browser features"
-    severity: low
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "helmet\\(\\s*\\{[^}]*permissionsPolicy\\s*:\\s*false"
-
-  - id: WEB-SH-007
-    name: go-no-security-headers-middleware
-    description: "Go HTTP server without security header middleware"
-    severity: medium
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "http\\.ListenAndServe\\s*\\([^)]+,\\s*(?:mux|router|handler)\\s*\\)(?![^}]*Header.*Strict-Transport)"
+    - id: WEB-SH-001
+      name: hsts-missing-or-short-maxage
+      description: "Strict-Transport-Security header missing or max-age too short (< 1 year)"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?i)Strict-Transport-Security.*max-age\\s*=\\s*(?:[0-9]{1,4}|[0-9]{5})"
+        - regex: "(?i)hsts.*max-age\\s*[=:]\\s*0"
+    - id: WEB-SH-002
+      name: x-content-type-options-missing
+      description: "X-Content-Type-Options: nosniff header not set"
+      severity: low
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "helmet\\(\\s*\\{[^}]*contentTypeOptions\\s*:\\s*false"
+        - regex: "(?i)X-Content-Type-Options.*(?:sniff|allow)"
+    - id: WEB-SH-003
+      name: csp-unsafe-inline
+      description: "Content-Security-Policy with 'unsafe-inline' which negates XSS protection"
+      severity: high
+      confidence: high
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php, ruby]
+      patterns:
+        - regex: "(?i)Content-Security-Policy.*'unsafe-inline'"
+        - regex: "(?i)csp.*unsafe-inline"
+        - regex: "(?i)script-src.*'unsafe-inline'"
+    - id: WEB-SH-004
+      name: csp-unsafe-eval
+      description: "Content-Security-Policy with 'unsafe-eval' allowing eval() and similar"
+      severity: high
+      confidence: high
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?i)Content-Security-Policy.*'unsafe-eval'"
+        - regex: "(?i)script-src.*'unsafe-eval'"
+    - id: WEB-SH-005
+      name: referrer-policy-unsafe
+      description: "Referrer-Policy set to 'unsafe-url' leaking full URLs"
+      severity: medium
+      confidence: high
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?i)Referrer-Policy.*unsafe-url"
+        - regex: "(?i)referrerPolicy.*unsafe-url"
+    - id: WEB-SH-006
+      name: permissions-policy-missing-dangerous
+      description: "Permissions-Policy not restricting sensitive browser features"
+      severity: low
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "helmet\\(\\s*\\{[^}]*permissionsPolicy\\s*:\\s*false"
+    - id: WEB-SH-007
+      name: go-no-security-headers-middleware
+      description: "Go HTTP server without security header middleware"
+      severity: medium
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "http\\.ListenAndServe\\s*\\([^)]+,\\s*(?:mux|router|handler)\\s*\\)"

@@ -1,38 +1,36 @@
 rules:
-  - id: SC-LOCK-001
-    name: gitignore-lockfile
-    description: "Lockfile ignored in .gitignore — non-deterministic builds"
-    severity: medium
-    confidence: high
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [generic]
-    patterns:
-      - regex: "^package-lock\\.json$"
-      - regex: "^yarn\\.lock$"
-      - regex: "^Pipfile\\.lock$"
-      - regex: "^Gemfile\\.lock$"
-
-  - id: SC-LOCK-002
-    name: npm-install-not-ci
-    description: "CI/CD pipeline uses npm install instead of npm ci (uses lockfile)"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "npm\\s+install(?!\\s*--save|\\s*-g|\\s+[a-z])"
-      - regex: "run:\\s*npm\\s+install(?!\\s*--production)"
-
-  - id: SC-LOCK-003
-    name: pip-install-no-requirements
-    description: "pip install without requirements.txt or pinned versions in CI"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "pip\\s+install\\s+(?!-r\\s+requirements)"
-      - regex: "pip3\\s+install\\s+(?!-r\\s+requirements)"
+    - id: SC-LOCK-001
+      name: gitignore-lockfile
+      description: "Lockfile ignored in .gitignore — non-deterministic builds"
+      severity: medium
+      confidence: high
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [generic]
+      patterns:
+        - regex: "^package-lock\\.json$"
+        - regex: "^yarn\\.lock$"
+        - regex: "^Pipfile\\.lock$"
+        - regex: "^Gemfile\\.lock$"
+    - id: SC-LOCK-002
+      name: npm-install-not-ci
+      description: "CI/CD pipeline uses npm install instead of npm ci (uses lockfile)"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "npm\\s+install"
+        - regex: "run:\\s*npm\\s+install"
+    - id: SC-LOCK-003
+      name: pip-install-no-requirements
+      description: "pip install without requirements.txt or pinned versions in CI"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "pip\\s+install\\s+"
+        - regex: "pip3\\s+install\\s+"

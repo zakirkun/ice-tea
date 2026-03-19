@@ -13,6 +13,7 @@ import (
 	"github.com/zakirkun/ice-tea/internal/finding"
 	"github.com/zakirkun/ice-tea/internal/notifier/telegram"
 	"github.com/zakirkun/ice-tea/internal/parser/goparser"
+	"github.com/zakirkun/ice-tea/internal/parser/textparser"
 	"github.com/zakirkun/ice-tea/internal/parser/treesitter"
 	"github.com/zakirkun/ice-tea/internal/reporter"
 	"github.com/zakirkun/ice-tea/internal/scanner"
@@ -138,8 +139,8 @@ func runScan(cmd *cobra.Command, args []string) error {
 	
 	// Register parsers
 	engine.RegisterParser(goparser.New())
-	// tree-sitter will be registered here in the future
 	engine.RegisterParser(treesitter.New())
+	engine.RegisterParser(textparser.New())
 
 	// Register reporters
 	engine.RegisterReporter(reporter.NewConsoleReporter(!conf.Output.Color))
@@ -180,9 +181,13 @@ func runScan(cmd *cobra.Command, args []string) error {
 			telegramCfg.Enabled = true
 		}
 		if telegramCfg.BotToken == "" {
-			// Try environment variable
 			if envToken := os.Getenv("ICE_TEA_TELEGRAM_BOT_TOKEN"); envToken != "" {
 				telegramCfg.BotToken = envToken
+			}
+		}
+		if telegramCfg.ChatID == "" {
+			if envChatID := os.Getenv("ICE_TEA_TELEGRAM_CHAT_ID"); envChatID != "" {
+				telegramCfg.ChatID = envChatID
 			}
 		}
 		if telegramCfg.BotToken != "" && telegramCfg.ChatID != "" {

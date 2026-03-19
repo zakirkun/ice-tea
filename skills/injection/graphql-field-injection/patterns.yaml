@@ -1,35 +1,33 @@
 rules:
-  - id: INJ-GQL-001
-    name: graphql-resolver-sql-concat
-    description: "GraphQL resolver builds SQL query with string concatenation of args"
-    severity: high
-    confidence: medium
-    cwe: [CWE-89]
-    owasp: [A03:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "resolve\\s*:\\s*async\\s*\\([^)]*,\\s*\\{[^}]*args[^}]*\\}[^)]*\\)[^{]*\\{[^}]*`.*\\$\\{args\\."
-      - regex: "resolver.*args\\.\\w+.*SELECT.*\\+"
-
-  - id: INJ-GQL-002
-    name: graphql-args-no-validation
-    description: "GraphQL resolver uses args without input validation"
-    severity: medium
-    confidence: low
-    cwe: [CWE-89]
-    owasp: [A03:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "args\\.(?:id|userId|filter|search|query)(?![^;]*validate|[^;]*sanitize|[^;]*parseInt)"
-
-  - id: INJ-GQL-003
-    name: graphql-dynamic-query
-    description: "GraphQL query dynamically constructed from user input"
-    severity: high
-    confidence: medium
-    cwe: [CWE-89]
-    owasp: [A03:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "gql`[^`]*\\$\\{(?:args|variables|input|params)\\."
-      - regex: "graphql\\s*\\(\\s*`[^`]*\\$\\{(?:args|input|req\\.body)"
+    - id: INJ-GQL-001
+      name: graphql-resolver-sql-concat
+      description: "GraphQL resolver builds SQL query with string concatenation of args"
+      severity: high
+      confidence: medium
+      cwe: [CWE-89]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "resolve\\s*:\\s*async\\s*\\([^)]*,\\s*\\{[^}]*args[^}]*\\}[^)]*\\)[^{]*\\{[^}]*`.*\\$\\{args\\."
+        - regex: "resolver.*args\\.\\w+.*SELECT.*\\+"
+    - id: INJ-GQL-002
+      name: graphql-args-no-validation
+      description: "GraphQL resolver uses args without input validation"
+      severity: medium
+      confidence: low
+      cwe: [CWE-89]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "args\\.(?:id|userId|filter|search|query)"
+    - id: INJ-GQL-003
+      name: graphql-dynamic-query
+      description: "GraphQL query dynamically constructed from user input"
+      severity: high
+      confidence: medium
+      cwe: [CWE-89]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "gql`[^`]*\\$\\{(?:args|variables|input|params)\\."
+        - regex: "graphql\\s*\\(\\s*`[^`]*\\$\\{(?:args|input|req\\.body)"

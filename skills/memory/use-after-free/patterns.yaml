@@ -1,59 +1,55 @@
 rules:
-  - id: MEM-UAF-001
-    name: c-free-then-use
-    description: "Pointer used after free() — use-after-free vulnerability"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-416]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;(?:[^;]*;)*[^;]*\\1\\s*[^=]"
-      - regex: "free\\s*\\(\\s*\\w+\\s*\\)\\s*;[^;]*(?:strlen|strcpy|memcpy|printf)\\s*\\("
-
-  - id: MEM-UAF-002
-    name: cpp-delete-then-use
-    description: "C++ object used after delete — use-after-free"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-416]
-    owasp: [A06:2025]
-    languages: [cpp]
-    patterns:
-      - regex: "delete\\s+(\\w+)\\s*;[^;]*\\1->"
-      - regex: "delete\\[\\]\\s+(\\w+)\\s*;[^;]*\\1\\["
-
-  - id: MEM-UAF-003
-    name: c-no-null-after-free
-    description: "free() called without setting pointer to NULL afterward"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-416]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;(?![^;]*\\1\\s*=\\s*NULL)"
-      - regex: "free\\s*\\(\\s*\\w+\\s*\\)\\s*;\\s*(?:return|\\})"
-
-  - id: MEM-UAF-004
-    name: cpp-raw-pointer-instead-of-smart
-    description: "C++ raw pointer used where smart pointer would prevent UAF"
-    severity: medium
-    confidence: low
-    cwe: [CWE-416]
-    owasp: [A06:2025]
-    languages: [cpp]
-    patterns:
-      - regex: "new\\s+\\w+\\s*\\([^)]*\\)\\s*;(?![^;]*unique_ptr|[^;]*shared_ptr)"
-      - regex: "\\w+\\*\\s+\\w+\\s*=\\s*new\\s+\\w+"
-
-  - id: MEM-UAF-005
-    name: c-double-free
-    description: "Double free — freeing already-freed memory"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-415]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;[^}]*free\\s*\\(\\s*\\1\\s*\\)"
+    - id: MEM-UAF-001
+      name: c-free-then-use
+      description: "Pointer used after free() — use-after-free vulnerability"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-416]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;(?:[^;]*;)*[^;]*\\1\\s*[^=]"
+        - regex: "free\\s*\\(\\s*\\w+\\s*\\)\\s*;[^;]*(?:strlen|strcpy|memcpy|printf)\\s*\\("
+    - id: MEM-UAF-002
+      name: cpp-delete-then-use
+      description: "C++ object used after delete — use-after-free"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-416]
+      owasp: ['A06:2025']
+      languages: [cpp]
+      patterns:
+        - regex: "delete\\s+(\\w+)\\s*;[^;]*\\1->"
+        - regex: "delete\\[\\]\\s+(\\w+)\\s*;[^;]*\\1\\["
+    - id: MEM-UAF-003
+      name: c-no-null-after-free
+      description: "free() called without setting pointer to NULL afterward"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-416]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;"
+        - regex: "free\\s*\\(\\s*\\w+\\s*\\)\\s*;\\s*(?:return|\\})"
+    - id: MEM-UAF-004
+      name: cpp-raw-pointer-instead-of-smart
+      description: "C++ raw pointer used where smart pointer would prevent UAF"
+      severity: medium
+      confidence: low
+      cwe: [CWE-416]
+      owasp: ['A06:2025']
+      languages: [cpp]
+      patterns:
+        - regex: "new\\s+\\w+\\s*\\([^)]*\\)\\s*;"
+        - regex: "\\w+\\*\\s+\\w+\\s*=\\s*new\\s+\\w+"
+    - id: MEM-UAF-005
+      name: c-double-free
+      description: "Double free — freeing already-freed memory"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-415]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "free\\s*\\(\\s*(\\w+)\\s*\\)\\s*;[^}]*free\\s*\\(\\s*\\1\\s*\\)"

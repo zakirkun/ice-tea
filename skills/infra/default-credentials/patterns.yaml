@@ -1,64 +1,60 @@
 rules:
-  - id: INFRA-DC-001
-    name: admin-admin-credentials
-    description: "Hardcoded admin:admin or admin:password default credentials"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [generic, javascript, typescript, python, go, java, php, yaml]
-    patterns:
-      - regex: "(?i)(?:username|user|login)\\s*[=:]\\s*['\"]admin['\"]"
-      - regex: "(?i)(?:password|pass|pwd)\\s*[=:]\\s*['\"](?:admin|password|1234|123456|root|default|changeme|letmein)['\"]"
-      - regex: "(?i)admin:\\s*(?:admin|password|1234|123456)"
-
-  - id: INFRA-DC-002
-    name: database-default-password
-    description: "Database connection using default or empty password"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [generic, javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)(?:DB_PASSWORD|DATABASE_PASSWORD|MYSQL_PASSWORD|POSTGRES_PASSWORD)\\s*=\\s*['\"](?:root|password|mysql|postgres|1234|)['\"]"
-      - regex: "(?i)password\\s*:\\s*['\"](?:root|mysql|postgres|['\"])"
-      - regex: "(?i)MYSQL_ROOT_PASSWORD:\\s*(?:root|mysql|password|1234)"
-
-  - id: INFRA-DC-003
-    name: docker-default-credentials
-    description: "Docker Compose or Dockerfile with default service credentials"
-    severity: high
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "(?i)POSTGRES_PASSWORD:\\s*(?:postgres|password|root|1234|mysecretpassword)"
-      - regex: "(?i)MYSQL_ROOT_PASSWORD:\\s*(?:root|mysql|password)"
-      - regex: "(?i)REDIS_PASSWORD:\\s*(?:redis|password|1234|)"
-
-  - id: INFRA-DC-004
-    name: test-credentials-in-production-code
-    description: "Test or demo credentials hardcoded that may reach production"
-    severity: high
-    confidence: medium
-    cwe: [CWE-798]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?i)(?:password|token|secret)\\s*[=:]\\s*['\"](?:test|demo|sample|example|foo|bar|baz|qwerty|asdf)['\"]"
-      - regex: "(?i)api_key\\s*[=:]\\s*['\"](?:test|demo|fake|sample|example)[_-]?(?:key|token)?['\"]"
-
-  - id: INFRA-DC-005
-    name: empty-password
-    description: "Empty string used as password or secret"
-    severity: critical
-    confidence: high
-    cwe: [CWE-1392]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java, php, yaml]
-    patterns:
-      - regex: "(?i)(?:password|secret|passwd|pwd)\\s*[=:]\\s*['\"]['\"](?!.*env\\.|.*process\\.env|.*os\\.environ)"
-      - regex: "(?i)JWT_SECRET\\s*=\\s*['\"]['\"]"
-      - regex: "(?i)DB_PASS(?:WORD)?\\s*=\\s*$"
+    - id: INFRA-DC-001
+      name: admin-admin-credentials
+      description: "Hardcoded admin:admin or admin:password default credentials"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [generic, javascript, typescript, python, go, java, php, yaml]
+      patterns:
+        - regex: "(?i)(?:username|user|login)\\s*[=:]\\s*['\"]admin['\"]"
+        - regex: "(?i)(?:password|pass|pwd)\\s*[=:]\\s*['\"](?:admin|password|1234|123456|root|default|changeme|letmein)['\"]"
+        - regex: "(?i)admin:\\s*(?:admin|password|1234|123456)"
+    - id: INFRA-DC-002
+      name: database-default-password
+      description: "Database connection using default or empty password"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [generic, javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?i)(?:DB_PASSWORD|DATABASE_PASSWORD|MYSQL_PASSWORD|POSTGRES_PASSWORD)\\s*=\\s*['\"](?:root|password|mysql|postgres|1234|)['\"]"
+        - regex: "(?i)password\\s*:\\s*['\"](?:root|mysql|postgres|['\"])"
+        - regex: "(?i)MYSQL_ROOT_PASSWORD:\\s*(?:root|mysql|password|1234)"
+    - id: INFRA-DC-003
+      name: docker-default-credentials
+      description: "Docker Compose or Dockerfile with default service credentials"
+      severity: high
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "(?i)POSTGRES_PASSWORD:\\s*(?:postgres|password|root|1234|mysecretpassword)"
+        - regex: "(?i)MYSQL_ROOT_PASSWORD:\\s*(?:root|mysql|password)"
+        - regex: "(?i)REDIS_PASSWORD:\\s*(?:redis|password|1234|)"
+    - id: INFRA-DC-004
+      name: test-credentials-in-production-code
+      description: "Test or demo credentials hardcoded that may reach production"
+      severity: high
+      confidence: medium
+      cwe: [CWE-798]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?i)(?:password|token|secret)\\s*[=:]\\s*['\"](?:test|demo|sample|example|foo|bar|baz|qwerty|asdf)['\"]"
+        - regex: "(?i)api_key\\s*[=:]\\s*['\"](?:test|demo|fake|sample|example)[_-]?(?:key|token)?['\"]"
+    - id: INFRA-DC-005
+      name: empty-password
+      description: "Empty string used as password or secret"
+      severity: critical
+      confidence: high
+      cwe: [CWE-1392]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, php, yaml]
+      patterns:
+        - regex: "(?i)(?:password|secret|passwd|pwd)\\s*[=:]\\s*['\"]['\"]"
+        - regex: "(?i)JWT_SECRET\\s*=\\s*['\"]['\"]"
+        - regex: "(?i)DB_PASS(?:WORD)?\\s*=\\s*$"

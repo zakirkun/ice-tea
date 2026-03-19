@@ -1,48 +1,45 @@
 rules:
-  - id: INJ-PDF-001
-    name: wkhtmltopdf-user-html
-    description: "wkhtmltopdf converts HTML containing user input — SSRF/file-read via file://"
-    severity: high
-    confidence: medium
-    cwe: [CWE-79]
-    owasp: [A03:2025]
-    languages: [javascript, typescript, python, php, java]
-    patterns:
-      - regex: "wkhtmltopdf\\s+(?!.*no-local-file-access)"
-      - regex: "exec.*wkhtmltopdf.*(?:req\\.body|request\\.form|\\$_POST)"
-
-  - id: INJ-PDF-002
-    name: puppeteer-pdf-user-html
-    description: "Puppeteer/Playwright PDF generation with user-controlled HTML content"
-    severity: high
-    confidence: medium
-    cwe: [CWE-79]
-    owasp: [A03:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "page\\.setContent\\s*\\([^)]*(?:req\\.body|userInput|html)"
-      - regex: "page\\.goto\\s*\\(['\"]data:text/html.*\\+.*(?:req\\.body|user)"
-
-  - id: INJ-PDF-003
-    name: python-pdf-html-injection
-    description: "Python weasyprint/reportlab with user-controlled HTML"
-    severity: high
-    confidence: medium
-    cwe: [CWE-79]
-    owasp: [A03:2025]
-    languages: [python]
-    patterns:
-      - regex: "HTML\\s*\\(\\s*string\\s*=.*(?:request\\.(?:args|form|json)|user_input)"
-      - regex: "weasyprint.*HTML.*(?:request|user_input)"
-
-  - id: INJ-PDF-004
-    name: ssrf-via-pdf-generator
-    description: "PDF generator may fetch URLs from user input — SSRF risk"
-    severity: high
-    confidence: medium
-    cwe: [CWE-918]
-    owasp: [A10:2025]
-    languages: [javascript, typescript, python, php]
-    patterns:
-      - regex: "<img\\s+src\\s*=\\s*['\"]?\\$_(?:GET|POST)"
-      - regex: "<link\\s+href\\s*=\\s*['\"]?(?:file://|http://169\\.254\\.169\\.254)"
+    - id: INJ-PDF-001
+      name: wkhtmltopdf-user-html
+      description: "wkhtmltopdf converts HTML containing user input — SSRF/file-read via file://"
+      severity: high
+      confidence: medium
+      cwe: [CWE-79]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript, python, php, java]
+      patterns:
+        - regex: "wkhtmltopdf\\s+"
+        - regex: "exec.*wkhtmltopdf.*(?:req\\.body|request\\.form|\\$_POST)"
+    - id: INJ-PDF-002
+      name: puppeteer-pdf-user-html
+      description: "Puppeteer/Playwright PDF generation with user-controlled HTML content"
+      severity: high
+      confidence: medium
+      cwe: [CWE-79]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "page\\.setContent\\s*\\([^)]*(?:req\\.body|userInput|html)"
+        - regex: "page\\.goto\\s*\\(['\"]data:text/html.*\\+.*(?:req\\.body|user)"
+    - id: INJ-PDF-003
+      name: python-pdf-html-injection
+      description: "Python weasyprint/reportlab with user-controlled HTML"
+      severity: high
+      confidence: medium
+      cwe: [CWE-79]
+      owasp: ['A03:2025']
+      languages: [python]
+      patterns:
+        - regex: "HTML\\s*\\(\\s*string\\s*=.*(?:request\\.(?:args|form|json)|user_input)"
+        - regex: "weasyprint.*HTML.*(?:request|user_input)"
+    - id: INJ-PDF-004
+      name: ssrf-via-pdf-generator
+      description: "PDF generator may fetch URLs from user input — SSRF risk"
+      severity: high
+      confidence: medium
+      cwe: [CWE-918]
+      owasp: ['A10:2025']
+      languages: [javascript, typescript, python, php]
+      patterns:
+        - regex: "<img\\s+src\\s*=\\s*['\"]?\\$_(?:GET|POST)"
+        - regex: "<link\\s+href\\s*=\\s*['\"]?(?:file://|http://169\\.254\\.169\\.254)"

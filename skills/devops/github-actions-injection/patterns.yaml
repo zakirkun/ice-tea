@@ -1,58 +1,54 @@
 rules:
-  - id: DEVOPS-GHA-001
-    name: github-actions-event-in-run
-    description: "GitHub Actions interpolates untrusted event data directly in run step"
-    severity: critical
-    confidence: high
-    cwe: [CWE-77]
-    owasp: [A03:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "run:\\s*.*\\$\\{\\{\\s*github\\.event\\.(?:issue|pull_request|comment|discussion)\\.(?:title|body|name)"
-      - regex: "run:\\s*.*\\$\\{\\{\\s*github\\.head_ref"
-
-  - id: DEVOPS-GHA-002
-    name: github-actions-pr-title-injection
-    description: "Pull request title or body interpolated into shell command"
-    severity: critical
-    confidence: high
-    cwe: [CWE-77]
-    owasp: [A03:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "\\$\\{\\{\\s*github\\.event\\.pull_request\\.(?:title|body|head\\.label)"
-      - regex: "\\$\\{\\{\\s*github\\.event\\.review\\.body"
-
-  - id: DEVOPS-GHA-003
-    name: github-actions-no-permissions
-    description: "GitHub Actions workflow without explicit permissions block — may have broad token access"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-732]
-    owasp: [A05:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "on:\\s*(?:\\n\\s+.+)+(?!(?:[\\s\\S]*permissions:))"
-      - regex: "jobs:\\s*[^:]+:(?![\\s\\S]*permissions:)"
-
-  - id: DEVOPS-GHA-004
-    name: github-actions-secret-in-env
-    description: "GitHub Actions passes secret directly as environment variable to external scripts"
-    severity: high
-    confidence: medium
-    cwe: [CWE-312]
-    owasp: [A07:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "env:\\s*\\n(?:\\s+\\w+:\\s*\\$\\{\\{\\s*secrets\\.[^}]+\\}\\}\\s*\\n)+"
-
-  - id: DEVOPS-GHA-005
-    name: github-actions-pin-missing
-    description: "GitHub Actions uses action with mutable tag rather than commit SHA"
-    severity: medium
-    confidence: high
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [yaml]
-    patterns:
-      - regex: "uses:\\s+[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+@(?:main|master|HEAD|v[0-9]+(?:\\.[0-9]+)?)"
+    - id: DEVOPS-GHA-001
+      name: github-actions-event-in-run
+      description: "GitHub Actions interpolates untrusted event data directly in run step"
+      severity: critical
+      confidence: high
+      cwe: [CWE-77]
+      owasp: ['A03:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "run:\\s*.*\\$\\{\\{\\s*github\\.event\\.(?:issue|pull_request|comment|discussion)\\.(?:title|body|name)"
+        - regex: "run:\\s*.*\\$\\{\\{\\s*github\\.head_ref"
+    - id: DEVOPS-GHA-002
+      name: github-actions-pr-title-injection
+      description: "Pull request title or body interpolated into shell command"
+      severity: critical
+      confidence: high
+      cwe: [CWE-77]
+      owasp: ['A03:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "\\$\\{\\{\\s*github\\.event\\.pull_request\\.(?:title|body|head\\.label)"
+        - regex: "\\$\\{\\{\\s*github\\.event\\.review\\.body"
+    - id: DEVOPS-GHA-003
+      name: github-actions-no-permissions
+      description: "GitHub Actions workflow without explicit permissions block — may have broad token access"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-732]
+      owasp: ['A05:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "on:\\s*(?:\\n\\s+.+)+"
+        - regex: "jobs:\\s*[^:]+:"
+    - id: DEVOPS-GHA-004
+      name: github-actions-secret-in-env
+      description: "GitHub Actions passes secret directly as environment variable to external scripts"
+      severity: high
+      confidence: medium
+      cwe: [CWE-312]
+      owasp: ['A07:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "env:\\s*\\n(?:\\s+\\w+:\\s*\\$\\{\\{\\s*secrets\\.[^}]+\\}\\}\\s*\\n)+"
+    - id: DEVOPS-GHA-005
+      name: github-actions-pin-missing
+      description: "GitHub Actions uses action with mutable tag rather than commit SHA"
+      severity: medium
+      confidence: high
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [yaml]
+      patterns:
+        - regex: "uses:\\s+[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+@(?:main|master|HEAD|v[0-9]+(?:\\.[0-9]+)?)"

@@ -1,36 +1,34 @@
 rules:
-  - id: RC-DCL-001
-    name: java-double-check-no-volatile
-    description: "Java double-checked locking without volatile field declaration"
-    severity: high
-    confidence: medium
-    cwe: [CWE-609]
-    owasp: [A06:2025]
-    languages: [java]
-    patterns:
-      - regex: "if\\s*\\(\\s*instance\\s*==\\s*null\\s*\\)\\s*\\{[^}]*synchronized[^}]*if\\s*\\(\\s*instance\\s*==\\s*null\\s*\\)"
-      - regex: "private\\s+static\\s+(?!volatile)\\w+\\s+instance(?![^;]*volatile)"
-
-  - id: RC-DCL-002
-    name: go-lazy-init-no-once
-    description: "Go lazy initialization without sync.Once — race condition"
-    severity: high
-    confidence: medium
-    cwe: [CWE-609]
-    owasp: [A06:2025]
-    languages: [go]
-    patterns:
-      - regex: "if\\s+\\w+\\s*==\\s*nil\\s*\\{[^}]*\\w+\\s*=\\s*New\\w+\\s*\\("
-      - regex: "var\\s+\\w+\\s+\\*\\w+(?![^;]*sync\\.Once)"
-
-  - id: RC-DCL-003
-    name: cpp-singleton-no-call-once
-    description: "C++ singleton without std::call_once — thread safety issue"
-    severity: high
-    confidence: medium
-    cwe: [CWE-609]
-    owasp: [A06:2025]
-    languages: [cpp]
-    patterns:
-      - regex: "static\\s+\\w+\\*\\s+instance(?![^;]*call_once|[^;]*atomic)"
-      - regex: "if\\s*\\(\\s*instance\\s*==\\s*nullptr\\s*\\)\\s*\\{[^}]*instance\\s*=\\s*new"
+    - id: RC-DCL-001
+      name: java-double-check-no-volatile
+      description: "Java double-checked locking without volatile field declaration"
+      severity: high
+      confidence: medium
+      cwe: [CWE-609]
+      owasp: ['A06:2025']
+      languages: [java]
+      patterns:
+        - regex: "if\\s*\\(\\s*instance\\s*==\\s*null\\s*\\)\\s*\\{[^}]*synchronized[^}]*if\\s*\\(\\s*instance\\s*==\\s*null\\s*\\)"
+        - regex: "private\\s+static\\s+\\w+\\s+instance"
+    - id: RC-DCL-002
+      name: go-lazy-init-no-once
+      description: "Go lazy initialization without sync.Once — race condition"
+      severity: high
+      confidence: medium
+      cwe: [CWE-609]
+      owasp: ['A06:2025']
+      languages: [go]
+      patterns:
+        - regex: "if\\s+\\w+\\s*==\\s*nil\\s*\\{[^}]*\\w+\\s*=\\s*New\\w+\\s*\\("
+        - regex: "var\\s+\\w+\\s+\\*\\w+"
+    - id: RC-DCL-003
+      name: cpp-singleton-no-call-once
+      description: "C++ singleton without std::call_once — thread safety issue"
+      severity: high
+      confidence: medium
+      cwe: [CWE-609]
+      owasp: ['A06:2025']
+      languages: [cpp]
+      patterns:
+        - regex: "static\\s+\\w+\\*\\s+instance"
+        - regex: "if\\s*\\(\\s*instance\\s*==\\s*nullptr\\s*\\)\\s*\\{[^}]*instance\\s*=\\s*new"

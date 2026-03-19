@@ -1,34 +1,32 @@
 rules:
-  - id: CRYPTO-DH-001
-    name: dh-key-size-too-small
-    description: "Diffie-Hellman key size less than 2048 bits"
-    severity: high
-    confidence: high
-    cwe: [CWE-326]
-    owasp: [A02:2025]
-    languages: [python, go, java, javascript]
-    patterns:
-      - regex: "(?:DHParameterSpec|generate_parameters|DH\\s*\\(|dh\\.generate_parameters).*(?:512|768|1024)(?![0-9])"
-      - regex: "OpenSSL.*dhparam.*(?:512|768|1024)(?![0-9])"
-
-  - id: CRYPTO-DH-002
-    name: ssl-export-ciphers
-    description: "SSL/TLS export-grade DH cipher suites enabled"
-    severity: critical
-    confidence: high
-    cwe: [CWE-326]
-    owasp: [A02:2025]
-    languages: [python, java, go, javascript]
-    patterns:
-      - regex: "(?i)DHE_EXPORT|DH_EXPORT|EXPORT_DHE|_EXPORT_WITH_DH"
-
-  - id: CRYPTO-DH-003
-    name: static-dh-key-reuse
-    description: "DH parameters generated once and reused — static DH"
-    severity: high
-    confidence: low
-    cwe: [CWE-326]
-    owasp: [A02:2025]
-    languages: [python, go, java]
-    patterns:
-      - regex: "(?:dhparam|dh_params|DHParameters).*=.*load(?!.*per_request|.*new_each)"
+    - id: CRYPTO-DH-001
+      name: dh-key-size-too-small
+      description: "Diffie-Hellman key size less than 2048 bits"
+      severity: high
+      confidence: high
+      cwe: [CWE-326]
+      owasp: ['A02:2025']
+      languages: [python, go, java, javascript]
+      patterns:
+        - regex: "(?:DHParameterSpec|generate_parameters|DH\\s*\\(|dh\\.generate_parameters).*(?:512|768|1024)"
+        - regex: "OpenSSL.*dhparam.*(?:512|768|1024)"
+    - id: CRYPTO-DH-002
+      name: ssl-export-ciphers
+      description: "SSL/TLS export-grade DH cipher suites enabled"
+      severity: critical
+      confidence: high
+      cwe: [CWE-326]
+      owasp: ['A02:2025']
+      languages: [python, java, go, javascript]
+      patterns:
+        - regex: "(?i)DHE_EXPORT|DH_EXPORT|EXPORT_DHE|_EXPORT_WITH_DH"
+    - id: CRYPTO-DH-003
+      name: static-dh-key-reuse
+      description: "DH parameters generated once and reused — static DH"
+      severity: high
+      confidence: low
+      cwe: [CWE-326]
+      owasp: ['A02:2025']
+      languages: [python, go, java]
+      patterns:
+        - regex: "(?:dhparam|dh_params|DHParameters).*=.*load"

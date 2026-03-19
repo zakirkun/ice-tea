@@ -1,47 +1,44 @@
 rules:
-  - id: PRIV-HEALTH-001
-    name: health-data-in-log
-    description: "Health or medical data fields logged"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-359]
-    owasp: [A02:2025]
-    languages: [javascript, typescript, python, go, java]
-    patterns:
-      - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug|warn)).*(?:diagnosis|medication|prescription|health|medical|patient|ssn|insurance)"
-      - regex: "logging\\.(?:info|debug).*(?:diagnosis|medication|patient_id|health_record)"
-
-  - id: PRIV-HEALTH-002
-    name: phi-in-url
-    description: "Patient health information passed as URL parameter"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-359]
-    owasp: [A02:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "\\?(?:patient_id|diagnosis|medication|ssn|health)=[^&\"']+"
-      - regex: "req\\.query\\.(?:patient_id|diagnosis|ssn|health)"
-
-  - id: PRIV-HEALTH-003
-    name: ssn-in-response
-    description: "Social Security Number pattern in HTTP response"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-359]
-    owasp: [A02:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "\\b[0-9]{3}-[0-9]{2}-[0-9]{4}\\b"
-      - regex: "(?:ssn|social_security)\\s*[=:]\\s*['\"][0-9\\-]{9,11}['\"]"
-
-  - id: PRIV-HEALTH-004
-    name: health-data-no-encryption
-    description: "Health record stored without encryption markers"
-    severity: high
-    confidence: low
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [python, go, java, javascript]
-    patterns:
-      - regex: "db\\.(?:save|insert|create).*(?:diagnosis|medication|prescription|health_record)(?![^;]*encrypt|[^;]*cipher)"
+    - id: PRIV-HEALTH-001
+      name: health-data-in-log
+      description: "Health or medical data fields logged"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-359]
+      owasp: ['A02:2025']
+      languages: [javascript, typescript, python, go, java]
+      patterns:
+        - regex: "(?:console\\.log|log(?:ger)?\\.(?:info|debug|warn)).*(?:diagnosis|medication|prescription|health|medical|patient|ssn|insurance)"
+        - regex: "logging\\.(?:info|debug).*(?:diagnosis|medication|patient_id|health_record)"
+    - id: PRIV-HEALTH-002
+      name: phi-in-url
+      description: "Patient health information passed as URL parameter"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-359]
+      owasp: ['A02:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "\\?(?:patient_id|diagnosis|medication|ssn|health)=[^&\"']+"
+        - regex: "req\\.query\\.(?:patient_id|diagnosis|ssn|health)"
+    - id: PRIV-HEALTH-003
+      name: ssn-in-response
+      description: "Social Security Number pattern in HTTP response"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-359]
+      owasp: ['A02:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "\\b[0-9]{3}-[0-9]{2}-[0-9]{4}\\b"
+        - regex: "(?:ssn|social_security)\\s*[=:]\\s*['\"][0-9\\-]{9,11}['\"]"
+    - id: PRIV-HEALTH-004
+      name: health-data-no-encryption
+      description: "Health record stored without encryption markers"
+      severity: high
+      confidence: low
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [python, go, java, javascript]
+      patterns:
+        - regex: "db\\.(?:save|insert|create).*(?:diagnosis|medication|prescription|health_record)"

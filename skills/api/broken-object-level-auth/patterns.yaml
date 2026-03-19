@@ -1,74 +1,69 @@
 rules:
-  - id: API-BOLA-001
-    name: express-findbyid-no-ownership-check
-    description: "Express route uses URL param to findById() without user ownership scope"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-639]
-    owasp: [A01:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "findById\\s*\\(\\s*req\\.params\\.(?:id|userId|\\w+Id)\\s*\\)"
-      - regex: "\\.findOne\\s*\\(\\s*\\{\\s*_id\\s*:\\s*req\\.params\\.\\w+\\s*\\}\\s*\\)"
-      - regex: "\\.findByPk\\s*\\(\\s*req\\.params\\.(?:id|\\w+Id)\\s*\\)"
-
-  - id: API-BOLA-002
-    name: python-get-by-id-no-auth-scope
-    description: "Python API gets object by ID from request without user scope filter"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-639]
-    owasp: [A01:2025]
-    languages: [python]
-    patterns:
-      - regex: "\\.query\\.filter_by\\s*\\(\\s*id\\s*=\\s*(?:request\\.args|kwargs\\[|request\\.view_args)"
-      - regex: "\\.get\\s*\\(\\s*(?:request\\.args\\.get\\(['\"]id['\"]\\)|kwargs\\[.id.\\])"
-      - regex: "get_object_or_404\\s*\\([^,]+,\\s*(?:pk|id)\\s*=\\s*(?!.*user)"
-
-  - id: API-BOLA-003
-    name: go-db-query-by-path-param-only
-    description: "Go API queries DB using only path parameter without user scope"
-    severity: critical
-    confidence: low
-    cwe: [CWE-639]
-    owasp: [A01:2025]
-    languages: [go]
-    patterns:
-      - regex: "db\\.(?:First|Find)\\s*\\(&\\w+,\\s*(?:id|\\w+ID|mux\\.Vars\\(r\\))"
-      - regex: "WHERE\\s+id\\s*=\\s*\\?.*(?!AND\\s+user_id)"
-
-  - id: API-BOLA-004
-    name: java-repository-findbyid-no-user
-    description: "Java Spring repository.findById() using path variable without user check"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-639]
-    owasp: [A01:2025]
-    languages: [java]
-    patterns:
-      - regex: "repository\\.findById\\s*\\(\\s*(?:id|orderId|userId)\\s*\\)(?![^;]*userId|[^;]*principal)"
-      - regex: "@GetMapping.*\\{id\\}.*repository\\.findById(?![^;]*currentUser)"
-
-  - id: API-BOLA-005
-    name: php-direct-id-query
-    description: "PHP API endpoint queries by ID from GET/POST without user authorization check"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-639]
-    owasp: [A01:2025]
-    languages: [php]
-    patterns:
-      - regex: "WHERE\\s+id\\s*=\\s*(?:\\$_GET\\[|\\$_POST\\[|intval\\(\\$_GET)"
-      - regex: "findById\\s*\\(\\s*\\$(?:_GET|_POST)\\s*\\[\\s*['\"]id['\"]"
-
-  - id: API-BOLA-006
-    name: idor-numeric-id-exposure
-    description: "API endpoint exposes sequential numeric IDs in URL (predictable, IDOR risk)"
-    severity: medium
-    confidence: low
-    cwe: [CWE-284]
-    owasp: [A01:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "(?:app|router)\\.(?:get|put|delete)\\s*\\(['\"][^'\"]*/:(?:id|userId|orderId|documentId)['\"]"
-      - regex: "@(?:Get|Put|Delete)Mapping\\(['\"][^'\"]*\\{(?:id|userId|orderId)\\}['\"]\\)"
+    - id: API-BOLA-001
+      name: express-findbyid-no-ownership-check
+      description: "Express route uses URL param to findById() without user ownership scope"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-639]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "findById\\s*\\(\\s*req\\.params\\.(?:id|userId|\\w+Id)\\s*\\)"
+        - regex: "\\.findOne\\s*\\(\\s*\\{\\s*_id\\s*:\\s*req\\.params\\.\\w+\\s*\\}\\s*\\)"
+        - regex: "\\.findByPk\\s*\\(\\s*req\\.params\\.(?:id|\\w+Id)\\s*\\)"
+    - id: API-BOLA-002
+      name: python-get-by-id-no-auth-scope
+      description: "Python API gets object by ID from request without user scope filter"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-639]
+      owasp: ['A01:2025']
+      languages: [python]
+      patterns:
+        - regex: "\\.query\\.filter_by\\s*\\(\\s*id\\s*=\\s*(?:request\\.args|kwargs\\[|request\\.view_args)"
+        - regex: "\\.get\\s*\\(\\s*(?:request\\.args\\.get\\(['\"]id['\"]\\)|kwargs\\[.id.\\])"
+        - regex: "get_object_or_404\\s*\\([^,]+,\\s*(?:pk|id)\\s*=\\s*"
+    - id: API-BOLA-003
+      name: go-db-query-by-path-param-only
+      description: "Go API queries DB using only path parameter without user scope"
+      severity: critical
+      confidence: low
+      cwe: [CWE-639]
+      owasp: ['A01:2025']
+      languages: [go]
+      patterns:
+        - regex: "db\\.(?:First|Find)\\s*\\(&\\w+,\\s*(?:id|\\w+ID|mux\\.Vars\\(r\\))"
+        - regex: "WHERE\\s+id\\s*=\\s*\\?.*"
+    - id: API-BOLA-004
+      name: java-repository-findbyid-no-user
+      description: "Java Spring repository.findById() using path variable without user check"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-639]
+      owasp: ['A01:2025']
+      languages: [java]
+      patterns:
+        - regex: "repository\\.findById\\s*\\(\\s*(?:id|orderId|userId)\\s*\\)"
+        - regex: "@GetMapping.*\\{id\\}.*repository\\.findById"
+    - id: API-BOLA-005
+      name: php-direct-id-query
+      description: "PHP API endpoint queries by ID from GET/POST without user authorization check"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-639]
+      owasp: ['A01:2025']
+      languages: [php]
+      patterns:
+        - regex: "WHERE\\s+id\\s*=\\s*(?:\\$_GET\\[|\\$_POST\\[|intval\\(\\$_GET)"
+        - regex: "findById\\s*\\(\\s*\\$(?:_GET|_POST)\\s*\\[\\s*['\"]id['\"]"
+    - id: API-BOLA-006
+      name: idor-numeric-id-exposure
+      description: "API endpoint exposes sequential numeric IDs in URL (predictable, IDOR risk)"
+      severity: medium
+      confidence: low
+      cwe: [CWE-284]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "(?:app|router)\\.(?:get|put|delete)\\s*\\(['\"][^'\"]*/:(?:id|userId|orderId|documentId)['\"]"
+        - regex: "@(?:Get|Put|Delete)Mapping\\(['\"][^'\"]*\\{(?:id|userId|orderId)\\}['\"]\\)"

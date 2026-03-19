@@ -1,45 +1,42 @@
 rules:
-  - id: MEM-STCK-001
-    name: c-vla-user-size
-    description: "C Variable-Length Array sized from user input — stack overflow"
-    severity: high
-    confidence: medium
-    cwe: [CWE-121]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "int\\s+\\w+\\s*\\[\\s*(?:atoi|atol|strtol)\\s*\\([^)]+\\)\\s*\\]"
-      - regex: "char\\s+\\w+\\s*\\[\\s*(?:strlen|sizeof|atoi)\\s*\\([^)]+\\)\\s*\\]"
-
-  - id: MEM-STCK-002
-    name: alloca-user-size
-    description: "alloca() with user-controlled size — stack overflow"
-    severity: high
-    confidence: high
-    cwe: [CWE-121]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "\\balloca\\s*\\("
-
-  - id: MEM-STCK-003
-    name: recursive-no-depth-limit
-    description: "Recursive function without depth limit on user-controlled data"
-    severity: high
-    confidence: low
-    cwe: [CWE-674]
-    owasp: [A06:2025]
-    languages: [python, java, javascript, go]
-    patterns:
-      - regex: "def\\s+\\w+\\s*\\([^)]*\\):[^:]*\\n(?:[^\\n]*\\n){0,10}[^\\n]*\\w+\\s*\\([^)]*\\)(?![^;\\n]*depth|[^;\\n]*level|[^;\\n]*limit)"
-
-  - id: MEM-STCK-004
-    name: go-recursive-no-limit
-    description: "Go recursive function operating on user-controlled nested data"
-    severity: medium
-    confidence: low
-    cwe: [CWE-674]
-    owasp: [A06:2025]
-    languages: [go]
-    patterns:
-      - regex: "func\\s+\\w+\\s*\\([^)]*interface\\{\\}[^)]*\\)(?:[^{]*\\{[^}]*){0,5}[^}]*\\w+\\s*\\([^)]*\\)(?![^;]*depth|[^;]*level)"
+    - id: MEM-STCK-001
+      name: c-vla-user-size
+      description: "C Variable-Length Array sized from user input — stack overflow"
+      severity: high
+      confidence: medium
+      cwe: [CWE-121]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "int\\s+\\w+\\s*\\[\\s*(?:atoi|atol|strtol)\\s*\\([^)]+\\)\\s*\\]"
+        - regex: "char\\s+\\w+\\s*\\[\\s*(?:strlen|sizeof|atoi)\\s*\\([^)]+\\)\\s*\\]"
+    - id: MEM-STCK-002
+      name: alloca-user-size
+      description: "alloca() with user-controlled size — stack overflow"
+      severity: high
+      confidence: high
+      cwe: [CWE-121]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "\\balloca\\s*\\("
+    - id: MEM-STCK-003
+      name: recursive-no-depth-limit
+      description: "Recursive function without depth limit on user-controlled data"
+      severity: high
+      confidence: low
+      cwe: [CWE-674]
+      owasp: ['A06:2025']
+      languages: [python, java, javascript, go]
+      patterns:
+        - regex: "def\\s+\\w+\\s*\\([^)]*\\):[^:]*\\n(?:[^\\n]*\\n){0,10}[^\\n]*\\w+\\s*\\([^)]*\\)"
+    - id: MEM-STCK-004
+      name: go-recursive-no-limit
+      description: "Go recursive function operating on user-controlled nested data"
+      severity: medium
+      confidence: low
+      cwe: [CWE-674]
+      owasp: ['A06:2025']
+      languages: [go]
+      patterns:
+        - regex: "func\\s+\\w+\\s*\\([^)]*interface\\{\\}[^)]*\\)(?:[^{]*\\{[^}]*){0,5}[^}]*\\w+\\s*\\([^)]*\\)"

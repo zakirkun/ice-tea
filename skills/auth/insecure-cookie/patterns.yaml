@@ -1,95 +1,88 @@
 rules:
-  - id: AUTH-CK-001
-    name: go-cookie-missing-secure
-    description: "Go http.Cookie set without Secure flag"
-    severity: medium
-    confidence: high
-    cwe: [CWE-614]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "&http\\.Cookie\\{[^}]*(?!Secure:\\s*true)[^}]*\\}"
-      - regex: "http\\.Cookie\\{[^}]*Name:\\s*['\"]session['\"][^}]*\\}"
-
-  - id: AUTH-CK-002
-    name: go-cookie-missing-httponly
-    description: "Go http.Cookie set without HttpOnly flag"
-    severity: high
-    confidence: high
-    cwe: [CWE-1004]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "&http\\.Cookie\\{[^}]*(?!HttpOnly:\\s*true)[^}]*\\}"
-
-  - id: AUTH-CK-003
-    name: php-setcookie-no-flags
-    description: "PHP setcookie() called without secure/httponly flags"
-    severity: medium
-    confidence: high
-    cwe: [CWE-614]
-    owasp: [A05:2025]
-    languages: [php]
-    patterns:
-      - regex: "setcookie\\s*\\([^)]{0,200}\\)"
-      - regex: "setcookie\\s*\\(\\s*['\"][^'\"]+['\"]\\s*,\\s*[^,)]+\\s*(?:,\\s*[^,)]+\\s*)?(?:,\\s*[^,)]+\\s*)?(?:,\\s*[^,)]+\\s*)?(?:,\\s*false\\b|\\))"
-
-  - id: AUTH-CK-004
-    name: express-cookie-no-httponly
-    description: "Express.js res.cookie() called without httpOnly option"
-    severity: high
-    confidence: medium
-    cwe: [CWE-1004]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "res\\.cookie\\s*\\([^)]*(?!httpOnly\\s*:\\s*true)[^)]*\\)"
-      - regex: "res\\.cookie\\s*\\(\\s*['\"][^'\"]+['\"]\\s*,\\s*[^,)]+\\s*\\)"
-
-  - id: AUTH-CK-005
-    name: express-cookie-no-secure
-    description: "Express.js session cookie without secure flag"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-614]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "cookie\\s*:\\s*\\{[^}]*(?!secure\\s*:\\s*true)[^}]*\\}"
-      - regex: "session\\(\\s*\\{[^}]*cookie\\s*:\\s*\\{[^}]*\\}[^}]*\\}\\s*\\)"
-
-  - id: AUTH-CK-006
-    name: python-response-cookie-no-flags
-    description: "Python Flask/Django response.set_cookie() without secure/httponly"
-    severity: medium
-    confidence: high
-    cwe: [CWE-614]
-    owasp: [A05:2025]
-    languages: [python]
-    patterns:
-      - regex: "set_cookie\\s*\\([^)]*(?!secure\\s*=\\s*True)[^)]*\\)"
-      - regex: "set_cookie\\s*\\([^)]*(?!httponly\\s*=\\s*True)[^)]*\\)"
-
-  - id: AUTH-CK-007
-    name: java-cookie-no-httponly
-    description: "Java Cookie created without setHttpOnly(true)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-1004]
-    owasp: [A05:2025]
-    languages: [java]
-    patterns:
-      - regex: "new\\s+Cookie\\s*\\([^)]+\\)"
-      - regex: "cookie\\.setHttpOnly\\(false\\)"
-
-  - id: AUTH-CK-008
-    name: samesite-none-without-secure
-    description: "SameSite=None cookie without Secure flag is rejected by modern browsers and insecure"
-    severity: medium
-    confidence: high
-    cwe: [CWE-352]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, php, python, go, java, ruby]
-    patterns:
-      - regex: "(?i)SameSite\\s*=\\s*None(?![^\\n]*Secure)"
-      - regex: "(?i)samesite\\s*:\\s*['\"]none['\"]"
+    - id: AUTH-CK-001
+      name: go-cookie-missing-secure
+      description: "Go http.Cookie set without Secure flag"
+      severity: medium
+      confidence: high
+      cwe: [CWE-614]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "&http\\.Cookie\\{[^}]*[^}]*\\}"
+        - regex: "http\\.Cookie\\{[^}]*Name:\\s*['\"]session['\"][^}]*\\}"
+    - id: AUTH-CK-002
+      name: go-cookie-missing-httponly
+      description: "Go http.Cookie set without HttpOnly flag"
+      severity: high
+      confidence: high
+      cwe: [CWE-1004]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "&http\\.Cookie\\{[^}]*[^}]*\\}"
+    - id: AUTH-CK-003
+      name: php-setcookie-no-flags
+      description: "PHP setcookie() called without secure/httponly flags"
+      severity: medium
+      confidence: high
+      cwe: [CWE-614]
+      owasp: ['A05:2025']
+      languages: [php]
+      patterns:
+        - regex: "setcookie\\s*\\([^)]{0,200}\\)"
+        - regex: "setcookie\\s*\\(\\s*['\"][^'\"]+['\"]\\s*,\\s*[^,)]+\\s*(?:,\\s*[^,)]+\\s*)?(?:,\\s*[^,)]+\\s*)?(?:,\\s*[^,)]+\\s*)?(?:,\\s*false\\b|\\))"
+    - id: AUTH-CK-004
+      name: express-cookie-no-httponly
+      description: "Express.js res.cookie() called without httpOnly option"
+      severity: high
+      confidence: medium
+      cwe: [CWE-1004]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "res\\.cookie\\s*\\([^)]*[^)]*\\)"
+        - regex: "res\\.cookie\\s*\\(\\s*['\"][^'\"]+['\"]\\s*,\\s*[^,)]+\\s*\\)"
+    - id: AUTH-CK-005
+      name: express-cookie-no-secure
+      description: "Express.js session cookie without secure flag"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-614]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "cookie\\s*:\\s*\\{[^}]*[^}]*\\}"
+        - regex: "session\\(\\s*\\{[^}]*cookie\\s*:\\s*\\{[^}]*\\}[^}]*\\}\\s*\\)"
+    - id: AUTH-CK-006
+      name: python-response-cookie-no-flags
+      description: "Python Flask/Django response.set_cookie() without secure/httponly"
+      severity: medium
+      confidence: high
+      cwe: [CWE-614]
+      owasp: ['A05:2025']
+      languages: [python]
+      patterns:
+        - regex: "set_cookie\\s*\\([^)]*[^)]*\\)"
+        - regex: "set_cookie\\s*\\([^)]*[^)]*\\)"
+    - id: AUTH-CK-007
+      name: java-cookie-no-httponly
+      description: "Java Cookie created without setHttpOnly(true)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-1004]
+      owasp: ['A05:2025']
+      languages: [java]
+      patterns:
+        - regex: "new\\s+Cookie\\s*\\([^)]+\\)"
+        - regex: "cookie\\.setHttpOnly\\(false\\)"
+    - id: AUTH-CK-008
+      name: samesite-none-without-secure
+      description: "SameSite=None cookie without Secure flag is rejected by modern browsers and insecure"
+      severity: medium
+      confidence: high
+      cwe: [CWE-352]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, php, python, go, java, ruby]
+      patterns:
+        - regex: "(?i)SameSite\\s*=\\s*None"
+        - regex: "(?i)samesite\\s*:\\s*['\"]none['\"]"

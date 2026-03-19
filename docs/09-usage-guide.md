@@ -595,6 +595,11 @@ xcode-select --install
 | Rust | `.rs` | Tree-sitter |
 | C | `.c`, `.h` | Tree-sitter |
 | C++ | `.cpp`, `.cc`, `.cxx` | Tree-sitter |
+| Dart (Flutter) | `.dart` | Text (regex) |
+| Kotlin | `.kt`, `.kts` | Tree-sitter |
+| Zig | `.zig` | Text (regex) |
+| Perl | `.pl`, `.pm` | Text (regex) |
+| Elixir | `.ex`, `.exs` | Tree-sitter |
 | YAML | `.yaml`, `.yml` | Regex |
 | Generic | Any | Regex-only |
 

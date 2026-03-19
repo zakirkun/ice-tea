@@ -1,75 +1,70 @@
 rules:
-  - id: API-GQL-001
-    name: graphql-introspection-enabled
-    description: "GraphQL introspection enabled in production (reveals full schema)"
-    severity: high
-    confidence: high
-    cwe: [CWE-200]
-    owasp: [A08:2025]
-    languages: [javascript, typescript, python, java]
-    patterns:
-      - regex: "introspection\\s*:\\s*true"
-      - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*(?!introspection\\s*:\\s*false)"
-      - regex: "graphql\\([^)]*,\\s*null\\s*,\\s*\\{[^}]*(?!introspection\\s*:\\s*false)"
-
-  - id: API-GQL-002
-    name: graphql-no-depth-limit
-    description: "GraphQL server without query depth limiting (DoS via nested queries)"
-    severity: high
-    confidence: low
-    cwe: [CWE-400]
-    owasp: [A08:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*(?!depthLimit|validationRules)"
-      - regex: "new\\s+GraphQLSchema\\s*\\(\\s*\\{[^}]*(?!depthLimit)"
-      - regex: "graphene\\.Schema\\s*\\([^)]*\\)(?![^;]*depth_limit)"
-
-  - id: API-GQL-003
-    name: graphql-playground-production
-    description: "GraphQL Playground or GraphiQL enabled in production"
-    severity: medium
-    confidence: high
-    cwe: [CWE-200]
-    owasp: [A08:2025]
-    languages: [javascript, typescript, python, java]
-    patterns:
-      - regex: "playground\\s*:\\s*true"
-      - regex: "graphiql\\s*:\\s*true"
-      - regex: "GraphiQL.*enabled(?!.*false)"
-
-  - id: API-GQL-004
-    name: graphql-no-auth-resolver
-    description: "GraphQL resolver accessing data without authentication check"
-    severity: high
-    confidence: low
-    cwe: [CWE-862]
-    owasp: [A01:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "resolve\\s*:\\s*async\\s*\\([^)]*\\)\\s*=>\\s*\\{(?![^}]*(?:context\\.user|auth|token|req\\.user))"
-      - regex: "resolver\\s*=\\s*async\\s*\\([^)]*,\\s*\\{[^}]*context[^}]*\\}\\s*\\)\\s*=>(?![^;]*context\\.user)"
-
-  - id: API-GQL-005
-    name: graphql-no-query-complexity
-    description: "GraphQL schema without query complexity validation"
-    severity: medium
-    confidence: low
-    cwe: [CWE-400]
-    owasp: [A08:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*schema[^}]*\\}\\s*\\)(?![^;]*complexity)"
-      - regex: "new\\s+ApolloServer\\s*\\((?![^)]*(?:validationRules|complexity))"
-
-  - id: API-GQL-006
-    name: graphql-batch-no-limit
-    description: "GraphQL endpoint allowing unlimited batched queries"
-    severity: high
-    confidence: medium
-    cwe: [CWE-400]
-    owasp: [A08:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "allowBatchedHttpRequests\\s*:\\s*true"
-      - regex: "Array\\.isArray\\s*\\(\\s*body\\s*\\)(?![^;]*batch(?:Limit|Max|Size))"
+    - id: API-GQL-001
+      name: graphql-introspection-enabled
+      description: "GraphQL introspection enabled in production (reveals full schema)"
+      severity: high
+      confidence: high
+      cwe: [CWE-200]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript, python, java]
+      patterns:
+        - regex: "introspection\\s*:\\s*true"
+        - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*"
+        - regex: "graphql\\([^)]*,\\s*null\\s*,\\s*\\{[^}]*"
+    - id: API-GQL-002
+      name: graphql-no-depth-limit
+      description: "GraphQL server without query depth limiting (DoS via nested queries)"
+      severity: high
+      confidence: low
+      cwe: [CWE-400]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*"
+        - regex: "new\\s+GraphQLSchema\\s*\\(\\s*\\{[^}]*"
+        - regex: "graphene\\.Schema\\s*\\([^)]*\\)"
+    - id: API-GQL-003
+      name: graphql-playground-production
+      description: "GraphQL Playground or GraphiQL enabled in production"
+      severity: medium
+      confidence: high
+      cwe: [CWE-200]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript, python, java]
+      patterns:
+        - regex: "playground\\s*:\\s*true"
+        - regex: "graphiql\\s*:\\s*true"
+        - regex: "GraphiQL.*enabled"
+    - id: API-GQL-004
+      name: graphql-no-auth-resolver
+      description: "GraphQL resolver accessing data without authentication check"
+      severity: high
+      confidence: low
+      cwe: [CWE-862]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "resolve\\s*:\\s*async\\s*\\([^)]*\\)\\s*=>\\s*\\{"
+        - regex: "resolver\\s*=\\s*async\\s*\\([^)]*,\\s*\\{[^}]*context[^}]*\\}\\s*\\)\\s*=>"
+    - id: API-GQL-005
+      name: graphql-no-query-complexity
+      description: "GraphQL schema without query complexity validation"
+      severity: medium
+      confidence: low
+      cwe: [CWE-400]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "ApolloServer\\s*\\(\\s*\\{[^}]*schema[^}]*\\}\\s*\\)"
+        - regex: "new\\s+ApolloServer\\s*\\("
+    - id: API-GQL-006
+      name: graphql-batch-no-limit
+      description: "GraphQL endpoint allowing unlimited batched queries"
+      severity: high
+      confidence: medium
+      cwe: [CWE-400]
+      owasp: ['A08:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "allowBatchedHttpRequests\\s*:\\s*true"
+        - regex: "Array\\.isArray\\s*\\(\\s*body\\s*\\)"

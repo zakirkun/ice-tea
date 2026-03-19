@@ -1,24 +1,23 @@
 rules:
-  - id: RC-SING-001
-    name: java-lazy-init-not-synchronized
-    description: "Java lazy singleton initialization without synchronization"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-362]
-    owasp: [A06:2025]
-    languages: [java]
-    patterns:
-      - regex: "public\\s+static\\s+\\w+\\s+getInstance\\s*\\(\\s*\\)(?![^{]*synchronized)"
-      - regex: "if\\s*\\(\\s*\\w+\\s*==\\s*null\\s*\\)\\s*\\{[^}]*\\w+\\s*=\\s*new\\s+\\w+\\s*\\(\\s*\\)(?![^}]*synchronized)"
-
-  - id: RC-SING-002
-    name: go-global-map-no-mutex
-    description: "Go global map written without mutex — race condition"
-    severity: high
-    confidence: medium
-    cwe: [CWE-362]
-    owasp: [A06:2025]
-    languages: [go]
-    patterns:
-      - regex: "var\\s+\\w+\\s*=\\s*make\\(map\\["
-      - regex: "(?:var|:=)\\s+\\w+\\s*map\\[\\w+\\]\\w+(?![^;\\n]*sync\\.Mutex|[^;\\n]*sync\\.RWMutex)"
+    - id: RC-SING-001
+      name: java-lazy-init-not-synchronized
+      description: "Java lazy singleton initialization without synchronization"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-362]
+      owasp: ['A06:2025']
+      languages: [java]
+      patterns:
+        - regex: "public\\s+static\\s+\\w+\\s+getInstance\\s*\\(\\s*\\)"
+        - regex: "if\\s*\\(\\s*\\w+\\s*==\\s*null\\s*\\)\\s*\\{[^}]*\\w+\\s*=\\s*new\\s+\\w+\\s*\\(\\s*\\)"
+    - id: RC-SING-002
+      name: go-global-map-no-mutex
+      description: "Go global map written without mutex — race condition"
+      severity: high
+      confidence: medium
+      cwe: [CWE-362]
+      owasp: ['A06:2025']
+      languages: [go]
+      patterns:
+        - regex: "var\\s+\\w+\\s*=\\s*make\\(map\\["
+        - regex: "(?:var|:=)\\s+\\w+\\s*map\\[\\w+\\]\\w+"

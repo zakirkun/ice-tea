@@ -1,61 +1,57 @@
 rules:
-  - id: DB-MONGO-001
-    name: mongodb-connect-no-auth
-    description: "MongoDB connection string without username/password"
-    severity: critical
-    confidence: high
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go, java]
-    patterns:
-      - regex: "['\"]mongodb://[^:@'\"]+:[0-9]+[^'\"]*['\"](?![^;]*auth)"
-      - regex: "MongoClient\\.connect\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
-      - regex: "pymongo\\.MongoClient\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
-
-  - id: DB-MONGO-002
-    name: mongodb-config-no-auth
-    description: "MongoDB config with authorization disabled"
-    severity: critical
-    confidence: high
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "authorization:\\s*disabled"
-      - regex: "security:\\s*\\{[^}]*\\}(?![^}]*authorization)"
-
-  - id: DB-MONGO-003
-    name: mongoose-connect-no-auth
-    description: "Mongoose connection without authentication options"
-    severity: high
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "mongoose\\.connect\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
-      - regex: "mongoose\\.connect\\s*\\([^)]*(?!user|pass|auth)[^)]*\\)"
-
-  - id: DB-MONGO-004
-    name: go-mongo-no-credential
-    description: "Go MongoDB driver without credential options"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "options\\.Client\\(\\)\\.ApplyURI\\(['\"]mongodb://[^:@'\"]+['\"]"
-      - regex: "mongo\\.Connect\\s*\\([^)]*\\)(?![^;]*Credential)"
-
-  - id: DB-MONGO-005
-    name: mongodb-localhost-no-auth
-    description: "MongoDB on localhost without auth (still insecure on shared hosts)"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-306]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "['\"]mongodb://localhost(?::[0-9]+)?(?:/[^'\"]*)?['\"]"
-      - regex: "['\"]mongodb://127\\.0\\.0\\.1(?::[0-9]+)?(?:/[^'\"]*)?['\"]"
+    - id: DB-MONGO-001
+      name: mongodb-connect-no-auth
+      description: "MongoDB connection string without username/password"
+      severity: critical
+      confidence: high
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go, java]
+      patterns:
+        - regex: "['\"]mongodb://[^:@'\"]+:[0-9]+[^'\"]*['\"]"
+        - regex: "MongoClient\\.connect\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
+        - regex: "pymongo\\.MongoClient\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
+    - id: DB-MONGO-002
+      name: mongodb-config-no-auth
+      description: "MongoDB config with authorization disabled"
+      severity: critical
+      confidence: high
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "authorization:\\s*disabled"
+        - regex: "security:\\s*\\{[^}]*\\}"
+    - id: DB-MONGO-003
+      name: mongoose-connect-no-auth
+      description: "Mongoose connection without authentication options"
+      severity: high
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "mongoose\\.connect\\s*\\(['\"]mongodb://[^:@'\"]+['\"]"
+        - regex: "mongoose\\.connect\\s*\\([^)]*[^)]*\\)"
+    - id: DB-MONGO-004
+      name: go-mongo-no-credential
+      description: "Go MongoDB driver without credential options"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "options\\.Client\\(\\)\\.ApplyURI\\(['\"]mongodb://[^:@'\"]+['\"]"
+        - regex: "mongo\\.Connect\\s*\\([^)]*\\)"
+    - id: DB-MONGO-005
+      name: mongodb-localhost-no-auth
+      description: "MongoDB on localhost without auth (still insecure on shared hosts)"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-306]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, go]
+      patterns:
+        - regex: "['\"]mongodb://localhost(?::[0-9]+)?(?:/[^'\"]*)?['\"]"
+        - regex: "['\"]mongodb://127\\.0\\.0\\.1(?::[0-9]+)?(?:/[^'\"]*)?['\"]"

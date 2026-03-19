@@ -1,34 +1,32 @@
 rules:
-  - id: AUTH-ENUM-001
-    name: login-user-not-found-message
-    description: "Login response reveals whether username exists — account enumeration"
-    severity: medium
-    confidence: high
-    cwe: [CWE-204]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "['\"](?:User not found|Username not found|Account not found|No user with|Email not registered)['\"]"
-      - regex: "['\"](?:Incorrect password|Wrong password|Invalid password)['\"]"
-
-  - id: AUTH-ENUM-002
-    name: registration-email-exists-message
-    description: "Registration reveals email already exists — account enumeration"
-    severity: medium
-    confidence: high
-    cwe: [CWE-204]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python, go, java, php]
-    patterns:
-      - regex: "['\"](?:Email already exists|Email already registered|Account already exists|Username taken)['\"]"
-
-  - id: AUTH-ENUM-003
-    name: timing-difference-user-lookup
-    description: "User lookup has timing difference between found and not-found paths"
-    severity: medium
-    confidence: low
-    cwe: [CWE-208]
-    owasp: [A07:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "if\\s*\\(\\s*!user\\s*\\)\\s*\\{[^}]*return(?![^}]*bcrypt\\.compare|[^}]*hashPassword)"
+    - id: AUTH-ENUM-001
+      name: login-user-not-found-message
+      description: "Login response reveals whether username exists — account enumeration"
+      severity: medium
+      confidence: high
+      cwe: [CWE-204]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "['\"](?:User not found|Username not found|Account not found|No user with|Email not registered)['\"]"
+        - regex: "['\"](?:Incorrect password|Wrong password|Invalid password)['\"]"
+    - id: AUTH-ENUM-002
+      name: registration-email-exists-message
+      description: "Registration reveals email already exists — account enumeration"
+      severity: medium
+      confidence: high
+      cwe: [CWE-204]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python, go, java, php]
+      patterns:
+        - regex: "['\"](?:Email already exists|Email already registered|Account already exists|Username taken)['\"]"
+    - id: AUTH-ENUM-003
+      name: timing-difference-user-lookup
+      description: "User lookup has timing difference between found and not-found paths"
+      severity: medium
+      confidence: low
+      cwe: [CWE-208]
+      owasp: ['A07:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "if\\s*\\(\\s*!user\\s*\\)\\s*\\{[^}]*return"

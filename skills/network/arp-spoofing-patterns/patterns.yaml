@@ -1,36 +1,34 @@
 rules:
-  - id: NET-ARP-001
-    name: raw-socket-arp-packet
-    description: "Raw socket used to send or receive ARP packets — potential ARP manipulation"
-    severity: high
-    confidence: medium
-    cwe: [CWE-923]
-    owasp: [A02:2025]
-    languages: [python]
-    patterns:
-      - regex: "socket\\.socket\\s*\\(\\s*socket\\.AF_PACKET"
-      - regex: "sendto.*\\(.*ETH_P_ARP|ARP.*socket\\.AF_PACKET"
-
-  - id: NET-ARP-002
-    name: scapy-arp-send
-    description: "Scapy sending ARP packets — potential ARP spoofing tool"
-    severity: high
-    confidence: high
-    cwe: [CWE-923]
-    owasp: [A02:2025]
-    languages: [python]
-    patterns:
-      - regex: "from\\s+scapy.*import.*ARP"
-      - regex: "send\\s*\\(.*ARP\\s*\\(.*op\\s*=\\s*['\"]?(?:2|is-at)['\"]?"
-
-  - id: NET-ARP-003
-    name: http-no-certificate-validation
-    description: "HTTP client without TLS — fully vulnerable to ARP MITM attacks"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-923]
-    owasp: [A02:2025]
-    languages: [python, javascript]
-    patterns:
-      - regex: "requests\\.get\\s*\\(['\"]http://(?!localhost|127\\.0\\.0\\.1)"
-      - regex: "axios\\.get\\s*\\(['\"]http://(?!localhost|127\\.0\\.0\\.1)"
+    - id: NET-ARP-001
+      name: raw-socket-arp-packet
+      description: "Raw socket used to send or receive ARP packets — potential ARP manipulation"
+      severity: high
+      confidence: medium
+      cwe: [CWE-923]
+      owasp: ['A02:2025']
+      languages: [python]
+      patterns:
+        - regex: "socket\\.socket\\s*\\(\\s*socket\\.AF_PACKET"
+        - regex: "sendto.*\\(.*ETH_P_ARP|ARP.*socket\\.AF_PACKET"
+    - id: NET-ARP-002
+      name: scapy-arp-send
+      description: "Scapy sending ARP packets — potential ARP spoofing tool"
+      severity: high
+      confidence: high
+      cwe: [CWE-923]
+      owasp: ['A02:2025']
+      languages: [python]
+      patterns:
+        - regex: "from\\s+scapy.*import.*ARP"
+        - regex: "send\\s*\\(.*ARP\\s*\\(.*op\\s*=\\s*['\"]?(?:2|is-at)['\"]?"
+    - id: NET-ARP-003
+      name: http-no-certificate-validation
+      description: "HTTP client without TLS — fully vulnerable to ARP MITM attacks"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-923]
+      owasp: ['A02:2025']
+      languages: [python, javascript]
+      patterns:
+        - regex: "requests\\.get\\s*\\(['\"]http://"
+        - regex: "axios\\.get\\s*\\(['\"]http://"

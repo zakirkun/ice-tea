@@ -1,35 +1,33 @@
 rules:
-  - id: API-BVER-001
-    name: v1-route-no-auth-v2-has-auth
-    description: "API v1 route defined without auth middleware while v2 has it"
-    severity: high
-    confidence: low
-    cwe: [CWE-1059]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "(?:app|router)\\.(?:get|post|put|delete)\\s*\\(['\"][^'\"]*v1[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\(req)"
-      - regex: "prefix\\s*[=:]\\s*['\"](?:/api)?/v1['\"](?![^;\\n]*auth|[^;\\n]*jwt|[^;\\n]*authenticate)"
-
-  - id: API-BVER-002
-    name: deprecated-endpoint-no-removal
-    description: "Deprecated API endpoint still accessible"
-    severity: medium
-    confidence: high
-    cwe: [CWE-1059]
-    owasp: [A09:2025]
-    languages: [javascript, typescript, python, java]
-    patterns:
-      - regex: "@deprecated.*\\n.*@(?:GetMapping|PostMapping|app\\.route)"
-      - regex "(?:// DEPRECATED|# deprecated|@Deprecated).*\\n.*(?:app|router)\\.(?:get|post)"
-
-  - id: API-BVER-003
-    name: multiple-version-different-security
-    description: "Multiple API version routes with inconsistent security middleware"
-    severity: high
-    confidence: low
-    cwe: [CWE-1059]
-    owasp: [A09:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "router\\.use\\s*\\(['\"][/]?v1['\"]\\s*,\\s*\\w+Router\\s*\\)(?![^;]*auth|[^;]*jwt)"
+    - id: API-BVER-001
+      name: v1-route-no-auth-v2-has-auth
+      description: "API v1 route defined without auth middleware while v2 has it"
+      severity: high
+      confidence: low
+      cwe: [CWE-1059]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, go]
+      patterns:
+        - regex: "(?:app|router)\\.(?:get|post|put|delete)\\s*\\(['\"][^'\"]*v1[^'\"]*['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\(req)"
+        - regex: "prefix\\s*[=:]\\s*['\"](?:/api)?/v1['\"]"
+    - id: API-BVER-002
+      name: deprecated-endpoint-no-removal
+      description: "Deprecated API endpoint still accessible"
+      severity: medium
+      confidence: high
+      cwe: [CWE-1059]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript, python, java]
+      patterns:
+        - regex: "@deprecated.*\\n.*@(?:GetMapping|PostMapping|app\\.route)"
+        - regex "(?:// DEPRECATED|# deprecated|@Deprecated).*\\n.*(?:app|router)\\.(?:get|post)"
+    - id: API-BVER-003
+      name: multiple-version-different-security
+      description: "Multiple API version routes with inconsistent security middleware"
+      severity: high
+      confidence: low
+      cwe: [CWE-1059]
+      owasp: ['A09:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "router\\.use\\s*\\(['\"][/]?v1['\"]\\s*,\\s*\\w+Router\\s*\\)"

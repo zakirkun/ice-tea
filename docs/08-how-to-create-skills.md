@@ -130,7 +130,7 @@ http.SetCookie(w, &http.Cookie{
 ### Supported Language Identifiers
 
 ```
-go, javascript, typescript, python, java, php, ruby, rust, c, cpp, yaml, generic
+go, javascript, typescript, python, java, php, ruby, rust, c, cpp, yaml, dart, kotlin, zig, perl, elixir, generic
 ```
 
 Use `generic` for patterns (regex-only) that apply to any file type.

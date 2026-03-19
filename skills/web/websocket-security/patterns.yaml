@@ -1,62 +1,58 @@
 rules:
-  - id: WEB-WS-001
-    name: websocket-no-origin-check
-    description: "WebSocket server upgrade handler without Origin header validation"
-    severity: high
-    confidence: medium
-    cwe: [CWE-345]
-    owasp: [A01:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "new\\s+WebSocket\\.Server\\s*\\((?![^)]*verifyClient)"
-      - regex: "wss?\\.on\\s*\\(\\s*['\"]connection['\"](?![^)]*origin)"
-      - regex: "WebSocketServer\\s*\\(\\s*\\{[^}]*(?!verifyClient)[^}]*\\}\\s*\\)"
-
-  - id: WEB-WS-002
-    name: websocket-no-auth
-    description: "WebSocket connection handler does not verify authentication"
-    severity: high
-    confidence: low
-    cwe: [CWE-284]
-    owasp: [A01:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "ws\\.on\\s*\\(\\s*['\"]message['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
-      - regex: "socket\\.on\\s*\\(\\s*['\"](?:message|data)['\"](?![^}]*(?:session|token|auth|user))"
-
-  - id: WEB-WS-003
-    name: websocket-message-broadcast-no-sanitize
-    description: "WebSocket message broadcast without sanitization (XSS/injection risk)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-79]
-    owasp: [A03:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "wss?\\.clients\\.forEach.*\\.send\\s*\\(\\s*(?:message|data|msg)\\s*\\)"
-      - regex: "socket\\.broadcast\\.emit\\s*\\([^,]+,\\s*(?:message|data|msg)\\s*\\)"
-
-  - id: WEB-WS-004
-    name: python-websocket-no-origin
-    description: "Python websockets/aiohttp WebSocket without origin check"
-    severity: high
-    confidence: medium
-    cwe: [CWE-345]
-    owasp: [A01:2025]
-    languages: [python]
-    patterns:
-      - regex: "async\\s+def\\s+\\w+\\s*\\(\\s*websocket\\s*(?:,\\s*path)?\\s*\\)(?![^:]*origin)"
-      - regex: "websocket\\.accept\\s*\\(\\s*\\)(?![^\\n]*origin)"
-
-  - id: WEB-WS-005
-    name: go-websocket-no-origin-check
-    description: "Go gorilla/websocket Upgrader without CheckOrigin function"
-    severity: high
-    confidence: high
-    cwe: [CWE-345]
-    owasp: [A01:2025]
-    languages: [go]
-    patterns:
-      - regex: "websocket\\.Upgrader\\s*\\{[^}]*(?!CheckOrigin)[^}]*\\}"
-      - regex: "Upgrader\\s*\\{\\s*\\}"
-      - regex: "CheckOrigin:\\s*func\\s*\\(r\\s*\\*http\\.Request\\)\\s*bool\\s*\\{\\s*return\\s*true\\s*\\}"
+    - id: WEB-WS-001
+      name: websocket-no-origin-check
+      description: "WebSocket server upgrade handler without Origin header validation"
+      severity: high
+      confidence: medium
+      cwe: [CWE-345]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "new\\s+WebSocket\\.Server\\s*\\("
+        - regex: "wss?\\.on\\s*\\(\\s*['\"]connection['\"]"
+        - regex: "WebSocketServer\\s*\\(\\s*\\{[^}]*[^}]*\\}\\s*\\)"
+    - id: WEB-WS-002
+      name: websocket-no-auth
+      description: "WebSocket connection handler does not verify authentication"
+      severity: high
+      confidence: low
+      cwe: [CWE-284]
+      owasp: ['A01:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "ws\\.on\\s*\\(\\s*['\"]message['\"]\\s*,\\s*(?:async\\s*)?(?:function|\\()"
+        - regex: "socket\\.on\\s*\\(\\s*['\"](?:message|data)['\"]"
+    - id: WEB-WS-003
+      name: websocket-message-broadcast-no-sanitize
+      description: "WebSocket message broadcast without sanitization (XSS/injection risk)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-79]
+      owasp: ['A03:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "wss?\\.clients\\.forEach.*\\.send\\s*\\(\\s*(?:message|data|msg)\\s*\\)"
+        - regex: "socket\\.broadcast\\.emit\\s*\\([^,]+,\\s*(?:message|data|msg)\\s*\\)"
+    - id: WEB-WS-004
+      name: python-websocket-no-origin
+      description: "Python websockets/aiohttp WebSocket without origin check"
+      severity: high
+      confidence: medium
+      cwe: [CWE-345]
+      owasp: ['A01:2025']
+      languages: [python]
+      patterns:
+        - regex: "async\\s+def\\s+\\w+\\s*\\(\\s*websocket\\s*(?:,\\s*path)?\\s*\\)"
+        - regex: "websocket\\.accept\\s*\\(\\s*\\)"
+    - id: WEB-WS-005
+      name: go-websocket-no-origin-check
+      description: "Go gorilla/websocket Upgrader without CheckOrigin function"
+      severity: high
+      confidence: high
+      cwe: [CWE-345]
+      owasp: ['A01:2025']
+      languages: [go]
+      patterns:
+        - regex: "websocket\\.Upgrader\\s*\\{[^}]*[^}]*\\}"
+        - regex: "Upgrader\\s*\\{\\s*\\}"
+        - regex: "CheckOrigin:\\s*func\\s*\\(r\\s*\\*http\\.Request\\)\\s*bool\\s*\\{\\s*return\\s*true\\s*\\}"

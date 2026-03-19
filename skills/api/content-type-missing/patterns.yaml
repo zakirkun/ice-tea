@@ -1,35 +1,33 @@
 rules:
-  - id: API-CT-001
-    name: api-no-content-type-check
-    description: "API endpoint processes body without validating Content-Type"
-    severity: medium
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, go, python]
-    patterns:
-      - regex: "(?:app|router)\\.post\\s*\\([^)]+\\)(?![^{]*content-type|[^{]*Content-Type)"
-      - regex: "(?:req\\.body|request\\.json)(?![^;]*content.type|[^;]*Content-Type)"
-
-  - id: API-CT-002
-    name: accept-formdata-on-api
-    description: "JSON API endpoint accepting multipart/form-data — CSRF vulnerability"
-    severity: high
-    confidence: medium
-    cwe: [CWE-352]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python]
-    patterns:
-      - regex: "multipart.*(?:app|router)\\.post\\s*\\(['\"][^'\"]*api"
-      - regex: "upload.*single.*(?:app|router)\\.post.*api"
-
-  - id: API-CT-003
-    name: response-no-content-type-json
-    description: "API response without explicit application/json Content-Type"
-    severity: low
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [go, java]
-    patterns:
-      - regex: "w\\.Write\\s*\\(.*json\\.Marshal(?![^;]*Content-Type|[^;]*application/json)"
+    - id: API-CT-001
+      name: api-no-content-type-check
+      description: "API endpoint processes body without validating Content-Type"
+      severity: medium
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, go, python]
+      patterns:
+        - regex: "(?:app|router)\\.post\\s*\\([^)]+\\)"
+        - regex: "(?:req\\.body|request\\.json)"
+    - id: API-CT-002
+      name: accept-formdata-on-api
+      description: "JSON API endpoint accepting multipart/form-data — CSRF vulnerability"
+      severity: high
+      confidence: medium
+      cwe: [CWE-352]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python]
+      patterns:
+        - regex: "multipart.*(?:app|router)\\.post\\s*\\(['\"][^'\"]*api"
+        - regex: "upload.*single.*(?:app|router)\\.post.*api"
+    - id: API-CT-003
+      name: response-no-content-type-json
+      description: "API response without explicit application/json Content-Type"
+      severity: low
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [go, java]
+      patterns:
+        - regex: "w\\.Write\\s*\\(.*json\\.Marshal"

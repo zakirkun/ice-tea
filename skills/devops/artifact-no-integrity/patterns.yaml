@@ -1,33 +1,31 @@
 rules:
-  - id: DEVOPS-ARTINT-001
-    name: ci-download-no-checksum
-    description: "CI/CD downloads binary without checksum verification"
-    severity: high
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "(?:curl|wget)\\s+[^\\n]*https?://[^\\n]+\\.(?:tar\\.gz|zip|deb|rpm|exe|bin)(?![\\s\\S]{0,300}sha256|[\\s\\S]{0,300}checksum)"
-
-  - id: DEVOPS-ARTINT-002
-    name: go-install-without-version-pin
-    description: "go install without specific version — unpinned tool install"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [generic, yaml]
-    patterns:
-      - regex: "go\\s+install\\s+[^@\\s]+@latest"
-
-  - id: DEVOPS-ARTINT-003
-    name: pip-install-without-constraints
-    description: "pip install in CI without requirements file or version constraints"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "pip\\s+install\\s+(?!-r\\s)[a-zA-Z][a-zA-Z0-9-_]*(?!==)"
+    - id: DEVOPS-ARTINT-001
+      name: ci-download-no-checksum
+      description: "CI/CD downloads binary without checksum verification"
+      severity: high
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "(?:curl|wget)\\s+[^\\n]*https?://[^\\n]+\\.(?:tar\\.gz|zip|deb|rpm|exe|bin)"
+    - id: DEVOPS-ARTINT-002
+      name: go-install-without-version-pin
+      description: "go install without specific version — unpinned tool install"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [generic, yaml]
+      patterns:
+        - regex: "go\\s+install\\s+[^@\\s]+@latest"
+    - id: DEVOPS-ARTINT-003
+      name: pip-install-without-constraints
+      description: "pip install in CI without requirements file or version constraints"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "pip\\s+install\\s+[a-zA-Z][a-zA-Z0-9-_]*"

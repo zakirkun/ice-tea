@@ -1,49 +1,46 @@
 rules:
-  - id: DESER-PHP-001
-    name: php-unserialize-user-input
-    description: "PHP unserialize() called with user-controlled superglobal input"
-    severity: critical
-    confidence: high
-    cwe: [CWE-502]
-    owasp: [A08:2025]
-    languages: [php]
-    patterns:
-      - regex: "unserialize\\s*\\(\\s*\\$_(?:GET|POST|REQUEST|COOKIE|SERVER)"
-      - regex: "unserialize\\s*\\(\\s*base64_decode\\s*\\(\\s*\\$_(?:GET|POST|REQUEST)"
-      - regex: "unserialize\\s*\\(\\s*\\$(?:input|data|payload|body|request)"
-
-  - id: DESER-PHP-002
-    name: php-unserialize-cookie
-    description: "PHP unserialize() on cookie value — common attack vector"
-    severity: critical
-    confidence: high
-    cwe: [CWE-502]
-    owasp: [A08:2025]
-    languages: [php]
-    patterns:
-      - regex: "unserialize\\s*\\(\\s*\\$_COOKIE"
-      - regex: "unserialize\\s*\\(\\s*base64_decode\\s*\\(\\s*\\$_COOKIE"
-
-  - id: DESER-PHP-003
-    name: php-unserialize-no-allowed-classes
-    description: "PHP unserialize() without allowed_classes restriction"
-    severity: high
-    confidence: medium
-    cwe: [CWE-502]
-    owasp: [A08:2025]
-    languages: [php]
-    patterns:
-      - regex: "unserialize\\s*\\([^)]+\\)(?![^;]*allowed_classes)"
-      - regex: "unserialize\\s*\\(\\s*\\$[a-zA-Z_]+\\s*\\)(?![^;]*\\[.*allowed)"
-
-  - id: DESER-PHP-004
-    name: php-magic-method-wakeup
-    description: "PHP __wakeup() or __destruct() with dangerous operations — gadget indicator"
-    severity: medium
-    confidence: low
-    cwe: [CWE-502]
-    owasp: [A08:2025]
-    languages: [php]
-    patterns:
-      - regex: "public\\s+function\\s+__wakeup\\s*\\(\\s*\\)[^{]*\\{[^}]*(?:exec|system|eval|file_put_contents)"
-      - regex: "public\\s+function\\s+__destruct\\s*\\(\\s*\\)[^{]*\\{[^}]*(?:exec|system|eval|unlink)"
+    - id: DESER-PHP-001
+      name: php-unserialize-user-input
+      description: "PHP unserialize() called with user-controlled superglobal input"
+      severity: critical
+      confidence: high
+      cwe: [CWE-502]
+      owasp: ['A08:2025']
+      languages: [php]
+      patterns:
+        - regex: "unserialize\\s*\\(\\s*\\$_(?:GET|POST|REQUEST|COOKIE|SERVER)"
+        - regex: "unserialize\\s*\\(\\s*base64_decode\\s*\\(\\s*\\$_(?:GET|POST|REQUEST)"
+        - regex: "unserialize\\s*\\(\\s*\\$(?:input|data|payload|body|request)"
+    - id: DESER-PHP-002
+      name: php-unserialize-cookie
+      description: "PHP unserialize() on cookie value — common attack vector"
+      severity: critical
+      confidence: high
+      cwe: [CWE-502]
+      owasp: ['A08:2025']
+      languages: [php]
+      patterns:
+        - regex: "unserialize\\s*\\(\\s*\\$_COOKIE"
+        - regex: "unserialize\\s*\\(\\s*base64_decode\\s*\\(\\s*\\$_COOKIE"
+    - id: DESER-PHP-003
+      name: php-unserialize-no-allowed-classes
+      description: "PHP unserialize() without allowed_classes restriction"
+      severity: high
+      confidence: medium
+      cwe: [CWE-502]
+      owasp: ['A08:2025']
+      languages: [php]
+      patterns:
+        - regex: "unserialize\\s*\\([^)]+\\)"
+        - regex: "unserialize\\s*\\(\\s*\\$[a-zA-Z_]+\\s*\\)"
+    - id: DESER-PHP-004
+      name: php-magic-method-wakeup
+      description: "PHP __wakeup() or __destruct() with dangerous operations — gadget indicator"
+      severity: medium
+      confidence: low
+      cwe: [CWE-502]
+      owasp: ['A08:2025']
+      languages: [php]
+      patterns:
+        - regex: "public\\s+function\\s+__wakeup\\s*\\(\\s*\\)[^{]*\\{[^}]*(?:exec|system|eval|file_put_contents)"
+        - regex: "public\\s+function\\s+__destruct\\s*\\(\\s*\\)[^{]*\\{[^}]*(?:exec|system|eval|unlink)"

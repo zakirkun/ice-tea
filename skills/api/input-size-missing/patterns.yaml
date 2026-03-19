@@ -1,47 +1,44 @@
 rules:
-  - id: API-SIZE-001
-    name: express-no-body-size-limit
-    description: "Express JSON body parser without size limit"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-770]
-    owasp: [A04:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "express\\.json\\s*\\(\\s*\\)(?![^;]*limit)"
-      - regex: "bodyParser\\.json\\s*\\(\\s*\\)(?![^;]*limit)"
-
-  - id: API-SIZE-002
-    name: flask-max-content-length-missing
-    description: "Flask application without MAX_CONTENT_LENGTH setting"
-    severity: medium
-    confidence: low
-    cwe: [CWE-770]
-    owasp: [A04:2025]
-    languages: [python]
-    patterns:
-      - regex: "app\\.config\\[\\s*['\"]MAX_CONTENT_LENGTH['\"]\\s*\\]\\s*=\\s*(?:None|0)"
-
-  - id: API-SIZE-003
-    name: go-http-no-maxbytes
-    description: "Go HTTP handler without MaxBytesReader size limit"
-    severity: medium
-    confidence: low
-    cwe: [CWE-770]
-    owasp: [A04:2025]
-    languages: [go]
-    patterns:
-      - regex: "json\\.NewDecoder\\s*\\(\\s*r\\.Body\\s*\\)(?![^;]*MaxBytesReader|[^;]*LimitReader)"
-      - regex: "ioutil\\.ReadAll\\s*\\(\\s*r\\.Body\\s*\\)(?![^;]*limit|[^;]*Max)"
-
-  - id: API-SIZE-004
-    name: large-body-size-limit
-    description: "Express body parser with excessive size limit (> 100MB)"
-    severity: medium
-    confidence: high
-    cwe: [CWE-770]
-    owasp: [A04:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "express\\.json\\s*\\(\\s*\\{[^}]*limit\\s*:\\s*['\"]\\d+(?:00m|gb)['\"]"
-      - regex: "bodyParser\\.json\\s*\\(\\s*\\{[^}]*limit\\s*:\\s*['\"](?:[1-9][0-9]+mb|\\d+gb)['\"]"
+    - id: API-SIZE-001
+      name: express-no-body-size-limit
+      description: "Express JSON body parser without size limit"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-770]
+      owasp: ['A04:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "express\\.json\\s*\\(\\s*\\)"
+        - regex: "bodyParser\\.json\\s*\\(\\s*\\)"
+    - id: API-SIZE-002
+      name: flask-max-content-length-missing
+      description: "Flask application without MAX_CONTENT_LENGTH setting"
+      severity: medium
+      confidence: low
+      cwe: [CWE-770]
+      owasp: ['A04:2025']
+      languages: [python]
+      patterns:
+        - regex: "app\\.config\\[\\s*['\"]MAX_CONTENT_LENGTH['\"]\\s*\\]\\s*=\\s*(?:None|0)"
+    - id: API-SIZE-003
+      name: go-http-no-maxbytes
+      description: "Go HTTP handler without MaxBytesReader size limit"
+      severity: medium
+      confidence: low
+      cwe: [CWE-770]
+      owasp: ['A04:2025']
+      languages: [go]
+      patterns:
+        - regex: "json\\.NewDecoder\\s*\\(\\s*r\\.Body\\s*\\)"
+        - regex: "ioutil\\.ReadAll\\s*\\(\\s*r\\.Body\\s*\\)"
+    - id: API-SIZE-004
+      name: large-body-size-limit
+      description: "Express body parser with excessive size limit (> 100MB)"
+      severity: medium
+      confidence: high
+      cwe: [CWE-770]
+      owasp: ['A04:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "express\\.json\\s*\\(\\s*\\{[^}]*limit\\s*:\\s*['\"]\\d+(?:00m|gb)['\"]"
+        - regex: "bodyParser\\.json\\s*\\(\\s*\\{[^}]*limit\\s*:\\s*['\"](?:[1-9][0-9]+mb|\\d+gb)['\"]"

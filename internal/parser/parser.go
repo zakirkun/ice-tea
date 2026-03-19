@@ -16,6 +16,11 @@ const (
 	LangCPP        Language = "cpp"
 	LangShell      Language = "shell"
 	LangYAML       Language = "yaml"
+	LangDart       Language = "dart"
+	LangKotlin     Language = "kotlin"
+	LangZig        Language = "zig"
+	LangPerl       Language = "perl"
+	LangElixir     Language = "elixir"
 )
 
 // Position represents a position in source code

@@ -1,62 +1,58 @@
 rules:
-  - id: MEM-INT-001
-    name: c-malloc-addition-overflow
-    description: "malloc() size calculated via addition/multiplication — integer overflow risk"
-    severity: high
-    confidence: medium
-    cwe: [CWE-190]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "malloc\\s*\\(\\s*\\w+\\s*\\+\\s*\\w+\\s*\\)"
-      - regex: "malloc\\s*\\(\\s*\\w+\\s*\\*\\s*\\w+\\s*\\)"
-      - regex: "calloc\\s*\\(\\s*\\w+\\s*,\\s*\\w+\\s*\\)"
-
-  - id: MEM-INT-002
-    name: c-signed-unsigned-comparison
-    description: "Comparison between signed and unsigned integer — underflow bypass"
-    severity: high
-    confidence: medium
-    cwe: [CWE-191]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "if\\s*\\(\\s*(?:int|ssize_t)\\s+\\w+\\s*<\\s*(?:unsigned|size_t|uint)\\s+\\w+"
-      - regex: "(?:strlen|sizeof)\\s*\\([^)]*\\)\\s*(?:>|<|>=|<=)\\s*(?:-[0-9]+|\\w+)"
-
-  - id: MEM-INT-003
-    name: c-length-check-bypass
-    description: "Length validation before malloc that can be bypassed via overflow"
-    severity: high
-    confidence: medium
-    cwe: [CWE-190]
-    owasp: [A06:2025]
-    languages: [c, cpp]
-    patterns:
-      - regex: "if\\s*\\(\\s*\\w+\\s*>\\s*MAX_SIZE\\s*\\).*malloc\\s*\\(\\s*\\w+\\s*\\+\\s*[0-9]+"
-      - regex: "if\\s*\\(\\s*len\\s*>\\s*\\d+\\s*\\)\\s*return.*malloc\\s*\\(\\s*len\\s*\\+"
-
-  - id: MEM-INT-004
-    name: java-array-index-overflow
-    description: "Java array allocation size from arithmetic that may overflow"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-190]
-    owasp: [A06:2025]
-    languages: [java]
-    patterns:
-      - regex: "new\\s+\\w+\\[\\s*\\w+\\s*\\+\\s*\\w+\\s*\\]"
-      - regex: "new\\s+byte\\[\\s*\\w+\\s*\\*\\s*\\w+\\s*\\]"
-
-  - id: MEM-INT-005
-    name: go-int-conversion-overflow
-    description: "Go int/int32/int16 conversion that may truncate large values"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-190]
-    owasp: [A06:2025]
-    languages: [go]
-    patterns:
-      - regex: "int32\\s*\\(\\s*\\w+\\s*\\)(?![^;\\n]*<\\s*math\\.MaxInt32)"
-      - regex: "int16\\s*\\(\\s*\\w+\\s*\\)(?![^;\\n]*<\\s*math\\.MaxInt16)"
-      - regex: "uint8\\s*\\(\\s*\\w+\\s*\\)(?![^;\\n]*<\\s*256)"
+    - id: MEM-INT-001
+      name: c-malloc-addition-overflow
+      description: "malloc() size calculated via addition/multiplication — integer overflow risk"
+      severity: high
+      confidence: medium
+      cwe: [CWE-190]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "malloc\\s*\\(\\s*\\w+\\s*\\+\\s*\\w+\\s*\\)"
+        - regex: "malloc\\s*\\(\\s*\\w+\\s*\\*\\s*\\w+\\s*\\)"
+        - regex: "calloc\\s*\\(\\s*\\w+\\s*,\\s*\\w+\\s*\\)"
+    - id: MEM-INT-002
+      name: c-signed-unsigned-comparison
+      description: "Comparison between signed and unsigned integer — underflow bypass"
+      severity: high
+      confidence: medium
+      cwe: [CWE-191]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "if\\s*\\(\\s*(?:int|ssize_t)\\s+\\w+\\s*<\\s*(?:unsigned|size_t|uint)\\s+\\w+"
+        - regex: "(?:strlen|sizeof)\\s*\\([^)]*\\)\\s*(?:>|<|>=|<=)\\s*(?:-[0-9]+|\\w+)"
+    - id: MEM-INT-003
+      name: c-length-check-bypass
+      description: "Length validation before malloc that can be bypassed via overflow"
+      severity: high
+      confidence: medium
+      cwe: [CWE-190]
+      owasp: ['A06:2025']
+      languages: [c, cpp]
+      patterns:
+        - regex: "if\\s*\\(\\s*\\w+\\s*>\\s*MAX_SIZE\\s*\\).*malloc\\s*\\(\\s*\\w+\\s*\\+\\s*[0-9]+"
+        - regex: "if\\s*\\(\\s*len\\s*>\\s*\\d+\\s*\\)\\s*return.*malloc\\s*\\(\\s*len\\s*\\+"
+    - id: MEM-INT-004
+      name: java-array-index-overflow
+      description: "Java array allocation size from arithmetic that may overflow"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-190]
+      owasp: ['A06:2025']
+      languages: [java]
+      patterns:
+        - regex: "new\\s+\\w+\\[\\s*\\w+\\s*\\+\\s*\\w+\\s*\\]"
+        - regex: "new\\s+byte\\[\\s*\\w+\\s*\\*\\s*\\w+\\s*\\]"
+    - id: MEM-INT-005
+      name: go-int-conversion-overflow
+      description: "Go int/int32/int16 conversion that may truncate large values"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-190]
+      owasp: ['A06:2025']
+      languages: [go]
+      patterns:
+        - regex: "int32\\s*\\(\\s*\\w+\\s*\\)"
+        - regex: "int16\\s*\\(\\s*\\w+\\s*\\)"
+        - regex: "uint8\\s*\\(\\s*\\w+\\s*\\)"

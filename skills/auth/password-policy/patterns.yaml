@@ -1,90 +1,84 @@
 rules:
-  - id: AUTH-PW-001
-    name: password-hashed-with-md5
-    description: "Password hashed with MD5 — insufficient for password storage"
-    severity: critical
-    confidence: high
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [php, python, javascript, java, go, ruby]
-    patterns:
-      - regex: "(?i)md5\\s*\\(\\s*\\$?password"
-      - regex: "(?i)hashlib\\.md5\\s*\\(.*password"
-      - regex: "(?i)MessageDigest\\.getInstance\\(['\"]MD5['\"]\\)"
-      - regex: "(?i)crypto\\.createHash\\(['\"]md5['\"]\\)"
-
-  - id: AUTH-PW-002
-    name: password-hashed-with-sha1
-    description: "Password hashed with SHA-1 — insufficient for password storage"
-    severity: critical
-    confidence: high
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [php, python, javascript, java, go, ruby]
-    patterns:
-      - regex: "(?i)sha1\\s*\\(\\s*\\$?password"
-      - regex: "(?i)hashlib\\.sha1\\s*\\(.*password"
-      - regex: "(?i)MessageDigest\\.getInstance\\(['\"]SHA-1['\"]\\)"
-      - regex: "(?i)crypto\\.createHash\\(['\"]sha1['\"]\\)"
-
-  - id: AUTH-PW-003
-    name: password-plaintext-comparison
-    description: "Password compared directly without hashing — plaintext storage"
-    severity: critical
-    confidence: high
-    cwe: [CWE-521]
-    owasp: [A02:2025]
-    languages: [php, python, javascript, java, go, ruby]
-    patterns:
-      - regex: "(?i)password\\s*==\\s*\\$?(?:user|db|stored)_?password"
-      - regex: "(?i)if\\s*\\(\\s*\\$?(?:input)?password\\s*===?\\s*\\$?(?:stored|db|user)"
-      - regex: "(?i)\\.password\\s*===?\\s*(?:req|request)\\.body"
-
-  - id: AUTH-PW-004
-    name: php-password-without-password-hash
-    description: "PHP authentication not using password_hash()/password_verify()"
-    severity: high
-    confidence: medium
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [php]
-    patterns:
-      - regex: "md5\\s*\\(\\s*\\$_POST\\s*\\[\\s*['\"]password['\"]"
-      - regex: "sha1\\s*\\(\\s*\\$_POST\\s*\\[\\s*['\"]password['\"]"
-
-  - id: AUTH-PW-005
-    name: go-password-without-bcrypt
-    description: "Go password hashing not using bcrypt/argon2"
-    severity: high
-    confidence: medium
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [go]
-    patterns:
-      - regex: "sha256\\.Sum256\\(\\[\\]byte\\(password\\)\\)"
-      - regex: "md5\\.Sum\\(\\[\\]byte\\(password\\)\\)"
-
-  - id: AUTH-PW-006
-    name: javascript-password-sha256-only
-    description: "JavaScript using SHA-256 alone for password hashing (no bcrypt/argon2)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-916]
-    owasp: [A02:2025]
-    languages: [javascript, typescript]
-    patterns:
-      - regex: "crypto\\.createHash\\(['\"]sha256['\"]\\).*password"
-      - regex: "(?i)hash\\(password\\)(?!.*bcrypt|.*argon)"
-
-  - id: AUTH-PW-007
-    name: password-stored-in-cookie
-    description: "Password value stored directly in cookie"
-    severity: critical
-    confidence: medium
-    cwe: [CWE-312]
-    owasp: [A02:2025]
-    languages: [php, python, javascript, java, go, ruby]
-    patterns:
-      - regex: "(?i)setcookie\\s*\\(\\s*['\"]password['\"]"
-      - regex: "(?i)res\\.cookie\\s*\\(\\s*['\"]password['\"]"
-      - regex: "(?i)\\$_COOKIE\\s*\\[\\s*['\"]password['\"]"
+    - id: AUTH-PW-001
+      name: password-hashed-with-md5
+      description: "Password hashed with MD5 — insufficient for password storage"
+      severity: critical
+      confidence: high
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [php, python, javascript, java, go, ruby]
+      patterns:
+        - regex: "(?i)md5\\s*\\(\\s*\\$?password"
+        - regex: "(?i)hashlib\\.md5\\s*\\(.*password"
+        - regex: "(?i)MessageDigest\\.getInstance\\(['\"]MD5['\"]\\)"
+        - regex: "(?i)crypto\\.createHash\\(['\"]md5['\"]\\)"
+    - id: AUTH-PW-002
+      name: password-hashed-with-sha1
+      description: "Password hashed with SHA-1 — insufficient for password storage"
+      severity: critical
+      confidence: high
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [php, python, javascript, java, go, ruby]
+      patterns:
+        - regex: "(?i)sha1\\s*\\(\\s*\\$?password"
+        - regex: "(?i)hashlib\\.sha1\\s*\\(.*password"
+        - regex: "(?i)MessageDigest\\.getInstance\\(['\"]SHA-1['\"]\\)"
+        - regex: "(?i)crypto\\.createHash\\(['\"]sha1['\"]\\)"
+    - id: AUTH-PW-003
+      name: password-plaintext-comparison
+      description: "Password compared directly without hashing — plaintext storage"
+      severity: critical
+      confidence: high
+      cwe: [CWE-521]
+      owasp: ['A02:2025']
+      languages: [php, python, javascript, java, go, ruby]
+      patterns:
+        - regex: "(?i)password\\s*==\\s*\\$?(?:user|db|stored)_?password"
+        - regex: "(?i)if\\s*\\(\\s*\\$?(?:input)?password\\s*===?\\s*\\$?(?:stored|db|user)"
+        - regex: "(?i)\\.password\\s*===?\\s*(?:req|request)\\.body"
+    - id: AUTH-PW-004
+      name: php-password-without-password-hash
+      description: "PHP authentication not using password_hash()/password_verify()"
+      severity: high
+      confidence: medium
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [php]
+      patterns:
+        - regex: "md5\\s*\\(\\s*\\$_POST\\s*\\[\\s*['\"]password['\"]"
+        - regex: "sha1\\s*\\(\\s*\\$_POST\\s*\\[\\s*['\"]password['\"]"
+    - id: AUTH-PW-005
+      name: go-password-without-bcrypt
+      description: "Go password hashing not using bcrypt/argon2"
+      severity: high
+      confidence: medium
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [go]
+      patterns:
+        - regex: "sha256\\.Sum256\\(\\[\\]byte\\(password\\)\\)"
+        - regex: "md5\\.Sum\\(\\[\\]byte\\(password\\)\\)"
+    - id: AUTH-PW-006
+      name: javascript-password-sha256-only
+      description: "JavaScript using SHA-256 alone for password hashing (no bcrypt/argon2)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-916]
+      owasp: ['A02:2025']
+      languages: [javascript, typescript]
+      patterns:
+        - regex: "crypto\\.createHash\\(['\"]sha256['\"]\\).*password"
+        - regex: "(?i)hash\\(password\\)"
+    - id: AUTH-PW-007
+      name: password-stored-in-cookie
+      description: "Password value stored directly in cookie"
+      severity: critical
+      confidence: medium
+      cwe: [CWE-312]
+      owasp: ['A02:2025']
+      languages: [php, python, javascript, java, go, ruby]
+      patterns:
+        - regex: "(?i)setcookie\\s*\\(\\s*['\"]password['\"]"
+        - regex: "(?i)res\\.cookie\\s*\\(\\s*['\"]password['\"]"
+        - regex: "(?i)\\$_COOKIE\\s*\\[\\s*['\"]password['\"]"

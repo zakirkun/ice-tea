@@ -227,6 +227,24 @@ var extensionToLanguage = map[string]string{
 	".yaml": "yaml",
 	".yml":  "yaml",
 
+	// Dart (Flutter)
+	".dart": "dart",
+
+	// Kotlin
+	".kt":  "kotlin",
+	".kts": "kotlin",
+
+	// Zig
+	".zig": "zig",
+
+	// Perl
+	".pl": "perl",
+	".pm": "perl",
+
+	// Elixir
+	".ex":  "elixir",
+	".exs": "elixir",
+
 	// Dockerfile
 	// Note: Dockerfile has no extension, handled separately
 }

@@ -1,34 +1,32 @@
 rules:
-  - id: SC-PIP-001
-    name: pip-extra-index-url-after-private
-    description: "pip config with extra-index-url public PyPI alongside private index (confusion risk)"
-    severity: high
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [generic]
-    patterns:
-      - regex: "extra-index-url.*pypi\\.org|pypi\\.org.*extra-index-url"
-      - regex: "\\[global\\](?:[^\\[]*\\n)*[^\\[]*index-url\\s*=[^\\n]+\\n[^\\[]*extra-index-url\\s*=\\s*https://pypi"
-
-  - id: SC-PIP-002
-    name: requirements-no-hash
-    description: "requirements.txt without package hash verification (pip install --require-hashes)"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [generic]
-    patterns:
-      - regex: "^[a-zA-Z0-9_-]+==\\d+\\.\\d+(?!\\.\\d+\\s+\\\\\\n\\s*--hash=)"
-
-  - id: SC-PIP-003
-    name: setup-py-install-requires-no-pin
-    description: "setup.py install_requires with unpinned or broad version constraints"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-494]
-    owasp: [A06:2025]
-    languages: [python]
-    patterns:
-      - regex: "install_requires\\s*=\\s*\\[[^\\]]*['\"][a-zA-Z][^'\"]*['\"][^\\]]*\\]"
+    - id: SC-PIP-001
+      name: pip-extra-index-url-after-private
+      description: "pip config with extra-index-url public PyPI alongside private index (confusion risk)"
+      severity: high
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [generic]
+      patterns:
+        - regex: "extra-index-url.*pypi\\.org|pypi\\.org.*extra-index-url"
+        - regex: "\\[global\\](?:[^\\[]*\\n)*[^\\[]*index-url\\s*=[^\\n]+\\n[^\\[]*extra-index-url\\s*=\\s*https://pypi"
+    - id: SC-PIP-002
+      name: requirements-no-hash
+      description: "requirements.txt without package hash verification (pip install --require-hashes)"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [generic]
+      patterns:
+        - regex: "^[a-zA-Z0-9_-]+==\\d+\\.\\d+"
+    - id: SC-PIP-003
+      name: setup-py-install-requires-no-pin
+      description: "setup.py install_requires with unpinned or broad version constraints"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-494]
+      owasp: ['A06:2025']
+      languages: [python]
+      patterns:
+        - regex: "install_requires\\s*=\\s*\\[[^\\]]*['\"][a-zA-Z][^'\"]*['\"][^\\]]*\\]"

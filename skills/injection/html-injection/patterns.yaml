@@ -1,47 +1,44 @@
 rules:
-  - id: INJ-HTML-001
-    name: python-html-unescaped-output
-    description: "Python Flask/Django renders user input in HTML without escaping"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-80]
-    owasp: [A03:2025]
-    languages: [python]
-    patterns:
-      - regex: "return\\s+['\"]<[^>]+>[^<]*['\"]\\s*\\+\\s*(?:request\\.(?:args|form|json|values))\\.get"
-      - regex: "render_template_string\\s*\\([^)]*\\+\\s*(?:request\\.(?:args|form))"
-
-  - id: INJ-HTML-002
-    name: php-echo-unescaped
-    description: "PHP echo/print with unescaped user input"
-    severity: medium
-    confidence: high
-    cwe: [CWE-80]
-    owasp: [A03:2025]
-    languages: [php]
-    patterns:
-      - regex: "(?:echo|print)\\s+\\$_(?:GET|POST|REQUEST)\\s*\\["
-      - regex: "echo\\s+\\$(?:_GET|_POST|_REQUEST)\\[[^\\]]+\\](?![^;]*htmlspecialchars|[^;]*htmlentities)"
-
-  - id: INJ-HTML-003
-    name: go-html-template-unsafe
-    description: "Go html/template used with unsafe raw HTML injection via template.HTML"
-    severity: high
-    confidence: high
-    cwe: [CWE-80]
-    owasp: [A03:2025]
-    languages: [go]
-    patterns:
-      - regex: "template\\.HTML\\s*\\([^)]*(?:r\\.URL\\.Query|r\\.FormValue|userInput)"
-      - regex: "template\\.JS\\s*\\([^)]*(?:r\\.URL\\.Query|r\\.FormValue)"
-
-  - id: INJ-HTML-004
-    name: meta-refresh-injection
-    description: "Meta refresh tag with user-controlled URL — redirect injection"
-    severity: medium
-    confidence: high
-    cwe: [CWE-80]
-    owasp: [A03:2025]
-    languages: [php, python, javascript]
-    patterns:
-      - regex: "<meta[^>]*http-equiv\\s*=\\s*['\"]refresh['\"][^>]*url\\s*=\\s*['\"]?[^>]*\\$_(?:GET|POST)"
+    - id: INJ-HTML-001
+      name: python-html-unescaped-output
+      description: "Python Flask/Django renders user input in HTML without escaping"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-80]
+      owasp: ['A03:2025']
+      languages: [python]
+      patterns:
+        - regex: "return\\s+['\"]<[^>]+>[^<]*['\"]\\s*\\+\\s*(?:request\\.(?:args|form|json|values))\\.get"
+        - regex: "render_template_string\\s*\\([^)]*\\+\\s*(?:request\\.(?:args|form))"
+    - id: INJ-HTML-002
+      name: php-echo-unescaped
+      description: "PHP echo/print with unescaped user input"
+      severity: medium
+      confidence: high
+      cwe: [CWE-80]
+      owasp: ['A03:2025']
+      languages: [php]
+      patterns:
+        - regex: "(?:echo|print)\\s+\\$_(?:GET|POST|REQUEST)\\s*\\["
+        - regex: "echo\\s+\\$(?:_GET|_POST|_REQUEST)\\[[^\\]]+\\]"
+    - id: INJ-HTML-003
+      name: go-html-template-unsafe
+      description: "Go html/template used with unsafe raw HTML injection via template.HTML"
+      severity: high
+      confidence: high
+      cwe: [CWE-80]
+      owasp: ['A03:2025']
+      languages: [go]
+      patterns:
+        - regex: "template\\.HTML\\s*\\([^)]*(?:r\\.URL\\.Query|r\\.FormValue|userInput)"
+        - regex: "template\\.JS\\s*\\([^)]*(?:r\\.URL\\.Query|r\\.FormValue)"
+    - id: INJ-HTML-004
+      name: meta-refresh-injection
+      description: "Meta refresh tag with user-controlled URL — redirect injection"
+      severity: medium
+      confidence: high
+      cwe: [CWE-80]
+      owasp: ['A03:2025']
+      languages: [php, python, javascript]
+      patterns:
+        - regex: "<meta[^>]*http-equiv\\s*=\\s*['\"]refresh['\"][^>]*url\\s*=\\s*['\"]?[^>]*\\$_(?:GET|POST)"

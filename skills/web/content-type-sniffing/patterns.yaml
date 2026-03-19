@@ -1,35 +1,33 @@
 rules:
-  - id: WEB-MIME-001
-    name: missing-x-content-type-options
-    description: "Response handler without X-Content-Type-Options: nosniff header"
-    severity: medium
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, go, python, java]
-    patterns:
-      - regex: "(?:app|router)\\.use\\s*\\(\\s*(?!.*contentTypeOptions|.*nosniff)[^)]*\\)"
-      - regex: "helmet\\s*\\(\\s*\\{[^}]*contentTypeOptions\\s*:\\s*false"
-
-  - id: WEB-MIME-002
-    name: user-upload-served-same-origin
-    description: "User-uploaded file served from same origin as application — sniffing risk"
-    severity: high
-    confidence: medium
-    cwe: [CWE-79]
-    owasp: [A05:2025]
-    languages: [javascript, typescript, python, php, go]
-    patterns:
-      - regex: "(?:express\\.static|send(?:File)?).*(?:uploads?|user[-_]files?|attachments?)"
-      - regex: "app\\.use\\s*\\(['\"][^'\"]*['\"]\\s*,\\s*express\\.static\\s*\\(['\"](?:uploads?|files)"
-
-  - id: WEB-MIME-003
-    name: response-no-content-type
-    description: "Response sent without explicit Content-Type header"
-    severity: low
-    confidence: low
-    cwe: [CWE-16]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "w\\.Write\\s*\\([^)]+\\)(?![^;\\n]*Content-Type|[^;\\n]*WriteHeader)"
+    - id: WEB-MIME-001
+      name: missing-x-content-type-options
+      description: "Response handler without X-Content-Type-Options: nosniff header"
+      severity: medium
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, go, python, java]
+      patterns:
+        - regex: "(?:app|router)\\.use\\s*\\(\\s*[^)]*\\)"
+        - regex: "helmet\\s*\\(\\s*\\{[^}]*contentTypeOptions\\s*:\\s*false"
+    - id: WEB-MIME-002
+      name: user-upload-served-same-origin
+      description: "User-uploaded file served from same origin as application — sniffing risk"
+      severity: high
+      confidence: medium
+      cwe: [CWE-79]
+      owasp: ['A05:2025']
+      languages: [javascript, typescript, python, php, go]
+      patterns:
+        - regex: "(?:express\\.static|send(?:File)?).*(?:uploads?|user[-_]files?|attachments?)"
+        - regex: "app\\.use\\s*\\(['\"][^'\"]*['\"]\\s*,\\s*express\\.static\\s*\\(['\"](?:uploads?|files)"
+    - id: WEB-MIME-003
+      name: response-no-content-type
+      description: "Response sent without explicit Content-Type header"
+      severity: low
+      confidence: low
+      cwe: [CWE-16]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "w\\.Write\\s*\\([^)]+\\)"

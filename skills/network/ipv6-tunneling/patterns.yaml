@@ -1,37 +1,35 @@
 rules:
-  - id: NET-IPV6-001
-    name: ssrf-filter-ipv4-only
-    description: "SSRF filter only blocks IPv4 private ranges, not IPv6 equivalents"
-    severity: high
-    confidence: medium
-    cwe: [CWE-918]
-    owasp: [A10:2025]
-    languages: [python, javascript, typescript, go]
-    patterns:
-      - regex: "(?:127\\.0\\.0\\.1|10\\.[0-9]+\\.[0-9]+\\.[0-9]+)(?![^;]*::1|[^;]*fc00|[^;]*fe80)"
-      - regex: "blockedIPs.*(?:127\\.0\\.0\\.1|192\\.168)(?![^;]*::1)"
-
-  - id: NET-IPV6-002
-    name: ipv6-loopback-ssrf
-    description: "IPv6 loopback address ::1 used in SSRF-sensitive context"
-    severity: high
-    confidence: high
-    cwe: [CWE-918]
-    owasp: [A10:2025]
-    languages: [generic]
-    patterns:
-      - regex: "http://\\[::1\\]"
-      - regex: "http://\\[::1\\]:[0-9]+"
-      - regex: "connect.*::1"
-
-  - id: NET-IPV6-003
-    name: server-bind-all-interfaces-ipv6
-    description: "Server binding to :: (all IPv6 interfaces) without explicit security"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-668]
-    owasp: [A05:2025]
-    languages: [python, go, java, javascript]
-    patterns:
-      - regex: "listen\\s*:\\s*['\"]?::['\"]?"
-      - regex: "Addr\\s*:\\s*['\"][0-9.]*:0['\"]"
+    - id: NET-IPV6-001
+      name: ssrf-filter-ipv4-only
+      description: "SSRF filter only blocks IPv4 private ranges, not IPv6 equivalents"
+      severity: high
+      confidence: medium
+      cwe: [CWE-918]
+      owasp: ['A10:2025']
+      languages: [python, javascript, typescript, go]
+      patterns:
+        - regex: "(?:127\\.0\\.0\\.1|10\\.[0-9]+\\.[0-9]+\\.[0-9]+)"
+        - regex: "blockedIPs.*(?:127\\.0\\.0\\.1|192\\.168)"
+    - id: NET-IPV6-002
+      name: ipv6-loopback-ssrf
+      description: "IPv6 loopback address ::1 used in SSRF-sensitive context"
+      severity: high
+      confidence: high
+      cwe: [CWE-918]
+      owasp: ['A10:2025']
+      languages: [generic]
+      patterns:
+        - regex: "http://\\[::1\\]"
+        - regex: "http://\\[::1\\]:[0-9]+"
+        - regex: "connect.*::1"
+    - id: NET-IPV6-003
+      name: server-bind-all-interfaces-ipv6
+      description: "Server binding to :: (all IPv6 interfaces) without explicit security"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-668]
+      owasp: ['A05:2025']
+      languages: [python, go, java, javascript]
+      patterns:
+        - regex: "listen\\s*:\\s*['\"]?::['\"]?"
+        - regex: "Addr\\s*:\\s*['\"][0-9.]*:0['\"]"

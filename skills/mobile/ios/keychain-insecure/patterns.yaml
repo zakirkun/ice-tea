@@ -1,48 +1,45 @@
 rules:
-  - id: IOS-KC-001
-    name: keychain-accessible-always
-    description: "iOS Keychain item with kSecAttrAccessibleAlways — accessible when locked"
-    severity: high
-    confidence: high
-    cwe: [CWE-312]
-    owasp: [A02:2025]
-    languages: [generic]
-    patterns:
-      - regex: "kSecAttrAccessibleAlways(?:ThisDeviceOnly)?"
-      - regex: "SecAttrAccessible\\.always"
-
-  - id: IOS-KC-002
-    name: keychain-after-first-unlock
-    description: "iOS Keychain with kSecAttrAccessibleAfterFirstUnlock — accessible to background processes"
-    severity: medium
-    confidence: high
-    cwe: [CWE-312]
-    owasp: [A02:2025]
-    languages: [generic]
-    patterns:
-      - regex: "kSecAttrAccessibleAfterFirstUnlock(?:ThisDeviceOnly)?"
-      - regex: "SecAttrAccessible\\.afterFirstUnlock"
-
-  - id: IOS-KC-003
-    name: keychain-no-device-only
-    description: "Keychain item without ThisDeviceOnly — synced to iCloud Keychain"
-    severity: medium
-    confidence: medium
-    cwe: [CWE-312]
-    owasp: [A02:2025]
-    languages: [generic]
-    patterns:
-      - regex: "kSecAttrAccessibleWhenUnlocked(?!ThisDeviceOnly)"
-      - regex: "kSecAttrAccessibleAfterFirstUnlock(?!ThisDeviceOnly)"
-
-  - id: IOS-KC-004
-    name: nsuserdefaults-sensitive
-    description: "NSUserDefaults used to store sensitive data instead of Keychain"
-    severity: high
-    confidence: medium
-    cwe: [CWE-312]
-    owasp: [A02:2025]
-    languages: [generic]
-    patterns:
-      - regex: "NSUserDefaults.*(?:password|token|secret|key|credential)"
-      - regex: "UserDefaults\\.standard\\.set.*(?:password|token|secret)"
+    - id: IOS-KC-001
+      name: keychain-accessible-always
+      description: "iOS Keychain item with kSecAttrAccessibleAlways — accessible when locked"
+      severity: high
+      confidence: high
+      cwe: [CWE-312]
+      owasp: ['A02:2025']
+      languages: [generic]
+      patterns:
+        - regex: "kSecAttrAccessibleAlways(?:ThisDeviceOnly)?"
+        - regex: "SecAttrAccessible\\.always"
+    - id: IOS-KC-002
+      name: keychain-after-first-unlock
+      description: "iOS Keychain with kSecAttrAccessibleAfterFirstUnlock — accessible to background processes"
+      severity: medium
+      confidence: high
+      cwe: [CWE-312]
+      owasp: ['A02:2025']
+      languages: [generic]
+      patterns:
+        - regex: "kSecAttrAccessibleAfterFirstUnlock(?:ThisDeviceOnly)?"
+        - regex: "SecAttrAccessible\\.afterFirstUnlock"
+    - id: IOS-KC-003
+      name: keychain-no-device-only
+      description: "Keychain item without ThisDeviceOnly — synced to iCloud Keychain"
+      severity: medium
+      confidence: medium
+      cwe: [CWE-312]
+      owasp: ['A02:2025']
+      languages: [generic]
+      patterns:
+        - regex: "kSecAttrAccessibleWhenUnlocked"
+        - regex: "kSecAttrAccessibleAfterFirstUnlock"
+    - id: IOS-KC-004
+      name: nsuserdefaults-sensitive
+      description: "NSUserDefaults used to store sensitive data instead of Keychain"
+      severity: high
+      confidence: medium
+      cwe: [CWE-312]
+      owasp: ['A02:2025']
+      languages: [generic]
+      patterns:
+        - regex: "NSUserDefaults.*(?:password|token|secret|key|credential)"
+        - regex: "UserDefaults\\.standard\\.set.*(?:password|token|secret)"

@@ -1,100 +1,93 @@
 rules:
-  - id: INJ-XXE-001
-    name: java-documentbuilder-xxe
-    description: "Java DocumentBuilderFactory without XXE protection features disabled"
-    severity: critical
-    confidence: high
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [java]
-    patterns:
-      - regex: "DocumentBuilderFactory\\.newInstance\\(\\)"
-      - regex: "DocumentBuilder\\s+\\w+\\s*=\\s*\\w+\\.newDocumentBuilder\\(\\)"
-
-  - id: INJ-XXE-002
-    name: java-saxparser-xxe
-    description: "Java SAXParserFactory without XXE protection"
-    severity: critical
-    confidence: high
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [java]
-    patterns:
-      - regex: "SAXParserFactory\\.newInstance\\(\\)"
-      - regex: "XMLInputFactory\\.newInstance\\(\\)"
-      - regex: "SchemaFactory\\.newInstance\\("
-
-  - id: INJ-XXE-003
-    name: python-xml-elementtree-unsafe
-    description: "Python xml.etree.ElementTree vulnerable to XXE via entity expansion"
-    severity: high
-    confidence: medium
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [python]
-    patterns:
-      - regex: "import\\s+xml\\.etree\\.ElementTree"
-      - regex: "from\\s+xml\\.etree(?:\\.ElementTree)?\\s+import"
-      - regex: "xml\\.etree\\.ElementTree\\.parse\\("
-      - regex: "ElementTree\\.fromstring\\("
-
-  - id: INJ-XXE-004
-    name: python-lxml-xxe
-    description: "Python lxml parser without resolve_entities=False"
-    severity: high
-    confidence: medium
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [python]
-    patterns:
-      - regex: "lxml\\.etree\\.parse\\("
-      - regex: "etree\\.XMLParser\\((?!.*resolve_entities\\s*=\\s*False)"
-
-  - id: INJ-XXE-005
-    name: php-simplexml-xxe
-    description: "PHP simplexml_load_string/file without LIBXML_NOENT disabled"
-    severity: critical
-    confidence: high
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [php]
-    patterns:
-      - regex: "simplexml_load_string\\s*\\([^)]*(?:LIBXML_NOENT|LIBXML_DTDLOAD)"
-      - regex: "simplexml_load_string\\s*\\(\\s*\\$(?!.*LIBXML_NOENT)"
-      - regex: "simplexml_load_file\\s*\\("
-
-  - id: INJ-XXE-006
-    name: php-domdocument-xxe
-    description: "PHP DOMDocument::loadXML() without disabling entity loading"
-    severity: critical
-    confidence: high
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [php]
-    patterns:
-      - regex: "\\$dom\\s*->\\s*loadXML\\s*\\("
-      - regex: "new\\s+DOMDocument\\s*\\(\\s*\\)(?!(?:[^;]*;){0,3}[^;]*substituteEntities)"
-
-  - id: INJ-XXE-007
-    name: go-xml-external-entity
-    description: "Go XML decoder parsing user-controlled data (check for XXE via custom entities)"
-    severity: medium
-    confidence: low
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [go]
-    patterns:
-      - regex: "xml\\.NewDecoder\\s*\\([^)]*(?:r|req|body|input)"
-      - regex: "xml\\.Unmarshal\\s*\\([^)]*(?:body|data|input|req)"
-
-  - id: INJ-XXE-008
-    name: ruby-nokogiri-xxe
-    description: "Ruby Nokogiri parsing XML without noent option disabled"
-    severity: high
-    confidence: medium
-    cwe: [CWE-611]
-    owasp: [A05:2025]
-    languages: [ruby]
-    patterns:
-      - regex: "Nokogiri::XML\\s*\\([^)]*\\)(?!.*noent.*false)"
-      - regex: "Nokogiri::XML\\.parse\\("
+    - id: INJ-XXE-001
+      name: java-documentbuilder-xxe
+      description: "Java DocumentBuilderFactory without XXE protection features disabled"
+      severity: critical
+      confidence: high
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [java]
+      patterns:
+        - regex: "DocumentBuilderFactory\\.newInstance\\(\\)"
+        - regex: "DocumentBuilder\\s+\\w+\\s*=\\s*\\w+\\.newDocumentBuilder\\(\\)"
+    - id: INJ-XXE-002
+      name: java-saxparser-xxe
+      description: "Java SAXParserFactory without XXE protection"
+      severity: critical
+      confidence: high
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [java]
+      patterns:
+        - regex: "SAXParserFactory\\.newInstance\\(\\)"
+        - regex: "XMLInputFactory\\.newInstance\\(\\)"
+        - regex: "SchemaFactory\\.newInstance\\("
+    - id: INJ-XXE-003
+      name: python-xml-elementtree-unsafe
+      description: "Python xml.etree.ElementTree vulnerable to XXE via entity expansion"
+      severity: high
+      confidence: medium
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [python]
+      patterns:
+        - regex: "import\\s+xml\\.etree\\.ElementTree"
+        - regex: "from\\s+xml\\.etree(?:\\.ElementTree)?\\s+import"
+        - regex: "xml\\.etree\\.ElementTree\\.parse\\("
+        - regex: "ElementTree\\.fromstring\\("
+    - id: INJ-XXE-004
+      name: python-lxml-xxe
+      description: "Python lxml parser without resolve_entities=False"
+      severity: high
+      confidence: medium
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [python]
+      patterns:
+        - regex: "lxml\\.etree\\.parse\\("
+        - regex: "etree\\.XMLParser\\("
+    - id: INJ-XXE-005
+      name: php-simplexml-xxe
+      description: "PHP simplexml_load_string/file without LIBXML_NOENT disabled"
+      severity: critical
+      confidence: high
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [php]
+      patterns:
+        - regex: "simplexml_load_string\\s*\\([^)]*(?:LIBXML_NOENT|LIBXML_DTDLOAD)"
+        - regex: "simplexml_load_string\\s*\\(\\s*\\$"
+        - regex: "simplexml_load_file\\s*\\("
+    - id: INJ-XXE-006
+      name: php-domdocument-xxe
+      description: "PHP DOMDocument::loadXML() without disabling entity loading"
+      severity: critical
+      confidence: high
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [php]
+      patterns:
+        - regex: "\\$dom\\s*->\\s*loadXML\\s*\\("
+        - regex: "new\\s+DOMDocument\\s*\\(\\s*\\)"
+    - id: INJ-XXE-007
+      name: go-xml-external-entity
+      description: "Go XML decoder parsing user-controlled data (check for XXE via custom entities)"
+      severity: medium
+      confidence: low
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [go]
+      patterns:
+        - regex: "xml\\.NewDecoder\\s*\\([^)]*(?:r|req|body|input)"
+        - regex: "xml\\.Unmarshal\\s*\\([^)]*(?:body|data|input|req)"
+    - id: INJ-XXE-008
+      name: ruby-nokogiri-xxe
+      description: "Ruby Nokogiri parsing XML without noent option disabled"
+      severity: high
+      confidence: medium
+      cwe: [CWE-611]
+      owasp: ['A05:2025']
+      languages: [ruby]
+      patterns:
+        - regex: "Nokogiri::XML\\s*\\([^)]*\\)"
+        - regex: "Nokogiri::XML\\.parse\\("

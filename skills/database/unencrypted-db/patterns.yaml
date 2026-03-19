@@ -1,63 +1,59 @@
 rules:
-  - id: DB-ENC-001
-    name: postgres-ssl-disabled
-    description: "PostgreSQL connection with sslmode=disable — no transport encryption"
-    severity: high
-    confidence: high
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, go, java, php]
-    patterns:
-      - regex: "(?i)sslmode\\s*=\\s*(?:disable|disabled)"
-      - regex: "(?i)ssl_mode\\s*=\\s*['\"]?disable['\"]?"
-      - regex: "postgresql?://[^?]+\\?[^'\"]*sslmode=disable"
-
-  - id: DB-ENC-002
-    name: mysql-ssl-disabled
-    description: "MySQL connection without SSL/TLS enabled"
-    severity: high
-    confidence: high
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [python, javascript, typescript, go, php]
-    patterns:
-      - regex: "(?i)ssl\\s*:\\s*false"
-      - regex: "(?i)ssl_disabled\\s*=\\s*True"
-      - regex: "(?i)MYSQL_ATTR_SSL_CA.*false|ssl_verify_cert.*false"
-
-  - id: DB-ENC-003
-    name: sqlite-no-encryption
-    description: "SQLite used without SQLCipher encryption for sensitive data"
-    severity: medium
-    confidence: low
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [python, javascript, go, java, php]
-    patterns:
-      - regex: "sqlite3\\.connect\\s*\\(['\"][^'\"]+\\.(?:db|sqlite)['\"]\\)"
-      - regex: "import\\s+sqlite3(?!cipher)"
-
-  - id: DB-ENC-004
-    name: rds-no-encryption
-    description: "AWS RDS instance without storage encryption in IaC"
-    severity: high
-    confidence: high
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [yaml, generic]
-    patterns:
-      - regex: "(?i)storage_encrypted:\\s*false"
-      - regex: "(?i)encrypted:\\s*false"
-
-  - id: DB-ENC-005
-    name: mongodb-no-tls
-    description: "MongoDB connection without TLS required"
-    severity: high
-    confidence: medium
-    cwe: [CWE-311]
-    owasp: [A02:2025]
-    languages: [javascript, typescript, python, go]
-    patterns:
-      - regex: "(?i)tls\\s*:\\s*false"
-      - regex: "(?i)ssl\\s*:\\s*false.*mongo|mongo.*ssl\\s*:\\s*false"
-      - regex: "tlsAllowInvalidCertificates\\s*:\\s*true"
+    - id: DB-ENC-001
+      name: postgres-ssl-disabled
+      description: "PostgreSQL connection with sslmode=disable — no transport encryption"
+      severity: high
+      confidence: high
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, go, java, php]
+      patterns:
+        - regex: "(?i)sslmode\\s*=\\s*(?:disable|disabled)"
+        - regex: "(?i)ssl_mode\\s*=\\s*['\"]?disable['\"]?"
+        - regex: "postgresql?://[^?]+\\?[^'\"]*sslmode=disable"
+    - id: DB-ENC-002
+      name: mysql-ssl-disabled
+      description: "MySQL connection without SSL/TLS enabled"
+      severity: high
+      confidence: high
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [python, javascript, typescript, go, php]
+      patterns:
+        - regex: "(?i)ssl\\s*:\\s*false"
+        - regex: "(?i)ssl_disabled\\s*=\\s*True"
+        - regex: "(?i)MYSQL_ATTR_SSL_CA.*false|ssl_verify_cert.*false"
+    - id: DB-ENC-003
+      name: sqlite-no-encryption
+      description: "SQLite used without SQLCipher encryption for sensitive data"
+      severity: medium
+      confidence: low
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [python, javascript, go, java, php]
+      patterns:
+        - regex: "sqlite3\\.connect\\s*\\(['\"][^'\"]+\\.(?:db|sqlite)['\"]\\)"
+        - regex: "import\\s+sqlite3"
+    - id: DB-ENC-004
+      name: rds-no-encryption
+      description: "AWS RDS instance without storage encryption in IaC"
+      severity: high
+      confidence: high
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [yaml, generic]
+      patterns:
+        - regex: "(?i)storage_encrypted:\\s*false"
+        - regex: "(?i)encrypted:\\s*false"
+    - id: DB-ENC-005
+      name: mongodb-no-tls
+      description: "MongoDB connection without TLS required"
+      severity: high
+      confidence: medium
+      cwe: [CWE-311]
+      owasp: ['A02:2025']
+      languages: [javascript, typescript, python, go]
+      patterns:
+        - regex: "(?i)tls\\s*:\\s*false"
+        - regex: "(?i)ssl\\s*:\\s*false.*mongo|mongo.*ssl\\s*:\\s*false"
+        - regex: "tlsAllowInvalidCertificates\\s*:\\s*true"
