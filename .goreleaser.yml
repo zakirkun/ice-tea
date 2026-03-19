@@ -12,15 +12,14 @@ builds:
     binary: ice-tea
     env:
       - CGO_ENABLED=1
+    # darwin excluded: zig cc rejects Go's -arch flag for darwin cross-compile
     goos:
       - linux
       - windows
-      - darwin
     goarch:
       - amd64
       - arm64
     ignore:
-      # Cross-compiling CGO is hard without a matrix, but goreleaser will attempt it if CC cross-compilers are accessible.
       # Exclude arm64 for windows as it often requires specialized CGO toolchains not present by default.
       - goos: windows
         goarch: arm64
