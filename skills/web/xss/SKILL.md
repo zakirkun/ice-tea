@@ -2,7 +2,7 @@
 confidence: medium
 cwe:
     - CWE-79
-description: Detects DOM-based Cross-Site Scripting (XSS) vulnerabilities in JavaScript
+description: "Detects DOM-based XSS vulnerabilities by tracing user input to dangerous sinks like innerHTML, eval, and document.write. Use when reviewing JavaScript or TypeScript for XSS risks, unsafe DOM manipulation, or security audit."
 languages:
     - javascript
     - typescript
@@ -10,7 +10,7 @@ languages:
     - dart
     - zig
     - elixir
-name: Cross-Site Scripting (XSS) Detection
+name: cross-site-scripting-xss-detection
 owasp:
     - A03:2025
 severity: high
@@ -24,17 +24,25 @@ version: 1.0.0
 
 # Cross-Site Scripting (XSS)
 
-## Overview
-XSS vulnerabilities occur when an application includes untrusted data in a web page without proper validation or escaping.
+Scans frontend code for dangerous DOM manipulations where user-controlled input reaches execution sinks. See `patterns.yaml` for detection rules.
 
-## Detection Strategy
-This SKILL specifically looks for dangerous DOM manipulations in frontend code where user-controlled input might be executed as script.
+## Detection Workflow
 
-Sinks:
-- `innerHTML` assignment
-- `document.write()`
-- `eval()`
-- `setTimeout()` with string evaluation
+1. **Identify sources** — URL parameters (`location.search`, `location.hash`), form inputs, `postMessage` data
+2. **Trace to sinks** — `innerHTML`, `outerHTML`, `document.write()`, `eval()`, `setTimeout(string)`
+3. **Check sanitization** — verify DOMPurify or equivalent sits between source and sink
+4. **Report** — file, line, sink type, source, and suggested fix
 
-## Remediation
-Use safer alternatives like `textContent` or `innerText` instead of `innerHTML`. Use DOMPurify if HTML insertion is strictly required.
+### Vulnerable
+
+```javascript
+element.innerHTML = userInput;
+document.write(location.search);
+```
+
+### Safe
+
+```javascript
+element.textContent = userInput;
+element.innerHTML = DOMPurify.sanitize(userInput);
+```
