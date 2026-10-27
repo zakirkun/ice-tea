@@ -3,7 +3,7 @@ confidence: low
 cwe:
     - CWE-770
     - CWE-307
-description: Detects sensitive API endpoints without rate limiting, enabling resource exhaustion, credential stuffing, and enumeration attacks.
+description: "Detects sensitive API endpoints (auth, password reset, OTP) without rate limiting middleware. Use when auditing API security, checking for brute force protection, or reviewing throttling configuration."
 languages:
     - javascript
     - typescript
@@ -15,7 +15,7 @@ languages:
     - dart
     - zig
     - elixir
-name: Missing API Rate Limiting
+name: missing-api-rate-limiting
 owasp:
     - A04:2025
 severity: high
@@ -29,15 +29,24 @@ version: 1.0.0
 
 # Missing API Rate Limiting
 
-## Overview
-APIs without rate limiting are vulnerable to:
-- **Credential stuffing**: Automated login attempts with breached credentials
-- **Resource exhaustion**: Expensive computation triggered repeatedly (DoS)
-- **Data harvesting**: Scraping all records via automated enumeration
-- **OTP brute force**: Guessing 6-digit codes in 1,000,000 requests
+Identifies sensitive endpoints (auth, password reset, OTP) that lack rate limiting middleware. See `patterns.yaml` for framework-specific detection rules.
 
-## Detection Strategy
-Identify API endpoints handling authentication, password reset, OTP verification, or resource-intensive operations that lack rate limiting middleware.
+## Detection Workflow
 
-## Remediation
-Apply rate limiting at the API gateway or application level with per-IP or per-user quotas.
+1. **Enumerate endpoints** — find route definitions for auth, reset, OTP, and data-listing handlers
+2. **Check middleware** — verify rate limiter is applied (express-rate-limit, Flask-Limiter, or custom)
+3. **Validate limits** — flag excessively high limits (>5000 requests/window) as ineffective
+4. **Classify risk** — auth/OTP endpoints are critical; list endpoints are medium
+
+### Vulnerable
+
+```javascript
+router.post('/api/reset-password', async (req, res) => { ... });
+```
+
+### Safe
+
+```javascript
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5 });
+router.post('/api/reset-password', limiter, async (req, res) => { ... });
+```

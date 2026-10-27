@@ -2,7 +2,7 @@
 confidence: high
 cwe:
     - CWE-89
-description: Detects SQL injection vulnerabilities where user input is concatenated into SQL queries
+description: "Detects SQL injection via string concatenation and fmt.Sprintf in database queries. Use when reviewing code for SQLi, unsafe query construction, or auditing parameterized query usage."
 languages:
     - go
     - javascript
@@ -13,7 +13,7 @@ languages:
     - dart
     - zig
     - elixir
-name: SQL Injection Detection
+name: sql-injection-detection
 owasp:
     - A05:2025
 severity: critical
@@ -27,24 +27,25 @@ version: 1.0.0
 
 # SQL Injection Detection
 
-## Overview
-SQL injection occurs when user-controlled input is incorporated into SQL queries without proper sanitization or parameterization.
+Identifies SQL queries built with string concatenation or format strings where user input reaches execution sinks. See `patterns.yaml` for detection rules.
 
-## Detection Strategy
-1. **Import check**: Look for database packages (database/sql, gorm, sqlx)
-2. **Call check**: Find SQL execution functions (Query, Exec, Raw)
-3. **Context check**: Check if arguments include string concatenation or fmt.Sprintf
-4. **Taint check**: Trace if user input reaches SQL execution sinks
+## Detection Workflow
 
-## Remediation
-Use parameterized queries / prepared statements instead of string concatenation.
+1. **Import check** — look for database packages (`database/sql`, `gorm`, `sqlx`, ORMs)
+2. **Call check** — find SQL execution functions (`Query`, `QueryRow`, `Exec`, `Raw`)
+3. **Context check** — check if arguments include string concatenation or `fmt.Sprintf`
+4. **Taint check** — trace whether the concatenated variable is user-controlled (request params, form data, headers)
+5. **Validate** — confirm the variable is not a compile-time constant or allow-listed value before reporting
 
-**Vulnerable:**
+### Vulnerable
+
 ```go
 db.Query("SELECT * FROM users WHERE id = " + userInput)
+db.Query(fmt.Sprintf("SELECT * FROM users WHERE id = %s", userInput))
 ```
 
-**Safe:**
+### Safe
+
 ```go
 db.Query("SELECT * FROM users WHERE id = $1", userInput)
 ```
